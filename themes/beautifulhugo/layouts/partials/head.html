@@ -27,7 +27,7 @@
   {{ if .Site.Params.fb_app_id }}
     <meta property="fb:app_id" content="{{ .Site.Params.fb_app_id }}" />
   {{ end }}
- 
+
   {{ if .Params.meta_title }}
     <meta property="og:title" content="{{ .Params.meta_title }}" />
   {{ else if .Title }}
@@ -61,7 +61,7 @@
   {{ else if .Site.Params.logo }}
     <meta property="og:image" content="{{ .Site.Params.logo | absURL }}" />
   {{ end }}
-  
+
   <!-- Twitter summary cards -->
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:site" content="@{{ .Site.Author.twitter }}" />
@@ -89,6 +89,7 @@
     <meta name="twitter:image" content="{{ (index .Params.bigimg 0).src | absURL }}" />
   {{ else if .Site.Params.logo }}
     <meta name="twitter:image" content="{{ .Site.Params.logo | absURL }}" />
-  {{ end }} 
+  {{ end }}
 
 </head>
+

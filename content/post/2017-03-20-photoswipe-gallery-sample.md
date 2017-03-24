@@ -2,10 +2,11 @@
 title: Photoswipe Gallery Sample
 subtitle: Making a Gallery
 date: 2017-03-20
+author: Not me
 tags: ["example", "photoswipe"]
 ---
 
-Beautiful Hugo adds a few custom shortcodes created by [Li-Wen Yip](https://www.liwen.id.au/photoswipe/) and [Gert-Jan van den Berg](https://github.com/GjjvdBurg/HugoPhotoSwipe) for making galleries with [PhotoSwipe](http://photoswipe.com) . 
+Beautiful Hugo adds a few custom shortcodes created by [Li-Wen Yip](https://www.liwen.id.au/photoswipe/) and [Gert-Jan van den Berg](https://github.com/GjjvdBurg/HugoPhotoSwipe) for making galleries with [PhotoSwipe](http://photoswipe.com) .
 
 {{< gallery >}}
   {{< figure thumb="-thumb" link="/img/hexagon.jpg" >}}
@@ -36,4 +37,4 @@ As described on the [GitHub](https://github.com/liwenyip/hugo-pswp) page:
 * `{{</* figure thumb="-small" link="image.jpg" size="1024x768 "*/>}}` will avoid needing to pre-load `image.jpg` to determine its size (optional)
 * All the [features/parameters](https://gohugo.io/extras/shortcodes) of Hugo's built-in `figure` shortcode work as normal, i.e. src, link, title, caption, class, attr (attribution), attrlink, alt
 * `{{</* figure src="image.jpg" class="pswp-ignore" */>}}` will be ignored by PhotoSwipe (if that's what you really want)
-* enclose your figures in `{{</* gallery title="title of your gallery (optional)" */>}}` and `{{</* /gallery */>}}` to arrange your thumbnails inside a box 
+* enclose your figures in `{{</* gallery title="title of your gallery (optional)" */>}}` and `{{</* /gallery */>}}` to arrange your thumbnails inside a box

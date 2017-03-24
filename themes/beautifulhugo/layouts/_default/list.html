@@ -30,16 +30,18 @@
               <article class="post-preview">
                 <a href="{{ .Permalink }}">
                   <h2 class="post-title">{{ .Title }}</h2>
-      
+
                   {{ if .Params.subtitle }}
                     <h3 class="post-subtitle">
                       {{ .Params.subtitle }}
                     </h3>
                   {{ end }}
                 </a>
-      
+
                 <p class="post-meta">
-                  Posted on {{ .Date.Format .Site.Params.dateFormat }}
+                  Posted
+                  {{ if .Params.author }} by {{ .Params.author }} {{ end }}
+                  on {{ .Date.Format .Site.Params.dateFormat }}
                 </p>
                 <div class="post-entry">
                   {{ if .Truncated }}
@@ -49,7 +51,7 @@
                     {{ .Content }}
                   {{ end }}
                 </div>
-      
+
                 {{ if .Params.tags }}
                   <span class="post-meta">
                     {{ range .Params.tags }}
@@ -57,7 +59,7 @@
                     {{ end }}
                   </span>
                 {{ end }}
-      
+
               </article>
             {{ end }}
           </div>

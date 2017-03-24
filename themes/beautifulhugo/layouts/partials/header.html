@@ -32,7 +32,10 @@
                     {{ end }}
                   {{ end }}
                   {{ if eq .Type "post" }}
-                    <span class="post-meta">Posted on {{ .Date.Format .Site.Params.dateFormat }}</span>
+                    <span class="post-meta">Posted
+                                            {{ if .Params.author }} by {{ .Params.author }} {{ end }}
+                                            on {{ .Date.Format .Site.Params.dateFormat }}
+                    </span>
                   {{ end }}
               </div>
             </div>
@@ -57,7 +60,10 @@
                   {{ end }}
                 {{ end }}
                 {{ if eq .Type "post" }}
-                  <span class="post-meta">Posted on {{ .Date.Format .Site.Params.dateFormat }}</span>
+                  <span class="post-meta">Posted
+                                          {{ if .Params.author }} by {{ .Params.author }} {{ end }}
+                                          on {{ .Date.Format .Site.Params.dateFormat }}
+                  </span>
                 {{ end }}
             </div>
           </div>
@@ -68,3 +74,4 @@
 {{ else }}
   <div class="intro-header"></div>
 {{ end }}
+
