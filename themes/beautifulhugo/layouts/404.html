@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  {{ partial "head.html" . }}
+
+  <body>
+
+    {{ partial "nav.html" . }}
+
+    <div role="main" class="container main-content">
+      <div class="text-center">
+        <h1>Whoops, this page doesn't exist.</h1>
+        <h1>Move along. (404 error)</h1>
+        <br/>
+        <img src="{{ .Site.BaseURL }}/img/404-southpark.jpg" />
+      </div>
+    </div>
+
+    {{ partial "footer.html" . }}
+
+  </body>
+</html>

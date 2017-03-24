@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  {{ partial "head.html" . }}
+
+  <body>
+
+    {{ partial "nav.html" . }}
+    {{ partial "header.html" . }}
+
+    <div class="container" role="main">
+      {{ if eq .Type "post" }}
+        {{ partial "post.html" . }}
+      {{ else if eq .Type "page" }}
+        {{ partial "page.html" . }}
+      {{ else }}
+        NO MATCHING PARTIAL
+        {{.Content}}
+      {{ end }}
+    </div>
+
+    {{ partial "footer.html" . }}
+
+  </body>
+</html>

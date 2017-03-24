@@ -1,0 +1,94 @@
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>{{ .Title }}</title>
+  {{ with .Description }}<meta name="description" content="{{ . }}">{{ end }}
+  <meta name="author" content="{{ .Site.Author.name }}"/>
+  {{ .Hugo.Generator }}
+  {{ with .Site.Params.favicon }}<link href='{{ $.Site.BaseURL }}/{{ . }}' rel='icon' type='image/x-icon'/>{{ end }}
+
+  <link rel="alternate" href="{{ "/index.xml" | absURL }}" type="application/rss+xml" title="{{ .Site.Title }}">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="{{ .Site.BaseURL }}/css/main.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="{{ .Site.BaseURL }}/css/pygment_highlights.css" />
+  <link rel="stylesheet" href="{{ .Site.BaseURL }}/css/highlight.min.css" />
+  <link rel="stylesheet" href="{{ .Site.BaseURL }}/css/pswp-gallery.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.css" integrity="sha256-sCl5PUOGMLfFYctzDW3MtRib0ctyUvI9Qsmq2wXOeBY=" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/default-skin/default-skin.min.css" integrity="sha256-BFeI1V+Vh1Rk37wswuOYn5lsTcaU96hGaI7OUVCLjPc=" crossorigin="anonymous" />
+
+  <!-- Facebook OpenGraph tags -->
+  {{ if .Site.Params.fb_app_id }}
+    <meta property="fb:app_id" content="{{ .Site.Params.fb_app_id }}" />
+  {{ end }}
+ 
+  {{ if .Params.meta_title }}
+    <meta property="og:title" content="{{ .Params.meta_title }}" />
+  {{ else if .Title }}
+    <meta property="og:title" content="{{ .Title }}" />
+  {{ else }}
+    <meta property="og:title" content="{{ .Site.Title }}" />
+  {{ end }}
+
+  {{ if .Params.meta_description }}
+    <meta property="og:description" content="{{ .Params.meta_description }}">
+  {{ else if .Params.subtitle }}
+    <meta property="og:description" content="{{ .Params.subtitle }}">
+  {{ else }}
+    <meta property="og:description" content="{{ .Content | plainify | htmlEscape | truncate 200 }}">
+  {{ end }}
+
+  <meta property="og:type" content="website" />
+
+  {{ if .Params.id }}
+    <meta property="og:url" content="{{ .URL | absURL }}" />
+    <link rel="canonical" href="{{ .URL | absURL }}" />
+  {{ else }}
+    <meta property="og:url" content="{{ .URL | absURL }}" />
+    <link rel="canonical" href="{{ .URL | absURL }}" />
+  {{ end }}
+
+  {{ if .Params.share_img }}
+    <meta property="og:image" content="{{ .Params.share_img | absURL }}" />
+  {{ else if isset .Params.bigimg 0 }}
+    <meta property="og:image" content="{{ (index .Params.bigimg 0).src | absURL }}" />
+  {{ else if .Site.Params.logo }}
+    <meta property="og:image" content="{{ .Site.Params.logo | absURL }}" />
+  {{ end }}
+  
+  <!-- Twitter summary cards -->
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@{{ .Site.Author.twitter }}" />
+  <meta name="twitter:creator" content="@{{ .Site.Author.twitter }}" />
+
+  {{ if .Params.meta_title }}
+    <meta name="twitter:title" content="{{ .Params.meta_title }}" />
+  {{ else if .Title }}
+    <meta name="twitter:title" content="{{ .Title }}" />
+  {{ else }}
+    <meta name="twitter:title" content="{{ .Site.Title }}" />
+  {{ end }}
+
+  {{ if .Params.meta_description }}
+    <meta name="twitter:description" content="{{ .Params.meta_description }}">
+  {{ else if .Params.subtitle }}
+    <meta name="twitter:description" content="{{ .Params.subtitle }}">
+  {{ else }}
+    <meta name="twitter:description" content="{{ .Content | plainify | htmlEscape | truncate 200 }}">
+  {{ end }}
+
+  {{ if .Params.share_img }}
+    <meta name="twitter:image" content="{{ .Params.share_img | absURL }}" />
+  {{ else if isset .Params.bigimg 0 }}
+    <meta name="twitter:image" content="{{ (index .Params.bigimg 0).src | absURL }}" />
+  {{ else if .Site.Params.logo }}
+    <meta name="twitter:image" content="{{ .Site.Params.logo | absURL }}" />
+  {{ end }} 
+
+</head>

@@ -1,0 +1,14 @@
+<figure {{ with .Get "class" }}class="{{.}}"{{ end }} itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+  <a class="rig-cell" href="{{ with .Get "link" }}{{.}}{{ else }}{{ .Get "src" }}{{ end }}" {{ with .Get "size" }}data-size="{{.}}"{{ end }} itemprop="contentUrl"> 
+      <img class="rig-img" itemprop="thumbnail"
+          src="{{ with .Get "src" }}{{.}}{{ else }}{{ printf "%s." (.Get "thumb") | replace (.Get "link") "." }}{{ end }}"
+          {{ with .Get "alt" }}alt="{{.}}"{{ end }}
+          {{ with .Get "width" }}width="{{.}}"{{ end }}/>
+      <span class="rig-overlay"></span>
+      <span class="rig-text">{{ .Get "alt"}}</span>
+  </a>
+  <figcaption itemprop="caption description">
+    {{ .Get "caption"}}
+    <!--<span itemprop="copyrightHolder">&#169; {{ .Get "copyright"}}</span>-->
+  </figcaption>
+</figure>
