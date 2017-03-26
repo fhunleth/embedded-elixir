@@ -175,8 +175,11 @@
           {{ end }}
         </ul>
         <p class="credits copyright text-muted">
-          {{ .Site.Author.name }}
-          &nbsp;&bull;&nbsp;
+          {{ if .Site.Author.name }}
+            {{ .Site.Author.name }}
+            &nbsp;&bull;&nbsp;
+          {{ end }}
+
           {{ .Site.LastChange.Format "2006" }}
 
           {{ if .Site.Title }}
@@ -186,7 +189,7 @@
         </p>
         <!-- Please don't remove this, keep my open source work credited :) -->
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v{{ .Hugo.Version }}</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+        <a href="http://gohugo.io">Hugo v{{ .Hugo.Version }}</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> &nbsp;&bull;&nbsp; Logo based on <a href="https://thenounproject.com/search/?q=chip&i=751689">Processor Chip</a>
           {{ with .Site.Params.commit }}&nbsp;&bull;&nbsp;[<a href="{{.}}{{ getenv "GIT_COMMIT_SHA" }}">{{ getenv "GIT_COMMIT_SHA_SHORT" }}</a>]{{ end }}
         </p>
       </div>

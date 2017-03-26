@@ -8,17 +8,17 @@ pygmentCodeFences = true
 #googleAnalytics = "XXX"
 
 [Params]
-  subtitle = "Build a beautiful and simple website in minutes"
-  logo = "img/avatar-icon.png"
-  favicon = "img/favicon.ico"
+  subtitle = "News and Articles about Elixir on Embedded Systems"
+  logo = "images/logo.png"
+  favicon = "images/favicon.ico"
   dateFormat = "January 2, 2006"
   commit = false
   rss = true
   comments = true
 
 [Author]
-  name = "Some Person"
-  email = "youremail@domain.com"
+  #name = "Some Person"
+  #email = "youremail@domain.com"
   #facebook = "username"
   #googleplus = "+username" # or xxxxxxxxxxxxxxxxxxxxx
   #github = "username"
@@ -39,11 +39,6 @@ pygmentCodeFences = true
     name = "Blog"
     url = "/"
     weight = 1
-
-[[menu.main]]
-    name = "About"
-    url = "/page/about/"
-    weight = 3
 
 [[menu.main]]
     name = "Tags"
