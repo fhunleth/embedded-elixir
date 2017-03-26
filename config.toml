@@ -17,7 +17,7 @@ pygmentCodeFences = true
   comments = true
 
 [Author]
-  #name = "Some Person"
+  name = "Curated by Frank Hunleth"
   #email = "youremail@domain.com"
   #facebook = "username"
   #googleplus = "+username" # or xxxxxxxxxxxxxxxxxxxxx
