@@ -1,7 +1,6 @@
 ---
 title: Upgrading to Nerves 0.5
 subtitle: What's New and What's Changed
-draft: true
 date: 2017-03-30
 author: Greg Mefford
 tags: ["nerves", "release"]
