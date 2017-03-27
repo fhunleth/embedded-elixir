@@ -4,8 +4,8 @@ title = "Embedded Elixir"
 theme = "beautifulhugo"
 pygmentsUseClasses = true
 pygmentCodeFences = true
-#disqusShortname = "XXX"
-#googleAnalytics = "XXX"
+disqusShortname = "embedded-elixir"
+googleAnalytics = "UA-16709386-6"
 
 [Params]
   subtitle = "News and Articles about Elixir on Embedded Systems"
@@ -21,8 +21,8 @@ pygmentCodeFences = true
   #email = "youremail@domain.com"
   #facebook = "username"
   #googleplus = "+username" # or xxxxxxxxxxxxxxxxxxxxx
-  #github = "username"
-  #twitter = "username"
+  github = "fhunleth"
+  twitter = "fhunleth"
   #reddit = "username"
   #linkedin = "username"
   #xing = "username"
