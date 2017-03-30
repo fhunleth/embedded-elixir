@@ -18,7 +18,7 @@ googleAnalytics = "UA-16709386-6"
 [Author]
   name = "Curated by Frank Hunleth"
   #github = "fhunleth"
-  twitter = "fhunleth"
+  #twitter = "fhunleth" # Why doesn't this work???
 
 [[menu.main]]
     name = "Blog"
