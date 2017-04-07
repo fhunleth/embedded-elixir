@@ -1,5 +1,5 @@
 ---
-title: Roundup of Embedded Elixir Presentations in March
+title: Roundup of Embedded and IoT Presentations in March
 #subtitle: What's New and What's Changed
 date: 2017-03-31
 author: Frank Hunleth
@@ -7,11 +7,11 @@ draft: false
 tags: ["conferences", "talks"]
 ---
 
-March was quite a month for embedded systems talks starting with
+March was quite a month for talks starting with
 [ElixirDaze](http://elixirdaze.com/) in Florida, going to [Erlang and Elixir Factory](http://www.erlangelixir.com/) in
 San Francisco, and ending at the [Lviv Ruby Meetup](https://www.meetup.com/ruby-lviv/) in Ukraine.
 
-Here's a list of the ones that we found:
+Here's a list of embedded Elixir and Erlang related ones that we found:
 
 * [Get Cooking With Nerves - Garth Hitchens](https://youtu.be/O39ipRsXv3Y?list=PLE7tQUdRKcyZV6tCYvrBLOGoyxUf7s9RT)
 * [Building Communities of Smart Things Takes Nerves - Jean-François Cloutier](https://youtu.be/TjlbXQ88eEc?list=PLE7tQUdRKcyZV6tCYvrBLOGoyxUf7s9RT)
