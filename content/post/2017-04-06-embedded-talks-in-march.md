@@ -21,7 +21,7 @@ Here's a list of embedded Elixir and Erlang related ones that we found:
 * [Empowering devices for IoT with Erlang and FPGA - Irina Guberman](https://youtu.be/Peg7E-nTrOY?list=PLWbHc_FXPo2jtviHbf3fbBRWcaGDBC2u0)
 * [Instrumenting and Testing High Performance Switching Fabric for IoT - Vladan Djakovic](https://youtu.be/Grr_PAwdY2c?list=PLWbHc_FXPo2jtviHbf3fbBRWcaGDBC2u0)
 * [Piecemeal Into Space Reliability Safety and Erlang Principles - Brian Troutwine](https://youtu.be/pwoaJvrJE_U?list=PLWbHc_FXPo2jtviHbf3fbBRWcaGDBC2u0)
-* [Concurrency and Strong Types for IoT - Carl Hewitt](https://youtu.be/yWGwo-31FX4?list=PLWbHc_FXPo2jtviHbf3fbBRWcaGDBC2u0)
+* [Concurrency and Strong Types for IoT - Carl Hewitt](https://youtu.be/X-0WJ_COvBY)
 * [Interactive Robotics with Elixir and Nerves - Arto Bendiken](https://youtu.be/zBzKoV2iFdQ?list=PLa4SYMEyNCu9sRMl-F8HA6G5LpTCAkmnO)
 
 Did we miss any? Let us know in the comments.
