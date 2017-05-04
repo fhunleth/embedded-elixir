@@ -1,7 +1,7 @@
 ---
 title: Firmware Updates
 #subtitle:
-date: 2017-05-
+date: 2017-05-04
 author: Justin Schneck
 draft: false
 tags: ["nerves", "fwup", "reactor", "bootloader"]
@@ -39,7 +39,7 @@ You can stream the fw files over the network to a device by using the `nerves_fi
 `mix firmware.push 192.168.1.100 --target rpi0`
 
 # Whats New?
-The v0.4.0 release of `nerves_firmware_http` contains several bug fixes and improvements for the network update process.
+The v0.4.0 release of `nerves_firmware_http` and `nerves_firmware` contain several bug fixes and improvements for the network update process.
 
 One of the big improvements with this version is that we can now stream the firmware bundle to the inactive firmware slot in chunks while its coming across the network. This saves space and resources instead of writing it to a temporary file, or storing it in large chunks in memory. This means stable support for devices with more limited resources like Raspberry Pi Zero and LinkIt Smart.
 
