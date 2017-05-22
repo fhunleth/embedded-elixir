@@ -40,7 +40,7 @@ source ~/.asdf/asdf.sh
 
 then we will want to install the `plugin`s for both Erlang and Elixir
 
-## Instal Plugins
+## Install Plugins
 ``` bash
 asdf plugin-add erlang https://github.com/asdf-vm/asdf-erlang.git
 asdf plugin-add elixir https://github.com/asdf-vm/asdf-elixir.git
