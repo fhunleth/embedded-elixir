@@ -58,3 +58,7 @@ Then when that breaks (it will) you can simply change back:
 asdf global erlang 19.3
 asdf global elixir 1.4.2
 ```
+
+## Nerves
+The Nerves Project currently builds ERTS (Erlang Run Time System) into system images, and the build tools will throw an error if the host machine's OTP vesion doesn't match the version in the system image for your target platform.
+This is done to ensure you can develop your application on your host machine, then push to your embedded device and everything will work as expected. This is where a version manager really comes in handy. Instead of sifting thru .deb files, or trying to install a newer or older version of OTP on your operating system's package manager, you can run two commands that explicitly explain the version of a package you want. 
