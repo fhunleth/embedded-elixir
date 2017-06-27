@@ -17,7 +17,7 @@ updating to the latest version of Elixir and OTP. Now, there are built-in option
 # Managing Elixir and Erlang with ASDF-vm
 Let's go through how easy it is to set up Elixir and Erlang with ASDF.
 
-## Instalation
+## Installation
 You pretty much will just need `git` for installation.
 ``` bash
 git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.3.0
