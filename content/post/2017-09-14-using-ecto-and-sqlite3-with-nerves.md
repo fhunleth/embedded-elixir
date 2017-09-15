@@ -81,7 +81,7 @@ iex -S mix
 
 You'll notice that in the root of your project you will have a `dev.sqlite3` file.
 The keen eye will notice that when deployed to our Nerves device, Sqlite will not
-be aloud to write to that directory because of the read only filesystem.
+be allowed to write to that directory because of the read only filesystem.
 
 That is relatively easy to solve. Back in our `config.exs` file uncomment this line:
 `# import_config "#{Mix.Project.config[:target]}.exs"`
@@ -172,7 +172,7 @@ end
 ```
 
 
-We can brake that down a bit here:
+We can break that down a bit here:
 
 The `setup_repo!/1` was derived from the (create)[https://github.com/elixir-ecto/ecto/blob/master/lib/mix/tasks/ecto.create.ex]
 mix task. It just checks for the database file's existance, and creates it if the file
@@ -180,7 +180,7 @@ is non existant.
 
 The `migrate_repo/1` function is a bit more interesting. We actually need to start
 the repo (and its pool), find the path to our migrations, then of course run the migrations,
-and finally restart everything. Lucily `Mix.Ecto` is available for us that does
+and finally restart everything. Luckily `Mix.Ecto` is available for us that does
 much of the hard work for us.
 
 And there we have it, Your Sqlite repo will be setup and migrated at application startup.
@@ -190,7 +190,7 @@ jumping off point to storing data on a Nerves project.
 
 
 ## Bonus points
-Obviously some things weren't concidered here. Be sure to concider some things
+Obviously some things weren't considered here. Be sure to consider some things
 when setting up a database on your embedded device.
 
 * If you plan on having migrations
