@@ -17,7 +17,7 @@ projects. Before we dive too deep into SQLite, lets take a look at the other opt
   * PROS: Super easy setup. Simple API.
   * CONS: May be too simple. No migrations, File size may be an issue.
 
-* ETS and DETS
+* DETS or Mnesia
   * PROS: Built into Erlang. Easy setup. Distributed.
   * CONS: No migration system. Can be difficult to maintain.
 
@@ -31,7 +31,7 @@ local, non-clustered database is the perfect data storage mechanism for an
 embedded system like Nerves.
 
 ## Application setup
-Lets walk through a quick example app to get us up and running with Nerves and Ecto + SQLite3.
+Let's walk through a quick example app to get us up and running with Nerves and Ecto + SQLite3.
 
 ```elixir
 mix nerves.new hello_db
@@ -196,5 +196,5 @@ what will you do about failed migrations?
 
 * When and how do you drop the database/repo if at all?
 
-* Should migrations _always_ be ran? Maybe you want to hook into OTA updates, and
+* Should migrations _always_ be run? Maybe you want to hook into OTA updates, and
 only run them on an update. (With the above code, hey would be run on every boot.)
