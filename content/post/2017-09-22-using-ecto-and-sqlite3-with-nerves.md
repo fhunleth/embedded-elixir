@@ -1,6 +1,6 @@
 ---
 title: Using Ecto and Sqlite3 with Nerves
-date: 2017-09-14
+date: 2017-09-22
 author: Connor Rigby
 draft: false
 tags: ["nerves"]
