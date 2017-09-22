@@ -16,7 +16,7 @@ options:
 
 <!--more-->
 
-* Key-Value storage such as the ever popular (Persistant Storage)[https://github.com/cellulose/persistent_storage]
+* Key-Value storage such as the ever popular [Persistant Storage](https://github.com/cellulose/persistent_storage)
   * PROS: Super easy setup. Simple API.
   * CONS: May be too simple. No migrations, File size may be an issue.
 
@@ -86,7 +86,10 @@ will not be allowed to write to that directory because of the read-only
 filesystem.
 
 That is relatively easy to solve. Back in our `config.exs` file uncomment this
-line: `# import_config "#{Mix.Project.config[:target]}.exs"`
+line:
+```
+# import_config "#{Mix.Project.config[:target]}.exs"
+```
 
 Then create a new file `config/rpi0w.exs` (or whatever you plan on deploying to)
 and override the Ecto config:
@@ -180,7 +183,7 @@ end
 We can break that down a bit here:
 
 The `setup_repo!/1` was derived from the
-(create)[https://github.com/elixir-ecto/ecto/blob/master/lib/mix/tasks/ecto.create.ex]
+[create](https://github.com/elixir-ecto/ecto/blob/master/lib/mix/tasks/ecto.create.ex)
 mix task. It just checks for the database file's existence, and creates it if
 the file does not exist.
 
