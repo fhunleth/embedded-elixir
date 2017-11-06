@@ -7,9 +7,9 @@ draft: false
 tags: ["nerves", "update"]
 ---
 
-Wondering what's happening on the Nerves project? You're not alone. We're planning semi-regular updates so that you don't need to lurk on the [elixir-lang slack][elixir-lang slack]'s #nerves and #nerves-dev channels all the time.
+Wondering what's happening on the Nerves project? You're not alone. We're planning semi-regular updates so that you don't need to lurk on the [elixir-lang Slack][elixir-lang slack]'s #nerves and #nerves-dev channels all the time.
 
-Before the updates, I'd like to thank our [open collective backers][oc-nerves], [Le Tote][Le Tote] and [FarmBot][FarmBot], since they're majorly helping all of us make this project sustainable for the long term.
+Before the updates, I'd like to thank our [Open Collective backers][oc-nerves], [Le Tote][Le Tote] and [FarmBot][FarmBot], since they're majorly helping all of us make this project sustainable for the long term.
 
 Alright, here are the highlights:
 <!--more-->
@@ -20,14 +20,14 @@ Alright, here are the highlights:
 1. Console resizing works on the Raspberry Pi Zero. The fix (currently in [nbtty][nbtty]) is portable to other platforms. More importantly, nbtty also fixes a nasty hang issue on platforms using the gadget USB port for the IEx console.
 1. The Beaglebone port, [nerves_system_bbb][nerves_system_bbb] now supports the [PocketBeagle][PocketBeagle].
 1. Initial support for the [Raspberry Pi Compute Module 3][cm3] has been added to [nerves_system_rpi3][nerves_system_rpi3]. Advanced support for USB gadget mode and running off eMMC Flash is not available yet.
-1. The [grovepi][grovepi] project now supports servo control using the PivotPi.
+1. The [GrovePi][grovepi] project now supports servo control using the PivotPi.
 1. Some corporate sponsorship has enabled work on integrating Chromium into a Nerves system. This will replace the current kiosk webbrowser solution that uses qtwebkitkiosk which can be found at [kiosk_system_rpi3][kiosk_system_rpi3].
 1. Corporate sponsorship is also enabling support for platforms with raw NAND flash in [fwup][fwup]. This is relevent to Nerves use on very high volume devices.
 
 Community initiatives:
 
-1. Mikel Cranfill has created a [pru][pru] package to support the PRU microcontrollers found on the Beaglebone and similar boards. These are super useful for handling hard real tasks in embedded systems and we hope it will make them more accessible.
-1. Bluetooth support (specificially BLE support) has been a regular request for integration in Nerves. Several people have made custom systems with Bluez installed or attached BLE modules (like Adafruit Bluefruit modules) via [nerves_uart][nerves_uart], but nothing has been integrated with an easy-to-use hex package yet. Watch [this issue][ble-issue] if you're interested in this.
+1. Mikel Cranfill has created a [pru][pru] package to support the PRU microcontrollers found on the Beaglebone and similar boards. These are super useful for handling hard real-time tasks in embedded systems and we hope it will make them more accessible.
+1. Bluetooth support (specificially BLE support) has been a regular request for integration in Nerves. Several people have made custom systems with BlueZ installed or attached BLE modules (like Adafruit Bluefruit modules) via [nerves_uart][nerves_uart], but nothing has been integrated with an easy-to-use Hex package yet. Watch [this issue][ble-issue] if you're interested in this.
 
 Upcoming Nerves talks and training:
 
@@ -49,7 +49,7 @@ Upcoming Nerves talks and training:
 
 * Nerves Training - Frank Hunleth
 
-Lastly, if I'm missed anything, please let me know either here or on the elixir-lang slack.
+Lastly, if I've missed anything, please let me know either here or on the [elixir-lang Slack][elixir-lang slack].
 
 [ble-issue]: https://github.com/nerves-project/nerves/issues/210
 [cm3]: https://www.raspberrypi.org/products/compute-module-3/
