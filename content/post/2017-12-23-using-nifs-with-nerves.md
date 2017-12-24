@@ -1,36 +1,42 @@
 ---
-title: "Using Nifs With Nerves"
+title: "Using NIFs With Nerves"
 date: 2017-12-23T12:48:08-08:00
-tags: ["nerves", "c"]
+author: Connor Rigby
+draft: false
+tags: ["nerves", "nif", "c"]
 ---
 While working on a Nerves project, you will likely do most hard work in the
 `host` environnment. This means you get to develop features quickly, and when
 are ready, you simply deploy your known working firmware to your embedded
 devices. This however can lead to a situation where the code runs really well
-on your i7 powered beast computer, but when deployed on the (relatively) less
-powerful Raspberry Pi 0 for example. Nothing will be broken, but things are just
+on your i7 powered beast computer, but when deployed on a less
+powerful Raspberry Pi 0, for example. Nothing will be broken, but things are just
 _too_ slow. There are a number of solutions to this problem and in this post,
 I will walk you through a simplified real world example of one possible solution
-of using an [Erlang Nif](http://erlang.org/doc/tutorial/nif.html) to speed
-up a particular functionality.
+of using an [Erlang NIF](http://erlang.org/doc/tutorial/nif.html) to speed
+up one particular functionality.
 
-I would like to preface this by saying a Nif will now always be the solution for
+<!--more-->
+
+I would like to preface this by saying a NIF will not always be the solution for
 you. The documentation explains this: "NIFs are most suitable for synchronous functions".
-The other scary thing about Nifs is that
+The other scary thing about NIFs is that
 
-    a NIF library is dynamically linked into the emulator process,
-    this is the fastest way of calling C-code from Erlang
-    (alongside port drivers).
-    Calling NIFs requires no context switches.
-    But it is also the least safe,
-    because a crash in a NIF brings the emulator down too.
+>>>
+Since a NIF library is dynamically linked into the emulator process,
+this is the fastest way of calling C-code from Erlang
+(alongside port drivers).
+Calling NIFs requires no context switches.
+But it is also the least safe,
+because a crash in a NIF brings the emulator down too.
+>>>
 
-To simplify - A segfault in the code you are calling for example, will result
-in the Erlang Virtual machine crashing. This crash usually falls out of the scope
-of the `let it crash` mantra. (However, Nerves does have the ability to restart
-Erlang for you.)
+To simplify - a segfault in the code you are calling will result
+in the Erlang virtual machine crashing. This crash usually falls out of the scope
+of the `let it crash` mantra. Nerves will reboot your device when this happens
+by default.
 
-Now lets get started with that example. Full disclaimer, This example might get
+Now lets get started with that example. Full disclaimer: This example might get
 a little complex and long winded because I pulled it out of a real world project,
 but I think it is simple enough to follow.
 
@@ -39,7 +45,8 @@ something on in a repeating manor. So do _*something*_ every _*number*_ of _*uni
 starting on _*datetime*_ ending on _*datetime*_. It turns out generating a list
 of events in this manor can be pretty taxing. Let's get started.
 
-First we do the standard creating of a new app:
+First we create a new Nerves app like normal:
+
 ```bash
 mix nerves.new hello_calendar
 ```
@@ -49,7 +56,8 @@ database of some sort. We won't cover that here, but if you're interested in tha
 check out [this](http://embedded-elixir.com/post/2017-09-22-using-ecto-and-sqlite3-with-nerves/)
 post.
 
-Make a new file `lib/hello_calendar/calendar.ex`.
+Make a new file `lib/hello_calendar/calendar.ex`:
+
 ```elixir
 defmodule HelloCalendar.Calendar do
   defstruct [:start_time, :end_time, :repeat, :time_unit, :calendar]
@@ -80,7 +88,7 @@ defmodule HelloCalendar.Calendar do
 end
 ```
 
-Now for the hard (ish) part. the `build_calendar/1` function. We will want a list
+Now for the hard (ish) part: the `build_calendar/1` function. We want a list
 of events to operate on.
 
 ```elixir
@@ -101,7 +109,7 @@ def build_calendar(%__MODULE__{} = calendar) do
   %{calendar | calendar: new_calendar}
 end
 
-# This function will be replaced with out nif.
+# This function will be replaced with our NIF.
 def do_build_calendar(now_seconds, start_time_seconds, end_time_seconds, repeat, repeat_frequency_seconds) do
   Logger.warn "Using (very) slow calendar builder!"
   grace_period_cutoff_seconds = now_seconds - 60
@@ -122,14 +130,15 @@ defp time_unit_to_seconds(repeat, "monthly"), do: 60 * 60 * 24 * 30
 defp time_unit_to_seconds(repeat, "yearly"), do: 60 * 60 * 24 * 365
 ```
 
-Now that was a mouthful, but we are mostly interested in `do_build_calendar/5`
-first we build a `grace_period` by subtracting one minute from `now`. Then we build a `Range`
+Now that was a mouthful, but we are mostly interested in `do_build_calendar/5`.
+First we build a `grace_period` by subtracting one minute from `now`. Then we build a `Range`
 from the `start_time` to the `end_time`, and take the number of steps. Then we
 filter out every event that isn't after our grace period. Then we grab 60 of those
-events, and roud down to the nearest minute.
+events, and round down to the nearest minute.
 
 Now we can test it out:
-```
+
+```elixir
 iex()> now = DateTime.utc_now()
 iex()> start_time = %{now | minute: now.minute + 5}
 iex()> end_time = %{now | hour: now.hour + 1}
@@ -141,16 +150,19 @@ iex()> HelloCalendar.Calendar.new(start_time, end_time, 1, "minutely")
  start_time: #DateTime<2017-12-23 22:10:02.653171Z>, time_unit: "minutely"}
 ```
 
-And it was very quick. But now say you want `end_time` to be in 5 years..
-```
+And it was very quick. But now say you want `end_time` to be in 5 years...
+
+```elixir
 HelloCalendar.Calendar.new(start_time, %{end_time | year: end_time.year + 5}, 1, "minutely")
 ```
+
 That takes signifigantly longer, because it still needs to enumerate over every
 time before our `gracec_period` here: `|> Enum.filter(&Kernel.>(&1, grace_period_cutoff_seconds))`
 
-So lets get into the fun Nif stuff.
+So let's get into the fun NIF stuff.
 
-First we need to setup our `Make` environment. We add a dependency to the `mix.exs`
+First we need to setup our `make` environment. We add a dependency to the `mix.exs`:
+
 ```elixir
 def project do
   [...
@@ -169,6 +181,7 @@ end
 ```
 
 and we will need a `Makefile`. This is the complex part with Nerves.
+
 ```Makefile
 ifeq ($(ERTS_DIR),)
 ERTS_DIR = $(shell erl -eval "io:format(\"~s/erts-~s~n\", [code:root_dir(), erlang:system_info(version)])" -s init stop -noshell)
@@ -244,21 +257,23 @@ static ErlNifFunc nif_funcs[] =
 ERL_NIF_INIT(HelloCalendar.Calendar, nif_funcs, NULL,NULL,NULL,NULL)
 ```
 
-Now, you can do either `mix compile` or `make` to generate your new nif.
+Now, you can do either `mix compile` or `make` to generate your new NIF.
 You should have a file called `make_calendar.so` in your `priv` directory. Lets
 walk thru that file really quickly, starting from the bottom.
 
 `ERL_NIF_INIT(Elixir.HelloCalendar.Calendar, nif_funcs, NULL,NULL,NULL,NULL)` Tells
-the nif what the module name is, the functions to be exported, and then there are
+the NIF what the module name is, the functions to be exported, and then there are
 arguments for `on_load`, `on_reload`, `on_unload`, and `on_upgrade`. We won't be
 using those today.
+
 ```c
 static ErlNifFunc nif_funcs[] =
 {
     {"do_build_calendar", 5, do_build_calendar}
 };
 ```
-This tells the nif which functions and their arity to export.
+
+This tells the NIF which functions and their arity to export.
 
 ```c
 static ERL_NIF_TERM do_build_calendar(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
@@ -268,6 +283,7 @@ static ERL_NIF_TERM do_build_calendar(ErlNifEnv* env, int argc, const ERL_NIF_TE
   return enif_make_tuple(env, atom_err, atom_not_implemented);
 }
 ```
+
 This is our actual function. The last part is to wire it up in Elixir. Open up
 `lib/hello_calendar/calendar.ex` again and add this:
 
@@ -278,25 +294,30 @@ This is our actual function. The last part is to wire it up in Elixir. Open up
     case :erlang.load_nif(nif_file, 0) do
       :ok -> :ok
       {:error, {:reload, _}} -> :ok
-      {:error, reason} -> Logger.warn "Failed to load nif: #{inspect reason}"
+      {:error, reason} -> Logger.warn "Failed to load NIF: #{inspect reason}"
     end
   end
 ```
+
 Now lets walk through that.
 `@on_load :load_nif` is a compiler attribute that tells Elixir/Erlang to do something when
-the module is loaded. In this case we want to load a nif.
-If the nif loading fails, we want to fallback to the default implementation. This
+the module is loaded. In this case we want to load a NIF.
+If the NIF loading fails, we want to fallback to the default implementation. This
 is required in Nerves, since when running `mix firmware`, the Elixir compiler `load`s
-your code, which will load the nif.
+your code, which will load the NIF.
 
-now if we run the `iex` tests from above:
-```
-iex(1)> now = DateTime.utc_now()                                                               
+Now if we run the `iex` tests from above:
+
+```elixir
+iex(1)> now = DateTime.utc_now()
 #DateTime<2017-12-23 22:39:33.259057Z>
-iex(2)> start_time = now                                                                       
+
+iex(2)> start_time = now
 #DateTime<2017-12-23 22:39:33.259057Z>
-iex(3)> end_time = %{start_time | hour: now.hour + 5, year: now.year + 1000}                   
+
+iex(3)> end_time = %{start_time | hour: now.hour + 5, year: now.year + 1000}
 #DateTime<3017-12-23 27:39:33.259057Z>
+
 iex(4)> HelloCalendar.Calendar.new(start_time, %{end_time | year: end_time.year + 5}, 1, "minutely")
 ** (Protocol.UndefinedError) protocol Enumerable not implemented for {:error, :not_implemented}. This protocol is implemented for: Date.Range, File.Stream, Function, GenEvent.Stream, HashDict, HashSet, IO.Stream, List, Map, MapSet, Range, Stream
     (elixir) lib/enum.ex:1: Enumerable.impl_for!/1
@@ -309,6 +330,7 @@ Now we get `{:error, :not_implemented}` as a return from our `do_build_calendar`
 function. Obviously this is an error, but it didn't use the old Elixir implementation.
 
 Lets finish up the C version of that function:
+
 ```c
 static ERL_NIF_TERM do_build_calendar(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
 {
@@ -379,7 +401,6 @@ We know the first 3 are `long`s so we use the `enif_get_long` function to get th
 `repeat` is an integer so we do `enif_get_int` to get it. Those functions pass
 the address of the variables you wish to populate. (`&`).
 
-
 ```c
 // Data used to build the calendar.
 long int gracePeriodSeconds;
@@ -390,7 +411,7 @@ long int step = frequencySeconds * repeat;
 Just building up some information we will need later.
 
 ```c
-// build our events array, fill it with zeroes.
+// Build our events array and fill it with zeroes.
 long int events[MAX_GENERATED];
 for(i = 0; i < MAX_GENERATED; i++)
   events[i] = 0;
@@ -425,13 +446,15 @@ build the `list` of items to return to Erlang/Elixir. and finally
 Now if we run our examples again, they will be almost instant on our host machine.
 You can deploy to a nerves device now, and it should be still quite fast.
 
-`MIX_TARGET=rpi0 mix do deps.get, firmware`
+```sh
+MIX_TARGET=rpi0 mix do deps.get, firmware
+```
 
 You may notice a warning:
 `14:52:29.876 [warn]  Failed to load nif: {:load_failed, 'Failed to load NIF library:
 hello_calendar/_build/rpi0/dev/lib/hello_calendar/priv/build_calendar.so: wrong ELF class: ELFCLASS32\''}`
 
 This is happening because the Elixir compiler is trying to load your Nerves
-crosscompiled nif. You can safely ignore or disable this message.
+crosscompiled NIF. You can safely ignore or disable this message.
 
 All the code for this project is on Github [here](https://github.com/ConnorRigby/hello_calendar)
