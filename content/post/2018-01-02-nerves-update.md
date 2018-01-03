@@ -25,10 +25,10 @@ as well. Here's a summary of what's been happening:
    Tim posted a [video][nerves_on_windows] and we hope to update the docs to
    make things easier on Windows users.
 1. Connor Rigby's [linter][nerves_system_linter] is now live in almost all of
-   our officially supported systems. We recommend including it your custom
+   our officially-supported systems. We recommend including it in your custom
    systems to catch subtle assumptions that Elixir and Nerves have with the
    Buildroot and Linux configurations. If you've run into a custom system
-   issue,let us know about it - maybe we can help others avoid it using the
+   issue, let us know about it - maybe we can help others avoid it using the
    linter.
 1. We've been busy making it easier to revert software images loaded on devices.
    While this has always been possible with our A/B partition setup, it isn't
@@ -38,9 +38,9 @@ as well. Here's a summary of what's been happening:
 1. While not a Nerves feature that we worked on, we recently merged in Erlang
    20.2.1 to [nerves_system_br][nerves_system_br]. This brings in support in
    Erlang's `ssh` application for using ssh-agent. If you use
-   [nerves_firmware_ssh][nerves_firmware_ssh] or anything ssh related on your
-   devices and password protect your ssh private keys, this will be life
-   changing. Thank you OTP team!
+   [nerves_firmware_ssh][nerves_firmware_ssh] or anything ssh-related on your
+   devices and password protect your ssh private keys, this will be
+   life-changing. Thank you OTP team!
 1. Work has progressed on the Chromium integration in LeTote's
    [kiosk_system_rpi3][kiosk_system_rpi3] and
    [kiosk_system_x86_64][kiosk_system_x86_64] projects. Users comfortable with
@@ -48,7 +48,7 @@ as well. Here's a summary of what's been happening:
    out. This provides an alternative to the somewhat limited WebKit-based
    browser.
 1. [Smartrent][Smartrent] has promised sponsorship of an open source pull-based
-   firmware update server. This will fill a big gap in the Nerves ecosystem so
+   firmware update server. This will fill a big gap in the Nerves ecosystem, so
    we're quite excited about it.
 1. Our hardware-based regression test setup is progressing. I had hoped to have
    pictures of it in operation right now, but it's not ready yet. It's sooo
@@ -65,20 +65,28 @@ Here are a few:
    that looks awesome
 1. Derek Kraan is making good progress with an Elixir-based [Z-wave serial API
    stack][dkraan_zwave] for controlling devices in his home
-1. If you're into home automatic and using WeMo, checkout Chris Coté's new [ex_wemo][ex_wemo] library.
+1. If you're into home automation and using WeMo, check out Chris Coté's new
+   [ex_wemo][ex_wemo] library.
+1. Tim Gilbert described how he was able to [collect logs from a Nerves
+   device with Papertrail][tim_gilbert_papertrail].
+1. Michał Kalbarczyk showed how he used Nerves with a Raspberry Pi to [control
+   an LED matrix display][brewing_firmware].
 
 Upcoming Nerves talks and training:
 
 [Lonestar ElixirConf][Lonestar] - Austin, TX, February 22-24, 2018
 
 * Keynote - Tim Mecklem
-* Customize your car: An Adventure in Using Elixir and Nerves to Hack Your
+* Customize your Car: An Adventure in Using Elixir and Nerves to Hack Your
   Vehicle's Electronics Network - Brian Wankel
-* Nerves Training w/ Greg Mefford - There's still space left!
+* Nerves Training w/ Greg Mefford - Come build your own Nerves-based,
+  WiFi-enabled camera based on the Raspberry Pi Zero W. There's still space left,
+  but registration will close around the end of January, so don't delay if you're
+  planning to sign up!
 
 [ElixirConfEU 2018][ElixirConfEU] - Warsaw, April 18th, 2018
 
-* Nerves Training w/ Frank Hunleth - I've created a new project for this one day
+* Nerves Training w/ Frank Hunleth - I've created a new project for this one-day
   training class that includes the best parts of the popular ElixirConf 2017
   training in Seattle.
 
@@ -109,3 +117,5 @@ sustainable for the long term.
 [Lonestar]: http://lonestarelixir.com/
 [ex_wemo]: https://github.com/NationalAssociationOfRealtors/ex_wemo
 [oc-nerves]: https://opencollective.com/nerves-project/
+[tim_gilbert_papertrail]: https://timgilbert.wordpress.com/2017/12/31/logging-from-headless-nerves-machines-to-papertrail/
+[brewing_firmware]: https://blog.fazibear.me/brewing-the-firmware-for-raspberry-pi-with-elixir-and-nerves-5dd67970d073
