@@ -114,12 +114,12 @@ end
 
 @compile {:inline, [time_unit_to_seconds: 2]}
 defp time_unit_to_seconds(_, "never"), do: 0
-defp time_unit_to_seconds(repeat, "minutely"), do: 60 * repeat
-defp time_unit_to_seconds(repeat, "hourly"), do: 60 * 60 * repeat
-defp time_unit_to_seconds(repeat, "daily"), do: 60 * 60 * 24 * repeat
-defp time_unit_to_seconds(repeat, "weekly"), do: 60 * 60 * 24 * 7 * repeat
-defp time_unit_to_seconds(repeat, "monthly"), do: 60 * 60 * 24 * 30 * repeat
-defp time_unit_to_seconds(repeat, "yearly"), do: 60 * 60 * 24 * 365 * repeat
+defp time_unit_to_seconds(repeat, "minutely"), do: 60
+defp time_unit_to_seconds(repeat, "hourly"), do: 60 * 60
+defp time_unit_to_seconds(repeat, "daily"), do: 60 * 60 * 24
+defp time_unit_to_seconds(repeat, "weekly"), do: 60 * 60 * 24 * 7
+defp time_unit_to_seconds(repeat, "monthly"), do: 60 * 60 * 24 * 30
+defp time_unit_to_seconds(repeat, "yearly"), do: 60 * 60 * 24 * 365
 ```
 
 Now that was a mouthful, but we are mostly interested in `do_build_calendar/5`
@@ -173,37 +173,69 @@ and we will need a `Makefile`. This is the complex part with Nerves.
 ifeq ($(ERTS_DIR),)
 ERTS_DIR = $(shell erl -eval "io:format(\"~s/erts-~s~n\", [code:root_dir(), erlang:system_info(version)])" -s init stop -noshell)
 ifeq ($(ERTS_DIR),)
+   $(error Could not find the Erlang installation. Check to see that 'erl' is in your PATH or export ERTS_DIR)
+endif
+endif
+
+ifeq ($(ERL_EI_INCLUDE_DIR),)
+ERL_ROOT_DIR = $(shell erl -eval "io:format(\"~s~n\", [code:root_dir()])" -s init stop -noshell)
+ifeq ($(ERL_ROOT_DIR),)
    $(error Could not find the Erlang installation. Check to see that 'erl' is in your PATH)
 endif
+ERL_EI_INCLUDE_DIR = "$(ERL_ROOT_DIR)/usr/include"
+ERL_EI_LIBDIR = "$(ERL_ROOT_DIR)/usr/lib"
 endif
 
-CFLAGS = -fPIC -Wl,-undefined -Wl,dynamic_lookup -shared
-ERL_FLAGS = -I$(ERTS_DIR)/include
-CC ?= $(CROSSCOMPILER)g++
+# Set Erlang-specific compile and linker flags
+ERL_CFLAGS ?= -I$(ERL_EI_INCLUDE_DIR)
+ERL_LDFLAGS ?= -L$(ERL_EI_LIBDIR)
 
-all: build_calendar
+LDFLAGS += -fPIC -shared
+CFLAGS ?= -fPIC -O2 -Wall -Wextra -Wno-unused-parameter
 
-build_calendar:
-	$(CC) $(ERL_FLAGS) $(CFLAGS) -o priv/build_calendar.so c_src/build_calendar.c
+ifeq ($(CROSSCOMPILE),)
+ifeq ($(shell uname),Darwin)
+LDFLAGS += -undefined dynamic_lookup
+endif
+endif
+
+NIF=priv/build_calendar.so
+
+all: priv $(NIF)
+
+priv:
+	mkdir -p priv
+
+$(NIF): c_src/build_calendar.c
+	$(CC) $(ERL_CFLAGS) $(CFLAGS) $(ERL_LDFLAGS) $(LDFLAGS) \
+	    -o $@ $<
 
 clean:
-	$(RM) build_calendar.* priv/*.so
+	$(RM) $(NIF)
 ```
+ERTS_DIR
+ERL_EI_INCLUDE_DIR
 
-Basically the most important line is `CC ?= $(CROSSCOMPILER)g++`
-That says if `CC` does not exist, assign `$(CROSSCOMPILER)g++` to that value.
-This makes sure that our c code gets cross compiled when we run `mix firmware`.
+Basically what that Makefile does is makes sure both the `ERTS_DIR` and
+`ERL_EI_INCLUDE_DIR` environment variables are set, then included during
+the compile. This will give us access to the `erl_nif.h` header we will see
+later, and allows the compiler to properly link against it.
 
 Now we can finally get to writing our C code! Lets reimplement that slow
 `do_build_calendar` function. Create a new file `c_src/build_calendar.c`
 
 ```c
+#include <stdlib.h>
+#include <string.h>
+#include <erl_nif.h>
+
 static ERL_NIF_TERM do_build_calendar(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
 {
   ERL_NIF_TERM atom_err = enif_make_atom(env, "error");
   ERL_NIF_TERM atom_not_implemented = enif_make_atom(env, "not_implemented");
   return enif_make_tuple(env, 2, atom_err, atom_not_implemented);
 }
+
 static ErlNifFunc nif_funcs[] =
 {
     {"do_build_calendar", 5, do_build_calendar}
