@@ -6,7 +6,7 @@ draft: false
 tags: ["nerves", "nif", "c"]
 ---
 While working on a Nerves project, you will likely do most hard work in the
-`host` environnment. This means you get to develop features quickly, and when
+`host` environment. This means you get to develop features quickly, and when
 are ready, you simply deploy your known working firmware to your embedded
 devices. This however can lead to a situation where the code runs really well
 on your i7 powered beast computer, but when deployed on a less
@@ -33,8 +33,7 @@ because a crash in a NIF brings the emulator down too.
 
 To simplify - a segfault in the code you are calling will result
 in the Erlang virtual machine crashing. This crash usually falls out of the scope
-of the `let it crash` mantra. Nerves will reboot your device when this happens
-by default.
+of the `let it crash` mantra. Nerves will reboot your device when this happens.
 
 Now lets get started with that example. Full disclaimer: This example might get
 a little complex and long winded because I pulled it out of a real world project,
@@ -183,13 +182,6 @@ end
 and we will need a `Makefile`. This is the complex part with Nerves.
 
 ```Makefile
-ifeq ($(ERTS_DIR),)
-ERTS_DIR = $(shell erl -eval "io:format(\"~s/erts-~s~n\", [code:root_dir(), erlang:system_info(version)])" -s init stop -noshell)
-ifeq ($(ERTS_DIR),)
-   $(error Could not find the Erlang installation. Check to see that 'erl' is in your PATH or export ERTS_DIR)
-endif
-endif
-
 ifeq ($(ERL_EI_INCLUDE_DIR),)
 ERL_ROOT_DIR = $(shell erl -eval "io:format(\"~s~n\", [code:root_dir()])" -s init stop -noshell)
 ifeq ($(ERL_ROOT_DIR),)
@@ -227,13 +219,12 @@ clean:
 	$(RM) $(NIF)
 ```
 
-ERTS_DIR
-ERL_EI_INCLUDE_DIR
-
-Basically what that Makefile does is makes sure both the `ERTS_DIR` and
-`ERL_EI_INCLUDE_DIR` environment variables are set, then included during
-the compile. This will give us access to the `erl_nif.h` header we will see
-later, and allows the compiler to properly link against it.
+The only really complicated part of the `Makefile` is the top part that finds
+the paths to the Erlang interface (ei) include and library directories. They're
+needed for us to use the `erl_nif.h` header file. The `ERL_EI_INCLUDE_DIR` and
+`ERL_EI_LIBDIR` variables specify those paths by convention. Nerves will fill
+them in for us (via environment variables) when calling the Makefile, but if
+we're compiling outside of Nerves, we need to figure them out ourselves.
 
 Now we can finally get to writing our C code! Lets reimplement that slow
 `do_build_calendar` function. Create a new file `c_src/build_calendar.c`
