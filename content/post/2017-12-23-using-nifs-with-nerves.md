@@ -97,7 +97,7 @@ def build_calendar(%__MODULE__{} = calendar) do
   start_time_seconds = DateTime.to_unix(calendar.start_time, :seconds)
   end_time_seconds = DateTime.to_unix(calendar.end_time :seconds)
   repeat = calendar.repeat
-  repeat_frequency_seconds = time_unit_to_seconds(repeat, calendar.time_unit)
+  repeat_frequency_seconds = time_unit_to_seconds(calendar.time_unit)
 
   new_calendar =
     do_build_calendar(current_time_seconds,
@@ -121,13 +121,13 @@ def do_build_calendar(now_seconds, start_time_seconds, end_time_seconds, repeat,
 end
 
 @compile {:inline, [time_unit_to_seconds: 2]}
-defp time_unit_to_seconds(_, "never"), do: 0
-defp time_unit_to_seconds(repeat, "minutely"), do: 60
-defp time_unit_to_seconds(repeat, "hourly"), do: 60 * 60
-defp time_unit_to_seconds(repeat, "daily"), do: 60 * 60 * 24
-defp time_unit_to_seconds(repeat, "weekly"), do: 60 * 60 * 24 * 7
-defp time_unit_to_seconds(repeat, "monthly"), do: 60 * 60 * 24 * 30
-defp time_unit_to_seconds(repeat, "yearly"), do: 60 * 60 * 24 * 365
+defp time_unit_to_seconds("never"), do: 0
+defp time_unit_to_seconds("minutely"), do: 60
+defp time_unit_to_seconds("hourly"), do: 60 * 60
+defp time_unit_to_seconds("daily"), do: 60 * 60 * 24
+defp time_unit_to_seconds("weekly"), do: 60 * 60 * 24 * 7
+defp time_unit_to_seconds("monthly"), do: 60 * 60 * 24 * 30
+defp time_unit_to_seconds("yearly"), do: 60 * 60 * 24 * 365
 ```
 
 Now that was a mouthful, but we are mostly interested in `do_build_calendar/5`.
@@ -226,6 +226,7 @@ $(NIF): c_src/build_calendar.c
 clean:
 	$(RM) $(NIF)
 ```
+
 ERTS_DIR
 ERL_EI_INCLUDE_DIR
 
