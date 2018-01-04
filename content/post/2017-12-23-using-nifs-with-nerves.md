@@ -181,7 +181,7 @@ end
 
 and we will need a `Makefile`. This is the complex part with Nerves.
 
-```Makefile
+```makefile
 ifeq ($(ERL_EI_INCLUDE_DIR),)
 ERL_ROOT_DIR = $(shell erl -eval "io:format(\"~s~n\", [code:root_dir()])" -s init stop -noshell)
 ifeq ($(ERL_ROOT_DIR),)
