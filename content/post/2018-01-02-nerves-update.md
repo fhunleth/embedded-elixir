@@ -74,6 +74,10 @@ Here are a few:
 
 Upcoming Nerves talks and training:
 
+[CodeMash][codemash] - Sandusky, Ohio, January 9-12, 2018
+
+* Building an Artificial Pancreas - Tim Mecklem
+
 [Lonestar ElixirConf][Lonestar] - Austin, TX, February 22-24, 2018
 
 * Keynote - Tim Mecklem
@@ -119,3 +123,4 @@ sustainable for the long term.
 [oc-nerves]: https://opencollective.com/nerves-project/
 [tim_gilbert_papertrail]: https://timgilbert.wordpress.com/2017/12/31/logging-from-headless-nerves-machines-to-papertrail/
 [brewing_firmware]: https://blog.fazibear.me/brewing-the-firmware-for-raspberry-pi-with-elixir-and-nerves-5dd67970d073
+[codemash]: http://www.codemash.org/sessions?id=6796
