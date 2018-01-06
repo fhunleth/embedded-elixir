@@ -13,7 +13,7 @@ fi
 
 SHA=$(git rev-parse HEAD)
 if [ -n "$GITHUB_API_TOKEN" ]; then
-    GIT_USER_ARGS="-c user.name='travis' -c user.email='travis'"
+    GIT_USER_ARGS="-c user.name='CI' -c user.email='fhunleth@troodon-software.com'"
 fi
 
 echo "Deleting old publication"
@@ -29,7 +29,7 @@ hugo
 
 echo "Updating gh-pages branch"
 git -C public add --all
-git -C public $GIT_USER_ARGS commit -m "Publishing to gh-pages ($SHA)"
+git -C public $GIT_USER_ARGS commit -m "Publishing to gh-pages ($SHA) [skip ci]"
 
 echo "Pushing gh-pages branch"
 if [ -n "$GITHUB_API_TOKEN" ]; then

@@ -1,0 +1,9 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: cibuilds/hugo:0.28
+    working_directory: ~/project
+    steps:
+      - checkout
+      - run: ./_scripts/publish.sh
