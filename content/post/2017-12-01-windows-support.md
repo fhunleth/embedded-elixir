@@ -171,17 +171,97 @@ Finally run the container from your `nerves_developer` image:
 docker run --rm -it --hostname docker -p 4000:4000 -p 9100-9109:9100-9109 -v myhome:/home/pokyuser -v myvolume:/workdir nerves_developer --workdir=/workdir
 ```
 
+Docker commands are very verbose.  Here is a quick breakdown:
+* "run" a new container interactively (-it) from `nerves_developer` image and delete it (--rm) when done
+* Set the host name of the container to "docker" (--hostname docker).  This comes into play when doing distributed Erlang stuff
+* Expost the ports (-p) 4000, 9100-9109.  4000 is the default for Phoenix, and 910x is for Distributed Erlang
+* Mount volumes (-v).  Docker containers do not save state, so to make directories permanent we have to mount them as a "volume".
+* The CROPS scripts expect a workdir to be specifed.  We use their convention and chose /workdir
+
+Finally, to access files from Windows programs, mount /workdir as a network drive
+```
+net use a: \\192.168.99.100\workdir
+```
+
 ### Docker - Advanced
 
 The above setup will create a new temporary container each time the command is run, and cleanup after it exits.  What if you want a single container
-with multiple shells attached?  This is easily done.  Instead of the "run" command, we first need to "create":
+with multiple shells attached?  This is easily done.  :
 
-Create a new container `nerves_dev` from your `nerves_developer` image:
+Instead of the "run" command, we first need to "create" a new container `nerves_dev` from your `nerves_developer` image:
 ```sh
-docker create -t --user usersetup -v myvolume:/workdir --name nerves_dev --hostname docker myhome:/home/pokyuser -p 4000:4000 -p 9100-9109:9100-9109 nerves_developer --workdir=/workdir
+docker create -t --user usersetup -v myvolume:/workdir --name nerves_dev --hostname docker -v myhome:/home/pokyuser -p 4000:4000 -p 9100-9109:9100-9109 nerves_developer --workdir=/workdir
 ```
+You should recognized most of the options from before.  The only new one is "--user", which lets us specify the user to run the container as.  The `usersetup` user is part
+of the CROPS ecosystem.
 
 Finally, attach a new shell to the container.  You can attach as many shells desired, and they will all share the same container
 ```sh
 docker exec -it -u pokyuser nerves_dev poky-launch.sh /workdir bash -l
 ```
+
+## Burning SD Cards and GUIs
+
+Neither WSL or Docker allow GUIs or direct burning of SD Cards.  Thus we will need to install the native windows tools for this.
+The easiest way is to install Chocolately (https://chocolatey.org/)
+
+Next install fwup and elixir packages:
+* `fwup`
+  ```
+  choco install fwup
+  ```
+* `elixir`
+  ```
+  choco install elixir
+  ```
+
+### SD Card
+
+To burn an SD Card, you must run "fwup" from a Windows Command Prompt with Administrator priviledges.
+
+* Launch a new Command Prompt as Administrator
+* (Docker Only) The Administrator does not have access to mapped drives of the normal user, so you must re-mount the Samba share:
+  ```
+  net use a: \\192.168.99.100\workdir
+  ```
+* (WSL Only) Copy the .fw file to your Windows Desktop
+* Finally, run `fwup` to burn the SD Card.
+  Docker:
+  ```
+  a:
+  cd <path to nerves project>
+  fwup -a -i _build\<target\dev\nerves\images\myfirmware.fw -t complete
+  ```
+  WSL:
+  ```
+  cd Desktop
+  fwup -a -i myfirmware.fw -t complete
+  ```
+
+## Erlang GUIs
+
+Erlang ships with a variety of GUI applications to help with debugging.  The most useful of these is Observer
+
+Launching this on Windows is 2 step process
+* Launch your app with distribution enabled:
+```sh
+iex --sname my_app --cookie cookie --erl "-kernel inet_dist_listen_min 9100 inet_dist_listen_max 9109" -S mix
+```
+* Create a new file named `inetrc` to let erlang find our docker app
+```erlang
+{host,{192,168,99,100}, ["docker"]}.
+```
+
+* From Windows, Launch Observer
+```sh
+ERL_INETRC=inetrc iex --sname observer --cookie cookie -e ":observer.start()"
+```
+* Finally attach to the remote node
+  * select Nodes->Connect Nodes"
+  * type 'my_app@docker'
+
+Note even though we have named the node "docker", the above proceedure should work for WSL as well.
+
+## Conclusion
+
+WSL is a great way to get Nerves running on Windows.  If your version of Windows isn't new enough, Docker is a great way too.
