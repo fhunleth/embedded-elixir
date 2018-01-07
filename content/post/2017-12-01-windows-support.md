@@ -9,7 +9,6 @@ tags: ["nerves", "windows"]
 
 Most Elixir developers prefer Mac or Linux, but Windows is historically the platform of choice for embedded developers.  Fortunately there are many ways to get Nerves running on Windows.  Unfortunately, there is no "silver bullet"--each approach has its trade-offs.
 
-
 # 10,000 foot Overview
 
 There are 2 fundamental approaches to Nerves-on-Windows:
@@ -59,7 +58,7 @@ common.  You Have Been Warned)
 
 * The Good
   * Same as WSL
-  * Can use "volumes" which are Linux Native FS.  Thus preserves permissions
+  * Can use "volumes" which are Linux Native FS.  This perserves file case and permissions.
   * Expose volumes via Samba for Windows Editors
 * The Bad
   * No access to SD Cards (same as WSL)
@@ -86,10 +85,103 @@ This makes it hard to even upack on a Windows file system
 1. Ecosystem:  Many dependencies (accidentally??) require a unix environment to compile
 
 
-## Recomendations
+## Installation
+
+### WSL
 
 If you are running Windows 10 Creator's Update, then the choice is easy:  use WSL.
-Tim Mecklem has a great [video here](https://www.youtube.com/watch?v=rzV0qfhzzqc).  Just watch out where you checkout code, and make sure "git" is always run from WSL.
+Tim Mecklem has a great [video here](https://www.youtube.com/watch?v=rzV0qfhzzqc).
 
-For previous version of Windows, Docker Toolbox works fairly well, and gives an environment
-close to WSL.  The CROPS project has step-by-step [instructions here](https://github.com/crops/docker-win-mac-docs/wiki/Windows-Instructions-%28Docker-Toolbox%29)
+Note:  To avoid pain, always run "git" from WSL.
+
+### Docker
+
+For previous version of Windows, Docker Toolbox works fairly well, and gives an
+environment close to WSL.  The CROPS project has step-by-step
+[instructions here](https://github.com/crops/docker-win-mac-docs/wiki/Windows-Instructions-%28Docker-Toolbox%29).
+
+The above link will get you going with a "Base" Ubuntu 16 image.  We still need
+to create a dockerfile that has Elixir + Nerves dependencies.
+
+First we will need to create a file named "Dockerfile" with the following contents:
+```docker
+FROM crops/poky
+WORKDIR /tmp
+USER root
+
+RUN apt-get update &&\
+    apt-get install -y squashfs-tools docbook-xsl inotify-tools vim emacs npm nodejs nodejs-legacy software-properties-common python-software-properties &&\
+    add-apt-repository ppa:git-core/ppa &&\
+    apt-get update &&\
+    apt-get install -y git &&\
+    rm -rf /var/lib/apt/lists/*
+
+RUN wget https://packages.erlang-solutions.com/erlang-solutions_1.0_all.deb &&\
+    dpkg -i erlang-solutions_1.0_all.deb &&\
+    rm erlang-solutions_1.0_all.deb
+
+# Everything below will likely need to be updated periodically.
+RUN npm install -g n &&\
+    n lts &&\
+    apt-get remove -y nodejs nodejs-legacy
+
+RUN wget https://github.com/fhunleth/fwup/releases/download/v0.19.0/fwup_0.19.0_amd64.deb &&\
+    dpkg -i fwup_0.19.0_amd64.deb &&\
+    rm fwup_0.19.0_amd64.deb
+
+RUN apt-get update &&\
+    apt-get install -y esl-erlang=1:20.2.2 elixir=1.5.2-1 &&\
+    rm -rf /var/lib/apt/lists/*
+
+RUN HOME=/etc/skel mix local.hex --force &&\
+    HOME=/etc/skel mix local.rebar --force &&\
+    HOME=/etc/skel mix archive.install https://github.com/nerves-project/archives/raw/master/nerves_bootstrap.ez --force
+```
+The build process creates no artifacts in the local directory, so the file can be put anywhere
+
+Once you have your Dockerfile, use it to create a image named `nerves_developer`:
+```sh
+docker build nerves_developer .
+```
+
+Also create a volume to persist your home directory:
+```sh
+docker volume create myhome
+
+# This will copy ssh keys into the new home directory
+docker create -v  myhome:/home/pokyuser --name busybox_container busybox
+# Note there is a bug where docker cp can't use full paths that map back to /c/*, so workaround with pushd
+pushd $HOME
+docker cp .ssh  busybox_container:/home/pokyuser
+
+echo "Copying .gitconfig"
+docker cp .gitconfig busybox_container:/home/pokyuser
+popd
+
+echo "Copying .bashrc"
+docker cp .bashrc busybox_container:/home/pokyuser
+
+docker run -it --rm -v myhome:/home/pokyuser busybox chown -R 1000:1000 /home/pokyuser
+docker run -it --rm -v myhome:/home/pokyuser busybox chmod -R 700 /home/pokyuser/.ssh
+docker rm busybox_container
+```
+
+Finally run the container from your `nerves_developer` image:
+```sh
+docker run --rm -it --hostname docker -p 4000:4000 -p 9100-9109:9100-9109 -v myhome:/home/pokyuser -v myvolume:/workdir nerves_developer --workdir=/workdir
+```
+
+### Docker - Advanced
+
+The above setup will create a new temporary container each time the command is run, and cleanup after it exits.  What if you want a single container
+with multiple shells attached?  This is easily done.  Instead of the "run" command, we first need to "create":
+
+Create a new container `nerves_dev` from your `nerves_developer` image:
+```sh
+docker create -t --user usersetup -v myvolume:/workdir --name nerves_dev --hostname docker myhome:/home/pokyuser -p 4000:4000 -p 9100-9109:9100-9109 nerves_developer --workdir=/workdir
+```
+
+Finally, attach a new shell to the container.  You can attach as many shells desired, and they will all share the same container
+```sh
+docker exec -it -u pokyuser nerves_dev poky-launch.sh /workdir bash -l
+```
