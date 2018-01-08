@@ -27,6 +27,12 @@ git -C public checkout -b gh-pages
 echo "Generating site"
 hugo
 
+BRANCH=$(git rev-parse --abbrev-ref HEAD)
+if [ "$BRANCH" != "master" ]; then
+    echo "Not on master, so skipping deploy."
+    exit 0
+fi
+
 echo "Updating gh-pages branch"
 git -C public add --all
 git -C public $GIT_USER_ARGS commit -m "Publishing to gh-pages ($SHA) [skip ci]"
