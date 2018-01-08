@@ -33,6 +33,11 @@ if [ "$BRANCH" != "master" ]; then
     exit 0
 fi
 
+if [ -n "$CIRCLE_PR_USERNAME" ]; then
+    echo "Not deploying PR"
+    exit 0
+fi
+
 echo "Updating gh-pages branch"
 git -C public add --all
 git -C public $GIT_USER_ARGS commit -m "Publishing to gh-pages ($SHA) [skip ci]"
