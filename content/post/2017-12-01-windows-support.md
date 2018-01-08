@@ -1,22 +1,20 @@
 ---
 title: The Road to Windows
 #subtitle:
-date: 2017-12-0\1
+date: 2018-01-15
 author: Michael Schmidt
 draft: true
 tags: ["nerves", "windows"]
 ---
 
-Most Elixir developers prefer Mac or Linux, but Windows is historically the platform of choice for embedded developers.  Fortunately there are many ways to get Nerves running on Windows.  Unfortunately, there is no "silver bullet"--each approach has its trade-offs.
-
-# 10,000 foot Overview
+Most Elixir developers prefer Mac or Linux, but Windows is historically the platform of choice for embedded development.  Therefore as Nerves continues to grow, a Windows solution is needed.
 
 There are 2 fundamental approaches to Nerves-on-Windows:
 
 1. Pretend its Unix
 1. Run it as a Windows App
 
-Each approach has its trade-offs
+Unfortunately, there is no "silver bullet"--each approach has its trade-offs.
 
 ## Pretend its Unix
 
@@ -52,7 +50,7 @@ Updating Windows between these releases is problematic (at best), but if your ma
 
 ### Docker
 
-Docker for Windows comes in 2 distinct flavors:
+Docker on Windows comes in 2 distinct flavors:
 
 1. Docker Toolbox - Uses Virtualbox to create a Linux VM.  Supports Windows 7+
 1. Docker for Windows - Uses Hyper-V to create a Linux VM.  Windows Anniversary
