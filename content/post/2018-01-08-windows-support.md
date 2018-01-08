@@ -271,6 +271,7 @@ Administrator priviledges.
 * Finally, run `fwup` to burn the SD Card.
   Docker:
   ```bat
+  a:
   cd <path to nerves project>
   fwup -a -i _build\<target>\dev\nerves\images\myfirmware.fw -t complete
   ```
