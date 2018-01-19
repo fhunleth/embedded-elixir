@@ -29,3 +29,8 @@ googleAnalytics = "UA-16709386-6"
     name = "Tags"
     url = "/tags"
     weight = 3
+
+[[menu.main]]
+    name = "Email Updates"
+    url = "http://tinyletter.com/TINY_LETTER_USERNAME_HERE"
+    weight = 4
