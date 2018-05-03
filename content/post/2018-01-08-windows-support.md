@@ -20,7 +20,7 @@ Unfortunately, there is no "silver bullet"--each approach has its trade-offs.
 
 <!--more-->
 
-## Pretend its Unix
+## Pretend it's Unix
 
 There are several ways to make Windows pretend its Unix:
 
@@ -64,7 +64,7 @@ machine can run Creators Update (or later), Nerves becomes a 1st class citizen.
 
 Docker on Windows comes in 2 distinct flavors:
 
-1. Docker Toolbox - Uses Virtualbox to create a Linux VM.  Supports Windows 7+
+1. Docker Toolbox - Uses VirtualBox to create a Linux VM.  Supports Windows 7+
 1. Docker for Windows - Uses Hyper-V to create a Linux VM.  Windows Anniversary
 
 Update+ (Note that Original Release is officially supported, severe issues are

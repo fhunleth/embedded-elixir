@@ -16,7 +16,7 @@ Nerves project, but we didn't make it easy. That's changing.
 
 <!--more-->
 
-Let's go through a simple example. Imagine that you've created a trival
+Let's go through a simple example. Imagine that you've created a trivial
 application that uses [nerves_init_gadget][nerves_init_gadget] and loaded on a
 Raspberry Pi Zero. It doesn't do anything, but you can connect to its IEx prompt
 via a virtual serial port and upload firmware. Here's a list of its metadata:
@@ -146,7 +146,7 @@ at least good enough to take a patch should anything else be wrong. If the
 firmware image doesn't determine that it's "good", then the next reboot reverts
 back to the old image.
 
-If you're interested in implementing this automatic failback feature on your
+If you're interested in implementing this automatic fail-back feature on your
 devices, check if your device runs the [U-Boot][u-boot] bootloader or another
 script-able bootloader. If it does, then the "if" statement that decides which
 firmware slot to boot can be placed in there. If you don't have U-Boot (i.e.
@@ -161,7 +161,7 @@ again to lock in the new firmware.
 There are even more ways to ensure that your device can protect against buggy
 firmware. As you'd expect, this topic has quite a bit of depth that isn't
 covered here. Nonetheless, Nerves can support many of these strategies since so
-many lowlevel details can be tweaked. If you need to implement something more
+many low level details can be tweaked. If you need to implement something more
 exotic and don't know where to look, post a question to the [elixir-lang
 Slack][elixir-lang slack]. It's possible that someone has a custom Nerves system
 (possibly not public) that implements it.
