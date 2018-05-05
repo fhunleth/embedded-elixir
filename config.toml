@@ -1,4 +1,4 @@
-baseurl = "http://embedded-elixir.com/"
+baseurl = "https://embedded-elixir.com/"
 languageCode = "en-us"
 title = "Embedded Elixir"
 theme = "beautifulhugo"
