@@ -8,7 +8,7 @@ tags: ["nerves", "provisioning"]
 ---
 
 When you're starting out with Nerves, you may have connected to your first
-projects over the network using `nerves.local`. Projects like
+projects over the network using `nerves.local`. Libraries like
 [nerves_init_gadget](nerves_init_gadget) make this easy and when you're
 starting out, it's really convenient. Don't know the IP address that your
 device was assigned? Try `nerves.local` and you're good to go.
@@ -29,8 +29,8 @@ The default is to use that number to create a unique hostname and you can see
 it by running `:inet.gethostname()`. It will be something like `nerves-1234`.
 (This hostname is only local unless something registers it in the DNS.
 `nerves.local` is a mDNS name.) The `erlinit.config` file specifies how to
-create the hostname. For the [Raspberry Pi 3](rpi3_erlinit) look for the
-following:
+create the hostname. All of the Raspberry Pi boards have a similar setting.
+Here is the one for the [Raspberry Pi 3](rpi3_erlinit):
 
 ```elixir
 -d "/usr/bin/boardid -b uboot_env -u serial_number -b rpi -n 4"
@@ -40,11 +40,11 @@ following:
 The `-d` setting specifies how to find a unique ID. This invokes
 [boardid](boardid) to look it up. Don't worry about the commandline arguments
 yet. The unique ID could be stored in the CPU (like on the Raspberry Pi), an
-EEPROM, a few other places depending on the board. The `-n` setting specifies
+EEPROM, or a few other places depending on the board. The `-n` setting specifies
 the format of the hostname where the `%s` is substituted for the identifier.
 
 Getting back to the `boardid` commandline, the arguments say to use the
-`serial_number` key from the U-Boot environment first and if that doesn't exist,
+`serial_number` key from the U-Boot environment first or if that doesn't exist,
 use 4 digits of the Raspberry Pi's serial number.
 
 Nerves uses the U-Boot environment for many things, but mostly for keeping track
@@ -59,7 +59,7 @@ Nerves does not make writing values to the U-Boot environment convenient to
 reduce the chance of corrupting or losing data in it. Users should prefer to
 store application settings and data in the Nerves application partition. The
 U-Boot environment is appropriate for provisioning information that is unlikely
-to change over the device's lifetime, though. The serial number of the device is
+to change over the device's lifetime. The serial number of the device is
 one example. To write it, attach to your Nerves device's console at type:
 
 ```elixir
