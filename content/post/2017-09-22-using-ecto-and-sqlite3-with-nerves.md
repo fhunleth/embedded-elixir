@@ -166,7 +166,7 @@ defp migrate_repo!(repo) do
 
   migrator = &Ecto.Migrator.run/4
   pool = repo.config[:pool]
-  migrations_path = Path.join((:code.priv_dir(@otp_app) |> to_string), "repo")
+  migrations_path = Path.join([:code.priv_dir(@otp_app) |> to_string, "repo", "migrations"])
   migrated =
     if function_exported?(pool, :unboxed_run, 2) do
       pool.unboxed_run(repo, fn -> migrator.(repo, migrations_path, :up, opts) end)
