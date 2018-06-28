@@ -147,8 +147,10 @@ end
 defp setup_db! do
   repos = Application.get_env(@otp_app, :ecto_repos)
   for repo <- repos do
-    setup_repo!(repo)
-    migrate_repo!(repo)
+    if Application.get_env(@otp_app, repo)[:adapter] == Elixir.Sqlite.Ecto2 do
+      setup_repo!(repo)
+      migrate_repo!(repo)
+    end
   end
   :ok
 end
