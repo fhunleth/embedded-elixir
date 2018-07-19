@@ -9,7 +9,7 @@ tags: ["nerves", "provisioning"]
 
 When you're starting out with Nerves, you may have connected to your first
 projects over the network using `nerves.local`. Libraries like
-[nerves_init_gadget](nerves_init_gadget) make this easy and when you're
+[nerves_init_gadget][nerves_init_gadget] make this easy and when you're
 starting out, it's really convenient. Don't know the IP address that your
 device was assigned? Try `nerves.local` and you're good to go.
 
@@ -30,7 +30,7 @@ it by running `:inet.gethostname()`. It will be something like `nerves-1234`.
 (This hostname is only local unless something registers it in the DNS.
 `nerves.local` is a mDNS name.) The `erlinit.config` file specifies how to
 create the hostname. All of the Raspberry Pi boards have a similar setting.
-Here is the one for the [Raspberry Pi 3](rpi3_erlinit):
+Here is the one for the [Raspberry Pi 3][rpi3_erlinit]:
 
 ```elixir
 -d "/usr/bin/boardid -b uboot_env -u serial_number -b rpi -n 4"
@@ -38,7 +38,7 @@ Here is the one for the [Raspberry Pi 3](rpi3_erlinit):
 ```
 
 The `-d` setting specifies how to find a unique ID. This invokes
-[boardid](boardid) to look it up. Don't worry about the commandline arguments
+[boardid][boardid] to look it up. Don't worry about the commandline arguments
 yet. The unique ID could be stored in the CPU (like on the Raspberry Pi), an
 EEPROM, or a few other places depending on the board. The `-n` setting specifies
 the format of the hostname where the `%s` is substituted for the identifier.
@@ -51,7 +51,7 @@ Nerves uses the U-Boot environment for many things, but mostly for keeping track
 of the running firmware by default. You can think of it as a very simple and
 small key-value store that's on the SDCard (if you're using a Raspberry Pi) but
 stored outside of any of the filesystems.
-[Nerves.Runtime](nerves_runtime_metadata) documents the keys that Nerves uses. A
+[Nerves.Runtime][nerves_runtime_metadata] documents the keys that Nerves uses. A
 device doesn't have to run the U-Boot bootloader to have a U-Boot environment.
 The format is convenient so Nerves reuses it.
 
