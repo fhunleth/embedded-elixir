@@ -45,14 +45,14 @@ asdf plugin-add elixir https://github.com/asdf-vm/asdf-elixir.git
 ## Choose versions
 
 ```sh
-asdf install erlang 21.0.4 # This one can take a while, depending on your machine
+asdf install erlang 21.0.5 # This one can take a while, depending on your machine
 asdf install elixir 1.6.6-otp-21
 ```
 
 ## Setup
 
 ```sh
-asdf global erlang 21.0.4
+asdf global erlang 21.0.5
 asdf global elixir 1.6.6-otp-21
 ```
 
@@ -72,7 +72,7 @@ asdf global elixir 1.7.0-otp-22
 Then, when that inevitably breaks, you can simply change back:
 
 ```sh
-asdf global erlang 21.0.4
+asdf global erlang 21.0.5
 asdf global elixir 1.6.6-otp-21
 ```
 
