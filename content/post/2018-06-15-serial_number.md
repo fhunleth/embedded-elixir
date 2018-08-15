@@ -18,6 +18,8 @@ so convenient any more.
 
 <!--more-->
 
+## Update: we're moving to namespacing provisioning variables. The references to `serial_number` will eventually change to `nerves_serial_number`. We'll keep `serial_number` working in official builds, though.
+
 Suffice it to say that there are a number of ways of solving this problem. This
 post shows how to provision names or numbers to devices. You'll likely need to
 provision additional information to devices and that can be done in a similar
