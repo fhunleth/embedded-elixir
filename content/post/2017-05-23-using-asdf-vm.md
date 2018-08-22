@@ -26,7 +26,7 @@ Let's go through how easy it is to set up Elixir and Erlang with ASDF.
 You pretty much will just need `git` for installation.
 
 ```sh
-git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.5.0
+git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.5.1
 source ~/.asdf/asdf.sh
 ```
 
