@@ -1,7 +1,7 @@
 ---
 title: An expansion on Mocks and Explicit Contracts
 date: 2018-09-25
-author: Frank Hunleth
+author: Connor Rigby
 draft: false
 tags: ["nerves", "mock", "stub"]
 ---
@@ -217,3 +217,8 @@ Now you can store the `MyApp.ElixirAleLightImpl` file inside the
 dir.
 
 ## Summing Up
+You can keep your Nerves application concerns seperated and clean by using
+Elixir `@behaviour`s and explicit contracts. Something not discussed in
+depth in the short post is testing with Nerves. This deserves a post all
+in it's own, but mocks and contracts as described here is a huge part of
+writing tests for Nerves Devices.
