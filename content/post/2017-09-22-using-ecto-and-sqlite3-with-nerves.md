@@ -40,13 +40,14 @@ Ecto + SQLite3.
 mix nerves.new hello_db
 ```
 
-First off, crack open the `mix.exs` file and add two dependencies to your list.
+First off, crack open the `mix.exs` file and add the `:sqlite_ecto2` dependency
+to your list.
+
 ```elixir
 # ...
 def deps do
   [
-    {:ecto, "~> 2.2.2"},
-    {:sqlite_ecto2, "~> 2.2.1"}
+    {:sqlite_ecto2, "~> 2.3"}
   ]
 end
 ```
@@ -56,7 +57,7 @@ Next, open your `lib/hello_db/application.ex` file and add this line:
 ```elixir
 # ...
 children = [
-  supervisor(HelloDb.Repo, [])
+  HelloDb.Repo
 ]
 ```
 
@@ -91,8 +92,9 @@ line:
 # import_config "#{Mix.Project.config[:target]}.exs"
 ```
 
-Then create a new file `config/rpi0w.exs` (or whatever you plan on deploying to)
+Then create a new file `config/rpi0.exs` (or whatever you plan on deploying to)
 and override the Ecto config:
+
 ```elixir
 config :hello_db, HelloDb.Repo,
   adapter: Sqlite.Ecto2,
@@ -137,7 +139,7 @@ def start(_type, _args) do
   import Supervisor.Spec, warn: false
   :ok = setup_db!()
   children = [
-    supervisor(HelloDb.Repo, [])
+    HelloDb.Repo
   ]
 
   opts = [strategy: :one_for_one, name: HelloDb.Supervisor]
@@ -147,7 +149,7 @@ end
 defp setup_db! do
   repos = Application.get_env(@otp_app, :ecto_repos)
   for repo <- repos do
-    if Application.get_env(@otp_app, repo)[:adapter] == Elixir.Sqlite.Ecto2 do
+    if Application.get_env(@otp_app, repo)[:adapter] == Sqlite.Ecto2 do
       setup_repo!(repo)
       migrate_repo!(repo)
     end
