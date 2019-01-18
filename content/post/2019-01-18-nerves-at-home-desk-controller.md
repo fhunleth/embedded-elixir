@@ -168,7 +168,7 @@ With this, we can now easily caluculate height from the messages like so:
 
 # We can also match the last 2 bytes to get the big-endian value
 # then divide by 10 to get the float
-{:circuits_uart, "ttyAMA0", <<1, 1, height::(16)>>}
+{:circuits_uart, "ttyAMA0", <<1, 1, height::size(16)>>}
 30.6 = height/10
 ```
 
@@ -201,7 +201,7 @@ defmodule Controller.Reader do
     {:noreply, Map.put(state, :uart, uart)} # just for reference
   end
 
-  def handle_info({:circuits_uart, name, <<1, 1, height::(16)>>}, %{port: port} = state) when name == port do
+  def handle_info({:circuits_uart, name, <<1, 1, height::size(16)>>}, %{port: port} = state) when name == port do
     # converts the 16-bit big-endian integer to the height as a float
     # i.e. 306 / 10 = 30.6  
     new_height = height / 10
