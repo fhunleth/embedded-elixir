@@ -226,6 +226,11 @@ It's not special, but you can check it out at: https://dudewheresmydesk.live
 
 ## Fin
 
+To finish, I broke this all out into a breadboard and wired to keypad as well as
+the rpi3 controller so I could still use both options.
+
+![desk_all_connected.jpg](/images/2019-01-18/desk_all_connected.jpg)
+
 All of the code for the controller and website is available at https://github.com/jjcarstens/desk
 if you want to try yourself.
 
