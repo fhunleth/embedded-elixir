@@ -145,9 +145,16 @@ the trouble. Its actually a lot simplier than I thought...
 The height is the result of `Base height indicator + Current Height` and converting
 to a number with 1 decimal place. So this heigh would be `0 + 255 = 25.5 inches`.
 My desk can go up to 50.0 inches in height, but the largest decimal number you can
-represent in 8 bits is 255. Thats where the `Base Height Indicator` comes it. If
-that is `1`, then the base height is `256` (or `255 + 1`). With this, we can now
-easily caluculate height from the messages like so:
+represent in 8 bits is 255. Thats where the `Base Height Indicator` comes in. If
+that is `1`, then the base height is `256` (or `255 + 1`). 
+
+In fact, this concept is called [endianness](https://en.wikipedia.org/wiki/Endianness)
+which describes the order bytes are arranged into large numerical values when 
+transmitted. Specifically, this is [big-endian](https://en.wikipedia.org/wiki/Endianness#Big-endian)
+since the most significant byte is at the end of the address. (Big thanks to
+[Frank Hunleth](https://twitter.com/fhunleth?lang=en) for [pointing out this TIL gem](https://github.com/fhunleth/embedded-elixir/pull/23#issuecomment-455712932))
+
+With this, we can now easily caluculate height from the messages like so:
 
 ```elixir
 {:circuits_uart, "ttyAMA0", <<1, 1, 0, 253>>}
@@ -158,6 +165,11 @@ easily caluculate height from the messages like so:
 
 {:circuits_uart, "ttyAMA0", <<1, 1, 1, 53>>}
 # 1 + 255 + 53 = 309 or 30.9
+
+# We can also match the last 2 bytes to get the big-endian value
+# then divide by 10 to get the float
+{:circuits_uart, "ttyAMA0", <<1, 1, height::(16)>>}
+30.6 = height/10
 ```
 
 Now we can put that all together in a nice little GenServer module to handle the
@@ -189,14 +201,10 @@ defmodule Controller.Reader do
     {:noreply, Map.put(state, :uart, uart)} # just for reference
   end
 
-  def handle_info({:circuits_uart, name, <<1, 1, base, height>>}, %{port: port} = state) when name == port do
-    [tens, ones, tenths] = case base do
-                             1 -> 256 + height
-                             0 -> height
-                           end
-                           |> Integer.digits()
-
-    new_height = "#{tens}#{ones}.#{tenths}" |> String.to_float()
+  def handle_info({:circuits_uart, name, <<1, 1, height::(16)>>}, %{port: port} = state) when name == port do
+    # converts the 16-bit big-endian integer to the height as a float
+    # i.e. 306 / 10 = 30.6  
+    new_height = height / 10
 
     # We could could lots of messages with the same height, so only report changes here
     if new_height != state.current_height do
