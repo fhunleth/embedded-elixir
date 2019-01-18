@@ -7,7 +7,7 @@ draft: false
 tags: ["nerves", "elixir", "uart", "logic analyzer", "elixir-circuits", "gpio"]
 ---
 
-Use nerves and a little reverse engineering to contorl a motorized desk and
+Use Nerves and a little reverse engineering to control a motorized desk and
 incercept current height messages from the controller then publish to a phoenix
 site for real-time desk height measurements...because #yolo.
 
@@ -120,10 +120,10 @@ This exploded with messages!
 
 It was a bit overwelming and confusing. There were hundreds of messages for just
 simple movements and I was having trouble finding a pattern. I ended up pinging
-the always helpful folks in the [nerves slack channel](https://elixir-lang.slack.com/messages/C0AB4A879/)
-which ultimately advised me to get a logic analyzer to look at the messages (the
-[Saleae](https://www.saleae.com) one). Once that was wired up, I still got
-the same binary messages, in groups of 4 bytes.
+the always helpful folks in the [Nerves slack channel](https://elixir-lang.slack.com/messages/C0AB4A879/)
+which ultimately advised me to get a logic analyzer to look at the messages (the [Nerves Forum](https://elixirforum.com/c/nerves-forum)
+is also a great place to get help). Specifically, I got the one from [Saleae](https://www.saleae.com).
+Once that was wired up, I still got the same binary messages, in groups of 4 bytes.
 
 ```
 1, 1, 0, 253
