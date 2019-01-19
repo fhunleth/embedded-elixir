@@ -8,7 +8,7 @@ tags: ["nerves", "elixir", "uart", "logic analyzer", "elixir-circuits", "gpio"]
 ---
 
 Use Nerves and a little reverse engineering to control a motorized desk and
-incercept current height messages from the controller then publish to a phoenix
+intercept current height messages from the controller then publish to a Phoenix
 site for real-time desk height measurements...because #yolo.
 
 <!--more-->
@@ -16,11 +16,11 @@ site for real-time desk height measurements...because #yolo.
 ## The idea
 
 I'm fairly obsessed with automating my home and things around me. With nerves,
-that has become even easier and much more cost effective. But most of my recent 
+that has become even easier and much more cost effective. But most of my recent
 work has been pretty binary - turning relay on/off, reading a sensor is on/off,
 reading the temperature, etc etc. I wanted to branch out a bit and try to
-directly interface with an existing component in my house. Something that is it's
-own controller and has its own message system.
+directly interface with an existing component in my house. Something that is
+it's own controller and has its own message system.
 
 One day I leaned back to take a break from work, looked over at my [Uplift Desk
 Advanced Digital Memory Keypad](https://www.upliftdesk.com/advanced-digital-memory-keypad/)
@@ -41,16 +41,16 @@ is essentially just a simple microcontroller receiving and sending messages with
 
 The keypad connects to the desk controller via a RJ45 jack and looks like a
 typical ethernet cable with an 8-wire pinout. So I took apart to see what the
-connector looked like for those 8 wires and was pleasently surprised. The wires
-were clearly colored and the PCB had a label for each one so I was able to immediately
-identify `5V`, `GND`, and `G1`. The other wire labels were mostly covered by the
-connector, but I was able to make out `T`, `R`, and `G0` as well.
+connector looked like for those 8 wires and was pleasantly surprised. The wires
+were clearly colored and the PCB had a label for each one so I was able to
+immediately identify `5V`, `GND`, and `G1`. The other wire labels were mostly
+covered by the connector, but I was able to make out `T`, `R`, and `G0` as well.
 
 ![desk_keypad_internals](/images/2019-01-18/desk_keypad_internals.jpg)
 
-So I set out with a multimeter to map out the wires as best I could. `T`/`R` were
-most likely short for `Tx`/`Rx` and would be the communication with the controller,
-so I skipped those for now. Here's the final pinout I came up with:
+So I set out with a multimeter to map out the wires as best I could. `T`/`R`
+were most likely short for `Tx`/`Rx` and would be the communication with the
+controller, so I skipped those for now. Here's the final pinout I came up with:
 
 ![desk_keypad_pinout](/images/2019-01-18/desk_keypad_pinout.png)
 
@@ -66,30 +66,31 @@ can be easily done by toggling a GPIO pin between _HIGH (1)_ and _LOW (0)_ using
 
 # set LOW to move up and back down
 Circuits.GPIO.write(up_pin, 0) # start moving
-:timer.sleep(500) 
+:timer.sleep(500)
 Circuits.GPIO.write(up_pin, 1) # stop moving
 
 Circuits.GPIO.write(down_pin, 0) # start moving
-:timer.sleep(500) 
+:timer.sleep(500)
 Circuits.GPIO.write(down_pin, 1) # stop moving
 ```
 
 ## Reading the messages
 
-Now comes the fun part and ultimate goal of this project: reading the messages 
+Now comes the fun part and ultimate goal of this project: reading the messages
 from the controller for the current height.
 
 Initially, I connected the `Tx`(white) and `Rx`(brown) wires to my computer via
 [USB to TTL serial cable](https://www.adafruit.com/product/954) I had around and
 used `screen` in my terminal to see what these messages would even look like.
-It was just jibberish and repeating characters, but at least there were messages!
-I tried lots of different baud rates thinking maybe thats was causing the garbled
-mess, but I'm not really proficient with `screen` and serial communication so
-I gave up there.
+It was just jibberish and repeating characters, but at least there were
+messages!  I tried lots of different baud rates thinking maybe thats was causing
+the garbled mess, but I'm not really proficient with `screen` and serial
+communication so I gave up there.
 
 Instead I decided to connect the wires to the corresponding UART pins on my rpi3
-and used yet another fancy library, [Circuits.UART](https://github.com/elixir-circuits/circuits_gpio).
-From there, I could open UART port and see if I get better messages there.
+and used yet another fancy library,
+[Circuits.UART](https://github.com/elixir-circuits/circuits_gpio).  From there,
+I could open UART port and see if I get better messages there.
 
 ```elixir
 {:ok, uart} = Circuits.UART.start_link
@@ -100,7 +101,8 @@ From there, I could open UART port and see if I get better messages there.
 flush
 ```
 
-This exploded with messages! 
+This exploded with messages!
+
 ```elixir
 {:circuits_uart, "ttyAMA0", <<255>>}
 {:circuits_uart, "ttyAMA0", <<1>>}
@@ -115,30 +117,31 @@ This exploded with messages!
 {:circuits_uart, "ttyAMA0", <<5>>}
 {:circuits_uart, "ttyAMA0", <<1>>}
 {:circuits_uart, "ttyAMA0", <<0>>}
-...# repeated x100 
+...# repeated x100
 ```
 
-It was a bit overwelming and confusing. There were hundreds of messages for just
+It was a bit overwhelming and confusing. There were hundreds of messages for just
 simple movements and I was having trouble finding a pattern. I ended up pinging
 the always helpful folks in the [Nerves slack channel](https://elixir-lang.slack.com/messages/C0AB4A879/)
 which ultimately advised me to get a logic analyzer to look at the messages (the [Nerves Forum](https://elixirforum.com/c/nerves-forum)
 is also a great place to get help). Specifically, I got the one from [Saleae](https://www.saleae.com).
 Once that was wired up, I still got the same binary messages, in groups of 4 bytes.
 
-```
+```text
 1, 1, 0, 253
 1, 1, 0, 253
 1, 1, 0, 254
 1, 1, 0, 255
 1, 1, 1, 0
 ```
+
 Then it clicked: Serial data can be framed differently. _And_ `Circuits.UART` can
 handle framing. _And_ there is a [Circuits.UART.Framing.FourByte](https://github.com/elixir-circuits/circuits_uart/blob/master/lib/uart/framing/fourbyte.ex)
 module to handle this exact case. So really, I didn't need a full blown logic
 analyzer 🤦‍♂. Next time I'll need it 😉...
 
-So now that I can frame it, we just need to decifer what it means. I'll save you
-the trouble. Its actually a lot simplier than I thought...
+So now that I can frame it, we just need to decipher what it means. I'll save
+you the trouble. It's actually a lot simpler than I thought...
 
 ![desk_bytes_breakdown](/images/2019-01-18/desk_bytes_breakdown.png)
 
@@ -146,15 +149,15 @@ The height is the result of `Base height indicator + Current Height` and convert
 to a number with 1 decimal place. So this heigh would be `0 + 255 = 25.5 inches`.
 My desk can go up to 50.0 inches in height, but the largest decimal number you can
 represent in 8 bits is 255. Thats where the `Base Height Indicator` comes in. If
-that is `1`, then the base height is `256` (or `255 + 1`). 
+that is `1`, then the base height is `256` (or `255 + 1`).
 
 In fact, this concept is called [endianness](https://en.wikipedia.org/wiki/Endianness)
-which describes the order bytes are arranged into large numerical values when 
+which describes the order bytes are arranged into large numerical values when
 transmitted. Specifically, this is [big-endian](https://en.wikipedia.org/wiki/Endianness#Big-endian)
 since the most significant byte is at the end of the address. (Big thanks to
 [Frank Hunleth](https://twitter.com/fhunleth?lang=en) for [pointing out this TIL gem](https://github.com/fhunleth/embedded-elixir/pull/23#issuecomment-455712932))
 
-With this, we can now easily caluculate height from the messages like so:
+With this, we can now easily calculate height from the messages like so:
 
 ```elixir
 {:circuits_uart, "ttyAMA0", <<1, 1, 0, 253>>}
@@ -173,7 +176,7 @@ With this, we can now easily caluculate height from the messages like so:
 ```
 
 Now we can put that all together in a nice little GenServer module to handle the
-height messages we care about and ignore all others. Then calculate the current 
+height messages we care about and ignore all others. Then calculate the current
 height and report it somewhere:
 
 ```elixir
@@ -203,7 +206,7 @@ defmodule Controller.Reader do
 
   def handle_info({:circuits_uart, name, <<1, 1, height::size(16)>>}, %{port: port} = state) when name == port do
     # converts the 16-bit big-endian integer to the height as a float
-    # i.e. 306 / 10 = 30.6  
+    # i.e. 306 / 10 = 30.6
     new_height = height / 10
 
     # We could could lots of messages with the same height, so only report changes here
@@ -223,12 +226,14 @@ end
 
 ## Publish it
 
-The world obviously wants to know the current height of my desk, so I also made a
-website that my controller reports to anytime there is a height change. The site
-uses [Phoenix](https://phoenixframework.org) to handle websocket connections with
-the controller and browser sessions, and [Drab](https://github.com/grych/drab) to
-update the view in real time on the backend when the socket reports height change.
-You can see the reporting code at [here](https://github.com/jjcarstens/desk/blob/master/controller/lib/controller/reporter.ex).
+The world obviously wants to know the current height of my desk, so I also made
+a website that my controller reports to anytime there is a height change. The
+site uses [Phoenix](https://phoenixframework.org) to handle websocket
+connections with the controller and browser sessions, and
+[Drab](https://github.com/grych/drab) to update the view in real time on the
+backend when the socket reports height change.  You can see the reporting code
+at
+[here](https://github.com/jjcarstens/desk/blob/master/controller/lib/controller/reporter.ex).
 
 It's not special, but you can check it out at: https://dudewheresmydesk.live
 
@@ -239,16 +244,17 @@ the rpi3 controller so I could still use both options.
 
 ![desk_all_connected.jpg](/images/2019-01-18/desk_all_connected.jpg)
 
-All of the code for the controller and website is available at https://github.com/jjcarstens/desk
-if you want to try yourself.
+All of the code for the controller and website is available at
+[github.com/jjcarstens/desk](https://github.com/jjcarstens/desk) if you want to
+try yourself.
 
 There's really not much use-case for this, but it was definitely fun. My hope is
 that it helps remove some fear of working with hardware and encourage others to
-take the dive and try it out. There are lots of fun projects to do in hardware and
-nerves help make that a little easier.
+take the dive and try it out. There are lots of fun projects to do in hardware
+and nerves help make that a little easier.
 
-I've got quite a few more projects for _Nerves at Home_, so if you liked this then
-keep on the lookout for more to come.
+I've got quite a few more projects for _Nerves at Home_, so if you liked this
+then keep on the lookout for more to come.
 
 Also, feel free to reach out if you want to collaborate on fun _Nerves at Home_
 projects. Or join us at [Nerves Remote Meetup](https://twitter.com/NervesMeetup)
@@ -256,3 +262,4 @@ where we basically just talk about random hardware projects we're all working on
 and pass around ideas.
 
 Until then... 🎉 🍹 🌴 👋
+
