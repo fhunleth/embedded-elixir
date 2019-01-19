@@ -8,7 +8,7 @@ disqusShortname = "embedded-elixir"
 googleAnalytics = "UA-16709386-6"
 
 [Params]
-  subtitle = "News and Articles about Elixir on Embedded Systems"
+  subtitle = "All about Elixir in Embedded Systems"
   logo = "images/logo.png"
   favicon = "images/favicon.ico"
   dateFormat = "January 2, 2006"
