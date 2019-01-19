@@ -7,8 +7,8 @@ draft: false
 tags: ["nerves", "elixir", "uart", "logic analyzer", "elixir-circuits", "gpio"]
 ---
 
-Use Nerves and a little reverse engineering to control a motorized desk and
-intercept current height messages from the controller then publish to a Phoenix
+Use Nerves and a little reverse engineering to control a motorized desk. Then
+intercept current height messages from the controller and publish to a Phoenix
 site for real-time desk height measurements...because #yolo.
 
 <!--more-->
