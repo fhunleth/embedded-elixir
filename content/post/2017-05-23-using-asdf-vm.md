@@ -26,7 +26,7 @@ Let's go through how easy it is to set up Elixir and Erlang with ASDF.
 You pretty much will just need `git` for installation.
 
 ```sh
-git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.5.1
+git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.6.3
 source ~/.asdf/asdf.sh
 ```
 
@@ -38,26 +38,36 @@ Then you will want to install the `plugin`s for both Erlang and Elixir.
 ## Install plugins
 
 ```sh
-asdf plugin-add erlang https://github.com/asdf-vm/asdf-erlang.git
-asdf plugin-add elixir https://github.com/asdf-vm/asdf-elixir.git
+asdf plugin-add erlang
+asdf plugin-add elixir
 ```
 
 ## Choose versions
 
 ```sh
 # Build and install Erlang/OTP
-asdf install erlang 21.0.9
+asdf install erlang 21.2.2
 
-# Install Elixir 1.7.3 as compiled against Erlang/OTP 21
-asdf install elixir 1.7.3-otp-21
+# Install Elixir 1.8.0 as compiled against Erlang/OTP 21
+asdf install elixir 1.8.0-otp-21
 ```
 
 ## Setup
 
+The following sets the Erlang and Elixir versions system-wide.
+
 ```sh
-asdf global erlang 21.0.9
-asdf global elixir 1.7.3-otp-21
+asdf global erlang 21.2.2
+asdf global elixir 1.8.0-otp-21
 ```
+
+If you want to fix the version used in a directory, specify `local`:
+
+```sh
+asdf local erlang 21.2.2
+asdf local elixir 1.8.0-otp-21
+```
+
 
 ## Updating
 
@@ -72,11 +82,11 @@ asdf global erlang 22.0
 asdf global elixir 1.8.1-otp-22
 ```
 
-Then, when that inevitably breaks, you can simply change back:
+Then, if that were to break, you can simply change back:
 
 ```sh
-asdf global erlang 21.0.9
-asdf global elixir 1.7.3-otp-21
+asdf global erlang 21.2.2
+asdf global elixir 1.8.0-otp-21
 ```
 
 ## Nerves
