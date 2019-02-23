@@ -48,8 +48,8 @@ asdf plugin-add elixir
 # Build and install Erlang/OTP
 asdf install erlang 21.2.2
 
-# Install Elixir 1.8.0 as compiled against Erlang/OTP 21
-asdf install elixir 1.8.0-otp-21
+# Install Elixir 1.8.1 as compiled against Erlang/OTP 21
+asdf install elixir 1.8.1-otp-21
 ```
 
 ## Setup
@@ -58,35 +58,35 @@ The following sets the Erlang and Elixir versions system-wide.
 
 ```sh
 asdf global erlang 21.2.2
-asdf global elixir 1.8.0-otp-21
+asdf global elixir 1.8.1-otp-21
 ```
 
 If you want to fix the version used in a directory, specify `local`:
 
 ```sh
 asdf local erlang 21.2.2
-asdf local elixir 1.8.0-otp-21
+asdf local elixir 1.8.1-otp-21
 ```
 
 
 ## Updating
 
 When a new stable release comes out, you can do similar commands. Here's a
-currently hypothetical OTP 22/Elixir 1.8.1 example:
+currently hypothetical OTP 22/Elixir 1.9.1 example:
 
 ```sh
 asdf install erlang 22.0
-asdf install elixir 1.8.1-otp-22
+asdf install elixir 1.9.1-otp-22
 
 asdf global erlang 22.0
-asdf global elixir 1.8.1-otp-22
+asdf global elixir 1.9.1-otp-22
 ```
 
 Then, if that were to break, you can simply change back:
 
 ```sh
 asdf global erlang 21.2.2
-asdf global elixir 1.8.0-otp-21
+asdf global elixir 1.8.1-otp-21
 ```
 
 ## Nerves
