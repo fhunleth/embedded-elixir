@@ -7,13 +7,13 @@ draft: false
 tags: ["nerves", "elixir", "networking"]
 ---
 
-Introducing `VintageNetWizard` - Make WiFi Configuration Easy Again!
+Introducing `VintageNetWizard` - Simple WiFi Configuration using a web browser
 
 https://github.com/nerves-networking/vintage_net_wizard
 
 <!--more-->
 
-# VintageNet WiFi Configuration Wizard
+# VintageNet WiFi configuration wizard
 
 ![wizard](https://media.giphy.com/media/1AjULGLUb7LZZZhG3p/giphy.gif)
 
@@ -44,8 +44,9 @@ VintageNetWizard.run_wizard()
 * The device WiFi is placed in `host` mode and starts networking as an Access
   Point (AP) that broadcasts an SSID
 * The user joins their computer/phone to the AP
-* Once joined, the user opens a web browser to http://wifi.config and the device
-  delivers a web UI to go through configuration of any number of WiFi networks
+* Once joined, the user opens a web browser to `http://wifi.config` and the
+  device delivers a web UI to go through configuration of any number of WiFi
+  networks
     * You can also use the device hostname (i.e. `http://nerves-ce84.local`) or the IP
       address (`http://192.168.0.1`) in the browser as well
 * User applies the configuration, the device attempts to connect to the networks
@@ -98,7 +99,6 @@ Well, there are a few sources for this¬
   that is part of the repo. You can set `MIX_TARGET` in there and build a
   firmware to test on a device quickly.
 * [`NervesPack`](https://github.com/jjcarstens/nerves_pack) - a
-  `nerves_init_gadget` replacment. By default, this will start a wizard if your
+  `nerves_init_gadget` replacement. By default, this will start a wizard if your
   device supports WiFi but has not been configured. It also starts a button
   monitor for forcing the wizard via long button press at anytime.
-

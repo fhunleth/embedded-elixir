@@ -20,7 +20,7 @@ Good question.
 
 Truth be told, I wasn't directly involved in the struggles of `nerves_network`
 or building `vintage_net`, but am on the advocating end. So I think this can be
-better explained from this blurp in the `vintage_net` README.md by those who
+better explained from this blurb in the `vintage_net` README.md by those who
 built it:
 
 > `VintageNet` takes a different approach to networking from `nerves_network`.
@@ -30,7 +30,7 @@ built it:
 > setup to call the `ip` command directly and supervise the daemons that you may
 > need with [MuonTrap](https://github.com/fhunleth/muontrap). And from there you
 > can replace C implementations with Elixir and Erlang ones if you desire.
-
+>
 > Another important difference is that `VintageNet` doesn't attempt to make
 > incremental modifications to configurations. It completely tears down an
 > interface's connection and then brings up new configurations in a fresh state.
@@ -52,12 +52,11 @@ that tickles your fancy, then feel free to reach out for more discussion in the
 Elixir forum. However, for this article I want to focus on some of the new
 hotness that makes it a great library to use for your embedded networking.
 
-
 # The Bells & Whistles
 
 Mm, yes. The good stuff.
 
-This isn't going to be an exhaustive list but will hopefull shed light on being
+This isn't going to be an exhaustive list but will hopefully shed light on being
 able to do more than connect to a WiFi network. I've broken it down to a few
 sections and linked below so you don't have to take it all in at once:
 
@@ -65,7 +64,7 @@ sections and linked below so you don't have to take it all in at once:
 * [Runtime Configuration](#runtime-Configuration)
 * [Persisted](#persisted)
 * [Access-Point Mode Support](#access-point-mode-support)
-* [Network Event Sbuscriptions](#network-event-subscriptions)
+* [Network Event Subscriptions](#network-event-subscriptions)
 * [Multi-interface Prioritization](#multi-interface-prioritization)
 * [WiFi Network Prioritization](#wifi-network-prioritization)
 * [Bonus - Nerves Pack](#bonus-nerves-pack)
@@ -166,7 +165,7 @@ to be for this.
 ## Access-Point Mode Support
 
 Sometimes you may want a device to broadcast a network instead of connect to a
-network, or in otherwords, turn it into and Access Point. Well `VintageNet` has
+network, or in other words, turn it into and Access Point. Well `VintageNet` has
 you covered!  There is a bit of configuration, but it would look something like
 this:
 
@@ -194,9 +193,9 @@ ap_config =
 VintageNet.configure("wlan0", ap_config)
 ```
 
-There's a lot there, but the break down is device gets configured with `mode:
-:ap`, sets a static IP of `192.168.0.1`, sets up DHCP so it can give out IP's,
-and uses `dnsd` so that hostname can resolve to the static IP.
+There's a lot there, but the break down is device gets configured with
+`mode: :ap`, sets a static IP of `192.168.0.1`, sets up DHCP so it can give
+out IP's, and uses `dnsd` so that hostname can resolve to the static IP.
 
 This specific example is used with
 [`VintageNetWizard`](https://github.com/nerves-networking/vintage_net_wizard)
@@ -208,7 +207,7 @@ But using as a setup wizard is not the only use case. I, for example, will use
 it frequently on the go so I can still connect to a device when no cable or
 joint network is available.
 
-## Network Event Sbuscriptions
+## Network Event Subscriptions
 
 This is really cool 😎
 
@@ -273,7 +272,7 @@ where you want to look for more ideas.
 
 Not only does `VintageNet` allow you to configure multiple networks at once, but
 you can set priorities for them which is helpful when you might be in an area
-with multiple networks availble, but you prefer network A over the others. Or
+with multiple networks available, but you prefer network A over the others. Or
 you prefer the 5 Ghz network over 2.4 Ghz, etc etc. An example might look like¬
 
 ```elixir
