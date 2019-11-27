@@ -24,19 +24,22 @@ better explained from this blurb in the `vintage_net` README.md by those who
 built it:
 
 > `VintageNet` takes a different approach to networking from `nerves_network`.
-> It supports calling "old school" Linux utilities like `ifup` and `ifdown` to
-> configure networks. While this has many limitations, it can be a timesaver for
-> migrating a known working Linux setup to Nerves. After that you can change the
-> setup to call the `ip` command directly and supervise the daemons that you may
-> need with [MuonTrap](https://github.com/fhunleth/muontrap). And from there you
-> can replace C implementations with Elixir and Erlang ones if you desire.
+> It takes human-readable network configuration descriptions and transforms them
+> into low level commands to run, supervisors to start, and routes to add.  It
+> supports calling traditional Linux utilities like `ip` and `udhcpc` to
+> configure networks. This can be a timesaver for migrating complicated, but
+> known working Linux setups to Nerves. Linux daemons are supervised by
+> `VintageNet` so they're restarted if they crash and stopped when no longer
+> needed. Of course, implementing services in pure Elixir also has advantages
+> and you can replace the C implementations when and if you desire.
 >
-> Another important difference is that `VintageNet` doesn't attempt to make
-> incremental modifications to configurations. It completely tears down an
-> interface's connection and then brings up new configurations in a fresh state.
-> Network reconfiguration is assumed to be an infrequent event so while this can
-> cause a hiccup in the network connectivity, it removes state machine code that
-> made `nerves_network` hard to maintain.
+> Another important difference from `nerves_network` is that `VintageNet`
+> doesn't attempt to make incremental modifications to configurations. It
+> completely tears down an interface's connection and then brings up new
+> configurations in a fresh state.  Network reconfiguration is assumed to be an
+> infrequent event so while this causes hiccups in network connectivity, it
+> removes the complicated state machine code that made `nerves_network` hard to
+> maintain and extend.
 
 noice.
 

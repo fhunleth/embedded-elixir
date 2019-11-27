@@ -1,7 +1,7 @@
 ---
 title: "🧙‍♀️Wizards & WiFi ‍🧙‍♂️"
 subtitle: "Easily configure WiFi on devices"
-date: 2019-11-22
+date: 2019-11-23
 author: Jon Carstens
 draft: false
 tags: ["nerves", "elixir", "networking"]
@@ -41,14 +41,14 @@ VintageNetWizard.run_wizard()
 
 ​ Once started, a few things happen:
 
-* The device WiFi is placed in `host` mode and starts networking as an Access
-  Point (AP) that broadcasts an SSID
+* The WiFi interface is configured to `:ap` mode which starts up an Access
+  Point (AP) that broadcasts an SSID based on the device's serial number
 * The user joins their computer/phone to the AP
 * Once joined, the user opens a web browser to `http://wifi.config` and the
   device delivers a web UI to go through configuration of any number of WiFi
   networks
-    * You can also use the device hostname (i.e. `http://nerves-ce84.local`) or the IP
-      address (`http://192.168.0.1`) in the browser as well
+    * You can also use the device hostname (i.e. `http://nerves-ce84.local`) or
+      the IP address (`http://192.168.0.1`) in the browser as well
 * User applies the configuration, the device attempts to connect to the networks
   specified.
 * If successfully connects, device goes back into AP mode to report to the web
