@@ -117,8 +117,8 @@ Example:
 ```elixir
 config = %{
   ipv4: %{method: :dhcp},
-  type: VintageNet.Technology.WiFi,
-  wifi: %{
+  type: VintageNetWiFi,
+  vintage_net_wifi: %{
     networks: [
       %{key_mgmt: :wpa_psk, ssid: "sesame", psk: "open-sesame!"}
     ]
@@ -139,7 +139,7 @@ network, then apply:
 ```elixir
 new_network = %{key_mgmt: :wpa_psk, ssid: "bullpen", psk: "peralta-ultimate-human-slash-genius"}
 config = VintageNet.get_configuration("wlan0")
-         |> update_in([:wifi, :networks], & [new_network | &1])
+         |> update_in([:vintage_net_wifi, :networks], & [new_network | &1])
 
 VintageNet.configure("wlan0", config)
 ```
@@ -189,8 +189,8 @@ ap_config =
     },
     dnsd: %{records: [{"nerves.local", {192, 168, 0, 1}}]},
     ipv4: %{address: {192, 168, 0, 1}, method: :static, prefix_length: 24},
-    type: VintageNet.Technology.WiFi,
-    wifi: %{networks: [%{key_mgmt: :none, mode: :ap, ssid: "connect-to-me!"}]}
+    type: VintageNetWiFi,
+    vintage_net_wifi: %{networks: [%{key_mgmt: :none, mode: :ap, ssid: "connect-to-me!"}]}
   }
 
 VintageNet.configure("wlan0", ap_config)
@@ -281,8 +281,8 @@ you prefer the 5 Ghz network over 2.4 Ghz, etc etc. An example might look like¬
 ```elixir
 config = %{
   ipv4: %{method: :dhcp},
-  type: VintageNet.Technology.WiFi,
-  wifi: %{
+  type: VintageNetWiFi,
+  vintage_net_wifi: %{
     networks: [
       %{key_mgmt: :wpa_psk, ssid: "sesame", psk: "open-sesame!", priority: 90},
       %{key_mgmt: :wpa_psk, ssid: "bullpen", psk: "peralta-ultimate-human-slash-genius", priority: 100}
