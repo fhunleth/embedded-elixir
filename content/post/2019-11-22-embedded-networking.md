@@ -68,7 +68,6 @@ sections and linked below so you don't have to take it all in at once:
 * [Persisted](#persisted)
 * [Access-Point Mode Support](#access-point-mode-support)
 * [Network Event Subscriptions](#network-event-subscriptions)
-* [Multi-interface Prioritization](#multi-interface-prioritization)
 * [WiFi Network Prioritization](#wifi-network-prioritization)
 * [Bonus - Nerves Pack](#bonus-nerves-pack)
 
@@ -91,10 +90,26 @@ If this is your jam, check out the
 [Configuration](https://hexdocs.pm/vintage_net/readme.html#configuration)
 documentation.
 
-`VintageNet` is also setup to support multiple technologies like `WiFi`,
-`Ethernet`, and `USB Gadget` right out of the box. And if you need to support a
-new interface, you can implement the `VintageNet.Technology` behaviour and drop
-it right in with the rest.  Check out the [`VintageNet.Technology`
+`VintageNet` is also setup to support multiple technologies like
+[`WiFi`](https://hexdocs.pm/vintage_net_wifi),
+[`Ethernet`](https://hexdocs.pm/vintage_net_ethernet), and
+[`Direct`](https://hexdocs.pm/vintage_net_direct) (i.e things like `USB Gadget`)
+right out of the box. 
+The design is modular and separated into their own libraries so you can include
+only what you need by adding it as a dependency:
+
+```elixir
+def deps() do
+  {:vintage_net, "~> 0.7"},
+  {:vintage_net_direct, "~> 0.7"},
+  {:vintage_net_ethernet, "~> 0.7"},
+  {:vintage_net_wifi, "~> 0.7"}
+end
+```
+
+And if you need to support a new interface, just implement the
+`VintageNet.Technology` behaviour and drop it right in with the rest. Check out the
+[`VintageNet.Technology`
 documentation](https://hexdocs.pm/vintage_net/VintageNet.Technology.html#content)
 for more info.
 
@@ -268,8 +283,6 @@ end
 Or maybe you want to perform actions when connections go up or down. In any
 case, [Properties](https://hexdocs.pm/vintage_net/readme.html#properties) is
 where you want to look for more ideas.
-
-## Multi-interface Prioritization
 
 ## WiFi Network Prioritization
 
