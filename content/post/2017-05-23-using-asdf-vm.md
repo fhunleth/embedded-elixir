@@ -46,10 +46,10 @@ asdf plugin-add elixir
 
 ```sh
 # Build and install Erlang/OTP
-asdf install erlang 22.3.3
+asdf install erlang 23.0.2
 
-# Install Elixir 1.10 as compiled against Erlang/OTP 22
-asdf install elixir 1.10.3-otp-22
+# Install Elixir 1.10 as compiled against Erlang/OTP 23
+asdf install elixir 1.10.3-otp-23
 ```
 
 ## Setup
@@ -57,15 +57,15 @@ asdf install elixir 1.10.3-otp-22
 The following sets the Erlang and Elixir versions system-wide.
 
 ```sh
-asdf global erlang 22.3.3
-asdf global elixir 1.10.3-otp-22
+asdf global erlang 23.0.2
+asdf global elixir 1.10.3-otp-23
 ```
 
 If you want to fix the version used in a directory, specify `local`:
 
 ```sh
-asdf local erlang 22.3.3
-asdf local elixir 1.10.3-otp-22
+asdf local erlang 23.0.2
+asdf local elixir 1.10.3-otp-23
 ```
 
 The local option works by creating or updating a `.tool-versions` file in
@@ -74,21 +74,21 @@ the directory.
 ## Updating
 
 When a new stable release comes out, you can do similar commands. Here's a
-currently hypothetical OTP 23/Elixir 1.10 example:
+currently hypothetical OTP 24/Elixir 1.10 example:
 
 ```sh
-asdf install erlang 23.0
-asdf install elixir 1.10.3-otp-23
+asdf install erlang 24.0
+asdf install elixir 1.10.3-otp-24
 
-asdf global erlang 23.0
-asdf global elixir 1.10.3-otp-23
+asdf global erlang 24.0
+asdf global elixir 1.10.3-otp-24
 ```
 
 Then, if that were to break, you can simply change back:
 
 ```sh
-asdf global erlang 22.3.3
-asdf global elixir 1.10.3-otp-22
+asdf global erlang 23.0.2
+asdf global elixir 1.10.3-otp-23
 ```
 
 ## Nerves
