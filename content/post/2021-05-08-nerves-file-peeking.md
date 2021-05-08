@@ -1,43 +1,46 @@
 ---
 title: "Nerves 📂 👀"
-subtitle: "A few practices for peeking into disk storage on remote Nerves devices"
+subtitle: "Peeking into remote Nerves device storage"
 date: 2021-05-08
 author: Jon Carstens
 draft: false
-tags: ["nerves", "elixir", "disk"]
+tags: ["nerves", "elixir", "disk", "ssh", "sftp"]
 ---
 
-Remotely take a gander into your Nerves device disk space
+Want to look at and copy files on remote Nerves devices? This post shows you
+how using SSH.
 
 <!--more-->
 
-# Setup SSH
+## Setup SSH
 
-The most common way to interface remotely with your Nerves filesystem is via 
-SSH (or [Secure Shell Protocol](https://en.wikipedia.org/wiki/Secure_Shell_Protocol)).
-In fact, every method in this article is based on SSH in one way or another to get
-that initial access to device and present the filesystem differently. So first
-things first, you need to ensure you have SSH enabled on device and the simplest
-way is to use [`nerves_ssh`](https://github.com/nerves-project/nerves_ssh).
+The most common way to interface remotely with your Nerves filesystem is via SSH
+(or [Secure Shell Protocol](https://en.wikipedia.org/wiki/Secure_Shell_Protocol)).
+In fact, every method in this article is based on SSH in one way or another to
+get that initial access to device and present the filesystem differently. So
+first things first, you need to ensure you have SSH enabled on device and the
+simplest way is to use [`nerves_ssh`](https://hex.pm/packages/nerves_ssh). This
+is a dependency of [`nerves_pack`](https://hex.pm/packages/nerves_pack) so you
+may already have it.
 
-If you're unfamiliar with it, take a quick break to brush up on [the documentation](https://hexdocs.pm/nerves_ssh/readme.html)
-to get things setup. I'll wait...
+If you're unfamiliar with it, take a quick break to brush up on [the
+documentation](https://hexdocs.pm/nerves_ssh/readme.html) to get things setup.
+I'll wait...
 
 🍹
 
 K, great. Let's continue
 
+## SFTP
 
-# SFTP
-
-When using `nerves_ssh`, SFTP is enabled by default. So you can connect to
-your Nerves device and look around:
+When using `nerves_ssh`, SFTP is enabled by default. So you can connect to your
+Nerves device and look around:
 
 ```sh
 $ sftp nerves.local
 Connected to nerves.local.
 sftp> ls /root
-/root/lost+found     /root/tzdata         /root/you_found_me  
+/root/lost+found     /root/tzdata         /root/you_found_me
 ```
 
 Or get files from the device:
@@ -50,7 +53,7 @@ Fetching /root/you_found_me to ./you_found_me
 sftp> exit
 
 $ ls
-you_found_me          
+you_found_me
 ```
 
 Or put files to the device:
@@ -61,21 +64,20 @@ $ sftp 10.0.1.7
 Connected to 10.0.1.7.
 sftp> put whammy /root/
 Uploading whammy to /root/whammy
-whammy                             100%    0     0.0KB/s   00:00    
+whammy                             100%    0     0.0KB/s   00:00
 sftp> ls /root/
-/root/whammy  
+/root/whammy
 ```
 
-**NOTE:** The only _writable_ partition on a Nerves device, by default, is
-the `/root` partition, which is also symlinked as `/data`.
+**NOTE:** The only _writable_ partition on a Nerves device, by default, is the
+`/root` partition, which is also symlinked as `/data`.
 
 ## SSHFS
 
-This is a program to use SSH to mount the remote file system locally and is
-very convienent when working with many files quickly. It is not included
-by default and needs to be installed on your host. YMMV and you may want
-to research installation for your specific system, but the most
-common ways are:
+This is a program to use SSH to mount the remote file system locally and is very
+convenient when working with many files quickly. It is not included by default
+and needs to be installed on your host. YMMV and you may want to research
+installation for your specific system, but the most common ways are:
 
 **Ubuntu/Debian**
 
@@ -90,10 +92,9 @@ https://osxfuse.github.io
 
 **But, How?!**
 
-There are a plethora of options for `sshfs` command and I encourage
-you to read through the `man sshfs` page. But TL;DR is that it supports
-all the same SSH options via the `-o` flag and you specify the remote
-path and the mount point:
+There are a plethora of options for `sshfs` command and I encourage you to read
+through the `man sshfs` page. But TL;DR is that it supports all the same SSH
+options via the `-o` flag and you specify the remote path and the mount point:
 
 ```sh
 $ ls /tmp/nerves
@@ -102,9 +103,8 @@ $ ls /tmp/nerves
 bin/   boot/  data@  dev/   etc/   lib/   lib32@ media/ mnt/   opt/   proc/  root/  run/   sbin/  srv/   sys/   tmp/   usr/   var/
 ```
 
-You can then interact with it as normal. View files, edit them
-(on the `/root` or `/data` directory), etc etc. Then when you're done,
-unmount the disk:
+You can then interact with it as normal. View files, edit them (on the `/root`
+or `/data` directory), etc etc. Then when you're done, unmount the disk:
 
 ```sh
 $ umount /tmp/nerves
@@ -114,12 +114,11 @@ $
 
 **Bonus! Use a plugin for your IDE**
 
-Chances are there is an SSHFS plugin for you IDE. For example, VSCode has
-the [SSH FS](https://marketplace.visualstudio.com/items?itemName=Kelvin.vscode-sshfs) plugin
-which allows you to mount the remote Nerves file system with all
-your other code nice and neat:
+Chances are there is an SSHFS plugin for you IDE. For example, VSCode has the
+[SSH FS](https://marketplace.visualstudio.com/items?itemName=Kelvin.vscode-sshfs)
+plugin which allows you to mount the remote Nerves file system with all your
+other code nice and neat:
 
 ![vscode_sshfs](/images/2021-05-08/vscode_sshfs.png)
-
 
 Cheers 🍻
