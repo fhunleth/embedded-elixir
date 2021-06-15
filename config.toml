@@ -26,6 +26,11 @@ googleAnalytics = "UA-16709386-6"
     weight = 1
 
 [[menu.main]]
+    name = "Newsletter"
+    url = "/page/newsletter"
+    weight = 2
+
+[[menu.main]]
     name = "Tags"
     url = "/tags"
     weight = 3
