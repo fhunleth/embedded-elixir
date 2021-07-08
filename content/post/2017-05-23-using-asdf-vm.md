@@ -46,10 +46,10 @@ asdf plugin-add elixir
 
 ```sh
 # Build and install Erlang/OTP
-asdf install erlang 24.0.2
+asdf install erlang 24.0.3
 
 # Install Elixir 1.12 as compiled against Erlang/OTP 24
-asdf install elixir 1.12.1-otp-24
+asdf install elixir 1.12.2-otp-24
 ```
 
 ## Setup
@@ -57,15 +57,15 @@ asdf install elixir 1.12.1-otp-24
 The following sets the Erlang and Elixir versions system-wide.
 
 ```sh
-asdf global erlang 24.0.2
-asdf global elixir 1.12.1-otp-24
+asdf global erlang 24.0.3
+asdf global elixir 1.12.2-otp-24
 ```
 
 If you want to fix the version used in a directory, specify `local`:
 
 ```sh
-asdf local erlang 24.0.2
-asdf local elixir 1.12.1-otp-24
+asdf local erlang 24.0.3
+asdf local elixir 1.12.2-otp-24
 ```
 
 The local option works by creating or updating a `.tool-versions` file in
@@ -87,8 +87,8 @@ asdf global elixir 2.0.0-otp-99
 Then, if that were to break, you can simply change back:
 
 ```sh
-asdf global erlang 24.0.2
-asdf global elixir 1.12.1-otp-24
+asdf global erlang 24.0.3
+asdf global elixir 1.12.2-otp-24
 ```
 
 ## Nerves
