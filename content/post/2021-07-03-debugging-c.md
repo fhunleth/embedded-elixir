@@ -3,7 +3,6 @@ title: "Debugging C Code on Nerves"
 subtitle: "Getting stack traces from core dumps"
 date: 2021-07-03
 author: Connor Rigby
-draft: true
 tags: ["nerves", "coredump"]
 ---
 
