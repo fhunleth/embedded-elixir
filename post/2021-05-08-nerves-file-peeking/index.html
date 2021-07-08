@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>Embedded Elixir</title>
+  
+  <meta name="author" content="Curated by Frank Hunleth"/>
+  <meta name="generator" content="Hugo 0.40.2" />
+  <link href='https://embedded-elixir.com//images/favicon.ico' rel='icon' type='image/x-icon'/>
+
+  <link rel="alternate" href="https://embedded-elixir.com/index.xml" type="application/rss+xml" title="Embedded Elixir">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://embedded-elixir.com//css/main.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="https://embedded-elixir.com//css/pygment_highlights.css" />
+  <link rel="stylesheet" href="https://embedded-elixir.com//css/highlight.min.css" />
+  <link rel="stylesheet" href="https://embedded-elixir.com//css/pswp-gallery.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.css" integrity="sha256-sCl5PUOGMLfFYctzDW3MtRib0ctyUvI9Qsmq2wXOeBY=" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/default-skin/default-skin.min.css" integrity="sha256-BFeI1V+Vh1Rk37wswuOYn5lsTcaU96hGaI7OUVCLjPc=" crossorigin="anonymous" />
+
+  
+  
+
+  
+    <meta property="og:title" content="Nerves 📂 👀" />
+  
+
+  
+    <meta property="og:description" content="Peeking into remote Nerves device storage">
+  
+
+  <meta property="og:type" content="website" />
+
+  
+    <meta property="og:url" content="https://embedded-elixir.com/post/2021-05-08-nerves-file-peeking/" />
+    <link rel="canonical" href="https://embedded-elixir.com/post/2021-05-08-nerves-file-peeking/" />
+  
+
+  
+    <meta property="og:image" content="https://embedded-elixir.com/images/logo.png" />
+  
+
+  
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@" />
+  <meta name="twitter:creator" content="@" />
+
+  
+    <meta name="twitter:title" content="Nerves 📂 👀" />
+  
+
+  
+    <meta name="twitter:description" content="Peeking into remote Nerves device storage">
+  
+
+  
+    <meta name="twitter:image" content="https://embedded-elixir.com/images/logo.png" />
+  
+
+</head>
+
+
+
+  <body>
+
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://embedded-elixir.com/">Embedded Elixir</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="Blog" href="/">Blog</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Newsletter" href="/page/newsletter">Newsletter</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Tags" href="/tags">Tags</a>
+            </li>
+          
+        
+      </ul>
+    </div>
+
+    <div class="avatar-container">
+      <div class="avatar-img-border">
+        
+          <a title="Embedded Elixir" href="https://embedded-elixir.com/">
+            <img class="avatar-img" src="https://embedded-elixir.com//images/logo.png" alt="Embedded Elixir" />
+          </a>
+        
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+    
+  
+  
+  
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="post-heading">
+              <h1>Nerves 📂 👀</h1>
+                
+                  
+                    <h2 class="post-subheading">Peeking into remote Nerves device storage</h2>
+                  
+                
+                
+                  <span class="post-meta">Posted
+                                           by Jon Carstens 
+                                          on May 8, 2021
+                  </span>
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+
+
+    <div class="container" role="main">
+      
+        <div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        <p>Want to look at and copy files on remote Nerves devices? This post shows you
+how using SSH.</p>
+
+<p></p>
+
+<h2 id="setup-ssh">Setup SSH</h2>
+
+<p>The most common way to interface remotely with your Nerves filesystem is via SSH
+(or <a href="https://en.wikipedia.org/wiki/Secure_Shell_Protocol">Secure Shell Protocol</a>).
+In fact, every method in this article is based on SSH in one way or another to
+get that initial access to device and present the filesystem differently. So
+first things first, you need to ensure you have SSH enabled on device and the
+simplest way is to use <a href="https://hex.pm/packages/nerves_ssh"><code>nerves_ssh</code></a>. This
+is a dependency of <a href="https://hex.pm/packages/nerves_pack"><code>nerves_pack</code></a> so you
+may already have it.</p>
+
+<p>If you&rsquo;re unfamiliar with it, take a quick break to brush up on <a href="https://hexdocs.pm/nerves_ssh/readme.html">the
+documentation</a> to get things setup.
+I&rsquo;ll wait&hellip;</p>
+
+<p>🍹</p>
+
+<p>K, great. Let&rsquo;s continue</p>
+
+<h2 id="sftp">SFTP</h2>
+
+<p>When using <code>nerves_ssh</code>, SFTP is enabled by default. So you can connect to your
+Nerves device and look around:</p>
+
+<pre><code class="language-sh">$ sftp nerves.local
+Connected to nerves.local.
+sftp&gt; ls /root
+/root/lost+found     /root/tzdata         /root/you_found_me
+</code></pre>
+
+<p>Or get files from the device:</p>
+
+<pre><code class="language-sh">$ sftp 10.0.1.7
+Connected to 10.0.1.7.
+sftp&gt; get /root/you_found_me .
+Fetching /root/you_found_me to ./you_found_me
+sftp&gt; exit
+
+$ ls
+you_found_me
+</code></pre>
+
+<p>Or put files to the device:</p>
+
+<pre><code class="language-sh">$ touch whammy
+$ sftp 10.0.1.7
+Connected to 10.0.1.7.
+sftp&gt; put whammy /root/
+Uploading whammy to /root/whammy
+whammy                             100%    0     0.0KB/s   00:00
+sftp&gt; ls /root/
+/root/whammy
+</code></pre>
+
+<p><strong>NOTE:</strong> The only <em>writable</em> partition on a Nerves device, by default, is the
+<code>/root</code> partition, which is also symlinked as <code>/data</code>.</p>
+
+<h2 id="sshfs">SSHFS</h2>
+
+<p>This is a program to use SSH to mount the remote file system locally and is very
+convenient when working with many files quickly. It is not included by default
+and needs to be installed on your host. YMMV and you may want to research
+installation for your specific system, but the most common ways are:</p>
+
+<p><strong>Ubuntu/Debian</strong></p>
+
+<pre><code class="language-sh">sudo apt-get install sshfs
+</code></pre>
+
+<p><strong>MacOS</strong></p>
+
+<p>You&rsquo;ll need to install <code>Fuse!</code> and <code>SSHFS</code> from OXSFuse:
+<a href="https://osxfuse.github.io">https://osxfuse.github.io</a></p>
+
+<p><strong>But, How?!</strong></p>
+
+<p>There are a plethora of options for <code>sshfs</code> command and I encourage you to read
+through the <code>man sshfs</code> page. But TL;DR is that it supports all the same SSH
+options via the <code>-o</code> flag and you specify the remote path and the mount point:</p>
+
+<pre><code class="language-sh">$ ls /tmp/nerves
+$ sshfs nerves.local:/ /tmp/nerves
+$ ls /tmp/nerves
+bin/   boot/  data@  dev/   etc/   lib/   lib32@ media/ mnt/   opt/   proc/  root/  run/   sbin/  srv/   sys/   tmp/   usr/   var/
+</code></pre>
+
+<p>You can then interact with it as normal. View files, edit them (on the <code>/root</code>
+or <code>/data</code> directory), etc etc. Then when you&rsquo;re done, unmount the disk:</p>
+
+<pre><code class="language-sh">$ umount /tmp/nerves
+$ ls /tmp/nerves
+$
+</code></pre>
+
+<p><strong>Bonus! Use a plugin for your IDE</strong></p>
+
+<p>Chances are there is an SSHFS plugin for you IDE. For example, VSCode has the
+<a href="https://marketplace.visualstudio.com/items?itemName=Kelvin.vscode-sshfs">SSH FS</a>
+plugin which allows you to mount the remote Nerves file system with all your
+other code nice and neat:</p>
+
+<p><img src="/images/2021-05-08/vscode_sshfs.png" alt="vscode_sshfs" /></p>
+
+<p>Cheers 🍻</p>
+      </article>
+
+      <ul class="pager blog-pager">
+        
+          <li class="previous">
+            <a href="https://embedded-elixir.com/post/2019-11-23-wizards-and-wifi/" data-toggle="tooltip" data-placement="top" title="🧙‍♀️Wizards &amp; WiFi ‍🧙‍♂️">&larr; Previous Post</a>
+          </li>
+        
+        
+          <li class="next">
+            <a href="https://embedded-elixir.com/post/2021-07-03-debugging-c/" data-toggle="tooltip" data-placement="top" title="Debugging C Code on Nerves">Next Post &rarr;</a>
+          </li>
+        
+      </ul>
+
+      
+        
+          <div class="disqus-comments">
+            <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "embedded-elixir" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+          </div>
+        
+      
+
+    </div>
+  </div>
+</div>
+
+      
+    </div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            Curated by Frank Hunleth
+            &nbsp;&bull;&nbsp;
+          
+
+          2021
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://embedded-elixir.com/">Embedded Elixir</a>
+          
+          <br>
+          Contribute by submitting a PR to <a href="https://github.com/fhunleth/embedded-elixir">https://github.com/fhunleth/embedded-elixir</a>
+        </p>
+        
+        <p class="credits theme-by text-muted">
+        <a href="http://gohugo.io">Hugo v0.40.2</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> &nbsp;&bull;&nbsp; Logo based on <a href="https://thenounproject.com/search/?q=chip&i=751689">Processor Chip</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js" integrity="sha256-UplRCs9v4KXVJvVY+p+RSo5Q4ilAUXh7kpjyIP5odyc=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js" integrity="sha256-PWHOlUzc96pMc8ThwRIXPn8yH4NOLu42RQ0b9SpnpFk=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://embedded-elixir.com//js/pswp-init.js"></script>
+<script src="https://embedded-elixir.com//js/main.js"></script>
+<script src="https://embedded-elixir.com//js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+<script> renderMathInElement(document.body); </script>
+
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-16709386-6', 'auto');
+ga('send', 'pageview');
+</script>
+
+
+
+  </body>
+</html>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Release on Embedded Elixir</title>
+    <link>https://embedded-elixir.com/tags/release/</link>
+    <description>Recent content in Release on Embedded Elixir</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 30 Mar 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://embedded-elixir.com/tags/release/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Upgrading to Nerves 0.5</title>
+      <link>https://embedded-elixir.com/post/2017-03-30-upgrading-to-nerves-0-5/</link>
+      <pubDate>Thu, 30 Mar 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://embedded-elixir.com/post/2017-03-30-upgrading-to-nerves-0-5/</guid>
+      <description>In early March, the Nerves Project published its v0.5.0 release, marking another big step forward in usability and completeness of the platform. In this post, I&amp;rsquo;d like to describe the major changes to be aware of as you upgrade existing projects or create new ones using Nerves 0.5.
+Refreshed Docs and Examples If you&amp;rsquo;re new to Nerves or you&amp;rsquo;ve been using it for a long time and just never got around to it, you may want to check out the Getting Started guides and documentation available on Hexdocs and the example projects available on GitHub.</description>
+    </item>
+    
+  </channel>
+</rss>

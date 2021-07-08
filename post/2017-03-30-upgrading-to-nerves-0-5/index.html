@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>Embedded Elixir</title>
+  
+  <meta name="author" content="Curated by Frank Hunleth"/>
+  <meta name="generator" content="Hugo 0.40.2" />
+  <link href='https://embedded-elixir.com//images/favicon.ico' rel='icon' type='image/x-icon'/>
+
+  <link rel="alternate" href="https://embedded-elixir.com/index.xml" type="application/rss+xml" title="Embedded Elixir">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://embedded-elixir.com//css/main.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="https://embedded-elixir.com//css/pygment_highlights.css" />
+  <link rel="stylesheet" href="https://embedded-elixir.com//css/highlight.min.css" />
+  <link rel="stylesheet" href="https://embedded-elixir.com//css/pswp-gallery.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.css" integrity="sha256-sCl5PUOGMLfFYctzDW3MtRib0ctyUvI9Qsmq2wXOeBY=" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/default-skin/default-skin.min.css" integrity="sha256-BFeI1V+Vh1Rk37wswuOYn5lsTcaU96hGaI7OUVCLjPc=" crossorigin="anonymous" />
+
+  
+  
+
+  
+    <meta property="og:title" content="Upgrading to Nerves 0.5" />
+  
+
+  
+    <meta property="og:description" content="What&#39;s New and What&#39;s Changed">
+  
+
+  <meta property="og:type" content="website" />
+
+  
+    <meta property="og:url" content="https://embedded-elixir.com/post/2017-03-30-upgrading-to-nerves-0-5/" />
+    <link rel="canonical" href="https://embedded-elixir.com/post/2017-03-30-upgrading-to-nerves-0-5/" />
+  
+
+  
+    <meta property="og:image" content="https://embedded-elixir.com/images/logo.png" />
+  
+
+  
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@" />
+  <meta name="twitter:creator" content="@" />
+
+  
+    <meta name="twitter:title" content="Upgrading to Nerves 0.5" />
+  
+
+  
+    <meta name="twitter:description" content="What&#39;s New and What&#39;s Changed">
+  
+
+  
+    <meta name="twitter:image" content="https://embedded-elixir.com/images/logo.png" />
+  
+
+</head>
+
+
+
+  <body>
+
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://embedded-elixir.com/">Embedded Elixir</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="Blog" href="/">Blog</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Newsletter" href="/page/newsletter">Newsletter</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Tags" href="/tags">Tags</a>
+            </li>
+          
+        
+      </ul>
+    </div>
+
+    <div class="avatar-container">
+      <div class="avatar-img-border">
+        
+          <a title="Embedded Elixir" href="https://embedded-elixir.com/">
+            <img class="avatar-img" src="https://embedded-elixir.com//images/logo.png" alt="Embedded Elixir" />
+          </a>
+        
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+    
+  
+  
+  
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="post-heading">
+              <h1>Upgrading to Nerves 0.5</h1>
+                
+                  
+                    <h2 class="post-subheading">What&#39;s New and What&#39;s Changed</h2>
+                  
+                
+                
+                  <span class="post-meta">Posted
+                                           by Greg Mefford 
+                                          on March 30, 2017
+                  </span>
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+
+
+    <div class="container" role="main">
+      
+        <div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        
+
+<p>In early March, the <a href="http://www.nerves-project.org">Nerves Project</a> published its <a href="https://github.com/nerves-project/nerves/releases/tag/v0.5.0">v0.5.0 release</a>, marking another big step forward in usability and completeness of the platform.
+In this post, I&rsquo;d like to describe the major changes to be aware of as you upgrade existing projects or create new ones using Nerves 0.5.</p>
+
+<h1 id="refreshed-docs-and-examples">Refreshed Docs and Examples</h1>
+
+<p>If you&rsquo;re new to Nerves or you&rsquo;ve been using it for a long time and just never got around to it, you may want to check out the <a href="https://hexdocs.pm/nerves/getting-started.html">Getting Started guides and documentation available on Hexdocs</a> and the <a href="https://github.com/nerves-project/nerves-examples">example projects available on GitHub</a>.
+These have all been reviewed and updated to match what&rsquo;s available in Nerves 0.5, so it&rsquo;s a great way to quickly see how everything works.
+In particular, the <code>nerves-examples</code> projects can be used as a reference if you get stuck trying to start a new project or feature, or when upgrading an existing project.</p>
+
+<h1 id="the-default-build-target-is-now-host">The Default Build Target is Now <code>host</code></h1>
+
+<p>The biggest change in Nerves 0.5 is that projects now default to building with a target of <code>host</code> instead of always cross-compiling for different hardware.
+The reason for this change is that it is very difficult to test and debug your code on your host when it is cross-compiled for another target architeture.
+In order to support this change, we have added some additional structure to the <code>mix.exs</code> configuration file that gets generated by default for new Nerves projects.
+Let&rsquo;s generate a new project and walk through the important sections of <code>mix.exs</code>.</p>
+
+<pre><code class="language-bash">$ mix nerves.new example
+</code></pre>
+
+<p>This <code>@target</code> module attribute is what controls the cross-compiling environment used by Mix.
+If the <code>MIX_TARGET</code> environment variable is set in your shell, it will be used to choose which Nerves System to use.
+If it is not set, Mix will default to the <code>host</code> target.
+If you&rsquo;re familiar with previous versions of Nerves, you may also notice that we have changed the target-selection envirnoment variable from <code>NERVES_TARGET</code> to <code>MIX_TARGET</code>.</p>
+
+<pre><code class="language-elixir"># example/mix.exs
+defmodule Example.Mixfile do
+  use Mix.Project
+
+  @target System.get_env(&quot;MIX_TARGET&quot;) || &quot;host&quot;
+</code></pre>
+
+<p>Nerves 0.5 projects depend on version 0.3 of the <code>nerves_bootstrap</code> Mix archive.
+If you have a relatively recent version of <code>nerves_bootstrap</code> already, you can upgrade by running <code>mix local.nerves</code>.
+If that doesn&rsquo;t work, you can run <code>mix archive.install https://github.com/nerves-project/archives/raw/master/nerves_bootstrap.ez</code>.
+Also note that the <code>aliases()</code> definition now takes the <code>@target</code> as a parameter.
+We&rsquo;ll see what that does for us shortly.</p>
+
+<pre><code class="language-elixir">  def project do
+    [app: :example,
+     # ...
+     target: @target,
+     archives: [nerves_bootstrap: &quot;~&gt; 0.3.0&quot;],
+     aliases: aliases(@target),
+     deps: deps()]
+  end
+</code></pre>
+
+<p>Here, we set the <code>Application</code>s to be started, based on which <code>@target</code> is being used.
+This gives us the opportunity to automatically start the supervision tree when running on the target device, but not when running in <code>iex</code> on the host.
+Also note that we have switched to using the <code>extra_applications</code> convention for specifying which applications to include in the release.
+This will automatically include all applications in dependencies unless they are defined as <code>runtime: false</code>.
+Using <code>extra_applications</code> allows us to only list non-dependency applications (like <code>Logger</code>), rather than explicitly specifying them all in <code>applications</code>.</p>
+
+<pre><code class="language-elixir">  def application, do: application(@target)
+
+  def application(&quot;host&quot;) do
+    [extra_applications: [:logger]]
+  end
+  def application(_target) do
+    [mod: {Example.Application, []},
+     extra_applications: [:logger]]
+  end
+</code></pre>
+
+<p>Similarly, we choose which dependencies to include based on the <code>@target</code> selection.
+This gives an opportunity to easily swap out mock dependencies or simply not load any that are designed to run only on the target (e.g. to interface with specific hardware features).</p>
+
+<p>Note that the <code>nerves</code> and <code>nerves_system_*</code> dependencies have now been marked as <code>runtime: false</code> so that they will not be included in the release on the device.
+These are only used during the compilation process to tell Mix how to properly build for the target hardware, so they aren&rsquo;t needed at runtime.
+Instead, there is a new <code>nerves_runtime</code> dependency that contains only the components of Nerves that are usable from your running application.
+There isn&rsquo;t much included today with <code>nerves_runtime</code>, but the intention of the Nerves team is to build out a standard platform of runtime components that many Nerves projects are likely to need.</p>
+
+<pre><code class="language-elixir">  def deps do
+    [{:nerves, &quot;~&gt; 0.5.0&quot;, runtime: false}] ++
+    deps(@target)
+  end
+
+  # Specify target specific dependencies
+  def deps(&quot;host&quot;), do: []
+  def deps(target) do
+    [{:nerves_runtime, &quot;~&gt; 0.1.0&quot;},
+     {:&quot;nerves_system_#{target}&quot;, &quot;~&gt; 0.11.0&quot;, runtime: false}]
+  end
+</code></pre>
+
+<p>Finally, we use the <code>@target</code> attribute passed to the <code>aliases()</code> function to allow us to only inject the Nerves cross-compiling envinroment into Mix when we&rsquo;re not targeting the <code>host</code>.</p>
+
+<pre><code class="language-elixir">  # We do not invoke the Nerves Env when running on the Host
+  def aliases(&quot;host&quot;), do: []
+  def aliases(_target) do
+    [&quot;deps.precompile&quot;: [&quot;nerves.precompile&quot;, &quot;deps.precompile&quot;],
+     &quot;deps.loadpaths&quot;:  [&quot;deps.loadpaths&quot;, &quot;nerves.loadpaths&quot;]]
+  end
+
+end
+</code></pre>
+
+<h1 id="improved-console-interaction">Improved Console Interaction</h1>
+
+<p>One common complaint from previous versions of Nerves was that the console output was confusing during a Nerves firmware build.
+There were normal warnings that needed to be ignored and overly-verbose output from several tools without enough context.
+With Nerves 0.5, we have eliminated the noisy warnings and added high-contrast headers to outline the high-level build stages.</p>
+
+<p><img src="/images/2017-03-30/mix_firmware.png" alt="output from mix firmware" /></p>
+
+<p>You may also notice that new Nerves projects are now generated with some helpful versions information being shown by default whenever you build you project.
+If you want to change what is displayed, you can easily modify the following code near the top of your <code>mix.exs</code> file.</p>
+
+<pre><code class="language-elixir">  # example/mix.exs
+  # ...
+  Mix.shell.info([:green, &quot;&quot;&quot;
+  Env
+    MIX_TARGET:   #{@target}
+    MIX_ENV:      #{Mix.env}
+  &quot;&quot;&quot;, :reset])
+  # ...
+</code></pre>
+
+<p>In order to help with troubleshooting, especially when using a custom Nerves System, we have also added a new <code>mix nerves.info</code> task, which shows more-detailed information:</p>
+
+<p><img src="/images/2017-03-30/mix_nerves.info.png" alt="output from mix nerves.info" /></p>
+
+<h1 id="other-notable-changes">Other Notable Changes</h1>
+
+<h3 id="new-images-path-option">New <code>images_path</code> Option</h3>
+
+<p>You can now set the <code>images_path</code> option in your <code>Mix.Project</code> configuration.
+The default <code>images_path</code> location is <code>#{build_path}/nerves/images</code>, but you can override it if you want to place your built images elsewhere.</p>
+
+<h3 id="better-project-generation-by-default">Better Project Generation by Default</h3>
+
+<p>Something that consistently tripped-up new users of Nerves in past versions was that they needed to run <code>mix nerves.release.init</code> and <code>mix deps.get</code> prior to <code>mix firmware</code>.
+In order to ease that process, the <code>mix nerves.new</code> project generator now asks if they would like to have it run these commands during project generation.
+This makes it much easier to do the right thing by default, only deviating if you know you need to.</p>
+
+<p><img src="/images/2017-03-30/mix_nerves.new.png" alt="output from mix nerves.new" /></p>
+
+      </article>
+
+      <ul class="pager blog-pager">
+        
+        
+          <li class="next">
+            <a href="https://embedded-elixir.com/post/2017-04-06-embedded-talks-in-march/" data-toggle="tooltip" data-placement="top" title="Roundup of Embedded and IoT Presentations in March">Next Post &rarr;</a>
+          </li>
+        
+      </ul>
+
+      
+        
+          <div class="disqus-comments">
+            <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "embedded-elixir" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+          </div>
+        
+      
+
+    </div>
+  </div>
+</div>
+
+      
+    </div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            Curated by Frank Hunleth
+            &nbsp;&bull;&nbsp;
+          
+
+          2021
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://embedded-elixir.com/">Embedded Elixir</a>
+          
+          <br>
+          Contribute by submitting a PR to <a href="https://github.com/fhunleth/embedded-elixir">https://github.com/fhunleth/embedded-elixir</a>
+        </p>
+        
+        <p class="credits theme-by text-muted">
+        <a href="http://gohugo.io">Hugo v0.40.2</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> &nbsp;&bull;&nbsp; Logo based on <a href="https://thenounproject.com/search/?q=chip&i=751689">Processor Chip</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js" integrity="sha256-UplRCs9v4KXVJvVY+p+RSo5Q4ilAUXh7kpjyIP5odyc=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js" integrity="sha256-PWHOlUzc96pMc8ThwRIXPn8yH4NOLu42RQ0b9SpnpFk=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://embedded-elixir.com//js/pswp-init.js"></script>
+<script src="https://embedded-elixir.com//js/main.js"></script>
+<script src="https://embedded-elixir.com//js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+<script> renderMathInElement(document.body); </script>
+
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-16709386-6', 'auto');
+ga('send', 'pageview');
+</script>
+
+
+
+  </body>
+</html>

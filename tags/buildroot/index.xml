@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Buildroot on Embedded Elixir</title>
+    <link>https://embedded-elixir.com/tags/buildroot/</link>
+    <description>Recent content in Buildroot on Embedded Elixir</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 05 Oct 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://embedded-elixir.com/tags/buildroot/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Creating Patches Using Git</title>
+      <link>https://embedded-elixir.com/post/2017-10-05-patching-buildroot/</link>
+      <pubDate>Thu, 05 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://embedded-elixir.com/post/2017-10-05-patching-buildroot/</guid>
+      <description>&lt;p&gt;This is not an Elixir post, but it comes up when working with custom Nerves
+systems. The problem is how to deal with custom patches to Buildroot, Linux, or
+any of the non-Elixir libraries that your application might use. You may have
+seen patch files like
+&lt;a href=&#34;https://github.com/nerves-project/nerves_system_br/tree/master/patches/buildroot&#34;&gt;these&lt;/a&gt;.
+These patch files are used to create local changes to projects when
+modifications either can&amp;rsquo;t be sent upstream (partial workarounds, hacks for
+specific systems, etc.) or haven&amp;rsquo;t been integrated yet. This post describes a
+way to create them.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

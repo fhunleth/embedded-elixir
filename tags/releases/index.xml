@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Releases on Embedded Elixir</title>
+    <link>https://embedded-elixir.com/tags/releases/</link>
+    <description>Recent content in Releases on Embedded Elixir</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 02 May 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://embedded-elixir.com/tags/releases/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Nerves v1.0 Released</title>
+      <link>https://embedded-elixir.com/post/2018-05-03-nerves-v1.0.0/</link>
+      <pubDate>Wed, 02 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://embedded-elixir.com/post/2018-05-03-nerves-v1.0.0/</guid>
+      <description>&lt;p&gt;We are thrilled to announce &lt;a href=&#34;https://nerves-project.org&#34;&gt;Nerves&lt;/a&gt; v1.0 is finally out. This has been
+4219 commits by 102 contributors since the initial commit on &lt;a href=&#34;https://github.com/nerves-project/nerves_system_br/tree/dcd9a16edc39146a505c6e854579a03145c2d439&#34;&gt;October 29th,
+2013&lt;/a&gt;! This would not have been possible without our &lt;a href=&#34;https://nerves-project.org/#sponsors&#34;&gt;corporate
+sponsors&lt;/a&gt; and &lt;a href=&#34;https://opencollective.com/nerves-project&#34;&gt;individual backers&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

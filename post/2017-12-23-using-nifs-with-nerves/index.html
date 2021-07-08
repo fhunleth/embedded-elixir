@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>Embedded Elixir</title>
+  
+  <meta name="author" content="Curated by Frank Hunleth"/>
+  <meta name="generator" content="Hugo 0.40.2" />
+  <link href='https://embedded-elixir.com//images/favicon.ico' rel='icon' type='image/x-icon'/>
+
+  <link rel="alternate" href="https://embedded-elixir.com/index.xml" type="application/rss+xml" title="Embedded Elixir">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://embedded-elixir.com//css/main.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="https://embedded-elixir.com//css/pygment_highlights.css" />
+  <link rel="stylesheet" href="https://embedded-elixir.com//css/highlight.min.css" />
+  <link rel="stylesheet" href="https://embedded-elixir.com//css/pswp-gallery.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.css" integrity="sha256-sCl5PUOGMLfFYctzDW3MtRib0ctyUvI9Qsmq2wXOeBY=" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/default-skin/default-skin.min.css" integrity="sha256-BFeI1V+Vh1Rk37wswuOYn5lsTcaU96hGaI7OUVCLjPc=" crossorigin="anonymous" />
+
+  
+  
+
+  
+    <meta property="og:title" content="Using NIFs With Nerves" />
+  
+
+  
+    <meta property="og:description" content="While working on a Nerves project, you will likely do most hard work in the host environment. This means you get to develop features quickly, and when are ready, you simply deploy your known working …">
+  
+
+  <meta property="og:type" content="website" />
+
+  
+    <meta property="og:url" content="https://embedded-elixir.com/post/2017-12-23-using-nifs-with-nerves/" />
+    <link rel="canonical" href="https://embedded-elixir.com/post/2017-12-23-using-nifs-with-nerves/" />
+  
+
+  
+    <meta property="og:image" content="https://embedded-elixir.com/images/logo.png" />
+  
+
+  
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@" />
+  <meta name="twitter:creator" content="@" />
+
+  
+    <meta name="twitter:title" content="Using NIFs With Nerves" />
+  
+
+  
+    <meta name="twitter:description" content="While working on a Nerves project, you will likely do most hard work in the host environment. This means you get to develop features quickly, and when are ready, you simply deploy your known working …">
+  
+
+  
+    <meta name="twitter:image" content="https://embedded-elixir.com/images/logo.png" />
+  
+
+</head>
+
+
+
+  <body>
+
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://embedded-elixir.com/">Embedded Elixir</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="Blog" href="/">Blog</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Newsletter" href="/page/newsletter">Newsletter</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Tags" href="/tags">Tags</a>
+            </li>
+          
+        
+      </ul>
+    </div>
+
+    <div class="avatar-container">
+      <div class="avatar-img-border">
+        
+          <a title="Embedded Elixir" href="https://embedded-elixir.com/">
+            <img class="avatar-img" src="https://embedded-elixir.com//images/logo.png" alt="Embedded Elixir" />
+          </a>
+        
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+    
+  
+  
+  
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="post-heading">
+              <h1>Using NIFs With Nerves</h1>
+                
+                
+                  <span class="post-meta">Posted
+                                           by Connor Rigby 
+                                          on December 23, 2017
+                  </span>
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+
+
+    <div class="container" role="main">
+      
+        <div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        <p>While working on a Nerves project, you will likely do most hard work in the
+<code>host</code> environment. This means you get to develop features quickly, and when
+are ready, you simply deploy your known working firmware to your embedded
+devices. This however can lead to a situation where the code runs really well
+on your i7 powered beast computer, but when deployed on a less
+powerful Raspberry Pi 0, for example. Nothing will be broken, but things are just
+<em>too</em> slow. There are a number of solutions to this problem and in this post,
+I will walk you through a simplified real world example of one possible solution
+of using an <a href="http://erlang.org/doc/tutorial/nif.html">Erlang NIF</a> to speed
+up one particular functionality.</p>
+
+<p></p>
+
+<p>I would like to preface this by saying a NIF will not always be the solution for
+you. The documentation explains this: &ldquo;NIFs are most suitable for synchronous functions&rdquo;.
+The other scary thing about NIFs is that</p>
+
+<blockquote>
+<blockquote>
+<blockquote>
+<p>Since a NIF library is dynamically linked into the emulator process,
+this is the fastest way of calling C-code from Erlang
+(alongside port drivers).
+Calling NIFs requires no context switches.
+But it is also the least safe,
+because a crash in a NIF brings the emulator down too.</p>
+</blockquote>
+</blockquote>
+</blockquote>
+
+<p>To simplify - a segfault in the code you are calling will result
+in the Erlang virtual machine crashing. This crash usually falls out of the scope
+of the <code>let it crash</code> mantra. Nerves will reboot your device when this happens.</p>
+
+<p>Now lets get started with that example. Full disclaimer: This example might get
+a little complex and long winded because I pulled it out of a real world project,
+but I think it is simple enough to follow.</p>
+
+<p>Say we want a data structure that does
+something on in a repeating manor. So do <em><em>something</em></em> every <em><em>number</em></em> of <em><em>units</em></em>
+starting on <em><em>datetime</em></em> ending on <em><em>datetime</em></em>. It turns out generating a list
+of events in this manor can be pretty taxing. Let&rsquo;s get started.</p>
+
+<p>First we create a new Nerves app like normal:</p>
+
+<pre><code class="language-bash">mix nerves.new hello_calendar
+</code></pre>
+
+<p>Now in a real project we would likely want to store these <code>Calendar</code>s inside a
+database of some sort. We won&rsquo;t cover that here, but if you&rsquo;re interested in that,
+check out <a href="http://embedded-elixir.com/post/2017-09-22-using-ecto-and-sqlite3-with-nerves/">this</a>
+post.</p>
+
+<p>Make a new file <code>lib/hello_calendar/calendar.ex</code>:</p>
+
+<pre><code class="language-elixir">defmodule HelloCalendar.Calendar do
+  defstruct [:start_time, :end_time, :repeat, :time_unit, :calendar]
+  @valid_time_units [&quot;minutely&quot;, &quot;hourly&quot;, &quot;daily&quot;, &quot;weekly&quot;, &quot;monthly&quot;, &quot;yearly&quot;]
+  @doc &quot;&quot;&quot;
+  Start a new calendar
+  * start_time - DataTime struct
+  * end_time - DateTime struct
+  * repeat - integer number of repeats
+  * time_unit - one of
+    * &quot;minutely&quot;
+    * &quot;hourly&quot;
+    * &quot;daily&quot;
+    * &quot;weekly&quot;
+    * &quot;monthly&quot;
+    * &quot;yearly&quot;
+  &quot;&quot;&quot;
+  def new(%DateTime{} = start_time, %DateTime{} = end_time, repeat, time_unit)
+  when time_unit in @valid_time_units do
+    %__MODULE__{
+      start_time: start_time,
+      end_time: end_time,
+      repeat: repeat,
+      time_unit: time_unit
+    }
+    |&gt; build_calendar()
+  end
+end
+</code></pre>
+
+<p>Now for the hard (ish) part: the <code>build_calendar/1</code> function. We want a list
+of events to operate on.</p>
+
+<pre><code class="language-elixir">def build_calendar(%__MODULE__{} = calendar) do
+  current_time_seconds = :os.system_time(:second)
+  start_time_seconds = DateTime.to_unix(calendar.start_time, :seconds)
+  end_time_seconds = DateTime.to_unix(calendar.end_time :seconds)
+  repeat = calendar.repeat
+  repeat_frequency_seconds = time_unit_to_seconds(calendar.time_unit)
+
+  new_calendar =
+    do_build_calendar(current_time_seconds,
+                      start_time_seconds,
+                      end_time_seconds,
+                      repeat,
+                      repeat_frequency_seconds)
+                      |&gt; Enum.map(&amp;DateTime.from_unix!(&amp;1))
+  %{calendar | calendar: new_calendar}
+end
+
+# This function will be replaced with our NIF.
+def do_build_calendar(now_seconds, start_time_seconds, end_time_seconds, repeat, repeat_frequency_seconds) do
+  Logger.warn &quot;Using (very) slow calendar builder!&quot;
+  grace_period_cutoff_seconds = now_seconds - 60
+    Range.new(start_time_seconds, end_time_seconds)
+    |&gt; Enum.take_every(repeat * repeat_frequency_seconds)
+    |&gt; Enum.filter(&amp;Kernel.&gt;(&amp;1, grace_period_cutoff_seconds))
+    |&gt; Enum.take(60)
+    |&gt; Enum.map(&amp;Kernel.-(&amp;1, div(&amp;1, 60)))
+end
+
+@compile {:inline, [time_unit_to_seconds: 2]}
+defp time_unit_to_seconds(&quot;never&quot;), do: 0
+defp time_unit_to_seconds(&quot;minutely&quot;), do: 60
+defp time_unit_to_seconds(&quot;hourly&quot;), do: 60 * 60
+defp time_unit_to_seconds(&quot;daily&quot;), do: 60 * 60 * 24
+defp time_unit_to_seconds(&quot;weekly&quot;), do: 60 * 60 * 24 * 7
+defp time_unit_to_seconds(&quot;monthly&quot;), do: 60 * 60 * 24 * 30
+defp time_unit_to_seconds(&quot;yearly&quot;), do: 60 * 60 * 24 * 365
+</code></pre>
+
+<p>Now that was a mouthful, but we are mostly interested in <code>do_build_calendar/5</code>.
+First we build a <code>grace_period</code> by subtracting one minute from <code>now</code>. Then we build a <code>Range</code>
+from the <code>start_time</code> to the <code>end_time</code>, and take the number of steps. Then we
+filter out every event that isn&rsquo;t after our grace period. Then we grab 60 of those
+events, and round down to the nearest minute.</p>
+
+<p>Now we can test it out:</p>
+
+<pre><code class="language-elixir">iex()&gt; now = DateTime.utc_now()
+iex()&gt; start_time = %{now | minute: now.minute + 5}
+iex()&gt; end_time = %{now | hour: now.hour + 1}
+iex()&gt; HelloCalendar.Calendar.new(start_time, end_time, 1, &quot;minutely&quot;)
+14:10:03.864 [warn]  Using (very) slow calendar builder!
+%HelloCalendar.Calendar{calendar: [#DateTime&lt;2017-03-06 20:35:52Z&gt;,
+  #DateTime&lt;2017-03-06 20:36:51Z&gt;, ...],
+ end_time: #DateTime&lt;2017-12-23 27:10:02.653171Z&gt;, repeat: 1,
+ start_time: #DateTime&lt;2017-12-23 22:10:02.653171Z&gt;, time_unit: &quot;minutely&quot;}
+</code></pre>
+
+<p>And it was very quick. But now say you want <code>end_time</code> to be in 5 years&hellip;</p>
+
+<pre><code class="language-elixir">HelloCalendar.Calendar.new(start_time, %{end_time | year: end_time.year + 5}, 1, &quot;minutely&quot;)
+</code></pre>
+
+<p>That takes signifigantly longer, because it still needs to enumerate over every
+time before our <code>gracec_period</code> here: <code>|&gt; Enum.filter(&amp;Kernel.&gt;(&amp;1, grace_period_cutoff_seconds))</code></p>
+
+<p>So let&rsquo;s get into the fun NIF stuff.</p>
+
+<p>First we need to setup our <code>make</code> environment. We add a dependency to the <code>mix.exs</code>:</p>
+
+<pre><code class="language-elixir">def project do
+  [...
+   compilers: [:elixir_make] ++ Mix.compilers(),
+   make_clean: [&quot;clean&quot;],
+   ...
+  ]
+end
+
+def deps do
+  [
+    {:nerves, &quot;~&gt; 0.7&quot;, runtime: false},
+    {:elixir_make, &quot;~&gt; 0.4.0&quot;}
+  ] ++ deps(@target)
+end
+</code></pre>
+
+<p>and we will need a <code>Makefile</code>. This is the complex part with Nerves.</p>
+
+<pre><code class="language-makefile">ifeq ($(ERL_EI_INCLUDE_DIR),)
+ERL_ROOT_DIR = $(shell erl -eval &quot;io:format(\&quot;~s~n\&quot;, [code:root_dir()])&quot; -s init stop -noshell)
+ifeq ($(ERL_ROOT_DIR),)
+   $(error Could not find the Erlang installation. Check to see that 'erl' is in your PATH)
+endif
+ERL_EI_INCLUDE_DIR = &quot;$(ERL_ROOT_DIR)/usr/include&quot;
+ERL_EI_LIBDIR = &quot;$(ERL_ROOT_DIR)/usr/lib&quot;
+endif
+
+# Set Erlang-specific compile and linker flags
+ERL_CFLAGS ?= -I$(ERL_EI_INCLUDE_DIR)
+ERL_LDFLAGS ?= -L$(ERL_EI_LIBDIR)
+
+LDFLAGS += -fPIC -shared
+CFLAGS ?= -fPIC -O2 -Wall -Wextra -Wno-unused-parameter
+
+ifeq ($(CROSSCOMPILE),)
+ifeq ($(shell uname),Darwin)
+LDFLAGS += -undefined dynamic_lookup
+endif
+endif
+
+NIF=priv/build_calendar.so
+
+all: priv $(NIF)
+
+priv:
+	mkdir -p priv
+
+$(NIF): c_src/build_calendar.c
+	$(CC) $(ERL_CFLAGS) $(CFLAGS) $(ERL_LDFLAGS) $(LDFLAGS) \
+	    -o $@ $&lt;
+
+clean:
+	$(RM) $(NIF)
+</code></pre>
+
+<p>The only really complicated part of the <code>Makefile</code> is the top part that finds
+the paths to the Erlang interface (ei) include and library directories. They&rsquo;re
+needed for us to use the <code>erl_nif.h</code> header file. The <code>ERL_EI_INCLUDE_DIR</code> and
+<code>ERL_EI_LIBDIR</code> variables specify those paths by convention. Nerves will fill
+them in for us (via environment variables) when calling the Makefile, but if
+we&rsquo;re compiling outside of Nerves, we need to figure them out ourselves.</p>
+
+<p>Now we can finally get to writing our C code! Lets reimplement that slow
+<code>do_build_calendar</code> function. Create a new file <code>c_src/build_calendar.c</code></p>
+
+<pre><code class="language-c">#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+#include &lt;erl_nif.h&gt;
+
+static ERL_NIF_TERM do_build_calendar(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
+{
+  ERL_NIF_TERM atom_err = enif_make_atom(env, &quot;error&quot;);
+  ERL_NIF_TERM atom_not_implemented = enif_make_atom(env, &quot;not_implemented&quot;);
+  return enif_make_tuple(env, 2, atom_err, atom_not_implemented);
+}
+
+static ErlNifFunc nif_funcs[] =
+{
+    {&quot;do_build_calendar&quot;, 5, do_build_calendar}
+};
+
+ERL_NIF_INIT(HelloCalendar.Calendar, nif_funcs, NULL,NULL,NULL,NULL)
+</code></pre>
+
+<p>Now, you can do either <code>mix compile</code> or <code>make</code> to generate your new NIF.
+You should have a file called <code>make_calendar.so</code> in your <code>priv</code> directory. Lets
+walk thru that file really quickly, starting from the bottom.</p>
+
+<p><code>ERL_NIF_INIT(Elixir.HelloCalendar.Calendar, nif_funcs, NULL,NULL,NULL,NULL)</code> Tells
+the NIF what the module name is, the functions to be exported, and then there are
+arguments for <code>on_load</code>, <code>on_reload</code>, <code>on_unload</code>, and <code>on_upgrade</code>. We won&rsquo;t be
+using those today.</p>
+
+<pre><code class="language-c">static ErlNifFunc nif_funcs[] =
+{
+    {&quot;do_build_calendar&quot;, 5, do_build_calendar}
+};
+</code></pre>
+
+<p>This tells the NIF which functions and their arity to export.</p>
+
+<pre><code class="language-c">static ERL_NIF_TERM do_build_calendar(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
+{
+  ERL_NIF_TERM atom_err = enif_make_atom(env, &quot;error&quot;);
+  ERL_NIF_TERM atom_not_implemented = enif_make_atom(env, &quot;not_implemented&quot;);
+  return enif_make_tuple(env, atom_err, atom_not_implemented);
+}
+</code></pre>
+
+<p>This is our actual function. The last part is to wire it up in Elixir. Open up
+<code>lib/hello_calendar/calendar.ex</code> again and add this:</p>
+
+<pre><code class="language-elixir">  @on_load :load_nif
+  def load_nif do
+    nif_file = '#{:code.priv_dir(:hello_calendar)}/build_calendar'
+    case :erlang.load_nif(nif_file, 0) do
+      :ok -&gt; :ok
+      {:error, {:reload, _}} -&gt; :ok
+      {:error, reason} -&gt; Logger.warn &quot;Failed to load NIF: #{inspect reason}&quot;
+    end
+  end
+</code></pre>
+
+<p>Now lets walk through that.
+<code>@on_load :load_nif</code> is a compiler attribute that tells Elixir/Erlang to do something when
+the module is loaded. In this case we want to load a NIF.
+If the NIF loading fails, we want to fallback to the default implementation. This
+is required in Nerves, since when running <code>mix firmware</code>, the Elixir compiler <code>load</code>s
+your code, which will load the NIF.</p>
+
+<p>Now if we run the <code>iex</code> tests from above:</p>
+
+<pre><code class="language-elixir">iex(1)&gt; now = DateTime.utc_now()
+#DateTime&lt;2017-12-23 22:39:33.259057Z&gt;
+
+iex(2)&gt; start_time = now
+#DateTime&lt;2017-12-23 22:39:33.259057Z&gt;
+
+iex(3)&gt; end_time = %{start_time | hour: now.hour + 5, year: now.year + 1000}
+#DateTime&lt;3017-12-23 27:39:33.259057Z&gt;
+
+iex(4)&gt; HelloCalendar.Calendar.new(start_time, %{end_time | year: end_time.year + 5}, 1, &quot;minutely&quot;)
+** (Protocol.UndefinedError) protocol Enumerable not implemented for {:error, :not_implemented}. This protocol is implemented for: Date.Range, File.Stream, Function, GenEvent.Stream, HashDict, HashSet, IO.Stream, List, Map, MapSet, Range, Stream
+    (elixir) lib/enum.ex:1: Enumerable.impl_for!/1
+    (elixir) lib/enum.ex:116: Enumerable.reduce/3
+    (elixir) lib/enum.ex:1847: Enum.map/2
+    (hello_calendar) lib/hello_calendar/calendar.ex:46: HelloCalendar.Calendar.build_calendar/1
+</code></pre>
+
+<p>Now we get <code>{:error, :not_implemented}</code> as a return from our <code>do_build_calendar</code>
+function. Obviously this is an error, but it didn&rsquo;t use the old Elixir implementation.</p>
+
+<p>Lets finish up the C version of that function:</p>
+
+<pre><code class="language-c">static ERL_NIF_TERM do_build_calendar(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
+{
+  // Arguments
+  long int nowSeconds, startTimeSeconds, endTimeSeconds, frequencySeconds;
+  int repeat;
+
+  // Fetch arguments.
+  enif_get_long(env, argv[0], &amp;nowSeconds);
+  enif_get_long(env, argv[1], &amp;startTimeSeconds);
+  enif_get_long(env, argv[2], &amp;endTimeSeconds);
+  enif_get_int(env, argv[3], &amp;repeat);
+  enif_get_long(env, argv[4], &amp;frequencySeconds);
+
+  // Data used to build the calendar.
+  long int gracePeriodSeconds;
+  gracePeriodSeconds = nowSeconds - 60;
+  long int step = frequencySeconds * repeat;
+
+  // iterators for loops
+  long int i, j;
+
+  // build our events array, fill it with zeroes.
+  long int events[MAX_GENERATED];
+  for(i = 0; i &lt; MAX_GENERATED; i++)
+    events[i] = 0;
+
+  // put up to MAX_GENERATED events into the array
+  for(j = 0, i = startTimeSeconds; (i &lt; endTimeSeconds) &amp;&amp; (j &lt; MAX_GENERATED); i += step) {
+    // if this event (i) is after the grace period, add it to the array.
+    if(i &gt; gracePeriodSeconds) {
+      events[j] = i;
+      events[j] -= (events[j] % 60);
+      j++;
+    }
+  }
+
+  // Count up our total generated events
+  for(i=0, j=0; j&lt;MAX_GENERATED; j++) { if(events[j] &gt; 0) { i++; } }
+
+  // Build the array to be returned.
+  ERL_NIF_TERM retArr [i];
+  for(j=0; j&lt;i ; j++)
+    retArr[j] = enif_make_long(env, events[j]);
+
+  // we survived.
+  return enif_make_list_from_array(env, retArr,  i);
+}
+</code></pre>
+
+<p>Don&rsquo;t worry if you didn&rsquo;t catch all that. We&rsquo;ll go thru it.</p>
+
+<pre><code class="language-c">// Arguments
+long int nowSeconds, startTimeSeconds, endTimeSeconds, frequencySeconds;
+int repeat;
+
+// Fetch arguments.
+enif_get_long(env, argv[0], &amp;nowSeconds);
+enif_get_long(env, argv[1], &amp;startTimeSeconds);
+enif_get_long(env, argv[2], &amp;endTimeSeconds);
+enif_get_int(env, argv[3], &amp;repeat);
+enif_get_long(env, argv[4], &amp;frequencySeconds);
+</code></pre>
+
+<p><code>argv[]</code> is an array passed in as the arguments to our function.
+We know the first 3 are <code>long</code>s so we use the <code>enif_get_long</code> function to get them.
+<code>repeat</code> is an integer so we do <code>enif_get_int</code> to get it. Those functions pass
+the address of the variables you wish to populate. (<code>&amp;</code>).</p>
+
+<pre><code class="language-c">// Data used to build the calendar.
+long int gracePeriodSeconds;
+gracePeriodSeconds = nowSeconds - 60;
+long int step = frequencySeconds * repeat;
+</code></pre>
+
+<p>Just building up some information we will need later.</p>
+
+<pre><code class="language-c">// Build our events array and fill it with zeroes.
+long int events[MAX_GENERATED];
+for(i = 0; i &lt; MAX_GENERATED; i++)
+  events[i] = 0;
+
+// put up to MAX_GENERATED events into the array
+for(j = 0, i = startTimeSeconds; (i &lt; endTimeSeconds) &amp;&amp; (j &lt; MAX_GENERATED); i += step) {
+  // if this event (i) is after the grace period, add it to the array.
+  if(i &gt; gracePeriodSeconds) {
+    events[j] = i;
+    events[j] -= (events[j] % 60);
+    j++;
+  }
+}
+</code></pre>
+
+<p>Build an array, and fill it with zeroes, then populate it with up to <code>MAX_GENERATED</code>
+events.</p>
+
+<pre><code class="language-c">// Count up our total generated events
+for(i=0, j=0; j&lt;MAX_GENERATED; j++) { if(events[j] &gt; 0) { i++; } }
+
+// Build the array to be returned.
+ERL_NIF_TERM retArr [i];
+for(j=0; j&lt;i ; j++)
+  retArr[j] = enif_make_long(env, events[j]);
+</code></pre>
+
+<p>build the <code>list</code> of items to return to Erlang/Elixir. and finally
+<code>return enif_make_list_from_array(env, retArr,  i);</code></p>
+
+<p>Now if we run our examples again, they will be almost instant on our host machine.
+You can deploy to a nerves device now, and it should be still quite fast.</p>
+
+<pre><code class="language-sh">MIX_TARGET=rpi0 mix do deps.get, firmware
+</code></pre>
+
+<p>You may notice a warning:
+<code>14:52:29.876 [warn]  Failed to load nif: {:load_failed, 'Failed to load NIF library:
+hello_calendar/_build/rpi0/dev/lib/hello_calendar/priv/build_calendar.so: wrong ELF class: ELFCLASS32\''}</code></p>
+
+<p>This is happening because the Elixir compiler is trying to load your Nerves
+crosscompiled NIF. You can safely ignore or disable this message.</p>
+
+<p>All the code for this project is on Github <a href="https://github.com/ConnorRigby/hello_calendar">here</a></p>
+      </article>
+
+      <ul class="pager blog-pager">
+        
+          <li class="previous">
+            <a href="https://embedded-elixir.com/post/2017-11-02-nerves-update/" data-toggle="tooltip" data-placement="top" title="The Nerves Update">&larr; Previous Post</a>
+          </li>
+        
+        
+          <li class="next">
+            <a href="https://embedded-elixir.com/post/2018-01-02-nerves-update/" data-toggle="tooltip" data-placement="top" title="January 2018 Nerves Update">Next Post &rarr;</a>
+          </li>
+        
+      </ul>
+
+      
+        
+          <div class="disqus-comments">
+            <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "embedded-elixir" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+          </div>
+        
+      
+
+    </div>
+  </div>
+</div>
+
+      
+    </div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            Curated by Frank Hunleth
+            &nbsp;&bull;&nbsp;
+          
+
+          2021
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://embedded-elixir.com/">Embedded Elixir</a>
+          
+          <br>
+          Contribute by submitting a PR to <a href="https://github.com/fhunleth/embedded-elixir">https://github.com/fhunleth/embedded-elixir</a>
+        </p>
+        
+        <p class="credits theme-by text-muted">
+        <a href="http://gohugo.io">Hugo v0.40.2</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> &nbsp;&bull;&nbsp; Logo based on <a href="https://thenounproject.com/search/?q=chip&i=751689">Processor Chip</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js" integrity="sha256-UplRCs9v4KXVJvVY+p+RSo5Q4ilAUXh7kpjyIP5odyc=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js" integrity="sha256-PWHOlUzc96pMc8ThwRIXPn8yH4NOLu42RQ0b9SpnpFk=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://embedded-elixir.com//js/pswp-init.js"></script>
+<script src="https://embedded-elixir.com//js/main.js"></script>
+<script src="https://embedded-elixir.com//js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+<script> renderMathInElement(document.body); </script>
+
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-16709386-6', 'auto');
+ga('send', 'pageview');
+</script>
+
+
+
+  </body>
+</html>

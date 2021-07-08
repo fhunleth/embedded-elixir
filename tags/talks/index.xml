@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Talks on Embedded Elixir</title>
+    <link>https://embedded-elixir.com/tags/talks/</link>
+    <description>Recent content in Talks on Embedded Elixir</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 11 Sep 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://embedded-elixir.com/tags/talks/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Roundup of Embedded Elixir Talks at ElixirConf 2017</title>
+      <link>https://embedded-elixir.com/post/2017-09-11-embedded-talks-elixirconf/</link>
+      <pubDate>Mon, 11 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://embedded-elixir.com/post/2017-09-11-embedded-talks-elixirconf/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://elixirconf.com/&#34;&gt;ElixirConf 2017&lt;/a&gt; was fantastic with a good selection
+of Nerves and embedded Elixir talks. Here&amp;rsquo;s a list:&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Roundup of Embedded and IoT Presentations in March</title>
+      <link>https://embedded-elixir.com/post/2017-04-06-embedded-talks-in-march/</link>
+      <pubDate>Thu, 06 Apr 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://embedded-elixir.com/post/2017-04-06-embedded-talks-in-march/</guid>
+      <description>&lt;p&gt;March was quite a month for talks starting with
+&lt;a href=&#34;http://elixirdaze.com/&#34;&gt;ElixirDaze&lt;/a&gt; in Florida, going to &lt;a href=&#34;http://www.erlangelixir.com/&#34;&gt;Erlang and Elixir Factory&lt;/a&gt; in
+San Francisco, and ending at the &lt;a href=&#34;https://www.meetup.com/ruby-lviv/&#34;&gt;Lviv Ruby Meetup&lt;/a&gt; in Ukraine.&lt;/p&gt;
+
+&lt;p&gt;Here&amp;rsquo;s a list of embedded Elixir and Erlang related ones that we found:&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

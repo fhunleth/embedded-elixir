@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Nif on Embedded Elixir</title>
+    <link>https://embedded-elixir.com/tags/nif/</link>
+    <description>Recent content in Nif on Embedded Elixir</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 23 Dec 2017 12:48:08 -0800</lastBuildDate>
+    
+	<atom:link href="https://embedded-elixir.com/tags/nif/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Using NIFs With Nerves</title>
+      <link>https://embedded-elixir.com/post/2017-12-23-using-nifs-with-nerves/</link>
+      <pubDate>Sat, 23 Dec 2017 12:48:08 -0800</pubDate>
+      
+      <guid>https://embedded-elixir.com/post/2017-12-23-using-nifs-with-nerves/</guid>
+      <description>&lt;p&gt;While working on a Nerves project, you will likely do most hard work in the
+&lt;code&gt;host&lt;/code&gt; environment. This means you get to develop features quickly, and when
+are ready, you simply deploy your known working firmware to your embedded
+devices. This however can lead to a situation where the code runs really well
+on your i7 powered beast computer, but when deployed on a less
+powerful Raspberry Pi 0, for example. Nothing will be broken, but things are just
+&lt;em&gt;too&lt;/em&gt; slow. There are a number of solutions to this problem and in this post,
+I will walk you through a simplified real world example of one possible solution
+of using an &lt;a href=&#34;http://erlang.org/doc/tutorial/nif.html&#34;&gt;Erlang NIF&lt;/a&gt; to speed
+up one particular functionality.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

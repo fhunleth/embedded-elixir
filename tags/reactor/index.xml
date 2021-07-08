@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Reactor on Embedded Elixir</title>
+    <link>https://embedded-elixir.com/tags/reactor/</link>
+    <description>Recent content in Reactor on Embedded Elixir</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 04 May 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://embedded-elixir.com/tags/reactor/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Firmware Updates</title>
+      <link>https://embedded-elixir.com/post/2017-05-04-firmware-update/</link>
+      <pubDate>Thu, 04 May 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://embedded-elixir.com/post/2017-05-04-firmware-update/</guid>
+      <description>Firmware updates are an important aspect to all parts of the device lifecycle, not just production. In development, they can save you time not burning SD cards by using mechanisms like pushing firmware bundles over the network. Network updates can also pave the way to automate executing canary tests using real hardware. Firmware updates are important to these stages because they are the only way to modify the contents of the read only filesystem.</description>
+    </item>
+    
+  </channel>
+</rss>

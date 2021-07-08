@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Umbrella on Embedded Elixir</title>
+    <link>https://embedded-elixir.com/tags/umbrella/</link>
+    <description>Recent content in Umbrella on Embedded Elixir</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 19 May 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://embedded-elixir.com/tags/umbrella/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Poncho Projects</title>
+      <link>https://embedded-elixir.com/post/2017-05-19-poncho-projects/</link>
+      <pubDate>Fri, 19 May 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://embedded-elixir.com/post/2017-05-19-poncho-projects/</guid>
+      <description>&lt;p&gt;Recently in the Nerves community Slack channel, we have been talking about how &lt;a href=&#34;http://elixir-lang.org/getting-started/mix-otp/dependencies-and-umbrella-apps.html#umbrella-projects&#34;&gt;umbrella projects&lt;/a&gt; can be problematic for a Nerves-based project.
+As a result, we have coined the tongue-in-cheek term &amp;ldquo;poncho projects&amp;rdquo; to refer to plain-old-Elixir projects with applications that use plain-old-dependencies.
+This is different than using an umbrella project, which come with some standard conveniences and interdependencies between applications in the project.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

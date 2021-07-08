@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>Embedded Elixir</title>
+  
+  <meta name="author" content="Curated by Frank Hunleth"/>
+  <meta name="generator" content="Hugo 0.40.2" />
+  <link href='https://embedded-elixir.com//images/favicon.ico' rel='icon' type='image/x-icon'/>
+
+  <link rel="alternate" href="https://embedded-elixir.com/index.xml" type="application/rss+xml" title="Embedded Elixir">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://embedded-elixir.com//css/main.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="https://embedded-elixir.com//css/pygment_highlights.css" />
+  <link rel="stylesheet" href="https://embedded-elixir.com//css/highlight.min.css" />
+  <link rel="stylesheet" href="https://embedded-elixir.com//css/pswp-gallery.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.css" integrity="sha256-sCl5PUOGMLfFYctzDW3MtRib0ctyUvI9Qsmq2wXOeBY=" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/default-skin/default-skin.min.css" integrity="sha256-BFeI1V+Vh1Rk37wswuOYn5lsTcaU96hGaI7OUVCLjPc=" crossorigin="anonymous" />
+
+  
+  
+
+  
+    <meta property="og:title" content="Nerves @ 434 MHz" />
+  
+
+  
+    <meta property="og:description" content="Use Nerves to control RF items around you">
+  
+
+  <meta property="og:type" content="website" />
+
+  
+    <meta property="og:url" content="https://embedded-elixir.com/post/2019-08-29-nerves-at-434-mhz/" />
+    <link rel="canonical" href="https://embedded-elixir.com/post/2019-08-29-nerves-at-434-mhz/" />
+  
+
+  
+    <meta property="og:image" content="https://embedded-elixir.com/images/logo.png" />
+  
+
+  
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@" />
+  <meta name="twitter:creator" content="@" />
+
+  
+    <meta name="twitter:title" content="Nerves @ 434 MHz" />
+  
+
+  
+    <meta name="twitter:description" content="Use Nerves to control RF items around you">
+  
+
+  
+    <meta name="twitter:image" content="https://embedded-elixir.com/images/logo.png" />
+  
+
+</head>
+
+
+
+  <body>
+
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://embedded-elixir.com/">Embedded Elixir</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="Blog" href="/">Blog</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Newsletter" href="/page/newsletter">Newsletter</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Tags" href="/tags">Tags</a>
+            </li>
+          
+        
+      </ul>
+    </div>
+
+    <div class="avatar-container">
+      <div class="avatar-img-border">
+        
+          <a title="Embedded Elixir" href="https://embedded-elixir.com/">
+            <img class="avatar-img" src="https://embedded-elixir.com//images/logo.png" alt="Embedded Elixir" />
+          </a>
+        
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+    
+  
+  
+  
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="post-heading">
+              <h1>Nerves @ 434 MHz</h1>
+                
+                  
+                    <h2 class="post-subheading">Use Nerves to control RF items around you</h2>
+                  
+                
+                
+                  <span class="post-meta">Posted
+                                           by Jon Carstens 
+                                          on August 29, 2019
+                  </span>
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+
+
+    <div class="container" role="main">
+      
+        <div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        <p>Many home and office items use radio frequencies to communicate control. So naturally,
+lets take that over to control them from a single Nerves device with one wire on a
+GPIO pin.</p>
+
+<p></p>
+
+<h2 id="tl-dr">TL;DR</h2>
+
+<p>This was presented as a lightning talk at ElixirConf 2019. If you want a brief
+overview, check out the video 👇.</p>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/PEheIY6gGhY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<h2 id="the-problem">The Problem</h2>
+
+<p>A while back, I needed to replace our circa 1980&rsquo;s ceiling fan. It was loud, clunky,
+and its time had come. I thought it would be fun to replace it with one that had a
+remote because its 2019. Our world is more and more connected. Plus, #yolo.</p>
+
+<p>After some research, I settled on the <a href="https://www.hunterfan.com/ceiling-fans/windemere-with-light-54-inch-fam928">Hunter Windemere</a> and revelled in my new found ability to
+lazily control a ceiling fan from my bedside. The world was mine having been freed
+from the rigorous act of getting up to flip switches like a chum.</p>
+
+<p>O how wrong I was&hellip;</p>
+
+<p>Turns out that adding a remote just adds <em>another</em> point of failure. One that can
+very easily be misplaced in the abysses of my home.</p>
+
+<p><img src="https://media0.giphy.com/media/3orieNQgdcxedKjA3e/giphy.gif" alt="whereisit?!" /></p>
+
+<p>Plus, the fan remembers the last state meaning that if you turn the light off
+with the remote, toggling the wall switch off/on will have no affect. The fan
+will always be in that off state, even when power is introduced again!</p>
+
+<p>So lets fix this and bring back my needless convenience!</p>
+
+<h2 id="a-frivolous-quest">A Frivolous Quest</h2>
+
+<p>You might be thinking <em>&ldquo;How are you going to do this, Jon?!&rdquo;</em>. Well, the answer is
+simple&hellip;</p>
+
+<p><img src="/images/2019-08-29/radio!.jpg" alt="radio!" /></p>
+
+<p>As it turns out, the remote uses radio frequency to transmit the control the fan.
+Each button on the remote has a different signal and payload to represent the
+desired command. We <em>could</em> try to demodulate this, reverse engineer the payload,
+then recreate sending the data on the same frequency. Or&hellip;we save quite a bit of
+time and implement what is commonly as a <a href="https://en.wikipedia.org/wiki/Replay_attack">replay attack</a>.
+Simply put, you use a small receiver to create a copy of the signal. Then just
+send that signal from your own transmitter effectively &ldquo;replaying&rdquo; what the remote
+has built in.</p>
+
+<p>This doesn&rsquo;t work in every case, such as garage doors and some security locks which
+typically use a <a href="https://en.wikipedia.org/wiki/Rolling_code">rolling code</a> implementation
+specifically to prevent replay attacks. But for most RF controller items in the home,
+like the fan, security isn&rsquo;t really a concern so the signal is simple and copyable.</p>
+
+<p>For this case, we&rsquo;ll just focus on the fan light. Though for a multifunction remote
+(with many buttons), you would just repeat this procedure for each button.</p>
+
+<h3 id="record-the-signal">Record the signal</h3>
+
+<p>We&rsquo;ll actually need a little bit of hardware for this part. Specifically, some sort
+of receiver that can receive the signal and create a file for you. Something like
+<a href="https://en.wikipedia.org/wiki/Software-defined_radio">SDR (Software Defined Radio)</a>
+which just makes it easier to deal with radio signals in software rather than
+traditional hardware. For this, I&rsquo;ll be using the <a href="https://www.amazon.com/RTL-SDR-Blog-RTL2832U-Software-Defined/dp/B011HVUEME">RTL SDR</a>.</p>
+
+<p>You&rsquo;ll also want some way to interact with the dongle. For simplicity, I use an
+application with GUI to help narrow down the frequency, and the command line to
+record the signal. You can find lots of different software options on <a href="https://www.rtl-sdr.com/big-list-rtl-sdr-supported-software/">rtl-sdr.com</a>. I&rsquo;m using MacOS and alternate between
+<a href="https://github.com/cjcliffe/CubicSDR">CubicSDR</a> and <a href="https://github.com/jopohl/urh">Ultimate Radio Hacker</a>
+which are 2 open source and universal applications.</p>
+
+<p>Before recording, we need to know what frequency the device is transmitting at. By
+law, any transmitter device commericially produced and sold has to register an ID
+and transmit frequency so we can use sources like <a href="https://fccid.io">https://fccid.io</a> to look that up.
+For my remote, I just had to find that FCC ID on the back:</p>
+
+<p><img src="/images/2019-08-29/remote_fcc_id.jpeg" alt="remote_fcc_id" /></p>
+
+<p>Looking that up, I see my remote uses <code>434 MHz</code>. But, we need a little more precision
+so this is where the software comes in place. Fire up <code>CubicSDR</code>, plug in your SDR,
+and then set the <code>center frequency</code> to something close to the FCC defined frequency.
+Then just click a button on the remote and look for where the signal peaks. Hover
+your mouse over the center (or as close as you can tell) and save that frequency.
+You&rsquo;ll need to use it when recording and transmitting.</p>
+
+<p><img src="/images/2019-08-29/cubic_sdr_lights.png" alt="cubic_sdr" /></p>
+
+<p>Now that we have a little more precise frequency, we need to use it to record the
+signal. For this, I used the <a href="https://sdr.osmocom.org/trac/wiki/rtl-sdr">rtl_sdr</a> CLI
+for recording I/Q files and installed it via the command line:</p>
+
+<p><em>(You can also look at <a href="https://www.rtl-sdr.com/tag/install-guide/">rtl-sdr.com</a> for more install options)</em></p>
+
+<p><strong>MacOS</strong></p>
+
+<pre><code class="language-sh">$ brew install librtlsdr
+</code></pre>
+
+<p><strong>Linux</strong></p>
+
+<pre><code class="language-sh">$ sudo apt-get install rtl-sdr
+</code></pre>
+
+<p>Then plug in your frequency and path to where you want the recording to save and run it.
+While running, hit the desired button on your remote a few times, then manually kill
+the process when done with <code>^C</code> (<em>Control+C</em>):</p>
+
+<pre><code class="language-sh">$ rtl_sdr -s 250000 -f 433907740 ~/recordings/fan_light.iq
+</code></pre>
+
+<p>🎉 We now have a recording to replay!</p>
+
+<h3 id="replaying-the-signal">Replaying the signal</h3>
+
+<p>This is where things get cool.</p>
+
+<p>Normally one might need specific transmitting hardware that could potentially get
+expensive. But I have a Raspberry Pi 3+, Nerves, and a determination to save
+money. So I found this open source library called <a href="https://github.com/F5OEO/rpitx">rpitx</a>
+which allows you to transmit signals from 5 KHz - 1500 MHz from a single GPIO
+pin! And since most home devices fall within 300-400 MHz (in the US), this works
+perfectly. Currently GPIO 4 is the required pin, but with a little editing of the
+library, you could also get GPIO 6 and GPIO 20 to work as well.</p>
+
+<p><img src="/images/2019-08-29/pi_with_wire.jpeg" alt="withwire" /></p>
+
+<p>Yes..that is all you need&hellip;</p>
+
+<p>There is actually a lot to <a href="https://github.com/F5OEO/rpitx">rpitx</a>, but all we
+really need is the <a href="https://github.com/F5OEO/rpitx/blob/master/src/sendiq.cpp"><code>sendiq</code></a>
+binary for transmitting an I/Q recording file. So to make that easier in Nerves
+(or Elixir in general), I created <a href="https://github.com/jjcarstens/replex"><code>replex</code></a>
+which includes precompiled <code>sendiq</code> binary and some small wrappers to make things
+easier in Elixir land.</p>
+
+<p>In short, <a href="https://github.com/jjcarstens/replex"><code>replex</code></a> is just a really small
+wrapper of convenience functions. Use it, copy it, reimplement, whatever works for
+your use case.</p>
+
+<p>For my case, I want this in Nerves and created a small <a href="https://github.com/jjcarstens/radio"><code>radio</code></a>
+project, then added <a href="https://github.com/jjcarstens/replex"><code>replex</code></a> as a dependency:</p>
+
+<pre><code class="language-elixir">def deps do
+  {
+    #...other deps
+    {:replex, &quot;~&gt; 0.1&quot;}
+  }
+end
+</code></pre>
+
+<p>Building an Elixir release copies all the contents from the <code>priv/</code> directory into
+the build. And since Nerves firmware is utilizing Elixir build process, that&rsquo;s where
+we want to put our recording so it gets copied to the device:</p>
+
+<pre><code class="language-sh">$ mkdir -p ~/repos/radio/priv
+$ cp ~/recordings/fan_light.iq ~/repos/radio/priv/
+</code></pre>
+
+<p>Then I add a little bit of code to my <code>Radio</code> module to transmit my recording:</p>
+
+<pre><code class="language-elixir">defmodule Radio do
+  def fan_light() do
+    file = Path.join(:code.priv_dir(:radio), &quot;fan_light.iq&quot;)
+    Replex.replay(file, 433907740, sample_rate: 250_000)
+  end
+end
+</code></pre>
+
+<p>And take it for a run&hellip;</p>
+
+<p><img src="/images/2019-08-29/fan_light.gif" alt="fan_light" /></p>
+
+<p>Success! 🎉🕺</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>From here, we can do whatever we want to interface with the Nerves device to control
+all the things. I added buttons all around the room that connect to my Nerves device
+so that I can control the fan no matter where the remote ends up. You could do the
+same, build a web page with buttons, add a clapper, etc etc. I&rsquo;ll let you take it
+from here to decide how much further you can take this.</p>
+
+<p>🍻</p>
+      </article>
+
+      <ul class="pager blog-pager">
+        
+          <li class="previous">
+            <a href="https://embedded-elixir.com/post/2019-05-18-talking-i2c/" data-toggle="tooltip" data-placement="top" title="Talking I2C">&larr; Previous Post</a>
+          </li>
+        
+        
+          <li class="next">
+            <a href="https://embedded-elixir.com/post/2019-11-22-embedded-networking/" data-toggle="tooltip" data-placement="top" title="Embedded Networking">Next Post &rarr;</a>
+          </li>
+        
+      </ul>
+
+      
+        
+          <div class="disqus-comments">
+            <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "embedded-elixir" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+          </div>
+        
+      
+
+    </div>
+  </div>
+</div>
+
+      
+    </div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            Curated by Frank Hunleth
+            &nbsp;&bull;&nbsp;
+          
+
+          2021
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://embedded-elixir.com/">Embedded Elixir</a>
+          
+          <br>
+          Contribute by submitting a PR to <a href="https://github.com/fhunleth/embedded-elixir">https://github.com/fhunleth/embedded-elixir</a>
+        </p>
+        
+        <p class="credits theme-by text-muted">
+        <a href="http://gohugo.io">Hugo v0.40.2</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> &nbsp;&bull;&nbsp; Logo based on <a href="https://thenounproject.com/search/?q=chip&i=751689">Processor Chip</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js" integrity="sha256-UplRCs9v4KXVJvVY+p+RSo5Q4ilAUXh7kpjyIP5odyc=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js" integrity="sha256-PWHOlUzc96pMc8ThwRIXPn8yH4NOLu42RQ0b9SpnpFk=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://embedded-elixir.com//js/pswp-init.js"></script>
+<script src="https://embedded-elixir.com//js/main.js"></script>
+<script src="https://embedded-elixir.com//js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+<script> renderMathInElement(document.body); </script>
+
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-16709386-6', 'auto');
+ga('send', 'pageview');
+</script>
+
+
+
+  </body>
+</html>

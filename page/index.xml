@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Pages on Embedded Elixir</title>
+    <link>https://embedded-elixir.com/page/</link>
+    <description>Recent content in Pages on Embedded Elixir</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+	<atom:link href="https://embedded-elixir.com/page/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Newsletter archive</title>
+      <link>https://embedded-elixir.com/page/newsletter/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://embedded-elixir.com/page/newsletter/</guid>
+      <description> 9. There&amp;rsquo;s a RISC we might JIT the ARM 8. Eventually consistent newsletter 7. A great vintage 6. Livebooking 5. On the radio 4. Spring is here, time to detect temperatures 3. Livebook streams and translated blog posts 2. On the most solid foundations 1. Welcome to the Nerves Newsletter  </description>
+    </item>
+    
+  </channel>
+</rss>

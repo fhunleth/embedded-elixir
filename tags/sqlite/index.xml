@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Sqlite on Embedded Elixir</title>
+    <link>https://embedded-elixir.com/tags/sqlite/</link>
+    <description>Recent content in Sqlite on Embedded Elixir</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 22 Sep 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://embedded-elixir.com/tags/sqlite/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Using Ecto and Sqlite3 with Nerves</title>
+      <link>https://embedded-elixir.com/post/2017-09-22-using-ecto-and-sqlite3-with-nerves/</link>
+      <pubDate>Fri, 22 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://embedded-elixir.com/post/2017-09-22-using-ecto-and-sqlite3-with-nerves/</guid>
+      <description>&lt;p&gt;One of the most common questions we answer in the Nerves help channels is how to
+store persistant data across reboots.  Since the file system is read-only, the
+normal avenues usually will not work with Nerves.&lt;/p&gt;
+
+&lt;p&gt;There are several solutions that have yielded varying levels of success accross
+projects. Before we dive too deep into SQLite, lets take a look at the other
+options:&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

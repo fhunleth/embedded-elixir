@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Update on Embedded Elixir</title>
+    <link>https://embedded-elixir.com/tags/update/</link>
+    <description>Recent content in Update on Embedded Elixir</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 02 Jan 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://embedded-elixir.com/tags/update/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>January 2018 Nerves Update</title>
+      <link>https://embedded-elixir.com/post/2018-01-02-nerves-update/</link>
+      <pubDate>Tue, 02 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://embedded-elixir.com/post/2018-01-02-nerves-update/</guid>
+      <description>&lt;p&gt;Happy New Year from the Nerves team!&lt;/p&gt;
+
+&lt;p&gt;We&amp;rsquo;re marching ahead with our 1.0 plans and methodically going through our
+constituent projects to get them across the &amp;ldquo;finish&amp;rdquo; line. Work priorities have
+forced some Nerves development on tangents, but some of those may be of interest
+as well. Here&amp;rsquo;s a summary of what&amp;rsquo;s been happening:&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>The Nerves Update</title>
+      <link>https://embedded-elixir.com/post/2017-11-02-nerves-update/</link>
+      <pubDate>Thu, 02 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://embedded-elixir.com/post/2017-11-02-nerves-update/</guid>
+      <description>&lt;p&gt;Wondering what&amp;rsquo;s happening on the Nerves project? You&amp;rsquo;re not alone. We&amp;rsquo;re planning semi-regular updates so that you don&amp;rsquo;t need to lurk on the &lt;a href=&#34;https://elixir-slackin.herokuapp.com/&#34;&gt;elixir-lang Slack&lt;/a&gt;&amp;rsquo;s #nerves and #nerves-dev channels all the time.&lt;/p&gt;
+
+&lt;p&gt;Before the updates, I&amp;rsquo;d like to thank our &lt;a href=&#34;https://opencollective.com/nerves-project/&#34;&gt;Open Collective backers&lt;/a&gt;, &lt;a href=&#34;https://www.letote.com&#34;&gt;Le Tote&lt;/a&gt; and &lt;a href=&#34;https://farmbot.io/&#34;&gt;FarmBot&lt;/a&gt;, since they&amp;rsquo;re majorly helping all of us make this project sustainable for the long term.&lt;/p&gt;
+
+&lt;p&gt;Alright, here are the highlights:
+&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

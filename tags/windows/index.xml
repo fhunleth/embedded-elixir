@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Windows on Embedded Elixir</title>
+    <link>https://embedded-elixir.com/tags/windows/</link>
+    <description>Recent content in Windows on Embedded Elixir</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 08 Jan 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://embedded-elixir.com/tags/windows/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>The Road to Windows</title>
+      <link>https://embedded-elixir.com/post/2018-01-08-windows-support/</link>
+      <pubDate>Mon, 08 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://embedded-elixir.com/post/2018-01-08-windows-support/</guid>
+      <description>&lt;p&gt;Most Elixir developers prefer Mac or Linux, but Windows is historically the
+platform of choice for embedded development.  Therefore as Nerves continues to
+grow, a Windows solution is needed.&lt;/p&gt;
+
+&lt;p&gt;There are 2 fundamental approaches to Nerves-on-Windows:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Pretend it&amp;rsquo;s Unix&lt;/li&gt;
+&lt;li&gt;Run it as a Windows app&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Unfortunately, there is no &amp;ldquo;silver bullet&amp;rdquo;&amp;ndash;each approach has its trade-offs.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

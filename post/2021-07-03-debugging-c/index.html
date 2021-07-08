@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>Embedded Elixir</title>
+  
+  <meta name="author" content="Curated by Frank Hunleth"/>
+  <meta name="generator" content="Hugo 0.40.2" />
+  <link href='https://embedded-elixir.com//images/favicon.ico' rel='icon' type='image/x-icon'/>
+
+  <link rel="alternate" href="https://embedded-elixir.com/index.xml" type="application/rss+xml" title="Embedded Elixir">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://embedded-elixir.com//css/main.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="https://embedded-elixir.com//css/pygment_highlights.css" />
+  <link rel="stylesheet" href="https://embedded-elixir.com//css/highlight.min.css" />
+  <link rel="stylesheet" href="https://embedded-elixir.com//css/pswp-gallery.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.css" integrity="sha256-sCl5PUOGMLfFYctzDW3MtRib0ctyUvI9Qsmq2wXOeBY=" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/default-skin/default-skin.min.css" integrity="sha256-BFeI1V+Vh1Rk37wswuOYn5lsTcaU96hGaI7OUVCLjPc=" crossorigin="anonymous" />
+
+  
+  
+
+  
+    <meta property="og:title" content="Debugging C Code on Nerves" />
+  
+
+  
+    <meta property="og:description" content="AKA Getting usable stack traces from core dumps">
+  
+
+  <meta property="og:type" content="website" />
+
+  
+    <meta property="og:url" content="https://embedded-elixir.com/post/2021-07-03-debugging-c/" />
+    <link rel="canonical" href="https://embedded-elixir.com/post/2021-07-03-debugging-c/" />
+  
+
+  
+    <meta property="og:image" content="https://embedded-elixir.com/images/logo.png" />
+  
+
+  
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@" />
+  <meta name="twitter:creator" content="@" />
+
+  
+    <meta name="twitter:title" content="Debugging C Code on Nerves" />
+  
+
+  
+    <meta name="twitter:description" content="AKA Getting usable stack traces from core dumps">
+  
+
+  
+    <meta name="twitter:image" content="https://embedded-elixir.com/images/logo.png" />
+  
+
+</head>
+
+
+
+  <body>
+
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://embedded-elixir.com/">Embedded Elixir</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="Blog" href="/">Blog</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Newsletter" href="/page/newsletter">Newsletter</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Tags" href="/tags">Tags</a>
+            </li>
+          
+        
+      </ul>
+    </div>
+
+    <div class="avatar-container">
+      <div class="avatar-img-border">
+        
+          <a title="Embedded Elixir" href="https://embedded-elixir.com/">
+            <img class="avatar-img" src="https://embedded-elixir.com//images/logo.png" alt="Embedded Elixir" />
+          </a>
+        
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+    
+  
+  
+  
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="post-heading">
+              <h1>Debugging C Code on Nerves</h1>
+                
+                  
+                    <h2 class="post-subheading">AKA Getting usable stack traces from core dumps</h2>
+                  
+                
+                
+                  <span class="post-meta">Posted
+                                           by Connor Rigby 
+                                          on July 3, 2021
+                  </span>
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+
+
+    <div class="container" role="main">
+      
+        <div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        <p>Having trouble debugging C code on Nerves? This post shows how to create, obtain
+and work with core dumps.</p>
+
+<p></p>
+
+<h2 id="debugging-c-code">Debugging C code</h2>
+
+<p>Typically, when developing an application with Nerves, we like to stay inside
+The Beam. Occasionally, we need to interface to existing C and C++ applications
+and libraries. In this post, we&rsquo;ll look at new Nerves tooling to simplify using
+core dumps generated by C programs on the device.</p>
+
+<h2 id="getting-set-up">Getting set up</h2>
+
+<p>These instructions use new features in the Nerves stack, so we need to make sure
+we have the latest versions.  Specifically, we need <a href="https://github.com/nerves-project/nerves/releases/tag/v1.7.9">nerves
+v1.7.9</a> or later
+and Nerves systems based on <a href="https://github.com/nerves-project/nerves_system_br/releases/tag/v1.16.1">nerves_system_br
+v1.16.1</a>
+or later. For this tutorial, we&rsquo;ll create a brand new application:</p>
+
+<pre><code class="language-sh">mix nerves.new firmware
+</code></pre>
+
+<p>Next up we&rsquo;ll need to add the <code>elixir_make</code> dependency to compile our C code.
+Add the following to the <code>deps()</code> function inside <code>mix.exs</code>:</p>
+
+<pre><code class="language-elixir">def deps do
+  {:elixir_make, &quot;~&gt; 0.6&quot;, runtime: false}
+end
+</code></pre>
+
+<p>and also add it to the <code>compilers</code> option of <code>project()</code>:</p>
+
+<pre><code class="language-elixir">def project do
+  [
+    compilers: [:elixir_make | Mix.compilers()]
+  ]
+end
+</code></pre>
+
+<p>Next, we will need to instruct <code>erlinit</code> to set the system&rsquo;s resource limits.
+Specifically, we need to set the <code>core</code> dump limits. A core dump is a file
+containing a process&rsquo;s memory and more importantly, a stacktrace when the
+process terminates unexpectedly. By default core dumps are disabled. To enable
+collecting core dumps, open <code>config/target.exs</code> and find the configuration for
+<code>erlinit</code> and add the following:</p>
+
+<pre><code class="language-elixir">config :nerves,
+  erlinit: [
+    hostname_pattern: &quot;nerves-%s&quot;,
+    limits: &quot;core:unlimited:unlimited&quot;
+  ]
+</code></pre>
+
+<p>The <code>:limits</code> key works similar to the shell&rsquo;s <code>ulimit</code> command and takes an
+option and the a hard and soft limit. See
+<a href="https://man7.org/linux/man-pages/man2/setrlimit.2.html">setrlimit(2)</a> for a
+more technical description. The important part here is that the Linux kernel
+should not restrict the core dump size at all.</p>
+
+<p>Finally, create a <code>Makefile</code> to build an executable called <code>example</code>. This file
+will wind up in the <code>priv</code> directory on your target device&rsquo;s firmware.</p>
+
+<pre><code class="language-Makefile"># output and build directories. MIX_APP_PATH is supplied by elixir-make.
+PREFIX = $(MIX_APP_PATH)/priv
+BUILD  = $(MIX_APP_PATH)/obj
+
+all: install
+
+# This is important for enabling debug symbols
+CFLAGS += -g
+LDFLAGS += -g
+
+install: $(BUILD) $(PREFIX) $(PREFIX)/example
+
+# ERL_CFLAGS and ERL_LDFLAGS are also set by elixir-make
+
+# Rule for building C source
+$(BUILD)/%.o: src/%.c
+  $(CC) -c $(ERL_CFLAGS) $(CFLAGS) -o $@ $&lt;
+
+# Rule for linking to the final executable
+$(PREFIX)/example: $(BUILD)/example.o
+  $(CC) $^ $(ERL_LDFLAGS) $(LDFLAGS) -o $@
+
+$(PREFIX) $(BUILD):
+  mkdir -p $@
+
+clean:
+  $(RM) $(PREFIX)/example $(BUILD)/*.o
+
+.PHONY: all clean install
+</code></pre>
+
+<h2 id="example">Example</h2>
+
+<p>Create a new <code>c</code> source file <code>src/example.c</code>:</p>
+
+<pre><code class="language-c">#include &lt;stdlib.h&gt;
+
+int main(int argc, char const *argv[])
+{
+  // generate a core dump
+  abort();
+  return 0;
+}
+</code></pre>
+
+<p>Now that all the pieces are in place, we can create and burn firmware:</p>
+
+<pre><code class="language-sh">mix firmware.burn
+</code></pre>
+
+<p>And load the SD Card into your device. Next, SSH into the device:</p>
+
+<pre><code class="language-sh">ssh nerves.local
+</code></pre>
+
+<p>At the console we have to perform one setup command:</p>
+
+<pre><code class="language-elixir">iex&gt; File.write!(&quot;/proc/sys/kernel/core_pattern&quot;, &quot;/data/core-%e-%p-%h&quot;)
+</code></pre>
+
+<p>This instructs Linux to put the core dump in <code>/data</code> using that pattern provided.</p>
+
+<p>Finally, we can execute our example program:</p>
+
+<pre><code class="language-elixir">iex&gt; :os.cmd(:code.priv_dir(:firmware) ++ '/example')
+iex&gt; ls(&quot;/data&quot;)
+core-example-41-1622824880
+</code></pre>
+
+<p>Now that the core dump exists we need to get it back onto our host machine. The
+simplest way to do that is using <code>sftp</code>:</p>
+
+<pre><code class="language-sh">sftp nerves.local
+sftp&gt; cd /data
+sftp&gt; get core-example-41-1622824880
+
+</code></pre>
+
+<p>Now on host to check this core dump out, we&rsquo;ll use <code>gdb</code>. Specifically, the
+<code>gdb</code> that comes with the Nerves toolchain. There&rsquo;s some tedious path and
+environment setup that needs to be done to make this work, so we put together a
+short script to do it:</p>
+
+<pre><code class="language-sh">mix firmware.gen.gdb
+</code></pre>
+
+<p>and finally, we can use that script with our dump file:</p>
+
+<pre><code class="language-sh">./run-gdb.sh core-example-41-1622824880 _build/${MIX_TARGET}_dev/priv/example
+</code></pre>
+
+<p>From the GDB console, you can now type <code>bt</code> to get the <code>backtrace</code> of the
+executable. You should see something like:</p>
+
+<pre><code class="language-gdb">(gdb) bt
+#0  0x00007fdb4fadad22 in raise () from /usr/lib/libc.so.6
+#1  0x00007fdb4fac4862 in abort () from /usr/lib/libc.so.6
+#2  0x000055f89d40e14d in main (argc=1, argv=0x7fff1fe0a868) at src/example.c:5
+</code></pre>
+      </article>
+
+      <ul class="pager blog-pager">
+        
+          <li class="previous">
+            <a href="https://embedded-elixir.com/post/2021-05-08-nerves-file-peeking/" data-toggle="tooltip" data-placement="top" title="Nerves 📂 👀">&larr; Previous Post</a>
+          </li>
+        
+        
+      </ul>
+
+      
+        
+          <div class="disqus-comments">
+            <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "embedded-elixir" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+          </div>
+        
+      
+
+    </div>
+  </div>
+</div>
+
+      
+    </div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            Curated by Frank Hunleth
+            &nbsp;&bull;&nbsp;
+          
+
+          2021
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://embedded-elixir.com/">Embedded Elixir</a>
+          
+          <br>
+          Contribute by submitting a PR to <a href="https://github.com/fhunleth/embedded-elixir">https://github.com/fhunleth/embedded-elixir</a>
+        </p>
+        
+        <p class="credits theme-by text-muted">
+        <a href="http://gohugo.io">Hugo v0.40.2</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> &nbsp;&bull;&nbsp; Logo based on <a href="https://thenounproject.com/search/?q=chip&i=751689">Processor Chip</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js" integrity="sha256-UplRCs9v4KXVJvVY+p+RSo5Q4ilAUXh7kpjyIP5odyc=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js" integrity="sha256-PWHOlUzc96pMc8ThwRIXPn8yH4NOLu42RQ0b9SpnpFk=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://embedded-elixir.com//js/pswp-init.js"></script>
+<script src="https://embedded-elixir.com//js/main.js"></script>
+<script src="https://embedded-elixir.com//js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+<script> renderMathInElement(document.body); </script>
+
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-16709386-6', 'auto');
+ga('send', 'pageview');
+</script>
+
+
+
+  </body>
+</html>

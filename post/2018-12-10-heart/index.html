@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>Embedded Elixir</title>
+  
+  <meta name="author" content="Curated by Frank Hunleth"/>
+  <meta name="generator" content="Hugo 0.40.2" />
+  <link href='https://embedded-elixir.com//images/favicon.ico' rel='icon' type='image/x-icon'/>
+
+  <link rel="alternate" href="https://embedded-elixir.com/index.xml" type="application/rss+xml" title="Embedded Elixir">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://embedded-elixir.com//css/main.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="https://embedded-elixir.com//css/pygment_highlights.css" />
+  <link rel="stylesheet" href="https://embedded-elixir.com//css/highlight.min.css" />
+  <link rel="stylesheet" href="https://embedded-elixir.com//css/pswp-gallery.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.css" integrity="sha256-sCl5PUOGMLfFYctzDW3MtRib0ctyUvI9Qsmq2wXOeBY=" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/default-skin/default-skin.min.css" integrity="sha256-BFeI1V+Vh1Rk37wswuOYn5lsTcaU96hGaI7OUVCLjPc=" crossorigin="anonymous" />
+
+  
+  
+
+  
+    <meta property="og:title" content="You Gotta Have Heart" />
+  
+
+  
+    <meta property="og:description" content=" It’s one of an embedded developer’s worst nightmares: You have devices in the field, on remote sites, where you don’t have access to local staff to serve as your hands. You’re far from the devices, …">
+  
+
+  <meta property="og:type" content="website" />
+
+  
+    <meta property="og:url" content="https://embedded-elixir.com/post/2018-12-10-heart/" />
+    <link rel="canonical" href="https://embedded-elixir.com/post/2018-12-10-heart/" />
+  
+
+  
+    <meta property="og:image" content="https://embedded-elixir.com/images/logo.png" />
+  
+
+  
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@" />
+  <meta name="twitter:creator" content="@" />
+
+  
+    <meta name="twitter:title" content="You Gotta Have Heart" />
+  
+
+  
+    <meta name="twitter:description" content=" It’s one of an embedded developer’s worst nightmares: You have devices in the field, on remote sites, where you don’t have access to local staff to serve as your hands. You’re far from the devices, …">
+  
+
+  
+    <meta name="twitter:image" content="https://embedded-elixir.com/images/logo.png" />
+  
+
+</head>
+
+
+
+  <body>
+
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://embedded-elixir.com/">Embedded Elixir</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="Blog" href="/">Blog</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Newsletter" href="/page/newsletter">Newsletter</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Tags" href="/tags">Tags</a>
+            </li>
+          
+        
+      </ul>
+    </div>
+
+    <div class="avatar-container">
+      <div class="avatar-img-border">
+        
+          <a title="Embedded Elixir" href="https://embedded-elixir.com/">
+            <img class="avatar-img" src="https://embedded-elixir.com//images/logo.png" alt="Embedded Elixir" />
+          </a>
+        
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+    
+  
+  
+  
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="post-heading">
+              <h1>You Gotta Have Heart</h1>
+                
+                
+                  <span class="post-meta">Posted
+                                           by Doug Selph 
+                                          on December 10, 2018
+                  </span>
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+
+
+    <div class="container" role="main">
+      
+        <div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        
+
+<p>It’s one of an embedded developer’s worst nightmares: You have devices in the
+field, on remote sites, where you don’t have access to local staff to serve as
+your hands. You’re far from the devices, maybe on a different continent, even,
+and now you have a device that’s no longer responding to network requests, or
+not sending event data as expected.</p>
+
+<p>It is a terrible feeling.</p>
+
+<p>If you’re using Nerves to build firmware, you have tools at your disposal to
+help keep your devices online.</p>
+
+<h2 id="use-shoehorn">Use Shoehorn</h2>
+
+<p>First things first, if you’re deploying Nerves firmwares, make sure you’re
+using Shoehorn in the most advantageous way. <code>Shoehorn</code>  allows you to have a
+list of applications started on the BEAM VM prior to your application being
+started.</p>
+
+<p>You want to make certain that you get <code>:nerves_network</code> started from the
+Shoehorn list. One of its dependencies is <code>:nerves_firmware_ssh</code>, which means
+both <code>:nerves_network</code> and <code>:nerves_firmware_ssh</code> should be initialized prior to
+your app being started, and more importantly, they should still be running if
+your application dies or is taken out by the supervisor.</p>
+
+<pre><code class="language-elixir"># your Shoehorn config in ./config/config.exs might look similar to this
+
+config :shoehorn,
+  init: [:nerves_runtime, :nerves_network, :nerves_init_gadget, :nerves_time],
+  app: Mix.Project.config()[:app]
+</code></pre>
+
+<p>That hopefully leaves you able to push a new firmware to your device via ssh
+should your application fail, which will then trigger a reboot to load the new
+firmware. (This assumes, of course, that you are able to SSH to your device,
+which may well not be the case due to network firewalls, NAT configs, etc.)</p>
+
+<p>So, shoehorn is your first line of defense against a device going dark.</p>
+
+<h2 id="watchdog">Watchdog</h2>
+
+<p>When I first began working with Nerves, I didn’t realize the Beagle Bone
+Black/Green and RaspberryPi boards I was working with had a hardware watchdog.
+Each has a file system interface to a hardware feature which will restart the
+system if the watchdog detects a likely system crash.</p>
+
+<p>When used in this way, once you <code>touch</code> the designated file, the watchdog is
+activated and on alert, and that file must be touched again every N seconds, or
+the watchdog will reboot the board.</p>
+
+<p>This is interesting as far as it goes, and by all means, tinker with this
+system to your heart’s content.</p>
+
+<p>You might be tempted to implement your own watchdog-based scheme for keeping
+your devices online. I built one as an experiment, and it works ok, but there’s
+a better alternative to this approach for production Nerves firmware.</p>
+
+<h2 id="straight-to-the-heart">Straight to the :heart</h2>
+
+<p>The Nerves ecosystem is equipped to use a facility of the Erlang BEAM VM that
+helps ensure your app remains online.</p>
+
+<p>To start with, there is an Erlang module named heart (that will of course be
+:heart in your Elixir/Nerves code). Heart runs in the BEAM as an optional
+feature, and when active will trigger a restart if it detects an application
+crash. There is also a port program, written in C, on which heart relies. The
+Nerves Project maintains a fork of Erlang&rsquo;s heart code for Nerves users.</p>
+
+<p>What does it take to use heart? First of all, make sure that heart is enabled in
+your vm.args file (<code>$PROJECT_BASE_DIR/rel/vm.args</code>). The option is present in
+the default vm.args created by Nerves’ mix template:</p>
+
+<pre><code class="language-text">-heart -env HEART_BEAT_TIMEOUT 30
+</code></pre>
+
+<p>Then, as early as possible in your start sequence you want to register a
+function as a callback for heart.</p>
+
+<pre><code class="language-elixir">:heart.set_callback(Module, :function)
+</code></pre>
+
+<p>The callback interface is very simple: if the callback function returns <code>:ok</code>,
+heart concludes that all is well. Any other return will trigger a system reboot.</p>
+
+<h2 id="putting-heart-to-use">Putting :heart to Use</h2>
+
+<p>How should you approach your :heart callback? There are certainly multiple ways
+to approach this. You have to think about the concerns and failure modes of your
+application. You might need to ensure that you are receiving data from a sensor,
+a network node is reachable, or any number of combinations of these or other
+cases.</p>
+
+<p>My first callback relied solely on proof of the network being up. If the link to
+a control system was dropped, and failed to reconnect during a defined period, a
+timeout callback in a GenServer module would call a public function in the
+:heart callback’s GenServer, updating that server’s state so that the :heart
+callback would return something other than <code>:ok</code>. The next call from :heart to
+the callback then would trigger a reboot.</p>
+
+<p>Here is an example of such an implementation. (You might wonder why there are
+two GenServers rather than just one, and the reason is that <code>heart</code> will call
+the callback every five or so seconds, and these calls to the GenServer with the
+timeout callback prevent the callback from ever occurring.)</p>
+
+<pre><code class="language-elixir">defmodule MyApp.Heartbeat do
+  use GenServer
+
+  def check_status() do
+    GenServer.call(:heartbeat, :return_status)
+  end
+
+  def system_down() do
+    GenServer.cast(:heartbeat, :down)
+  end
+
+  def start_link(_ \\ []) do
+    GenServer.start_link(__MODULE__, %{sys_status: :ok}, [name: :heartbeat])
+  end
+
+  def init(state) do
+    :heart.set_callback(MyApp.Heartbeat, :check_status)
+    {:ok, state}
+  end
+
+  def handle_call(:check_status, _, %{sys_status: status} = state) do
+    {:reply, status, state}
+  end
+
+  def handle_cast(:down, _state) do
+    {:noreply, %{sys_status: :down}}
+  end
+end
+
+
+defmodule MyApp.SystemMonitor do
+  use GenServer
+
+  alias MyApp.Heartbeat
+
+  def pulse(src) do
+    # called from an event handler or similar to prove health
+    GenServer.cast(:sysmon, :pulse)
+  end
+
+  def start_link(_ \\[]) do
+    GenServer.start_link(__MODULE__, %{}, [name: :sysmon])
+  end
+
+  def init(state) do
+    {:ok, state, 30_000}
+  end
+
+  def handle_info(:timeout, state) do
+    Heartbeat.system_down()
+    {:noreply, state, 30_000}
+  end
+
+  def handle_cast(:pulse, state) do
+    {:noreply, state, 30_000}
+  end
+end
+</code></pre>
+
+<p>You will have to weigh what circumstances could arise with your application that
+would lead you to want to return something other than <code>:ok</code> from your :heart
+callback, and design a suitable scheme for assisting the current situation.</p>
+
+<p>Once you test and deploy your solution, you can sleep a little easier, knowing
+that <code>heart</code> is helping to keep your devices online, doing the work you
+intended.</p>
+
+<hr />
+
+<p><em><a href="www.linkedin.com/in/dselph">Doug Selph</a> has been building software solutions for more than 25 years. He prefers functional languages, and in addition to Elixir, works in Clojure, ClojureScript, and Erlang. He also blogs <a href="http://dougselph.com">here</a>.</em></p>
+
+      </article>
+
+      <ul class="pager blog-pager">
+        
+          <li class="previous">
+            <a href="https://embedded-elixir.com/post/2018-09-25-mocks-and-explicit-contracts-expansion/" data-toggle="tooltip" data-placement="top" title="Mocks and Explicit Contracts in Nerves">&larr; Previous Post</a>
+          </li>
+        
+        
+          <li class="next">
+            <a href="https://embedded-elixir.com/post/2018-12-10-using-distribution-to-test-hardware/" data-toggle="tooltip" data-placement="top" title="Using Erlang Distribution to test hardware">Next Post &rarr;</a>
+          </li>
+        
+      </ul>
+
+      
+        
+          <div class="disqus-comments">
+            <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "embedded-elixir" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+          </div>
+        
+      
+
+    </div>
+  </div>
+</div>
+
+      
+    </div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            Curated by Frank Hunleth
+            &nbsp;&bull;&nbsp;
+          
+
+          2021
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://embedded-elixir.com/">Embedded Elixir</a>
+          
+          <br>
+          Contribute by submitting a PR to <a href="https://github.com/fhunleth/embedded-elixir">https://github.com/fhunleth/embedded-elixir</a>
+        </p>
+        
+        <p class="credits theme-by text-muted">
+        <a href="http://gohugo.io">Hugo v0.40.2</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> &nbsp;&bull;&nbsp; Logo based on <a href="https://thenounproject.com/search/?q=chip&i=751689">Processor Chip</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js" integrity="sha256-UplRCs9v4KXVJvVY+p+RSo5Q4ilAUXh7kpjyIP5odyc=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js" integrity="sha256-PWHOlUzc96pMc8ThwRIXPn8yH4NOLu42RQ0b9SpnpFk=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://embedded-elixir.com//js/pswp-init.js"></script>
+<script src="https://embedded-elixir.com//js/main.js"></script>
+<script src="https://embedded-elixir.com//js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+<script> renderMathInElement(document.body); </script>
+
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-16709386-6', 'auto');
+ga('send', 'pageview');
+</script>
+
+
+
+  </body>
+</html>

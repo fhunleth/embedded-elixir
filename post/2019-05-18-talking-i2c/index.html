@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>Embedded Elixir</title>
+  
+  <meta name="author" content="Curated by Frank Hunleth"/>
+  <meta name="generator" content="Hugo 0.40.2" />
+  <link href='https://embedded-elixir.com//images/favicon.ico' rel='icon' type='image/x-icon'/>
+
+  <link rel="alternate" href="https://embedded-elixir.com/index.xml" type="application/rss+xml" title="Embedded Elixir">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://embedded-elixir.com//css/main.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="https://embedded-elixir.com//css/pygment_highlights.css" />
+  <link rel="stylesheet" href="https://embedded-elixir.com//css/highlight.min.css" />
+  <link rel="stylesheet" href="https://embedded-elixir.com//css/pswp-gallery.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.css" integrity="sha256-sCl5PUOGMLfFYctzDW3MtRib0ctyUvI9Qsmq2wXOeBY=" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/default-skin/default-skin.min.css" integrity="sha256-BFeI1V+Vh1Rk37wswuOYn5lsTcaU96hGaI7OUVCLjPc=" crossorigin="anonymous" />
+
+  
+  
+
+  
+    <meta property="og:title" content="Talking I2C" />
+  
+
+  
+    <meta property="og:description" content="How to communicate with sensors and low-level chips">
+  
+
+  <meta property="og:type" content="website" />
+
+  
+    <meta property="og:url" content="https://embedded-elixir.com/post/2019-05-18-talking-i2c/" />
+    <link rel="canonical" href="https://embedded-elixir.com/post/2019-05-18-talking-i2c/" />
+  
+
+  
+    <meta property="og:image" content="https://embedded-elixir.com/images/logo.png" />
+  
+
+  
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@" />
+  <meta name="twitter:creator" content="@" />
+
+  
+    <meta name="twitter:title" content="Talking I2C" />
+  
+
+  
+    <meta name="twitter:description" content="How to communicate with sensors and low-level chips">
+  
+
+  
+    <meta name="twitter:image" content="https://embedded-elixir.com/images/logo.png" />
+  
+
+</head>
+
+
+
+  <body>
+
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://embedded-elixir.com/">Embedded Elixir</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="Blog" href="/">Blog</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Newsletter" href="/page/newsletter">Newsletter</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Tags" href="/tags">Tags</a>
+            </li>
+          
+        
+      </ul>
+    </div>
+
+    <div class="avatar-container">
+      <div class="avatar-img-border">
+        
+          <a title="Embedded Elixir" href="https://embedded-elixir.com/">
+            <img class="avatar-img" src="https://embedded-elixir.com//images/logo.png" alt="Embedded Elixir" />
+          </a>
+        
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+    
+  
+  
+  
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="post-heading">
+              <h1>Talking I2C</h1>
+                
+                  
+                    <h2 class="post-subheading">How to communicate with sensors and low-level chips</h2>
+                  
+                
+                
+                  <span class="post-meta">Posted
+                                           by Michael Ries 
+                                          on May 18, 2019
+                  </span>
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+
+
+    <div class="container" role="main">
+      
+        <div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        <p>Reading datasheets for fun and profit, or how I learned to stop worrying and
+convert analog signals into elixir terms.</p>
+
+<p></p>
+
+<h2 id="watering-my-plants">Watering My Plants</h2>
+
+<p>I want to have a plant on my desk at work, but each time I bring one to the office it promptly dies.
+Technology is clearly the solution to my problem.
+I need to be told when to water my plants, or even better, have them water themselves.
+We&rsquo;ll start with a soil moisture sensor.</p>
+
+<p><img src="/images/2019-05-18/capacitive_sensor.jpg" alt="capacitive soil sensor" /></p>
+
+<blockquote>
+<p>Photo courtesy of <a href="http://wiki.seeedstudio.com/Grove-Capacitive_Moisture_Sensor-Corrosion-Resistant/">http://wiki.seeedstudio.com/Grove-Capacitive_Moisture_Sensor-Corrosion-Resistant/</a></p>
+</blockquote>
+
+<h2 id="analog-sensors">Analog Sensors</h2>
+
+<p>This sensor has 3 wires.
+<code>GND</code> and <code>VCC</code> provide power to the device and the <code>SIG</code> wire will carry a voltage between <code>0</code> and <code>3</code> volts depending on how much moisture is around the sensor.
+This is known as an analog interface and is a very simple concept, but if you are using a raspberry pi, it turns out to be a a little tricky to read that value.</p>
+
+<p>All of <a href="https://pinout.xyz/">the pins</a> on the raspberry pi are digital pins meaning that they can only be read as <code>0</code> or <code>1</code> depending on whether the voltage is closer to <code>0</code> or <code>3.3</code> volts.
+We will need something that converts the analog signal into a digital signal that the raspberry pi can read.</p>
+
+<p><img src="/images/2019-05-18/ads1115.jpg" alt="ADS1115 Analog to Digital Converter" /></p>
+
+<blockquote>
+<p>Photo courtesy of <a href="https://www.adafruit.com/product/1085">https://www.adafruit.com/product/1085</a></p>
+</blockquote>
+
+<h2 id="analog-to-digital">Analog to Digital</h2>
+
+<p>Analog to digital converters take in an analog signal like the <code>0-3</code> volt signal described above, and turn it into a digital signal.
+I&rsquo;m using an <a href="http://www.ti.com/product/ADS1115">ADS1115</a> chip which uses an <a href="https://i2c.info/">i²c interface</a> so that you can read 4 different analog signals with just one pair of wires.
+This allows you to read each of the analog signals as a 2-byte value, a number between <code>-32,768</code> and <code>32,767</code>.
+The raspberry pi has built-in support for talking to I2C devices, so this is a great option for my use-case.</p>
+
+<h2 id="eye-to-see">Eye to See</h2>
+
+<p>The I2C protocol allows you to have multiple devices connected to the same pair of wires that act as a message bus.
+The raspberry pi acts as a master, meaning that it initiates communication.
+Each device on the bus has an address, and you always use that address when sending or receiving data.</p>
+
+<p>Because the protocol is so basic, many devices implement a <a href="http://www.ti.com/lit/an/slva704/slva704.pdf">register-based protocol</a>.
+Each time you want to send a message to the device, you send a first byte that identifies which register you are writing to and the rest of the bytes are the information you want to write into that register.
+If you want to ask for some information you write 1 byte to identify what you are asking about, and then you read a certain number of bytes from that address to get the data you want.</p>
+
+<h2 id="checking-the-soil">Checking the Soil</h2>
+
+<p>The first thing we&rsquo;ll do is check the configuration of the device.
+To do this well send 1 byte telling the chip which register we want to sent and then read back 2 bytes (the size of the configuration register).</p>
+
+<pre><code class="language-elixir">{:ok, bus} = Circuits.I2C.open(&quot;i2c-1&quot;)
+:ok = Circuits.I2C.write(bus, 72, &lt;&lt;1&gt;&gt;)
+{:ok, &lt;&lt;133, 131&gt;&gt;} = Circuits.I2C.read(bus, 72, 2)
+# I2C also has a convenience method for this
+{:ok, &lt;&lt;133, 131&gt;&gt;} = Circuits.I2C.write_read(bus, 72, &lt;&lt;1&gt;&gt;, 2)
+</code></pre>
+
+<p>We&rsquo;re getting back some data, but what do those bytes mean?
+We&rsquo;ll need to take a look at <a href="http://www.ti.com/lit/ds/symlink/ads1115.pdf">the datasheet for the ADS1115</a> chip.
+These 16 bits of data tell us 9 different things about how the chip is currently operating.
+That&rsquo;s a lot of information packed into the space of just two ascii characters.</p>
+
+<p><img src="/images/2019-05-18/ADS1115_Config_Register.png" alt="Config Register" /></p>
+
+<p>Luckily, we can use <a href="https://hexdocs.pm/elixir/Kernel.SpecialForms.html#%3C%3C%3E%3E/1">Elixir&rsquo;s binary pattern matching syntax</a> to pull out this information.
+Binary pattern matching allows us to ask for information by expressing how we expect the information to be laid out across the bytes.
+No bit-shifting required.</p>
+
+<pre><code class="language-elixir">&lt;&lt; status::size(1), mux::size(3), _other_stuff::size(12) &gt;&gt; = &lt;&lt;133, 131&gt;&gt;
+</code></pre>
+
+<p>We can also similarly build a new binary to write new configuration to the register.</p>
+
+<pre><code class="language-elixir">config_bytes = &lt;&lt; status::size(1), mux::size(3), other_stuff::size(12) &gt;&gt;
+config_register = 1
+Circuits.I2C.write(bus, 72, &lt;&lt;config_register, config_bytes::binary&gt;&gt;)
+</code></pre>
+
+<h2 id="sharing-what-we-ve-learned">Sharing What We&rsquo;ve Learned</h2>
+
+<p>The binary pattern matching syntax is really helpful for parsing binary data, but learning which bits do which things still requires some squinting and a datasheet.
+So I went ahead and published the <a href="https://hexdocs.pm/ads1115/readme.html">ADS1115 package on hex.pm</a> so that other people can deal with a struct of config data.</p>
+
+<pre><code class="language-elixir">{:ok, bus} = Circuits.I2C.open(&quot;i2c-1&quot;)
+ADS1115.config(bus, 72)
+=&gt; {:ok, %ADS1115.Config{
+  performing_conversion: false,
+  mux: {:ain0, :ain1},
+  gain: 2048,
+  mode: :single_shot,
+  data_rate: 128,
+  comp_mode: :traditional,
+  comp_polarity: :active_low,
+  comp_latch: false,
+  comp_queue: :disabled
+}}
+</code></pre>
+
+<p>The package also gives you an easy way to read the sensor.
+Now I&rsquo;m ready to check my soil moisture sensors.</p>
+
+<h2 id="will-this-plant-live">Will This Plant Live?</h2>
+
+<p>Technology is no guarantee of success, but this is the best chance I have at keeping a plant alive.
+I&rsquo;ll be doing some basic experiments around how much moisture different plants need and whether they like to have dry cycles, but here&rsquo;s a simplistic example of to monitor and water a plant.</p>
+
+<pre><code class="language-elixir">defmodule Seedling do
+  use GenServer
+
+  @a2d_addr 72 # the address of our ADS1115 analog to digital converter
+  @check_interval 1_000 # wait 1000ms between checking the sensor
+  @pump_control_pin 4 # the GPIO pin we are using to control our water pump
+  @sensor_threshold 23_989 # a little experimenting showed that I get this reading or lower when soil is wet
+
+  def init do
+    {:ok, bus} = Circuits.I2C.open(&quot;i2c-1&quot;)
+    {:ok, pump} = Circuits.GPIO.open(@pump_control_pin, :output, initial_value: 0)
+    {:ok, {bus, pump}, @check_interval} # check the moisture in 1 second
+  end
+
+  def handle_info(:timeout, {bus, pump}) do
+    {:ok, reading} = ADS1115.read(bus, @a2d_addr, {:ain0, :gnd})
+    if reading &gt; @sensor_threshold do
+      Circuits.GPIO.write(pump, 1) # turn on the pump to get more water
+      # Note: what happens if the sensor is un-plugged, or malfunctions, or gets moved?
+      # You should probably limit the maximum amount of water you can pump in, but this
+      # should work for testing outside.
+    else
+      Circuits.GPIO.write(pump, 0) # turn off the pump, we got enough water
+    end
+    {:noreply, {bus, pump}, @check_interval}
+  end
+end
+</code></pre>
+      </article>
+
+      <ul class="pager blog-pager">
+        
+          <li class="previous">
+            <a href="https://embedded-elixir.com/post/2019-01-18-nerves-at-home-desk-controller/" data-toggle="tooltip" data-placement="top" title="Nerves At Home: Controlling a Desk">&larr; Previous Post</a>
+          </li>
+        
+        
+          <li class="next">
+            <a href="https://embedded-elixir.com/post/2019-08-29-nerves-at-434-mhz/" data-toggle="tooltip" data-placement="top" title="Nerves @ 434 MHz">Next Post &rarr;</a>
+          </li>
+        
+      </ul>
+
+      
+        
+          <div class="disqus-comments">
+            <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "embedded-elixir" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+          </div>
+        
+      
+
+    </div>
+  </div>
+</div>
+
+      
+    </div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            Curated by Frank Hunleth
+            &nbsp;&bull;&nbsp;
+          
+
+          2021
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://embedded-elixir.com/">Embedded Elixir</a>
+          
+          <br>
+          Contribute by submitting a PR to <a href="https://github.com/fhunleth/embedded-elixir">https://github.com/fhunleth/embedded-elixir</a>
+        </p>
+        
+        <p class="credits theme-by text-muted">
+        <a href="http://gohugo.io">Hugo v0.40.2</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> &nbsp;&bull;&nbsp; Logo based on <a href="https://thenounproject.com/search/?q=chip&i=751689">Processor Chip</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js" integrity="sha256-UplRCs9v4KXVJvVY+p+RSo5Q4ilAUXh7kpjyIP5odyc=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js" integrity="sha256-PWHOlUzc96pMc8ThwRIXPn8yH4NOLu42RQ0b9SpnpFk=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://embedded-elixir.com//js/pswp-init.js"></script>
+<script src="https://embedded-elixir.com//js/main.js"></script>
+<script src="https://embedded-elixir.com//js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+<script> renderMathInElement(document.body); </script>
+
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-16709386-6', 'auto');
+ga('send', 'pageview');
+</script>
+
+
+
+  </body>
+</html>

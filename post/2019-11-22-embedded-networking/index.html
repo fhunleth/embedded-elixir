@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>Embedded Elixir</title>
+  
+  <meta name="author" content="Curated by Frank Hunleth"/>
+  <meta name="generator" content="Hugo 0.40.2" />
+  <link href='https://embedded-elixir.com//images/favicon.ico' rel='icon' type='image/x-icon'/>
+
+  <link rel="alternate" href="https://embedded-elixir.com/index.xml" type="application/rss+xml" title="Embedded Elixir">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://embedded-elixir.com//css/main.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="https://embedded-elixir.com//css/pygment_highlights.css" />
+  <link rel="stylesheet" href="https://embedded-elixir.com//css/highlight.min.css" />
+  <link rel="stylesheet" href="https://embedded-elixir.com//css/pswp-gallery.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.css" integrity="sha256-sCl5PUOGMLfFYctzDW3MtRib0ctyUvI9Qsmq2wXOeBY=" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/default-skin/default-skin.min.css" integrity="sha256-BFeI1V+Vh1Rk37wswuOYn5lsTcaU96hGaI7OUVCLjPc=" crossorigin="anonymous" />
+
+  
+  
+
+  
+    <meta property="og:title" content="Embedded Networking" />
+  
+
+  
+    <meta property="og:description" content="Networking like the good&#39;ol days">
+  
+
+  <meta property="og:type" content="website" />
+
+  
+    <meta property="og:url" content="https://embedded-elixir.com/post/2019-11-22-embedded-networking/" />
+    <link rel="canonical" href="https://embedded-elixir.com/post/2019-11-22-embedded-networking/" />
+  
+
+  
+    <meta property="og:image" content="https://embedded-elixir.com/images/logo.png" />
+  
+
+  
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@" />
+  <meta name="twitter:creator" content="@" />
+
+  
+    <meta name="twitter:title" content="Embedded Networking" />
+  
+
+  
+    <meta name="twitter:description" content="Networking like the good&#39;ol days">
+  
+
+  
+    <meta name="twitter:image" content="https://embedded-elixir.com/images/logo.png" />
+  
+
+</head>
+
+
+
+  <body>
+
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://embedded-elixir.com/">Embedded Elixir</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="Blog" href="/">Blog</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Newsletter" href="/page/newsletter">Newsletter</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Tags" href="/tags">Tags</a>
+            </li>
+          
+        
+      </ul>
+    </div>
+
+    <div class="avatar-container">
+      <div class="avatar-img-border">
+        
+          <a title="Embedded Elixir" href="https://embedded-elixir.com/">
+            <img class="avatar-img" src="https://embedded-elixir.com//images/logo.png" alt="Embedded Elixir" />
+          </a>
+        
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+    
+  
+  
+  
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="post-heading">
+              <h1>Embedded Networking</h1>
+                
+                  
+                    <h2 class="post-subheading">Networking like the good&#39;ol days</h2>
+                  
+                
+                
+                  <span class="post-meta">Posted
+                                           by Jon Carstens 
+                                          on November 22, 2019
+                  </span>
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+
+
+    <div class="container" role="main">
+      
+        <div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        <p>Introducing <code>VintageNet</code> - a new networking library for embedded Elixir devices,
+specially designed for Nerves 💙💻📶</p>
+
+<p><a href="https://github.com/nerves-networking/vintage_net">https://github.com/nerves-networking/vintage_net</a></p>
+
+<p></p>
+
+<h1 id="why">Why?</h1>
+
+<p>Good question.</p>
+
+<p>Truth be told, I wasn&rsquo;t directly involved in the struggles of <code>nerves_network</code>
+or building <code>vintage_net</code>, but am on the advocating end. So I think this can be
+better explained from this blurb in the <code>vintage_net</code> README.md by those who
+built it:</p>
+
+<blockquote>
+<p><code>VintageNet</code> takes a different approach to networking from <code>nerves_network</code>.
+It takes human-readable network configuration descriptions and transforms them
+into low level commands to run, supervisors to start, and routes to add.  It
+supports calling traditional Linux utilities like <code>ip</code> and <code>udhcpc</code> to
+configure networks. This can be a timesaver for migrating complicated, but
+known working Linux setups to Nerves. Linux daemons are supervised by
+<code>VintageNet</code> so they&rsquo;re restarted if they crash and stopped when no longer
+needed. Of course, implementing services in pure Elixir also has advantages
+and you can replace the C implementations when and if you desire.</p>
+
+<p>Another important difference from <code>nerves_network</code> is that <code>VintageNet</code>
+doesn&rsquo;t attempt to make incremental modifications to configurations. It
+completely tears down an interface&rsquo;s connection and then brings up new
+configurations in a fresh state.  Network reconfiguration is assumed to be an
+infrequent event so while this causes hiccups in network connectivity, it
+removes the complicated state machine code that made <code>nerves_network</code> hard to
+maintain and extend.</p>
+</blockquote>
+
+<p>noice.</p>
+
+<p>Also, it is technically more directed towards Nerves, but extensible for running
+in other environments if needed. If you&rsquo;re looking to go down that path, check
+out the <a href="https://github.com/nerves-networking/vintage_net#system-requirements">system
+requirements</a>
+for what you need to get running.</p>
+
+<p>Depending on who you talk to, the answer to <em>why?</em> could really get in depth. If
+that tickles your fancy, then feel free to reach out for more discussion in the
+<a href="https://elixir-lang.slack.com/messages/C0AB4A879/">#nerves slack channel</a> or
+Elixir forum. However, for this article I want to focus on some of the new
+hotness that makes it a great library to use for your embedded networking.</p>
+
+<h1 id="the-bells-whistles">The Bells &amp; Whistles</h1>
+
+<p>Mm, yes. The good stuff.</p>
+
+<p>This isn&rsquo;t going to be an exhaustive list but will hopefully shed light on being
+able to do more than connect to a WiFi network. I&rsquo;ve broken it down to a few
+sections and linked below so you don&rsquo;t have to take it all in at once:</p>
+
+<ul>
+<li><a href="#extensible">Extensible</a></li>
+<li><a href="#runtime-Configuration">Runtime Configuration</a></li>
+<li><a href="#persisted">Persisted</a></li>
+<li><a href="#access-point-mode-support">Access-Point Mode Support</a></li>
+<li><a href="#network-event-subscriptions">Network Event Subscriptions</a></li>
+<li><a href="#wifi-network-prioritization">WiFi Network Prioritization</a></li>
+<li><a href="#bonus-nerves-pack">Bonus - Nerves Pack</a></li>
+</ul>
+
+<p>🍻</p>
+
+<h2 id="extensible">Extensible</h2>
+
+<p>As stated earlier, <code>vintage_net</code> is based on &ldquo;old school&rdquo; linux utilities and
+designed so that you can replace most of those utilities with your own should
+you so desire. Have your own implementation of <code>ip</code>? Use it. Have a different
+<code>ifup</code>/<code>ifdown</code> requirement?  Ya, you can change that out. You wrote a custom
+Unix domain socket for C to Elixir communication? Drop it in!</p>
+
+<p>In fact, you can also even change what host that is pinged to check that
+internet is actually up which is useful if, say, you only consider network &ldquo;up&rdquo;
+if it can talk to your special server because the rest of the internet is dead
+to you.</p>
+
+<p>If this is your jam, check out the
+<a href="https://hexdocs.pm/vintage_net/readme.html#configuration">Configuration</a>
+documentation.</p>
+
+<p><code>VintageNet</code> is also setup to support multiple technologies like
+<a href="https://hexdocs.pm/vintage_net_wifi"><code>WiFi</code></a>,
+<a href="https://hexdocs.pm/vintage_net_ethernet"><code>Ethernet</code></a>, and
+<a href="https://hexdocs.pm/vintage_net_direct"><code>Direct</code></a> (i.e things like <code>USB Gadget</code>)
+right out of the box.
+The design is modular and separated into their own libraries so you can include
+only what you need by adding it as a dependency:</p>
+
+<pre><code class="language-elixir">def deps() do
+  {:vintage_net, &quot;~&gt; 0.7&quot;},
+  {:vintage_net_direct, &quot;~&gt; 0.7&quot;},
+  {:vintage_net_ethernet, &quot;~&gt; 0.7&quot;},
+  {:vintage_net_wifi, &quot;~&gt; 0.7&quot;}
+end
+</code></pre>
+
+<p>And if you need to support a new interface, just implement the
+<code>VintageNet.Technology</code> behaviour and drop it right in with the rest. Check out the
+<a href="https://hexdocs.pm/vintage_net/VintageNet.Technology.html#content"><code>VintageNet.Technology</code>
+documentation</a>
+for more info.</p>
+
+<h2 id="runtime-configuration">Runtime Configuration</h2>
+
+<p>If you tried this with <code>nerves_network</code>, then this might bring tears of joy to
+your eyes. <em>(hint: it was painful)</em></p>
+
+<p><code>VintageNet</code> still supports compile time configuration, but in some cases one
+may not <em>want</em> to store sensitive values in a config. For example, WiFi
+credentials probably don&rsquo;t need to be stored in the clear. Or say you&rsquo;re
+deploying to 1000 different devices that all connecting to different networks.
+You may not want to store all 1000 network credentials in the config on <em>every</em>
+device.</p>
+
+<p>So, runtime it is!</p>
+
+<p>Example:</p>
+
+<pre><code class="language-elixir">config = %{
+  ipv4: %{method: :dhcp},
+  type: VintageNetWiFi,
+  vintage_net_wifi: %{
+    networks: [
+      %{key_mgmt: :wpa_psk, ssid: &quot;sesame&quot;, psk: &quot;open-sesame!&quot;}
+    ]
+  }
+}
+
+VintageNet.configure(&quot;wlan0&quot;, config)
+:ok
+</code></pre>
+
+<p>👏 dust your hands off, cause that&rsquo;s it.</p>
+
+<p>One big thing to note here is that configuration is a <em>total replacement</em> and
+doesn&rsquo;t add to existing configuration. The code above is the final config
+result. If you need to <em>add</em> to your config, simply fetch it first, add your
+network, then apply:</p>
+
+<pre><code class="language-elixir">new_network = %{key_mgmt: :wpa_psk, ssid: &quot;bullpen&quot;, psk: &quot;peralta-ultimate-human-slash-genius&quot;}
+config = VintageNet.get_configuration(&quot;wlan0&quot;)
+         |&gt; update_in([:vintage_net_wifi, :networks], &amp; [new_network | &amp;1])
+
+VintageNet.configure(&quot;wlan0&quot;, config)
+</code></pre>
+
+<p>See <a href="https://hexdocs.pm/vintage_net/readme.html#network-interface-configuration">Network Interface
+Configuration</a>
+for more deets.</p>
+
+<h2 id="persisted">Persisted</h2>
+
+<p>Simply put, when you configure network settings, they are persisted to disk. So
+add that WiFi network with the stupid long password <em>one time</em>, then
+<em>&ldquo;fuggedaboutit&rdquo;</em>.</p>
+
+<p>This is especially useful during firmware updates so that you still have the
+network configured after updating the code. On start, <code>VintageNet</code> also reads
+the persisted configuration so you could pass around this configured file with
+encrypted PSK so its there when needed, like during manufacturing.</p>
+
+<p>Or, you can disable it entirely to prevent persistence cause you don&rsquo;t need it.
+<code>VintageNet</code> has your back.</p>
+
+<p><a href="https://hexdocs.pm/vintage_net/readme.html#persistence">Persistence docs</a> is the place
+to be for this.</p>
+
+<h2 id="access-point-mode-support">Access-Point Mode Support</h2>
+
+<p>Sometimes you may want a device to broadcast a network instead of connect to a
+network, or in other words, turn it into and Access Point. Well <code>VintageNet</code> has
+you covered!  There is a bit of configuration, but it would look something like
+this:</p>
+
+<pre><code class="language-elixir">ap_config =
+  %{
+    dhcpd: %{
+      end: {192, 168, 0, 254},
+      max_leases: 235,
+      options: %{
+        dns: [{192, 168, 0, 1}],
+        domain: &quot;nerves.local&quot;,
+        router: [{192, 168, 0, 1}],
+        search: [&quot;nerves.local&quot;],
+        subnet: {255, 255, 255, 0}
+      },
+      start: {192, 168, 0, 20}
+    },
+    dnsd: %{records: [{&quot;nerves.local&quot;, {192, 168, 0, 1}}]},
+    ipv4: %{address: {192, 168, 0, 1}, method: :static, prefix_length: 24},
+    type: VintageNetWiFi,
+    vintage_net_wifi: %{networks: [%{key_mgmt: :none, mode: :ap, ssid: &quot;connect-to-me!&quot;}]}
+  }
+
+VintageNet.configure(&quot;wlan0&quot;, ap_config)
+</code></pre>
+
+<p>There&rsquo;s a lot there, but the break down is device gets configured with
+<code>mode: :ap</code>, sets a static IP of <code>192.168.0.1</code>, sets up DHCP so it can give
+out IP&rsquo;s, and uses <code>dnsd</code> so that hostname can resolve to the static IP.</p>
+
+<p>This specific example is used with
+<a href="https://github.com/nerves-networking/vintage_net_wizard"><code>VintageNetWizard</code></a>
+which is a tool for using your a web page to configure networks on your device.
+Check out the repo or our other write up -&gt; <a href="https://embedded-elixir/posts/2019-11-22-wizards-and-wifi">Wizards &amp;
+WiFi</a></p>
+
+<p>But using as a setup wizard is not the only use case. I, for example, will use
+it frequently on the go so I can still connect to a device when no cable or
+joint network is available.</p>
+
+<h2 id="network-event-subscriptions">Network Event Subscriptions</h2>
+
+<p>This is really cool 😎</p>
+
+<p><code>VintageNet</code> keeps a key/value store of network information that can be queried
+at any time. So say you want to know what the state of your ethernet connection
+is? easy</p>
+
+<pre><code class="language-elixir">iex)&gt; VintageNet.get([&quot;interface&quot;, &quot;eth0&quot;, &quot;connection&quot;])
+:internet
+</code></pre>
+
+<p>Or maybe your device is in <a href="#access-point-mode-support">AP mode</a> and you want to
+see what clients are connect? Done</p>
+
+<pre><code class="language-elixir">iex)&gt; VintageNet.get([&quot;interface&quot;, &quot;wlan0&quot;, &quot;wifi&quot;, &quot;clients&quot;])
+[&quot;8c:86:1e:b6:e5:ba&quot;]
+</code></pre>
+
+<p>Not only can you fetch, but you can also subscribe to the properties to get
+notified when they happen. Continuing with this example, what if I want to do
+some action only when a <em>specific</em> client connects? Well a simple GenServer
+&lsquo;ought to do the trick ¬</p>
+
+<pre><code class="language-elixir">defmodule MyApp do
+  use GenServer
+
+  @subscription [&quot;interface&quot;, &quot;wlan0&quot;, &quot;wifi&quot;, &quot;clients&quot;]
+  @special_client &quot;8c:86:1e:b6:e5:ba&quot;
+
+  def start_link(_) do
+    GenServer.start_link(__MODULE__, [])
+  end
+
+  def init(_) do
+    VintageNet.get(@subscription)
+    {:ok, %{}}
+  end
+
+  def handle_info({VintageNet, @subscription, left, joined, %{}}, state) do
+    cond do
+      @special_client in joined -&gt;
+        # client joined. Sing and dance! or something else...
+      @special_client in left -&gt;
+        # the client left the network, tell someone?
+      true -&gt;
+        # not special so do whatever
+    end
+  end
+end
+</code></pre>
+
+<p>Or maybe you want to perform actions when connections go up or down. In any
+case, <a href="https://hexdocs.pm/vintage_net/readme.html#properties">Properties</a> is
+where you want to look for more ideas.</p>
+
+<h2 id="wifi-network-prioritization">WiFi Network Prioritization</h2>
+
+<p>Not only does <code>VintageNet</code> allow you to configure multiple networks at once, but
+you can set priorities for them which is helpful when you might be in an area
+with multiple networks available, but you prefer network A over the others. Or
+you prefer the 5 Ghz network over 2.4 Ghz, etc etc. An example might look like¬</p>
+
+<pre><code class="language-elixir">config = %{
+  ipv4: %{method: :dhcp},
+  type: VintageNetWiFi,
+  vintage_net_wifi: %{
+    networks: [
+      %{key_mgmt: :wpa_psk, ssid: &quot;sesame&quot;, psk: &quot;open-sesame!&quot;, priority: 90},
+      %{key_mgmt: :wpa_psk, ssid: &quot;bullpen&quot;, psk: &quot;peralta-ultimate-human-slash-genius&quot;, priority: 100}
+    ]
+  }
+}
+
+VintageNet.configure(&quot;wlan0&quot;, config)
+</code></pre>
+
+<p><strong>Note</strong>: If you&rsquo;re not familiar with <code>wpa_supplicant</code> priority values, the
+<em>higher</em> value is <em>higher</em> priority (vs a ranking system where 1 == highest)</p>
+
+<h2 id="bonus-nerves-pack">Bonus - Nerves Pack</h2>
+
+<p>A common desire practice in Nerves and the embedded Elixir space is to try to
+keep pieces modular because not every case needs every piece. It allows you to
+pull in only what you need and keep firmware images small. <code>VintageNet</code> is no
+different here and to get a fully working user-end setup (SSH, mDNS, wifi wizard
+configuration, etc) might require more pieces. For the more advance use, ndb.
+For new to Nerves/Embedded, it could be a hurdle.</p>
+
+<p>In the past, this was aided with <code>nerves_init_gadget</code> which was a compilation of
+all the <em>typical</em> pieces needed to make a firmware, install, and get to an iex
+prompt within a few minutes. However, <code>VintageNet</code> is totally incompatible with
+<code>nerves_init_gadget</code> &hellip;  so I created a new one called <code>NervesPack</code>! 🎉</p>
+
+<p>By adding <code>nerves_pack</code> as a dependency, you&rsquo;ll get all these benefits plus
+pre-configured SSH, SFTP, mDNS, and all supported interfaces for your device
+will automatically be configured at runtime.</p>
+
+<p>Checkout the <a href="https://github.com/jjcarstens/nerves_pack"><code>NervesPack</code> repo</a> for
+more info.</p>
+      </article>
+
+      <ul class="pager blog-pager">
+        
+          <li class="previous">
+            <a href="https://embedded-elixir.com/post/2019-08-29-nerves-at-434-mhz/" data-toggle="tooltip" data-placement="top" title="Nerves @ 434 MHz">&larr; Previous Post</a>
+          </li>
+        
+        
+          <li class="next">
+            <a href="https://embedded-elixir.com/post/2019-11-23-wizards-and-wifi/" data-toggle="tooltip" data-placement="top" title="🧙‍♀️Wizards &amp; WiFi ‍🧙‍♂️">Next Post &rarr;</a>
+          </li>
+        
+      </ul>
+
+      
+        
+          <div class="disqus-comments">
+            <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "embedded-elixir" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+          </div>
+        
+      
+
+    </div>
+  </div>
+</div>
+
+      
+    </div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            Curated by Frank Hunleth
+            &nbsp;&bull;&nbsp;
+          
+
+          2021
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://embedded-elixir.com/">Embedded Elixir</a>
+          
+          <br>
+          Contribute by submitting a PR to <a href="https://github.com/fhunleth/embedded-elixir">https://github.com/fhunleth/embedded-elixir</a>
+        </p>
+        
+        <p class="credits theme-by text-muted">
+        <a href="http://gohugo.io">Hugo v0.40.2</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> &nbsp;&bull;&nbsp; Logo based on <a href="https://thenounproject.com/search/?q=chip&i=751689">Processor Chip</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js" integrity="sha256-UplRCs9v4KXVJvVY+p+RSo5Q4ilAUXh7kpjyIP5odyc=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js" integrity="sha256-PWHOlUzc96pMc8ThwRIXPn8yH4NOLu42RQ0b9SpnpFk=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://embedded-elixir.com//js/pswp-init.js"></script>
+<script src="https://embedded-elixir.com//js/main.js"></script>
+<script src="https://embedded-elixir.com//js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+<script> renderMathInElement(document.body); </script>
+
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-16709386-6', 'auto');
+ga('send', 'pageview');
+</script>
+
+
+
+  </body>
+</html>

@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>Embedded Elixir</title>
+  
+  <meta name="author" content="Curated by Frank Hunleth"/>
+  <meta name="generator" content="Hugo 0.40.2" />
+  <link href='https://embedded-elixir.com//images/favicon.ico' rel='icon' type='image/x-icon'/>
+
+  <link rel="alternate" href="https://embedded-elixir.com/index.xml" type="application/rss+xml" title="Embedded Elixir">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://embedded-elixir.com//css/main.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="https://embedded-elixir.com//css/pygment_highlights.css" />
+  <link rel="stylesheet" href="https://embedded-elixir.com//css/highlight.min.css" />
+  <link rel="stylesheet" href="https://embedded-elixir.com//css/pswp-gallery.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.css" integrity="sha256-sCl5PUOGMLfFYctzDW3MtRib0ctyUvI9Qsmq2wXOeBY=" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/default-skin/default-skin.min.css" integrity="sha256-BFeI1V+Vh1Rk37wswuOYn5lsTcaU96hGaI7OUVCLjPc=" crossorigin="anonymous" />
+
+  
+  
+
+  
+    <meta property="og:title" content="Provisioning Nerves Devices" />
+  
+
+  
+    <meta property="og:description" content="Life after nerves.local">
+  
+
+  <meta property="og:type" content="website" />
+
+  
+    <meta property="og:url" content="https://embedded-elixir.com/post/2018-06-15-serial_number/" />
+    <link rel="canonical" href="https://embedded-elixir.com/post/2018-06-15-serial_number/" />
+  
+
+  
+    <meta property="og:image" content="https://embedded-elixir.com/images/logo.png" />
+  
+
+  
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@" />
+  <meta name="twitter:creator" content="@" />
+
+  
+    <meta name="twitter:title" content="Provisioning Nerves Devices" />
+  
+
+  
+    <meta name="twitter:description" content="Life after nerves.local">
+  
+
+  
+    <meta name="twitter:image" content="https://embedded-elixir.com/images/logo.png" />
+  
+
+</head>
+
+
+
+  <body>
+
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://embedded-elixir.com/">Embedded Elixir</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="Blog" href="/">Blog</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Newsletter" href="/page/newsletter">Newsletter</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Tags" href="/tags">Tags</a>
+            </li>
+          
+        
+      </ul>
+    </div>
+
+    <div class="avatar-container">
+      <div class="avatar-img-border">
+        
+          <a title="Embedded Elixir" href="https://embedded-elixir.com/">
+            <img class="avatar-img" src="https://embedded-elixir.com//images/logo.png" alt="Embedded Elixir" />
+          </a>
+        
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+    
+  
+  
+  
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="post-heading">
+              <h1>Provisioning Nerves Devices</h1>
+                
+                  
+                    <h2 class="post-subheading">Life after nerves.local</h2>
+                  
+                
+                
+                  <span class="post-meta">Posted
+                                           by Frank Hunleth 
+                                          on June 15, 2018
+                  </span>
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+
+
+    <div class="container" role="main">
+      
+        <div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        <p>When you&rsquo;re starting out with Nerves, you may have connected to your first
+projects over the network using <code>nerves.local</code>. Libraries like
+<a href="https://github.com/nerves-project/nerves_init_gadget">nerves_init_gadget</a> make this easy and when you&rsquo;re
+starting out, it&rsquo;s really convenient. Don&rsquo;t know the IP address that your
+device was assigned? Try <code>nerves.local</code> and you&rsquo;re good to go.</p>
+
+<p>And then you add a second device to your network. <code>nerves.local</code> isn&rsquo;t looking
+so convenient any more.</p>
+
+<p></p>
+
+<h2 id="update-we-re-moving-to-namespacing-provisioning-variables-the-references-to-serial-number-will-eventually-change-to-nerves-serial-number-we-ll-keep-serial-number-working-in-official-builds-though">Update: we&rsquo;re moving to namespacing provisioning variables. The references to <code>serial_number</code> will eventually change to <code>nerves_serial_number</code>. We&rsquo;ll keep <code>serial_number</code> working in official builds, though.</h2>
+
+<p>Suffice it to say that there are a number of ways of solving this problem. This
+post shows how to provision names or numbers to devices. You&rsquo;ll likely need to
+provision additional information to devices and that can be done in a similar
+way.</p>
+
+<p>The first step is to decide on a way of identifying devices. Nearly every
+Nerves System has a way of finding a unique identifier for a board by default.
+The default is to use that number to create a unique hostname and you can see
+it by running <code>:inet.gethostname()</code>. It will be something like <code>nerves-1234</code>.
+(This hostname is only local unless something registers it in the DNS.
+<code>nerves.local</code> is a mDNS name.) The <code>erlinit.config</code> file specifies how to
+create the hostname. All of the Raspberry Pi boards have a similar setting.
+Here is the one for the <a href="https://github.com/nerves-project/nerves_system_rpi3/blob/master/rootfs_overlay/etc/erlinit.config">Raspberry Pi 3</a>:</p>
+
+<pre><code class="language-elixir">-d &quot;/usr/bin/boardid -b uboot_env -u serial_number -b rpi -n 4&quot;
+-n nerves-%s
+</code></pre>
+
+<p>The <code>-d</code> setting specifies how to find a unique ID. This invokes
+<a href="https://github.com/fhunleth/boardid">boardid</a> to look it up. Don&rsquo;t worry about the commandline arguments
+yet. The unique ID could be stored in the CPU (like on the Raspberry Pi), an
+EEPROM, or a few other places depending on the board. The <code>-n</code> setting specifies
+the format of the hostname where the <code>%s</code> is substituted for the identifier.</p>
+
+<p>Getting back to the <code>boardid</code> commandline, the arguments say to use the
+<code>serial_number</code> key from the U-Boot environment first or if that doesn&rsquo;t exist,
+use 4 digits of the Raspberry Pi&rsquo;s serial number.</p>
+
+<p>Nerves uses the U-Boot environment for many things, but mostly for keeping track
+of the running firmware by default. You can think of it as a very simple and
+small key-value store that&rsquo;s on the SDCard (if you&rsquo;re using a Raspberry Pi) but
+stored outside of any of the filesystems.
+<a href="https://github.com/nerves-project/nerves_runtime#nerves-system-and-firmware-metadata">Nerves.Runtime</a> documents the keys that Nerves uses. A
+device doesn&rsquo;t have to run the U-Boot bootloader to have a U-Boot environment.
+The format is convenient so Nerves reuses it.</p>
+
+<p>Nerves does not make writing values to the U-Boot environment convenient to
+reduce the chance of corrupting or losing data in it. Users should prefer to
+store application settings and data in the Nerves application partition. The
+U-Boot environment is appropriate for provisioning information that is unlikely
+to change over the device&rsquo;s lifetime. The serial number of the device is
+one example. To write it, attach to your Nerves device&rsquo;s console at type:</p>
+
+<pre><code class="language-elixir">iex&gt; cmd(&quot;fw_setenv serial_number abc123&quot;)
+:ok
+</code></pre>
+
+<p>Reboot and the next time the device comes up, you should be able to see the new
+serial number:</p>
+
+<pre><code class="language-elixir">iex&gt; Nerves.Runtime.KV.get(&quot;serial_number&quot;)
+&quot;abc123&quot;
+Iex&gt; :inet.gethostname()
+{:ok, 'nerves-abc123'}
+</code></pre>
+
+<p>Now getting back to the original issue, how does this fix the <code>nerves.local</code>
+problem? The answer is that you need to update the <code>nerves_init_gadget</code>
+configuration to tell it to construct the mDNS name off of the hostname. Modify
+your <code>config.exs</code> to look something like this:</p>
+
+<pre><code class="language-elixir">config :nerves_init_gadget,
+  mdns_domain: :hostname,
+  ssh_console_port: 22
+</code></pre>
+
+<p>Rebuild and update the device. On your laptop, you should be able to <code>ping
+nerves-abc123.local</code> now.</p>
+
+<h2 id="provisioning-devices-offline">Provisioning devices offline</h2>
+
+<p>Imagine that you need to make SDCards for a lot of devices. Logging on to the
+console to set the serial number on each device will get old quick. You can
+program the serial number at the same time that you&rsquo;re burning the SDCard.
+Instead of using <code>mix firmware.burn</code>, it is easier to call <code>fwup</code> directly. <code>mix
+firmware.burn</code> is a minimal wrapper on <code>fwup</code> anyway.</p>
+
+<pre><code class="language-sh">sudo SERIAL_NUMBER=abc123 fwup ./_build/rpi3/dev/nerves/images/myproj.fw
+</code></pre>
+
+<p>If you&rsquo;re wondering how this works, look for the following line in your system&rsquo;s
+<code>fwup.conf</code> file:</p>
+
+<pre><code class="language-config">uboot_setenv(uboot-env, &quot;serial_number&quot;, &quot;\${SERIAL_NUMBER}&quot;)
+</code></pre>
+
+<h2 id="security">Security</h2>
+
+<p>The U-Boot environment block is stored in the clear on the SDCard and is
+accessible via Nerves.Runtime.KV. The data isn&rsquo;t authenticated and tools are
+readily available to modify it. Since you&rsquo;ll be tempted to provision secret key
+material in the U-Boot environment block, please review the security
+ramifications of that decision before doing so.</p>
+      </article>
+
+      <ul class="pager blog-pager">
+        
+          <li class="previous">
+            <a href="https://embedded-elixir.com/post/2018-05-03-nerves-v1.0.0/" data-toggle="tooltip" data-placement="top" title="Nerves v1.0 Released">&larr; Previous Post</a>
+          </li>
+        
+        
+          <li class="next">
+            <a href="https://embedded-elixir.com/post/2018-09-25-mocks-and-explicit-contracts-expansion/" data-toggle="tooltip" data-placement="top" title="Mocks and Explicit Contracts in Nerves">Next Post &rarr;</a>
+          </li>
+        
+      </ul>
+
+      
+        
+          <div class="disqus-comments">
+            <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "embedded-elixir" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+          </div>
+        
+      
+
+    </div>
+  </div>
+</div>
+
+      
+    </div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            Curated by Frank Hunleth
+            &nbsp;&bull;&nbsp;
+          
+
+          2021
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://embedded-elixir.com/">Embedded Elixir</a>
+          
+          <br>
+          Contribute by submitting a PR to <a href="https://github.com/fhunleth/embedded-elixir">https://github.com/fhunleth/embedded-elixir</a>
+        </p>
+        
+        <p class="credits theme-by text-muted">
+        <a href="http://gohugo.io">Hugo v0.40.2</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> &nbsp;&bull;&nbsp; Logo based on <a href="https://thenounproject.com/search/?q=chip&i=751689">Processor Chip</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js" integrity="sha256-UplRCs9v4KXVJvVY+p+RSo5Q4ilAUXh7kpjyIP5odyc=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js" integrity="sha256-PWHOlUzc96pMc8ThwRIXPn8yH4NOLu42RQ0b9SpnpFk=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://embedded-elixir.com//js/pswp-init.js"></script>
+<script src="https://embedded-elixir.com//js/main.js"></script>
+<script src="https://embedded-elixir.com//js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+<script> renderMathInElement(document.body); </script>
+
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-16709386-6', 'auto');
+ga('send', 'pageview');
+</script>
+
+
+
+  </body>
+</html>
