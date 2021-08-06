@@ -2,6 +2,8 @@
 title: Newsletter archive
 ---
 
+- [10. Back in action!](/newsletter/nerves-newsletter-10.html) 
+- [10*. Systems at the ready (oops, numbering fail)](/newsletter/nerves-newsletter-10-b.html) 
 - [9. There's a RISC we might JIT the ARM](/newsletter/nerves-newsletter-9.html) 
 - [8. Eventually consistent newsletter](/newsletter/nerves-newsletter-8.html) 
 - [7. A great vintage](/newsletter/nerves-newsletter-7.html) 
