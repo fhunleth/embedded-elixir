@@ -1,7 +1,14 @@
 ---
-title: Newsletter archive
+title: Newsletter
 ---
 
+You can sign up for the Official Nerves Newsletter via [underjord.io](https://underjord.io/nerves-newsletter.html) or [nerves-project.org](https://www.nerves-project.org/#subForm).
+
+We keep the entire archive of issues here for your pleasure.
+
+## Archive
+
+- [12. Like waking from hibernation](/newsletter/nerves-newsletter-12.html) 
 - [10. Back in action!](/newsletter/nerves-newsletter-10.html) 
 - [10*. Systems at the ready (oops, numbering fail)](/newsletter/nerves-newsletter-10-b.html) 
 - [9. There's a RISC we might JIT the ARM](/newsletter/nerves-newsletter-9.html) 
