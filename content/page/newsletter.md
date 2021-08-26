@@ -8,6 +8,8 @@ We keep the entire archive of issues here for your pleasure.
 
 ## Archive
 
+- [14. Vintage networking, connecting at the thrift store](/newsletter/nerves-newsletter-14.html) 
+- [13. So many Nerves talks](/newsletter/nerves-newsletter-13.html) 
 - [12. Like waking from hibernation](/newsletter/nerves-newsletter-12.html) 
 - [10. Back in action!](/newsletter/nerves-newsletter-10.html) 
 - [10*. Systems at the ready (oops, numbering fail)](/newsletter/nerves-newsletter-10-b.html) 
