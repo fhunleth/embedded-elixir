@@ -8,6 +8,7 @@ We keep the entire archive of issues here for your pleasure.
 
 ## Archive
 
+- [15. Nerves book has best-seller status :)](/newsletter/nerves-newsletter-15.html) 
 - [14. Vintage networking, connecting at the thrift store](/newsletter/nerves-newsletter-14.html) 
 - [13. So many Nerves talks](/newsletter/nerves-newsletter-13.html) 
 - [12. Like waking from hibernation](/newsletter/nerves-newsletter-12.html) 
