@@ -8,6 +8,7 @@ We keep the entire archive of issues here for your pleasure.
 
 ## Archive
 
+- [17. Message of the Week](/newsletter/nerves-newsletter-17.html) 
 - [16. Totally valid](/newsletter/nerves-newsletter-16.html) 
 - [15. Nerves book has best-seller status :)](/newsletter/nerves-newsletter-15.html) 
 - [14. Vintage networking, connecting at the thrift store](/newsletter/nerves-newsletter-14.html) 
