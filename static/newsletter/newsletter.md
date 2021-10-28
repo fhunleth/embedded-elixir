@@ -8,6 +8,9 @@ We keep the entire archive of issues here for your pleasure.
 
 ## Archive
 
+- [20. NervesConf just happened!](/newsletter/nerves-newsletter-20.html) 
+- [19. We OTP 24.1 now](/newsletter/nerves-newsletter-19.html) 
+- [18. A neat gadget (mode)](/newsletter/nerves-newsletter-18.html) 
 - [17. Message of the Week](/newsletter/nerves-newsletter-17.html) 
 - [16. Totally valid](/newsletter/nerves-newsletter-16.html) 
 - [15. Nerves book has best-seller status :)](/newsletter/nerves-newsletter-15.html) 
