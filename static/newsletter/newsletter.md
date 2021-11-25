@@ -8,6 +8,9 @@ We keep the entire archive of issues here for your pleasure.
 
 ## Archive
 
+- [23. News bugs and library updates](/newsletter/nerves-newsletter-23.html) 
+- [22. Books and Zeros](/newsletter/nerves-newsletter-22.html) 
+- [21. Mature libraries](/newsletter/nerves-newsletter-21.html) 
 - [20. NervesConf just happened!](/newsletter/nerves-newsletter-20.html) 
 - [19. We OTP 24.1 now](/newsletter/nerves-newsletter-19.html) 
 - [18. A neat gadget (mode)](/newsletter/nerves-newsletter-18.html) 
