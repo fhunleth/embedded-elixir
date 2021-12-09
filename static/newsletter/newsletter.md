@@ -8,6 +8,7 @@ We keep the entire archive of issues here for your pleasure.
 
 ## Archive
 
+- [24. OpenCV, vision and system updates](/newsletter/nerves-newsletter-24.html) 
 - [23. News bugs and library updates](/newsletter/nerves-newsletter-23.html) 
 - [22. Books and Zeros](/newsletter/nerves-newsletter-22.html) 
 - [21. Mature libraries](/newsletter/nerves-newsletter-21.html) 
