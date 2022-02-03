@@ -8,6 +8,9 @@ We keep the entire archive of issues here for your pleasure.
 
 ## Archive
 
+- [27. Meetup goes hard, Analog-to-Digital and Livebook updates](/newsletter/nerves-newsletter-27.html) 
+- [26. libgomp, cpu frequencies and cmake](/newsletter/nerves-newsletter-26.html) 
+- [25. New year, big updates in Nerves systems](/newsletter/nerves-newsletter-25.html) 
 - [24. OpenCV, vision and system updates](/newsletter/nerves-newsletter-24.html) 
 - [23. News bugs and library updates](/newsletter/nerves-newsletter-23.html) 
 - [22. Books and Zeros](/newsletter/nerves-newsletter-22.html) 
