@@ -48,8 +48,8 @@ asdf plugin-add elixir
 # Build and install Erlang/OTP
 asdf install erlang 25.0.3
 
-# Install Elixir 1.12 as compiled against Erlang/OTP 24
-asdf install elixir 1.12.3-otp-24
+# Install Elixir 1.13 as compiled against Erlang/OTP 25
+asdf install elixir 1.13.4-otp-25
 ```
 
 ## Setup
