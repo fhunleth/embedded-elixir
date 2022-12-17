@@ -27,7 +27,7 @@ googleAnalytics = "UA-16709386-6"
 
 [[menu.main]]
     name = "Newsletter"
-    url = "/page/newsletter"
+    url = "https://nerves-project.org/newsletter"
     weight = 2
 
 [[menu.main]]
