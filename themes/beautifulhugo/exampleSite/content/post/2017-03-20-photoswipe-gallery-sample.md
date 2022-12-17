@@ -5,35 +5,33 @@ date: 2017-03-20
 tags: ["example", "photoswipe"]
 ---
 
-Beautiful Hugo adds a few custom shortcodes created by [Li-Wen Yip](https://www.liwen.id.au/photoswipe/) and [Gert-Jan van den Berg](https://github.com/GjjvdBurg/HugoPhotoSwipe) for making galleries with [PhotoSwipe](http://photoswipe.com) . 
+Beautiful Hugo adds a few custom shortcodes created by [Li-Wen Yip](https://www.liwen.id.au/heg/) and [Gert-Jan van den Berg](https://github.com/GjjvdBurg/HugoPhotoSwipe) for making galleries with [PhotoSwipe](http://photoswipe.com) . 
 
-{{< gallery >}}
+{{< gallery caption-effect="fade" >}}
   {{< figure thumb="-thumb" link="/img/hexagon.jpg" >}}
-  {{< figure thumb="-thumb" link="/img/sphere.jpg" alt="Sphere" >}}
-  {{< figure thumb="-thumb" link="/img/triangle.jpg" alt="Triangle" caption="This is a long comment about a triangle" >}}
+  {{< figure thumb="-thumb" link="/img/sphere.jpg" caption="Sphere" >}}
+  {{< figure thumb="-thumb" link="/img/triangle.jpg" caption="Triangle" alt="This is a long comment about a triangle" >}}
 {{< /gallery >}}
-{{< pswp-init >}}
 
 <!--more-->
 ## Example
 The above gallery was created using the following shortcodes:
 ```
-{{</* gallery */>}}
+{{</* gallery caption-effect="fade" */>}}
   {{</* figure thumb="-thumb" link="/img/hexagon.jpg" */>}}
-  {{</* figure thumb="-thumb" link="/img/sphere.jpg" alt="Sphere" */>}}
-  {{</* figure thumb="-thumb" link="/img/triangle.jpg" alt="Triangle" caption="This is a long comment about a triangle" */>}}
+  {{</* figure thumb="-thumb" link="/img/sphere.jpg" caption="Sphere" */>}}
+  {{</* figure thumb="-thumb" link="/img/triangle.jpg" caption="Triangle" alt="This is a long comment about a triangle" */>}}
 {{</* /gallery */>}}
-{{</* pswp-init */>}}
 ```
 
 ## Usage
-As described on the [GitHub](https://github.com/liwenyip/hugo-pswp) page:
+For full details please see the [hugo-easy-gallery GitHub](https://github.com/liwenyip/hugo-easy-gallery/) page. Basic usages from above are:
 
-* Call `{{</* pswp-init */>}}` **once** anywhere you want on each page where you want to use PhotoSwipe
-* `{{</* figure src="image.jpg" */>}}` will use `image.jpg` for thumbnail and lightbox
-* `{{</* figure src="thumb.jpg" link="image.jpg" */>}}` will use `thumb.jpg` for thumbnail and `image.jpg` for lightbox
-* `{{</* figure thumb="-small" link="image.jpg" */>}}` will use `image-small.jpg` for thumbnail and `image.jpg` for lightbox
-* `{{</* figure thumb="-small" link="image.jpg" size="1024x768 "*/>}}` will avoid needing to pre-load `image.jpg` to determine its size (optional)
-* All the [features/parameters](https://gohugo.io/extras/shortcodes) of Hugo's built-in `figure` shortcode work as normal, i.e. src, link, title, caption, class, attr (attribution), attrlink, alt
-* `{{</* figure src="image.jpg" class="pswp-ignore" */>}}` will be ignored by PhotoSwipe (if that's what you really want)
-* enclose your figures in `{{</* gallery title="title of your gallery (optional)" */>}}` and `{{</* /gallery */>}}` to arrange your thumbnails inside a box 
+- Create a gallery with open and close tags `{{</* gallery */>}}` and `{{</* /gallery */>}}`
+- `{{</* figure src="image.jpg" */>}}` will use `image.jpg` for thumbnail and lightbox
+- `{{</* figure src="thumb.jpg" link="image.jpg" */>}}` will use `thumb.jpg` for thumbnail and `image.jpg` for lightbox
+- `{{</* figure thumb="-small" link="image.jpg" */>}}` will use `image-small.jpg` for thumbnail and `image.jpg` for lightbox
+- All the [features/parameters](https://gohugo.io/extras/shortcodes) of Hugo's built-in `figure` shortcode work as normal, i.e. src, link, title, caption, class, attr (attribution), attrlink, alt
+- `{{</* gallery caption-effect="fade" */>}}` will fade in captions for all figures in this gallery instead of the default slide-up behavior
+- Many gallery styles for captions and hover effects exist; view the [hugo-easy-gallery GitHub](https://github.com/liwenyip/hugo-easy-gallery/) for all options
+- Note that this theme will load the photoswipe gallery theme and scripts by default, no need to load photoswipe on your individual pages

@@ -1,6 +1,9 @@
 ---
+title: "{{ replace .Name "-" " " | title }}"
+author: ""
+type: ""
+date: {{ .Date }}
 subtitle: ""
-comments: 
+image: ""
 tags: []
-bigimg: [{}]
 ---
