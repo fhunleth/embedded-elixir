@@ -28,8 +28,8 @@ echo "Generating site"
 hugo
 
 BRANCH=$(git rev-parse --abbrev-ref HEAD)
-if [ "$BRANCH" != "master" ]; then
-    echo "Not on master, so skipping deploy."
+if [ "$BRANCH" != "main" ]; then
+    echo "Not on main, so skipping deploy."
     exit 0
 fi
 
