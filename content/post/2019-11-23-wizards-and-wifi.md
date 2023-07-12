@@ -83,19 +83,19 @@ end
 It is also suggested to implement a button hold starting the wizard as well.
 Even without an actual button, you can use a jumper cable from 3.3v to the GPIO
 pin for the same effect in a pinch. Take a look at an implementation
-[here](https://github.com/nerves-networking/vintage_net_wizard/blob/master/example/lib/wizard_example/button.ex).
+[here](https://github.com/nerves-networking/vintage_net_wizard/blob/main/example/lib/wizard_example/button.ex).
 
 ## How about an example?
 
 Sure. 💥
 
-![action](https://raw.githubusercontent.com/nerves-networking/vintage_net_wizard/master/assets/vintage_net_wizard.gif)
+![action](https://raw.githubusercontent.com/nerves-networking/vintage_net_wizard/main/assets/vintage_net_wizard.gif)
 
 ## How about a _real_ example?
 
 Well, there are a few sources for this¬
 
-* [`vintage_net_wizard/example`](https://github.com/nerves-networking/vintage_net_wizard/tree/master/example)
+* [`vintage_net_wizard/example`](https://github.com/nerves-networking/vintage_net_wizard/tree/main/example)
   that is part of the repo. You can set `MIX_TARGET` in there and build a
   firmware to test on a device quickly.
 * [`NervesPack`](https://github.com/jjcarstens/nerves_pack) - a

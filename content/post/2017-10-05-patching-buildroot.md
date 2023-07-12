@@ -11,7 +11,7 @@ This is not an Elixir post, but it comes up when working with custom Nerves
 systems. The problem is how to deal with custom patches to Buildroot, Linux, or
 any of the non-Elixir libraries that your application might use. You may have
 seen patch files like
-[these](https://github.com/nerves-project/nerves_system_br/tree/master/patches/buildroot).
+[these](https://github.com/nerves-project/nerves_system_br/tree/main/patches/buildroot).
 These patch files are used to create local changes to projects when
 modifications either can't be sent upstream (partial workarounds, hacks for
 specific systems, etc.) or haven't been integrated yet. This post describes a
@@ -32,7 +32,7 @@ git checkout 2017.05   # or whatever release you want
 Remember the `2017.05` part. I'll refer to it later as the `<starting tag>`.
 
 If the source code isn't in `git`, copy it to a new directory, initialize a
-`git` repository, and add all files to it. Your starting tag will be `master`.
+`git` repository, and add all files to it. Your starting tag will be `main`.
 
 Next you'll want to create a branch so that all of the work that you're doing
 can be tracked independently from upstream:

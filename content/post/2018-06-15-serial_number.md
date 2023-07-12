@@ -122,6 +122,6 @@ ramifications of that decision before doing so.
 
 
 [nerves_init_gadget]: https://github.com/nerves-project/nerves_init_gadget
-[rpi3_erlinit]: https://github.com/nerves-project/nerves_system_rpi3/blob/master/rootfs_overlay/etc/erlinit.config
+[rpi3_erlinit]: https://github.com/nerves-project/nerves_system_rpi3/blob/main/rootfs_overlay/etc/erlinit.config
 [boardid]: https://github.com/fhunleth/boardid
 [nerves_runtime_metadata]: https://github.com/nerves-project/nerves_runtime#nerves-system-and-firmware-metadata

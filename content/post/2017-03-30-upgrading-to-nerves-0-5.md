@@ -41,7 +41,7 @@ defmodule Example.Mixfile do
 
 Nerves 0.5 projects depend on version 0.3 of the `nerves_bootstrap` Mix archive.
 If you have a relatively recent version of `nerves_bootstrap` already, you can upgrade by running `mix local.nerves`.
-If that doesn't work, you can run `mix archive.install https://github.com/nerves-project/archives/raw/master/nerves_bootstrap.ez`.
+If that doesn't work, you can run `mix archive.install https://github.com/nerves-project/archives/raw/main/nerves_bootstrap.ez`.
 Also note that the `aliases()` definition now takes the `@target` as a parameter.
 We'll see what that does for us shortly.
 

@@ -16,7 +16,7 @@ This is different than using an umbrella project, which come with some standard 
 # What's Wrong with Umbrellas
 
 Nerves-based umbrella projects nearly always have a "special" app in their umbrella that's used to build the firmware image that will be written to the bootable media.
-You can see a simple guide on how that's done [here](https://hexdocs.pm/nerves/user-interfaces.html) and some working example code [here](https://github.com/nerves-project/nerves-examples/tree/master/hello_phoenix).
+You can see a simple guide on how that's done [here](https://hexdocs.pm/nerves/user-interfaces.html) and some working example code [here](https://github.com/nerves-project/nerves-examples/tree/main/hello_phoenix).
 
 By default, umbrella projects have the following in their top-level `config/config.exs` file:
 

@@ -151,7 +151,7 @@ RUN apt-get update &&\
 
 RUN HOME=/etc/skel mix local.hex --force &&\
     HOME=/etc/skel mix local.rebar --force &&\
-    HOME=/etc/skel mix archive.install https://github.com/nerves-project/archives/raw/master/nerves_bootstrap.ez --force
+    HOME=/etc/skel mix archive.install https://github.com/nerves-project/archives/raw/main/nerves_bootstrap.ez --force
 ```
 
 The build process creates no artifacts in the local directory, so the file can
