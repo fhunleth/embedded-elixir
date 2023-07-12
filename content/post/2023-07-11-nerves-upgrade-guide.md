@@ -1,6 +1,6 @@
 ---
-title: "Nerves Upgrade Guide"
-subtitle: "Upgrading your Nerves firmware project to a newer version of Nerves System"
+title: "Nerves System Upgrade Guide"
+subtitle: "Upgrading your projects to newer Nerves System versions"
 date: 2023-07-11
 author: Masatoshi Nishiguchi
 draft: false
@@ -88,7 +88,7 @@ It is possible that a recent update to the Nerves System pulled in a new
 version of Erlang/OTP. If you are using an official Nerves System, you can
 verify this by reviewing the [Nerves System compatibility chart] in the Nerves
 documentation or changelog that comes with the release like
-[this](https://github.com/nerves-project/nerves_system_rpi4/commit/0cff1d8b9d66c117cf00a8f5753dc9bc4a70b59a).
+[this](https://github.com/nerves-project/nerves_system_rpi4/blob/main/CHANGELOG.md#v1230).
 
 [Nerves System compatibility chart]: https://hexdocs.pm/nerves/systems.html#compatibility
 
