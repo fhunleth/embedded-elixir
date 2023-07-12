@@ -23,15 +23,9 @@ Let's go through how easy it is to set up Elixir and Erlang with ASDF.
 
 ## Installation
 
-You pretty much will just need `git` for installation.
-
-```sh
-git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.10.2
-source ~/.asdf/asdf.sh
-```
-
-We try to keep this up to date, but if you run into any issues or if this is
-unclear, check out the [official instructions](https://asdf-vm.com/#/core-manage-asdf-vm).
+First, install `asdf`. There are many ways to do this, so check out the
+[official instructions](https://asdf-vm.com/#/core-manage-asdf-vm) for what is
+best for you.
 
 Then you will want to install the `plugin`s for both Erlang and Elixir.
 
@@ -46,10 +40,10 @@ asdf plugin-add elixir
 
 ```sh
 # Build and install Erlang/OTP
-asdf install erlang 25.3.2
+asdf install erlang 26.0.2
 
-# Install Elixir 1.14 as compiled against Erlang/OTP 25
-asdf install elixir 1.14.5-otp-25
+# Install Elixir 1.15 as compiled against Erlang/OTP 26
+asdf install elixir 1.15.2-otp-26
 ```
 
 ## Setup
@@ -57,15 +51,15 @@ asdf install elixir 1.14.5-otp-25
 The following sets the Erlang and Elixir versions system-wide.
 
 ```sh
-asdf global erlang 25.3.2
-asdf global elixir 1.14.5-otp-25
+asdf global erlang 26.0.2
+asdf global elixir 1.15.2-otp-26
 ```
 
 If you want to fix the version used in a directory, specify `local`:
 
 ```sh
-asdf local erlang 25.3.2
-asdf local elixir 1.14.5-otp-25
+asdf local erlang 26.0.2
+asdf local elixir 1.15.2-otp-26
 ```
 
 The local option works by creating or updating a `.tool-versions` file in
@@ -87,8 +81,8 @@ asdf global elixir 2.0.0-otp-99
 Then, if that were to break, you can simply change back:
 
 ```sh
-asdf global erlang 25.3.2
-asdf global elixir 1.14.5-otp-25
+asdf global erlang 26.0.2
+asdf global elixir 1.15.2-otp-26
 ```
 
 ## Nerves
