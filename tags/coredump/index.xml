@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Coredump on Embedded Elixir</title>
+    <link>https://embedded-elixir.com/tags/coredump/</link>
+    <description>Recent content in Coredump on Embedded Elixir</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 03 Jul 2021 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://embedded-elixir.com/tags/coredump/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Debugging C Code on Nerves</title>
+      <link>https://embedded-elixir.com/post/2021-07-03-debugging-c/</link>
+      <pubDate>Sat, 03 Jul 2021 00:00:00 +0000</pubDate>
+      <guid>https://embedded-elixir.com/post/2021-07-03-debugging-c/</guid>
+      <description>&lt;p&gt;Having trouble debugging C code on Nerves? This post shows how to create, obtain&#xA;and work with core dumps.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

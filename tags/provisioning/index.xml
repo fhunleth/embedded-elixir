@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Provisioning on Embedded Elixir</title>
+    <link>https://embedded-elixir.com/tags/provisioning/</link>
+    <description>Recent content in Provisioning on Embedded Elixir</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 15 Jun 2018 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://embedded-elixir.com/tags/provisioning/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Provisioning Nerves Devices</title>
+      <link>https://embedded-elixir.com/post/2018-06-15-serial_number/</link>
+      <pubDate>Fri, 15 Jun 2018 00:00:00 +0000</pubDate>
+      <guid>https://embedded-elixir.com/post/2018-06-15-serial_number/</guid>
+      <description>&lt;p&gt;When you&amp;rsquo;re starting out with Nerves, you may have connected to your first&#xA;projects over the network using &lt;code&gt;nerves.local&lt;/code&gt;. Libraries like&#xA;&lt;a href=&#34;https://github.com/nerves-project/nerves_init_gadget&#34;&gt;nerves_init_gadget&lt;/a&gt; make this easy and when you&amp;rsquo;re&#xA;starting out, it&amp;rsquo;s really convenient. Don&amp;rsquo;t know the IP address that your&#xA;device was assigned? Try &lt;code&gt;nerves.local&lt;/code&gt; and you&amp;rsquo;re good to go.&lt;/p&gt;&#xA;&lt;p&gt;And then you add a second device to your network. &lt;code&gt;nerves.local&lt;/code&gt; isn&amp;rsquo;t looking&#xA;so convenient any more.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

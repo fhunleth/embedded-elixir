@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Raspberrypi on Embedded Elixir</title>
+    <link>https://embedded-elixir.com/tags/raspberrypi/</link>
+    <description>Recent content in Raspberrypi on Embedded Elixir</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 18 Apr 2017 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://embedded-elixir.com/tags/raspberrypi/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Official Raspberry Pi Zero Support and new RPi Systems</title>
+      <link>https://embedded-elixir.com/post/2017-04-18-nerves_system_rpi/</link>
+      <pubDate>Tue, 18 Apr 2017 00:00:00 +0000</pubDate>
+      <guid>https://embedded-elixir.com/post/2017-04-18-nerves_system_rpi/</guid>
+      <description>&lt;p&gt;It&amp;rsquo;s official. Tim Mecklem&amp;rsquo;s Raspberry Pi Zero/Zero W system is now&#xA;part of the Nerves Project. Here&amp;rsquo;s why we&amp;rsquo;re so excited about this system:&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;https://embedded-elixir.com/images/2017-04-18/rpi0-equipment.jpg&#34; alt=&#34;Required hardware&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;It only requires a MicroUSB cable, MicroSD card, and an RPi Zero for&#xA;development. The MicroUSB cable provides power and access to the RPi&amp;rsquo;s&#xA;&lt;code&gt;IEx&lt;/code&gt; prompt. If you have a Zero W or a RedBear IoT pHAT, your programs&#xA;have easy access to WiFi too.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

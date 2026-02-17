@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Elixir-Circuits on Embedded Elixir</title>
+    <link>https://embedded-elixir.com/tags/elixir-circuits/</link>
+    <description>Recent content in Elixir-Circuits on Embedded Elixir</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 18 May 2019 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://embedded-elixir.com/tags/elixir-circuits/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Talking I2C</title>
+      <link>https://embedded-elixir.com/post/2019-05-18-talking-i2c/</link>
+      <pubDate>Sat, 18 May 2019 00:00:00 +0000</pubDate>
+      <guid>https://embedded-elixir.com/post/2019-05-18-talking-i2c/</guid>
+      <description>&lt;p&gt;Reading datasheets for fun and profit, or how I learned to stop worrying and&#xA;convert analog signals into elixir terms.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Nerves At Home: Controlling a Desk</title>
+      <link>https://embedded-elixir.com/post/2019-01-18-nerves-at-home-desk-controller/</link>
+      <pubDate>Fri, 18 Jan 2019 00:00:00 +0000</pubDate>
+      <guid>https://embedded-elixir.com/post/2019-01-18-nerves-at-home-desk-controller/</guid>
+      <description>&lt;p&gt;Use Nerves and a little reverse engineering to control a motorized desk. Then&#xA;intercept current height messages from the controller and publish to a Phoenix&#xA;site for real-time desk height measurements&amp;hellip;because #yolo.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

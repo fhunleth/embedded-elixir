@@ -1,0 +1,521 @@
+
+
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+  <head>
+    
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+ 
+
+
+      <title>🧙‍♀️Wizards &amp; WiFi ‍🧙‍♂️ - </title>
+
+  <meta name="description" content="Easily configure WiFi on devices">
+  <meta name="author" content="Curated by Frank Hunleth"/><script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "name": "Embedded Elixir",
+    
+    "url": "https:\/\/embedded-elixir.com\/"
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": "",
+  "url": "https:\/\/embedded-elixir.com\/"
+  
+  
+  
+  
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@id": "https:\/\/embedded-elixir.com\/",
+          "name": "home"
+        }
+    },{
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@id": "https:\/\/embedded-elixir.com\/post\/2019-11-23-wizards-and-wifi\/",
+          "name": "Wizards \u0026 wi fi"
+        }
+    }]
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "author": {
+    "name" : "Jon Carstens"
+  },
+  "headline": "🧙‍♀️Wizards \u0026 WiFi ‍🧙‍♂️",
+  "description" : "Introducing VintageNetWizard - Simple WiFi Configuration using a web browser\nhttps:\/\/github.com\/nerves-networking\/vintage_net_wizard\n",
+  "inLanguage" : "en",
+  "wordCount":  538 ,
+  "datePublished" : "2019-11-23T00:00:00\u002b00:00",
+  "dateModified" : "2019-11-23T00:00:00\u002b00:00",
+  "image" : "https:\/\/embedded-elixir.com\/images\/logo.png",
+  "keywords" : [ "nerves, elixir, networking" ],
+  "mainEntityOfPage" : "https:\/\/embedded-elixir.com\/post\/2019-11-23-wizards-and-wifi\/",
+  "publisher" : {
+    "@type": "Organization",
+    "name" : "https:\/\/embedded-elixir.com\/",
+    "logo" : {
+        "@type" : "ImageObject",
+        "url" : "https:\/\/embedded-elixir.com\/images\/logo.png",
+        "height" :  60 ,
+        "width" :  60
+    }
+  }
+}
+</script>
+
+
+<meta property="og:title" content="🧙‍♀️Wizards &amp; WiFi ‍🧙‍♂️" />
+<meta property="og:description" content="Easily configure WiFi on devices">
+<meta property="og:image" content="https://embedded-elixir.com/images/logo.png" />
+<meta property="og:url" content="https://embedded-elixir.com/post/2019-11-23-wizards-and-wifi/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Embedded Elixir" />
+
+  <meta name="twitter:title" content="🧙‍♀️Wizards &amp; WiFi ‍🧙‍♂️" />
+  <meta name="twitter:description" content="Easily configure WiFi on devices">
+  <meta name="twitter:image" content="https://embedded-elixir.com/images/logo.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link href='https://embedded-elixir.com/images/favicon.ico' rel='icon' type='image/x-icon'/>
+  <meta name="generator" content="Hugo 0.155.3">
+  <link rel="alternate" href="https://embedded-elixir.com/index.xml" type="application/rss+xml" title="Embedded Elixir"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css" integrity="sha384-5TcZemv2l/9On385z///+d7MSYlvIEw9FuZTIdZ14vJLqWphw7e7ZPuOiCHJcFCP" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v7.0.1/css/brands.css" integrity="sha384-+eXGm6TmVoCZR1gX03US+L++L2mJIfOvp2X0+luTuEktXaF5F+e3zn0sO0HBvOyT" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v7.0.1/css/fontawesome.css" integrity="sha384-B5nyPZa7e84uCJEYHtevCdVYtQosWsbDSRtq3cy/jeSVtQW05GL8CKXO7waXsjPK" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v7.0.1/css/regular.css" integrity="sha384-V71z/A/p/DGaZAryHhiSXRQj8HdQmK2nBgL2bX23MGD+h6ZKpyxOO76f5eSXmIaj" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v7.0.1/css/solid.css" integrity="sha384-1IIShlrK5iYgvS7OAgIH3prz4RAFP7hHZ2MaLIb9l3+trFwwnw/NdCWcUHlymZDU" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v7.0.1/css/svg.css" integrity="sha384-iBa7uugTOHXqQ2ngvDYJyKrPPQbd9n2P3EQe+o/0+HZe5TNvV+LO5X0lLLUrXLHP" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v7.0.1/css/svg-with-js.css" integrity="sha384-STWnS5AGz6M2YxsnGAd536EqcE2y+ktGovMMuhtXLsCBtl7lujeQj2eN4eDxa57x" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v7.0.1/css/v4-font-face.css" integrity="sha384-fH83IkgQi7kturzlxpXfNdsR8aUOcqj5HUORRVnSvJgObZkIw6aqKAaQx20IWyB/" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v7.0.1/css/v4-shims.css" integrity="sha384-cCODJHSivNBsaHei/8LC0HUD58kToSbDU+xT7Rs51BO1v/IvgT/uM0W6xMoUqKfn" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v7.0.1/css/v5-font-face.css" integrity="sha384-atSdF89mIn15dv+o2LKkDM6mCh3hwh6A7mwZ6F2it/kenqZbMu+QW/ye1OG4XSWV" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous"><link rel="stylesheet" href="https://embedded-elixir.com/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><link rel="stylesheet" href="https://embedded-elixir.com/css/syntax.css" /><link rel="stylesheet" href="https://embedded-elixir.com/css/codeblock.css" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.css" integrity="sha384-h/L2W9KefUClHWaty3SLE5F/qvc4djlyR4qY3NUV5HGQBBW7stbcfff1+I/vmsHh" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/default-skin/default-skin.min.css" integrity="sha384-iD0dNku6PYSIQLyfTOpB06F2KCZJAKLOThS5HRe8b3ibhdEQ6eKsFf/EeFxdOt5R" crossorigin="anonymous">
+
+  </head>
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://embedded-elixir.com/">Embedded Elixir</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="Blog" href="/">Blog</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Newsletter" href="https://nerves-project.org/newsletter">Newsletter</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Tags" href="/tags">Tags</a>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    
+      <div class="avatar-container">
+        <div class="avatar-img-border">
+          <a title="Embedded Elixir" href="https://embedded-elixir.com/">
+            <img class="avatar-img" src="https://embedded-elixir.com/images/logo.png" alt="Embedded Elixir" />
+           
+          </a>
+        </div>
+      </div>
+    
+
+  </div>
+</nav>
+
+
+
+
+    
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+
+  
+  
+  
+
+
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    
+    <div class="intro-header no-img">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="post-heading">
+              
+                <h1>🧙‍♀️Wizards &amp; WiFi ‍🧙‍♂️</h1>
+              
+              
+              
+                
+                  <h2 class="post-subheading">Easily configure WiFi on devices</h2>
+                
+              
+              
+                <span class="post-meta">
+  
+  
+  
+  <i class="fas fa-calendar"></i>&nbsp;Posted on November 23, 2019
+  
+  
+  
+  
+    
+      
+        &nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;Jon Carstens
+      
+    
+  
+  
+</span>
+
+
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        <p>Introducing <code>VintageNetWizard</code> - Simple WiFi Configuration using a web browser</p>
+<p><a href="https://github.com/nerves-networking/vintage_net_wizard">https://github.com/nerves-networking/vintage_net_wizard</a></p>
+<h1 id="vintagenet-wifi-configuration-wizard">VintageNet WiFi configuration wizard</h1>
+<p><img src="https://media.giphy.com/media/1AjULGLUb7LZZZhG3p/giphy.gif" alt="wizard"></p>
+<p>Well, not that kind of wizard..</p>
+<p>​A simple library that makes it easier to configure WiFi networks on
+devices without a screen or other access. It&rsquo;s based on the new Nerves
+networking library,
+<a href="https://github.com/nerves-networking/vintage_net"><code>vintage_net</code></a>, which
+drastically improves networking on Nerves devices. If you&rsquo;re interested in some
+of the internals of networking, go checkout these sources on <code>vintage_net</code>¬</p>
+<ul>
+<li><a href="https://embedded-elixir.com/post/2019-11-22-embedded-networking">Embedded Networking article</a></li>
+<li><a href="https://github.com/nerves-networking/vintage_net">github</a></li>
+</ul>
+<p>​When you include <code>:vintage_net_wizard</code> as a dep, it does not automatically
+start the server or AP configurations on startup. When and why to start the
+wizard varies from case to case and can be considered business logic so it was
+decided not to handle it within the library. Because of that, you will need to
+explicitly call the wizard run function somewhere in your code or IEx:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elixir" data-lang="elixir"><span class="line"><span class="cl"><span class="nc">VintageNetWizard</span><span class="o">.</span><span class="n">run_wizard</span><span class="p">()</span>
+</span></span></code></pre></div><p>​ Once started, a few things happen:</p>
+<ul>
+<li>The WiFi interface is configured to <code>:ap</code> mode which starts up an Access
+Point (AP) that broadcasts an SSID based on the device&rsquo;s serial number</li>
+<li>The user joins their computer/phone to the AP</li>
+<li>Once joined, the user opens a web browser to <code>http://wifi.config</code> and the
+device delivers a web UI to go through configuration of any number of WiFi
+networks
+<ul>
+<li>You can also use the device hostname (i.e. <code>http://nerves-ce84.local</code>) or
+the IP address (<code>http://192.168.0.1</code>) in the browser as well</li>
+</ul>
+</li>
+<li>User applies the configuration, the device attempts to connect to the networks
+specified.</li>
+<li>If successfully connects, device goes back into AP mode to report to the web
+that things are :ok_hand:
+<ul>
+<li>NOTE: This kills the AP network momentarily which means your machine will
+disconnect. Some machines are <em>very</em> quick to rejoin a good network nearby
+so sometimes you may have to manually watch for the AP network to come back
+up and manually join it again.</li>
+</ul>
+</li>
+<li>Once the web UI gets the OK, the user completes the setup in the UI, the
+device goes out of AP mode and reconnects to the network</li>
+<li>WiFi is now configured on your device! 🎉 🍻</li>
+</ul>
+<h2 id="a-note-on-starting-the-wizard">A note on <em>starting</em> the wizard</h2>
+<p>As stated early, you must explicitly start the wizard, or add code to deduce
+<em>when</em> your app should start it. A common way might be checking if WiFi is
+configured in your <code>application.ex</code> and start there if it is not.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elixir" data-lang="elixir"><span class="line"><span class="cl"><span class="kd">def</span> <span class="n">maybe_enable_wizard</span><span class="p">()</span> <span class="k">do</span>
+</span></span><span class="line"><span class="cl">  <span class="n">configured</span> <span class="o">=</span> <span class="nc">VintageNet</span><span class="o">.</span><span class="n">configured_interfaces</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="n">all</span> <span class="o">=</span> <span class="nc">VintageNet</span><span class="o">.</span><span class="n">all_interfaces</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">with</span> <span class="no">true</span> <span class="o">&lt;-</span> <span class="s2">&#34;wlan0&#34;</span> <span class="ow">in</span> <span class="n">all</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">       <span class="no">true</span> <span class="o">&lt;-</span> <span class="s2">&#34;wlan0&#34;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">configured</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="k">do</span>
+</span></span><span class="line"><span class="cl">    <span class="nc">VintageNetWizard</span><span class="o">.</span><span class="n">run_wizard</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="k">end</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span>
+</span></span></code></pre></div><p>It is also suggested to implement a button hold starting the wizard as well.
+Even without an actual button, you can use a jumper cable from 3.3v to the GPIO
+pin for the same effect in a pinch. Take a look at an implementation
+<a href="https://github.com/nerves-networking/vintage_net_wizard/blob/main/example/lib/wizard_example/button.ex">here</a>.</p>
+<h2 id="how-about-an-example">How about an example?</h2>
+<p>Sure. 💥</p>
+<p><img src="https://raw.githubusercontent.com/nerves-networking/vintage_net_wizard/main/assets/vintage_net_wizard.gif" alt="action"></p>
+<h2 id="how-about-a-real-example">How about a <em>real</em> example?</h2>
+<p>Well, there are a few sources for this¬</p>
+<ul>
+<li><a href="https://github.com/nerves-networking/vintage_net_wizard/tree/main/example"><code>vintage_net_wizard/example</code></a>
+that is part of the repo. You can set <code>MIX_TARGET</code> in there and build a
+firmware to test on a device quickly.</li>
+<li><a href="https://github.com/jjcarstens/nerves_pack"><code>NervesPack</code></a> - a
+<code>nerves_init_gadget</code> replacement. By default, this will start a wizard if your
+device supports WiFi but has not been configured. It also starts a button
+monitor for forcing the wizard via long button press at anytime.</li>
+</ul>
+
+        
+          <div class="blog-tags">
+            
+              
+              <a href="https://embedded-elixir.com/tags/nerves/">nerves</a>&nbsp;
+            
+              
+              <a href="https://embedded-elixir.com/tags/elixir/">elixir</a>&nbsp;
+            
+              
+              <a href="https://embedded-elixir.com/tags/networking/">networking</a>&nbsp;
+            
+          </div>
+        
+
+        
+
+        
+      </article>
+
+      
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="https://embedded-elixir.com/post/2019-11-22-embedded-networking/" data-toggle="tooltip" data-placement="top" title="Embedded Networking">&larr; Previous Post</a>
+            </li>
+          
+          
+            <li class="next">
+              <a href="https://embedded-elixir.com/post/2021-05-08-nerves-file-peeking/" data-toggle="tooltip" data-placement="top" title="Nerves 📂 👀">Next Post &rarr;</a>
+            </li>
+          
+        </ul>
+      
+
+
+      
+      
+      
+      
+      
+          
+          <div class="disqus-comments">
+            
+  
+    <div class="comments">
+      <div id="disqus_thread"></div>
+<script>
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "embedded-elixir" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    </div>
+  
+
+
+          </div>
+          
+        
+        
+      
+
+    </div>
+  </div>
+</div>
+
+      <footer>
+  <div class="container">
+    
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+		
+		  <a href="https://github.com/fhunleth" title="GitHub">
+		
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+		
+		  <a href="https://bsky.app/profile/fhunleth.bsky.social" title="Bluesky">
+		
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-bluesky fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              Curated by Frank Hunleth
+            
+          
+
+          &nbsp;&bull;&nbsp;&copy;
+          
+            2023
+          
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://embedded-elixir.com/">Embedded Elixir</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="https://gohugo.io">Hugo v0.155.3</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer><script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.js" integrity="sha384-cMkvdD8LoxVzGF/RPUKAcvmm49FQ0oxwDF3BGKtDXcEc+T1b2N+teh/OJfpU0jr6" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/contrib/auto-render.min.js" integrity="sha384-hCXGrW6PitJEwbkoStFjeJxv+fSOOQKOPbJxSfM6G5sWZjAyWhXiTIIAmQqnlLlh" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
+<script src="https://code.jquery.com/jquery-3.7.0.slim.min.js" integrity="sha384-w5y/xIeYixWvfM+A1cEbmHPURnvyqmVg5eVENruEdDjcyRLUSNej7512JQGspFUr" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+
+<script src="https://embedded-elixir.com/js/main.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.js" integrity="sha384-QELNnmcmU8IR9ZAykt67vGr9/rZJdHbiWi64V88fCPaOohUlHCqUD/unNN0BXSqy" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe-ui-default.min.js" integrity="sha384-m67o7SkQ1ALzKZIFh4CiTA8tmadaujiTa9Vu+nqPSwDOqHrDmxLezTdFln8077+q" crossorigin="anonymous"></script><script src="https://embedded-elixir.com/js/load-photoswipe.js"></script>
+
+
+
+
+
+
+
+
+
+
+    
+  </body>
+</html>
+

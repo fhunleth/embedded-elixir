@@ -1,0 +1,819 @@
+
+
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+  <head>
+    
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+ 
+
+
+      <title>Using NIFs With Nerves - </title>
+
+  <meta name="description" content="While working on a Nerves project, you will likely do most hard work in the
+host environment. This means you get to develop features quickly, and when
+are ready, you simply deploy your known working firmware to your embedded
+devices. This however can lead to a situation where the code runs really well
+on your i7 powered beast computer, but when deployed on a less
+powerful Raspberry Pi 0, for example. Nothing will be broken, but things are just
+too slow. There are a number of solutions to this problem and in this post,
+I will walk you through a simplified real world example of one possible solution
+of using an Erlang NIF to speed
+up one particular functionality.">
+  <meta name="author" content="Curated by Frank Hunleth"/><script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "name": "Embedded Elixir",
+    
+    "url": "https:\/\/embedded-elixir.com\/"
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": "",
+  "url": "https:\/\/embedded-elixir.com\/"
+  
+  
+  
+  
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@id": "https:\/\/embedded-elixir.com\/",
+          "name": "home"
+        }
+    },{
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@id": "https:\/\/embedded-elixir.com\/post\/2017-12-23-using-nifs-with-nerves\/",
+          "name": "Using nifs with nerves"
+        }
+    }]
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "author": {
+    "name" : "Connor Rigby"
+  },
+  "headline": "Using NIFs With Nerves",
+  "description" : "While working on a Nerves project, you will likely do most hard work in the host environment. This means you get to develop features quickly, and when are ready, you simply deploy your known working firmware to your embedded devices. This however can lead to a situation where the code runs really well on your i7 powered beast computer, but when deployed on a less powerful Raspberry Pi 0, for example. Nothing will be broken, but things are just too slow. There are a number of solutions to this problem and in this post, I will walk you through a simplified real world example of one possible solution of using an Erlang NIF to speed up one particular functionality.\n",
+  "inLanguage" : "en",
+  "wordCount":  1986 ,
+  "datePublished" : "2017-12-23T12:48:08-08:00",
+  "dateModified" : "2017-12-23T12:48:08-08:00",
+  "image" : "https:\/\/embedded-elixir.com\/images\/logo.png",
+  "keywords" : [ "nerves, nif, c" ],
+  "mainEntityOfPage" : "https:\/\/embedded-elixir.com\/post\/2017-12-23-using-nifs-with-nerves\/",
+  "publisher" : {
+    "@type": "Organization",
+    "name" : "https:\/\/embedded-elixir.com\/",
+    "logo" : {
+        "@type" : "ImageObject",
+        "url" : "https:\/\/embedded-elixir.com\/images\/logo.png",
+        "height" :  60 ,
+        "width" :  60
+    }
+  }
+}
+</script>
+
+
+<meta property="og:title" content="Using NIFs With Nerves" />
+<meta property="og:description" content="While working on a Nerves project, you will likely do most hard work in the
+host environment. This means you get to develop features quickly, and when
+are ready, you simply deploy your known working firmware to your embedded
+devices. This however can lead to a situation where the code runs really well
+on your i7 powered beast computer, but when deployed on a less
+powerful Raspberry Pi 0, for example. Nothing will be broken, but things are just
+too slow. There are a number of solutions to this problem and in this post,
+I will walk you through a simplified real world example of one possible solution
+of using an Erlang NIF to speed
+up one particular functionality.">
+<meta property="og:image" content="https://embedded-elixir.com/images/logo.png" />
+<meta property="og:url" content="https://embedded-elixir.com/post/2017-12-23-using-nifs-with-nerves/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Embedded Elixir" />
+
+  <meta name="twitter:title" content="Using NIFs With Nerves" />
+  <meta name="twitter:description" content="While working on a Nerves project, you will likely do most hard work in the
+host environment. This means you get to develop features quickly, and when
+are ready, you simply deploy your known working …">
+  <meta name="twitter:image" content="https://embedded-elixir.com/images/logo.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link href='https://embedded-elixir.com/images/favicon.ico' rel='icon' type='image/x-icon'/>
+  <meta name="generator" content="Hugo 0.155.3">
+  <link rel="alternate" href="https://embedded-elixir.com/index.xml" type="application/rss+xml" title="Embedded Elixir"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css" integrity="sha384-5TcZemv2l/9On385z///+d7MSYlvIEw9FuZTIdZ14vJLqWphw7e7ZPuOiCHJcFCP" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v7.0.1/css/brands.css" integrity="sha384-+eXGm6TmVoCZR1gX03US+L++L2mJIfOvp2X0+luTuEktXaF5F+e3zn0sO0HBvOyT" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v7.0.1/css/fontawesome.css" integrity="sha384-B5nyPZa7e84uCJEYHtevCdVYtQosWsbDSRtq3cy/jeSVtQW05GL8CKXO7waXsjPK" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v7.0.1/css/regular.css" integrity="sha384-V71z/A/p/DGaZAryHhiSXRQj8HdQmK2nBgL2bX23MGD+h6ZKpyxOO76f5eSXmIaj" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v7.0.1/css/solid.css" integrity="sha384-1IIShlrK5iYgvS7OAgIH3prz4RAFP7hHZ2MaLIb9l3+trFwwnw/NdCWcUHlymZDU" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v7.0.1/css/svg.css" integrity="sha384-iBa7uugTOHXqQ2ngvDYJyKrPPQbd9n2P3EQe+o/0+HZe5TNvV+LO5X0lLLUrXLHP" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v7.0.1/css/svg-with-js.css" integrity="sha384-STWnS5AGz6M2YxsnGAd536EqcE2y+ktGovMMuhtXLsCBtl7lujeQj2eN4eDxa57x" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v7.0.1/css/v4-font-face.css" integrity="sha384-fH83IkgQi7kturzlxpXfNdsR8aUOcqj5HUORRVnSvJgObZkIw6aqKAaQx20IWyB/" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v7.0.1/css/v4-shims.css" integrity="sha384-cCODJHSivNBsaHei/8LC0HUD58kToSbDU+xT7Rs51BO1v/IvgT/uM0W6xMoUqKfn" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v7.0.1/css/v5-font-face.css" integrity="sha384-atSdF89mIn15dv+o2LKkDM6mCh3hwh6A7mwZ6F2it/kenqZbMu+QW/ye1OG4XSWV" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous"><link rel="stylesheet" href="https://embedded-elixir.com/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><link rel="stylesheet" href="https://embedded-elixir.com/css/syntax.css" /><link rel="stylesheet" href="https://embedded-elixir.com/css/codeblock.css" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.css" integrity="sha384-h/L2W9KefUClHWaty3SLE5F/qvc4djlyR4qY3NUV5HGQBBW7stbcfff1+I/vmsHh" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/default-skin/default-skin.min.css" integrity="sha384-iD0dNku6PYSIQLyfTOpB06F2KCZJAKLOThS5HRe8b3ibhdEQ6eKsFf/EeFxdOt5R" crossorigin="anonymous">
+
+  </head>
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://embedded-elixir.com/">Embedded Elixir</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="Blog" href="/">Blog</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Newsletter" href="https://nerves-project.org/newsletter">Newsletter</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Tags" href="/tags">Tags</a>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    
+      <div class="avatar-container">
+        <div class="avatar-img-border">
+          <a title="Embedded Elixir" href="https://embedded-elixir.com/">
+            <img class="avatar-img" src="https://embedded-elixir.com/images/logo.png" alt="Embedded Elixir" />
+           
+          </a>
+        </div>
+      </div>
+    
+
+  </div>
+</nav>
+
+
+
+
+    
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+
+  
+  
+  
+
+
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    
+    <div class="intro-header no-img">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="post-heading">
+              
+                <h1>Using NIFs With Nerves</h1>
+              
+              
+              
+              
+                <span class="post-meta">
+  
+  
+  
+  <i class="fas fa-calendar"></i>&nbsp;Posted on December 23, 2017
+  
+  
+  
+  
+    
+      
+        &nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;Connor Rigby
+      
+    
+  
+  
+</span>
+
+
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        <p>While working on a Nerves project, you will likely do most hard work in the
+<code>host</code> environment. This means you get to develop features quickly, and when
+are ready, you simply deploy your known working firmware to your embedded
+devices. This however can lead to a situation where the code runs really well
+on your i7 powered beast computer, but when deployed on a less
+powerful Raspberry Pi 0, for example. Nothing will be broken, but things are just
+<em>too</em> slow. There are a number of solutions to this problem and in this post,
+I will walk you through a simplified real world example of one possible solution
+of using an <a href="http://erlang.org/doc/tutorial/nif.html">Erlang NIF</a> to speed
+up one particular functionality.</p>
+<p>I would like to preface this by saying a NIF will not always be the solution for
+you. The documentation explains this: &ldquo;NIFs are most suitable for synchronous functions&rdquo;.
+The other scary thing about NIFs is that</p>
+<blockquote>
+<blockquote>
+<blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>Since a NIF library is dynamically linked into the emulator process,
+this is the fastest way of calling C-code from Erlang
+(alongside port drivers).
+Calling NIFs requires no context switches.
+But it is also the least safe,
+because a crash in a NIF brings the emulator down too.</p>
+<blockquote>
+<blockquote>
+<blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>To simplify - a segfault in the code you are calling will result
+in the Erlang virtual machine crashing. This crash usually falls out of the scope
+of the <code>let it crash</code> mantra. Nerves will reboot your device when this happens.</p>
+<p>Now lets get started with that example. Full disclaimer: This example might get
+a little complex and long winded because I pulled it out of a real world project,
+but I think it is simple enough to follow.</p>
+<p>Say we want a data structure that does
+something on in a repeating manor. So do <em><em>something</em></em> every <em><em>number</em></em> of <em><em>units</em></em>
+starting on <em><em>datetime</em></em> ending on <em><em>datetime</em></em>. It turns out generating a list
+of events in this manor can be pretty taxing. Let&rsquo;s get started.</p>
+<p>First we create a new Nerves app like normal:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">mix nerves.new hello_calendar
+</span></span></code></pre></div><p>Now in a real project we would likely want to store these <code>Calendar</code>s inside a
+database of some sort. We won&rsquo;t cover that here, but if you&rsquo;re interested in that,
+check out <a href="http://embedded-elixir.com/post/2017-09-22-using-ecto-and-sqlite3-with-nerves/">this</a>
+post.</p>
+<p>Make a new file <code>lib/hello_calendar/calendar.ex</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elixir" data-lang="elixir"><span class="line"><span class="cl"><span class="kd">defmodule</span> <span class="nc">HelloCalendar.Calendar</span> <span class="k">do</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">defstruct</span> <span class="p">[</span><span class="ss">:start_time</span><span class="p">,</span> <span class="ss">:end_time</span><span class="p">,</span> <span class="ss">:repeat</span><span class="p">,</span> <span class="ss">:time_unit</span><span class="p">,</span> <span class="ss">:calendar</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">  <span class="na">@valid_time_units</span> <span class="p">[</span><span class="s2">&#34;minutely&#34;</span><span class="p">,</span> <span class="s2">&#34;hourly&#34;</span><span class="p">,</span> <span class="s2">&#34;daily&#34;</span><span class="p">,</span> <span class="s2">&#34;weekly&#34;</span><span class="p">,</span> <span class="s2">&#34;monthly&#34;</span><span class="p">,</span> <span class="s2">&#34;yearly&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">  <span class="na">@doc</span> <span class="sh">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="sh">  Start a new calendar
+</span></span></span><span class="line"><span class="cl"><span class="sh">  * start_time - DataTime struct
+</span></span></span><span class="line"><span class="cl"><span class="sh">  * end_time - DateTime struct
+</span></span></span><span class="line"><span class="cl"><span class="sh">  * repeat - integer number of repeats
+</span></span></span><span class="line"><span class="cl"><span class="sh">  * time_unit - one of
+</span></span></span><span class="line"><span class="cl"><span class="sh">    * &#34;minutely&#34;
+</span></span></span><span class="line"><span class="cl"><span class="sh">    * &#34;hourly&#34;
+</span></span></span><span class="line"><span class="cl"><span class="sh">    * &#34;daily&#34;
+</span></span></span><span class="line"><span class="cl"><span class="sh">    * &#34;weekly&#34;
+</span></span></span><span class="line"><span class="cl"><span class="sh">    * &#34;monthly&#34;
+</span></span></span><span class="line"><span class="cl"><span class="sh">    * &#34;yearly&#34;
+</span></span></span><span class="line"><span class="cl"><span class="sh">  &#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">def</span> <span class="n">new</span><span class="p">(%</span><span class="nc">DateTime</span><span class="p">{}</span> <span class="o">=</span> <span class="n">start_time</span><span class="p">,</span> <span class="p">%</span><span class="nc">DateTime</span><span class="p">{}</span> <span class="o">=</span> <span class="n">end_time</span><span class="p">,</span> <span class="n">repeat</span><span class="p">,</span> <span class="n">time_unit</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="ow">when</span> <span class="n">time_unit</span> <span class="ow">in</span> <span class="na">@valid_time_units</span> <span class="k">do</span>
+</span></span><span class="line"><span class="cl">    <span class="err">%</span><span class="n">__MODULE__</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="ss">start_time</span><span class="p">:</span> <span class="n">start_time</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="ss">end_time</span><span class="p">:</span> <span class="n">end_time</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="ss">repeat</span><span class="p">:</span> <span class="n">repeat</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="ss">time_unit</span><span class="p">:</span> <span class="n">time_unit</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="o">|&gt;</span> <span class="n">build_calendar</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="k">end</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span>
+</span></span></code></pre></div><p>Now for the hard (ish) part: the <code>build_calendar/1</code> function. We want a list
+of events to operate on.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elixir" data-lang="elixir"><span class="line"><span class="cl"><span class="kd">def</span> <span class="n">build_calendar</span><span class="p">(</span><span class="err">%</span><span class="n">__MODULE__</span><span class="p">{}</span> <span class="o">=</span> <span class="n">calendar</span><span class="p">)</span> <span class="k">do</span>
+</span></span><span class="line"><span class="cl">  <span class="n">current_time_seconds</span> <span class="o">=</span> <span class="ss">:os</span><span class="o">.</span><span class="n">system_time</span><span class="p">(</span><span class="ss">:second</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="n">start_time_seconds</span> <span class="o">=</span> <span class="nc">DateTime</span><span class="o">.</span><span class="n">to_unix</span><span class="p">(</span><span class="n">calendar</span><span class="o">.</span><span class="n">start_time</span><span class="p">,</span> <span class="ss">:seconds</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="n">end_time_seconds</span> <span class="o">=</span> <span class="nc">DateTime</span><span class="o">.</span><span class="n">to_unix</span><span class="p">(</span><span class="n">calendar</span><span class="o">.</span><span class="n">end_time</span> <span class="ss">:seconds</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="n">repeat</span> <span class="o">=</span> <span class="n">calendar</span><span class="o">.</span><span class="n">repeat</span>
+</span></span><span class="line"><span class="cl">  <span class="n">repeat_frequency_seconds</span> <span class="o">=</span> <span class="n">time_unit_to_seconds</span><span class="p">(</span><span class="n">calendar</span><span class="o">.</span><span class="n">time_unit</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">new_calendar</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">    <span class="n">do_build_calendar</span><span class="p">(</span><span class="n">current_time_seconds</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                      <span class="n">start_time_seconds</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                      <span class="n">end_time_seconds</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                      <span class="n">repeat</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                      <span class="n">repeat_frequency_seconds</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                      <span class="o">|&gt;</span> <span class="nc">Enum</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="o">&amp;</span><span class="nc">DateTime</span><span class="o">.</span><span class="n">from_unix!</span><span class="p">(</span><span class="ni">&amp;1</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">  <span class="p">%{</span><span class="n">calendar</span> <span class="o">|</span> <span class="ss">calendar</span><span class="p">:</span> <span class="n">new_calendar</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># This function will be replaced with our NIF.</span>
+</span></span><span class="line"><span class="cl"><span class="kd">def</span> <span class="n">do_build_calendar</span><span class="p">(</span><span class="n">now_seconds</span><span class="p">,</span> <span class="n">start_time_seconds</span><span class="p">,</span> <span class="n">end_time_seconds</span><span class="p">,</span> <span class="n">repeat</span><span class="p">,</span> <span class="n">repeat_frequency_seconds</span><span class="p">)</span> <span class="k">do</span>
+</span></span><span class="line"><span class="cl">  <span class="nc">Logger</span><span class="o">.</span><span class="n">warn</span> <span class="s2">&#34;Using (very) slow calendar builder!&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">grace_period_cutoff_seconds</span> <span class="o">=</span> <span class="n">now_seconds</span> <span class="o">-</span> <span class="mi">60</span>
+</span></span><span class="line"><span class="cl">    <span class="nc">Range</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">start_time_seconds</span><span class="p">,</span> <span class="n">end_time_seconds</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="o">|&gt;</span> <span class="nc">Enum</span><span class="o">.</span><span class="n">take_every</span><span class="p">(</span><span class="n">repeat</span> <span class="o">*</span> <span class="n">repeat_frequency_seconds</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="o">|&gt;</span> <span class="nc">Enum</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="o">&amp;</span><span class="nc">Kernel</span><span class="o">.&gt;</span><span class="p">(</span><span class="ni">&amp;1</span><span class="p">,</span> <span class="n">grace_period_cutoff_seconds</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="o">|&gt;</span> <span class="nc">Enum</span><span class="o">.</span><span class="n">take</span><span class="p">(</span><span class="mi">60</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="o">|&gt;</span> <span class="nc">Enum</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="o">&amp;</span><span class="nc">Kernel</span><span class="o">.-</span><span class="p">(</span><span class="ni">&amp;1</span><span class="p">,</span> <span class="n">div</span><span class="p">(</span><span class="ni">&amp;1</span><span class="p">,</span> <span class="mi">60</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="na">@compile</span> <span class="p">{</span><span class="ss">:inline</span><span class="p">,</span> <span class="p">[</span><span class="ss">time_unit_to_seconds</span><span class="p">:</span> <span class="mi">2</span><span class="p">]}</span>
+</span></span><span class="line"><span class="cl"><span class="kd">defp</span> <span class="n">time_unit_to_seconds</span><span class="p">(</span><span class="s2">&#34;never&#34;</span><span class="p">),</span> <span class="ss">do</span><span class="p">:</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl"><span class="kd">defp</span> <span class="n">time_unit_to_seconds</span><span class="p">(</span><span class="s2">&#34;minutely&#34;</span><span class="p">),</span> <span class="ss">do</span><span class="p">:</span> <span class="mi">60</span>
+</span></span><span class="line"><span class="cl"><span class="kd">defp</span> <span class="n">time_unit_to_seconds</span><span class="p">(</span><span class="s2">&#34;hourly&#34;</span><span class="p">),</span> <span class="ss">do</span><span class="p">:</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">60</span>
+</span></span><span class="line"><span class="cl"><span class="kd">defp</span> <span class="n">time_unit_to_seconds</span><span class="p">(</span><span class="s2">&#34;daily&#34;</span><span class="p">),</span> <span class="ss">do</span><span class="p">:</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">24</span>
+</span></span><span class="line"><span class="cl"><span class="kd">defp</span> <span class="n">time_unit_to_seconds</span><span class="p">(</span><span class="s2">&#34;weekly&#34;</span><span class="p">),</span> <span class="ss">do</span><span class="p">:</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">24</span> <span class="o">*</span> <span class="mi">7</span>
+</span></span><span class="line"><span class="cl"><span class="kd">defp</span> <span class="n">time_unit_to_seconds</span><span class="p">(</span><span class="s2">&#34;monthly&#34;</span><span class="p">),</span> <span class="ss">do</span><span class="p">:</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">24</span> <span class="o">*</span> <span class="mi">30</span>
+</span></span><span class="line"><span class="cl"><span class="kd">defp</span> <span class="n">time_unit_to_seconds</span><span class="p">(</span><span class="s2">&#34;yearly&#34;</span><span class="p">),</span> <span class="ss">do</span><span class="p">:</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">24</span> <span class="o">*</span> <span class="mi">365</span>
+</span></span></code></pre></div><p>Now that was a mouthful, but we are mostly interested in <code>do_build_calendar/5</code>.
+First we build a <code>grace_period</code> by subtracting one minute from <code>now</code>. Then we build a <code>Range</code>
+from the <code>start_time</code> to the <code>end_time</code>, and take the number of steps. Then we
+filter out every event that isn&rsquo;t after our grace period. Then we grab 60 of those
+events, and round down to the nearest minute.</p>
+<p>Now we can test it out:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elixir" data-lang="elixir"><span class="line"><span class="cl"><span class="n">iex</span><span class="p">()</span><span class="o">&gt;</span> <span class="n">now</span> <span class="o">=</span> <span class="nc">DateTime</span><span class="o">.</span><span class="n">utc_now</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">iex</span><span class="p">()</span><span class="o">&gt;</span> <span class="n">start_time</span> <span class="o">=</span> <span class="p">%{</span><span class="n">now</span> <span class="o">|</span> <span class="ss">minute</span><span class="p">:</span> <span class="n">now</span><span class="o">.</span><span class="n">minute</span> <span class="o">+</span> <span class="mi">5</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="n">iex</span><span class="p">()</span><span class="o">&gt;</span> <span class="n">end_time</span> <span class="o">=</span> <span class="p">%{</span><span class="n">now</span> <span class="o">|</span> <span class="ss">hour</span><span class="p">:</span> <span class="n">now</span><span class="o">.</span><span class="n">hour</span> <span class="o">+</span> <span class="mi">1</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="n">iex</span><span class="p">()</span><span class="o">&gt;</span> <span class="nc">HelloCalendar.Calendar</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">start_time</span><span class="p">,</span> <span class="n">end_time</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&#34;minutely&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="mi">14</span><span class="p">:</span><span class="mi">10</span><span class="p">:</span><span class="mf">03.864</span> <span class="p">[</span><span class="n">warn</span><span class="p">]</span>  <span class="nc">Using</span> <span class="p">(</span><span class="n">very</span><span class="p">)</span> <span class="n">slow</span> <span class="n">calendar</span> <span class="n">builder!</span>
+</span></span><span class="line"><span class="cl"><span class="p">%</span><span class="nc">HelloCalendar.Calendar</span><span class="p">{</span><span class="ss">calendar</span><span class="p">:</span> <span class="p">[</span><span class="c1">#DateTime&lt;2017-03-06 20:35:52Z&gt;,</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">#DateTime&lt;2017-03-06 20:36:51Z&gt;, ...],</span>
+</span></span><span class="line"><span class="cl"> <span class="ss">end_time</span><span class="p">:</span> <span class="c1">#DateTime&lt;2017-12-23 27:10:02.653171Z&gt;, repeat: 1,</span>
+</span></span><span class="line"><span class="cl"> <span class="ss">start_time</span><span class="p">:</span> <span class="c1">#DateTime&lt;2017-12-23 22:10:02.653171Z&gt;, time_unit: &#34;minutely&#34;}</span>
+</span></span></code></pre></div><p>And it was very quick. But now say you want <code>end_time</code> to be in 5 years&hellip;</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elixir" data-lang="elixir"><span class="line"><span class="cl"><span class="nc">HelloCalendar.Calendar</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">start_time</span><span class="p">,</span> <span class="p">%{</span><span class="n">end_time</span> <span class="o">|</span> <span class="ss">year</span><span class="p">:</span> <span class="n">end_time</span><span class="o">.</span><span class="n">year</span> <span class="o">+</span> <span class="mi">5</span><span class="p">},</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&#34;minutely&#34;</span><span class="p">)</span>
+</span></span></code></pre></div><p>That takes signifigantly longer, because it still needs to enumerate over every
+time before our <code>gracec_period</code> here: <code>|&gt; Enum.filter(&amp;Kernel.&gt;(&amp;1, grace_period_cutoff_seconds))</code></p>
+<p>So let&rsquo;s get into the fun NIF stuff.</p>
+<p>First we need to setup our <code>make</code> environment. We add a dependency to the <code>mix.exs</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elixir" data-lang="elixir"><span class="line"><span class="cl"><span class="kd">def</span> <span class="n">project</span> <span class="k">do</span>
+</span></span><span class="line"><span class="cl">  <span class="p">[</span><span class="n">...</span>
+</span></span><span class="line"><span class="cl">   <span class="ss">compilers</span><span class="p">:</span> <span class="p">[</span><span class="ss">:elixir_make</span><span class="p">]</span> <span class="o">++</span> <span class="nc">Mix</span><span class="o">.</span><span class="n">compilers</span><span class="p">(),</span>
+</span></span><span class="line"><span class="cl">   <span class="ss">make_clean</span><span class="p">:</span> <span class="p">[</span><span class="s2">&#34;clean&#34;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">   <span class="n">...</span>
+</span></span><span class="line"><span class="cl">  <span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">def</span> <span class="n">deps</span> <span class="k">do</span>
+</span></span><span class="line"><span class="cl">  <span class="p">[</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span><span class="ss">:nerves</span><span class="p">,</span> <span class="s2">&#34;~&gt; 0.7&#34;</span><span class="p">,</span> <span class="ss">runtime</span><span class="p">:</span> <span class="no">false</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span><span class="ss">:elixir_make</span><span class="p">,</span> <span class="s2">&#34;~&gt; 0.4.0&#34;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">]</span> <span class="o">++</span> <span class="n">deps</span><span class="p">(</span><span class="na">@target</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span>
+</span></span></code></pre></div><p>and we will need a <code>Makefile</code>. This is the complex part with Nerves.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-makefile" data-lang="makefile"><span class="line"><span class="cl"><span class="err">ifeq</span> <span class="err">(</span><span class="k">$(</span><span class="nv">ERL_EI_INCLUDE_DIR</span><span class="k">)</span><span class="err">,)</span>
+</span></span><span class="line"><span class="cl"><span class="nv">ERL_ROOT_DIR</span> <span class="o">=</span> <span class="k">$(</span>shell erl -eval <span class="s2">&#34;io:format(\&#34;~s~n\&#34;, [code:root_dir()])&#34;</span> -s init stop -noshell<span class="k">)</span>
+</span></span><span class="line"><span class="cl"><span class="err">ifeq</span> <span class="err">(</span><span class="k">$(</span><span class="nv">ERL_ROOT_DIR</span><span class="k">)</span><span class="err">,)</span>
+</span></span><span class="line"><span class="cl">   <span class="k">$(</span><span class="nv">error</span> <span class="nv">Could</span> <span class="nv">not</span> <span class="nv">find</span> <span class="nv">the</span> <span class="nv">Erlang</span> <span class="nv">installation</span>. <span class="nv">Check</span> <span class="nv">to</span> <span class="nv">see</span> <span class="nv">that</span> &#39;<span class="nv">erl</span>&#39; <span class="nv">is</span> <span class="nv">in</span> <span class="nv">your</span> <span class="nv">PATH</span><span class="k">)</span>
+</span></span><span class="line"><span class="cl"><span class="err">endif</span>
+</span></span><span class="line"><span class="cl"><span class="nv">ERL_EI_INCLUDE_DIR</span> <span class="o">=</span> <span class="s2">&#34;</span><span class="k">$(</span>ERL_ROOT_DIR<span class="k">)</span><span class="s2">/usr/include&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">ERL_EI_LIBDIR</span> <span class="o">=</span> <span class="s2">&#34;</span><span class="k">$(</span>ERL_ROOT_DIR<span class="k">)</span><span class="s2">/usr/lib&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="err">endif</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Set Erlang-specific compile and linker flags
+</span></span></span><span class="line"><span class="cl"><span class="nv">ERL_CFLAGS</span> <span class="o">?=</span> -I<span class="k">$(</span>ERL_EI_INCLUDE_DIR<span class="k">)</span>
+</span></span><span class="line"><span class="cl"><span class="nv">ERL_LDFLAGS</span> <span class="o">?=</span> -L<span class="k">$(</span>ERL_EI_LIBDIR<span class="k">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">LDFLAGS</span> <span class="o">+=</span> -fPIC -shared
+</span></span><span class="line"><span class="cl"><span class="nv">CFLAGS</span> <span class="o">?=</span> -fPIC -O2 -Wall -Wextra -Wno-unused-parameter
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">ifeq</span> <span class="err">(</span><span class="k">$(</span><span class="nv">CROSSCOMPILE</span><span class="k">)</span><span class="err">,)</span>
+</span></span><span class="line"><span class="cl"><span class="err">ifeq</span> <span class="err">(</span><span class="k">$(</span><span class="nv">shell</span> <span class="nv">uname</span><span class="k">)</span><span class="err">,Darwin)</span>
+</span></span><span class="line"><span class="cl"><span class="nv">LDFLAGS</span> <span class="o">+=</span> -undefined dynamic_lookup
+</span></span><span class="line"><span class="cl"><span class="err">endif</span>
+</span></span><span class="line"><span class="cl"><span class="err">endif</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">NIF</span><span class="o">=</span>priv/build_calendar.so
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nf">all</span><span class="o">:</span> <span class="n">priv</span> <span class="k">$(</span><span class="nv">NIF</span><span class="k">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nf">priv</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">	mkdir -p priv
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nf">$(NIF)</span><span class="o">:</span> <span class="n">c_src</span>/<span class="n">build_calendar</span>.<span class="n">c</span>
+</span></span><span class="line"><span class="cl">	<span class="k">$(</span>CC<span class="k">)</span> <span class="k">$(</span>ERL_CFLAGS<span class="k">)</span> <span class="k">$(</span>CFLAGS<span class="k">)</span> <span class="k">$(</span>ERL_LDFLAGS<span class="k">)</span> <span class="k">$(</span>LDFLAGS<span class="k">)</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl">	    -o <span class="nv">$@</span> $&lt;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nf">clean</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">	<span class="k">$(</span>RM<span class="k">)</span> <span class="k">$(</span>NIF<span class="k">)</span>
+</span></span></code></pre></div><p>The only really complicated part of the <code>Makefile</code> is the top part that finds
+the paths to the Erlang interface (ei) include and library directories. They&rsquo;re
+needed for us to use the <code>erl_nif.h</code> header file. The <code>ERL_EI_INCLUDE_DIR</code> and
+<code>ERL_EI_LIBDIR</code> variables specify those paths by convention. Nerves will fill
+them in for us (via environment variables) when calling the Makefile, but if
+we&rsquo;re compiling outside of Nerves, we need to figure them out ourselves.</p>
+<p>Now we can finally get to writing our C code! Lets reimplement that slow
+<code>do_build_calendar</code> function. Create a new file <code>c_src/build_calendar.c</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;string.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;erl_nif.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">static</span> <span class="n">ERL_NIF_TERM</span> <span class="nf">do_build_calendar</span><span class="p">(</span><span class="n">ErlNifEnv</span><span class="o">*</span> <span class="n">env</span><span class="p">,</span> <span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="k">const</span> <span class="n">ERL_NIF_TERM</span> <span class="n">argv</span><span class="p">[])</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">ERL_NIF_TERM</span> <span class="n">atom_err</span> <span class="o">=</span> <span class="nf">enif_make_atom</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="s">&#34;error&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="n">ERL_NIF_TERM</span> <span class="n">atom_not_implemented</span> <span class="o">=</span> <span class="nf">enif_make_atom</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="s">&#34;not_implemented&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="nf">enif_make_tuple</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">atom_err</span><span class="p">,</span> <span class="n">atom_not_implemented</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">static</span> <span class="n">ErlNifFunc</span> <span class="n">nif_funcs</span><span class="p">[]</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span><span class="s">&#34;do_build_calendar&#34;</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">do_build_calendar</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nf">ERL_NIF_INIT</span><span class="p">(</span><span class="n">HelloCalendar</span><span class="p">.</span><span class="n">Calendar</span><span class="p">,</span> <span class="n">nif_funcs</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span><span class="nb">NULL</span><span class="p">,</span><span class="nb">NULL</span><span class="p">,</span><span class="nb">NULL</span><span class="p">)</span>
+</span></span></code></pre></div><p>Now, you can do either <code>mix compile</code> or <code>make</code> to generate your new NIF.
+You should have a file called <code>make_calendar.so</code> in your <code>priv</code> directory. Lets
+walk thru that file really quickly, starting from the bottom.</p>
+<p><code>ERL_NIF_INIT(Elixir.HelloCalendar.Calendar, nif_funcs, NULL,NULL,NULL,NULL)</code> Tells
+the NIF what the module name is, the functions to be exported, and then there are
+arguments for <code>on_load</code>, <code>on_reload</code>, <code>on_unload</code>, and <code>on_upgrade</code>. We won&rsquo;t be
+using those today.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">static</span> <span class="n">ErlNifFunc</span> <span class="n">nif_funcs</span><span class="p">[]</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span><span class="s">&#34;do_build_calendar&#34;</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">do_build_calendar</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><p>This tells the NIF which functions and their arity to export.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">static</span> <span class="n">ERL_NIF_TERM</span> <span class="nf">do_build_calendar</span><span class="p">(</span><span class="n">ErlNifEnv</span><span class="o">*</span> <span class="n">env</span><span class="p">,</span> <span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="k">const</span> <span class="n">ERL_NIF_TERM</span> <span class="n">argv</span><span class="p">[])</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">ERL_NIF_TERM</span> <span class="n">atom_err</span> <span class="o">=</span> <span class="nf">enif_make_atom</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="s">&#34;error&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="n">ERL_NIF_TERM</span> <span class="n">atom_not_implemented</span> <span class="o">=</span> <span class="nf">enif_make_atom</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="s">&#34;not_implemented&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="nf">enif_make_tuple</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">atom_err</span><span class="p">,</span> <span class="n">atom_not_implemented</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>This is our actual function. The last part is to wire it up in Elixir. Open up
+<code>lib/hello_calendar/calendar.ex</code> again and add this:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elixir" data-lang="elixir"><span class="line"><span class="cl">  <span class="na">@on_load</span> <span class="ss">:load_nif</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">def</span> <span class="n">load_nif</span> <span class="k">do</span>
+</span></span><span class="line"><span class="cl">    <span class="n">nif_file</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">#{</span><span class="ss">:code</span><span class="o">.</span><span class="n">priv_dir</span><span class="p">(</span><span class="ss">:hello_calendar</span><span class="p">)</span><span class="si">}</span><span class="s1">/build_calendar&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">case</span> <span class="ss">:erlang</span><span class="o">.</span><span class="n">load_nif</span><span class="p">(</span><span class="n">nif_file</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="k">do</span>
+</span></span><span class="line"><span class="cl">      <span class="ss">:ok</span> <span class="o">-&gt;</span> <span class="ss">:ok</span>
+</span></span><span class="line"><span class="cl">      <span class="p">{</span><span class="ss">:error</span><span class="p">,</span> <span class="p">{</span><span class="ss">:reload</span><span class="p">,</span> <span class="n">_</span><span class="p">}}</span> <span class="o">-&gt;</span> <span class="ss">:ok</span>
+</span></span><span class="line"><span class="cl">      <span class="p">{</span><span class="ss">:error</span><span class="p">,</span> <span class="n">reason</span><span class="p">}</span> <span class="o">-&gt;</span> <span class="nc">Logger</span><span class="o">.</span><span class="n">warn</span> <span class="s2">&#34;Failed to load NIF: </span><span class="si">#{</span><span class="n">inspect</span> <span class="n">reason</span><span class="si">}</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">end</span>
+</span></span><span class="line"><span class="cl">  <span class="k">end</span>
+</span></span></code></pre></div><p>Now lets walk through that.
+<code>@on_load :load_nif</code> is a compiler attribute that tells Elixir/Erlang to do something when
+the module is loaded. In this case we want to load a NIF.
+If the NIF loading fails, we want to fallback to the default implementation. This
+is required in Nerves, since when running <code>mix firmware</code>, the Elixir compiler <code>load</code>s
+your code, which will load the NIF.</p>
+<p>Now if we run the <code>iex</code> tests from above:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elixir" data-lang="elixir"><span class="line"><span class="cl"><span class="n">iex</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">&gt;</span> <span class="n">now</span> <span class="o">=</span> <span class="nc">DateTime</span><span class="o">.</span><span class="n">utc_now</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#DateTime&lt;2017-12-23 22:39:33.259057Z&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">iex</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">&gt;</span> <span class="n">start_time</span> <span class="o">=</span> <span class="n">now</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#DateTime&lt;2017-12-23 22:39:33.259057Z&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">iex</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">&gt;</span> <span class="n">end_time</span> <span class="o">=</span> <span class="p">%{</span><span class="n">start_time</span> <span class="o">|</span> <span class="ss">hour</span><span class="p">:</span> <span class="n">now</span><span class="o">.</span><span class="n">hour</span> <span class="o">+</span> <span class="mi">5</span><span class="p">,</span> <span class="ss">year</span><span class="p">:</span> <span class="n">now</span><span class="o">.</span><span class="n">year</span> <span class="o">+</span> <span class="mi">1000</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#DateTime&lt;3017-12-23 27:39:33.259057Z&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">iex</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span><span class="o">&gt;</span> <span class="nc">HelloCalendar.Calendar</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">start_time</span><span class="p">,</span> <span class="p">%{</span><span class="n">end_time</span> <span class="o">|</span> <span class="ss">year</span><span class="p">:</span> <span class="n">end_time</span><span class="o">.</span><span class="n">year</span> <span class="o">+</span> <span class="mi">5</span><span class="p">},</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&#34;minutely&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="o">**</span> <span class="p">(</span><span class="nc">Protocol.UndefinedError</span><span class="p">)</span> <span class="n">protocol</span> <span class="nc">Enumerable</span> <span class="ow">not</span> <span class="n">implemented</span> <span class="k">for</span> <span class="p">{</span><span class="ss">:error</span><span class="p">,</span> <span class="ss">:not_implemented</span><span class="p">}</span><span class="o">.</span> <span class="nc">This</span> <span class="n">protocol</span> <span class="n">is</span> <span class="n">implemented</span> <span class="ss">for</span><span class="p">:</span> <span class="nc">Date.Range</span><span class="p">,</span> <span class="nc">File.Stream</span><span class="p">,</span> <span class="nc">Function</span><span class="p">,</span> <span class="nc">GenEvent.Stream</span><span class="p">,</span> <span class="nc">HashDict</span><span class="p">,</span> <span class="nc">HashSet</span><span class="p">,</span> <span class="nc">IO.Stream</span><span class="p">,</span> <span class="nc">List</span><span class="p">,</span> <span class="nc">Map</span><span class="p">,</span> <span class="nc">MapSet</span><span class="p">,</span> <span class="nc">Range</span><span class="p">,</span> <span class="nc">Stream</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="n">elixir</span><span class="p">)</span> <span class="n">lib</span><span class="o">/</span><span class="n">enum</span><span class="o">.</span><span class="n">ex</span><span class="p">:</span><span class="mi">1</span><span class="p">:</span> <span class="nc">Enumerable</span><span class="o">.</span><span class="n">impl_for!</span><span class="o">/</span><span class="mi">1</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="n">elixir</span><span class="p">)</span> <span class="n">lib</span><span class="o">/</span><span class="n">enum</span><span class="o">.</span><span class="n">ex</span><span class="p">:</span><span class="mi">116</span><span class="p">:</span> <span class="nc">Enumerable</span><span class="o">.</span><span class="n">reduce</span><span class="o">/</span><span class="mi">3</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="n">elixir</span><span class="p">)</span> <span class="n">lib</span><span class="o">/</span><span class="n">enum</span><span class="o">.</span><span class="n">ex</span><span class="p">:</span><span class="mi">1847</span><span class="p">:</span> <span class="nc">Enum</span><span class="o">.</span><span class="n">map</span><span class="o">/</span><span class="mi">2</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="n">hello_calendar</span><span class="p">)</span> <span class="n">lib</span><span class="o">/</span><span class="n">hello_calendar</span><span class="o">/</span><span class="n">calendar</span><span class="o">.</span><span class="n">ex</span><span class="p">:</span><span class="mi">46</span><span class="p">:</span> <span class="nc">HelloCalendar.Calendar</span><span class="o">.</span><span class="n">build_calendar</span><span class="o">/</span><span class="mi">1</span>
+</span></span></code></pre></div><p>Now we get <code>{:error, :not_implemented}</code> as a return from our <code>do_build_calendar</code>
+function. Obviously this is an error, but it didn&rsquo;t use the old Elixir implementation.</p>
+<p>Lets finish up the C version of that function:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">static</span> <span class="n">ERL_NIF_TERM</span> <span class="nf">do_build_calendar</span><span class="p">(</span><span class="n">ErlNifEnv</span><span class="o">*</span> <span class="n">env</span><span class="p">,</span> <span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="k">const</span> <span class="n">ERL_NIF_TERM</span> <span class="n">argv</span><span class="p">[])</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// Arguments
+</span></span></span><span class="line"><span class="cl">  <span class="kt">long</span> <span class="kt">int</span> <span class="n">nowSeconds</span><span class="p">,</span> <span class="n">startTimeSeconds</span><span class="p">,</span> <span class="n">endTimeSeconds</span><span class="p">,</span> <span class="n">frequencySeconds</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">int</span> <span class="n">repeat</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// Fetch arguments.
+</span></span></span><span class="line"><span class="cl">  <span class="nf">enif_get_long</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="o">&amp;</span><span class="n">nowSeconds</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">enif_get_long</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="o">&amp;</span><span class="n">startTimeSeconds</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">enif_get_long</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="o">&amp;</span><span class="n">endTimeSeconds</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">enif_get_int</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">argv</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="o">&amp;</span><span class="n">repeat</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">enif_get_long</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">argv</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="o">&amp;</span><span class="n">frequencySeconds</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// Data used to build the calendar.
+</span></span></span><span class="line"><span class="cl">  <span class="kt">long</span> <span class="kt">int</span> <span class="n">gracePeriodSeconds</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">gracePeriodSeconds</span> <span class="o">=</span> <span class="n">nowSeconds</span> <span class="o">-</span> <span class="mi">60</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">long</span> <span class="kt">int</span> <span class="n">step</span> <span class="o">=</span> <span class="n">frequencySeconds</span> <span class="o">*</span> <span class="n">repeat</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// iterators for loops
+</span></span></span><span class="line"><span class="cl">  <span class="kt">long</span> <span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// build our events array, fill it with zeroes.
+</span></span></span><span class="line"><span class="cl">  <span class="kt">long</span> <span class="kt">int</span> <span class="n">events</span><span class="p">[</span><span class="n">MAX_GENERATED</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">  <span class="k">for</span><span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">MAX_GENERATED</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">events</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// put up to MAX_GENERATED events into the array
+</span></span></span><span class="line"><span class="cl">  <span class="k">for</span><span class="p">(</span><span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">i</span> <span class="o">=</span> <span class="n">startTimeSeconds</span><span class="p">;</span> <span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">endTimeSeconds</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">j</span> <span class="o">&lt;</span> <span class="n">MAX_GENERATED</span><span class="p">);</span> <span class="n">i</span> <span class="o">+=</span> <span class="n">step</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// if this event (i) is after the grace period, add it to the array.
+</span></span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">&gt;</span> <span class="n">gracePeriodSeconds</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">events</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="n">events</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">-=</span> <span class="p">(</span><span class="n">events</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">%</span> <span class="mi">60</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="n">j</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// Count up our total generated events
+</span></span></span><span class="line"><span class="cl">  <span class="k">for</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">j</span><span class="o">&lt;</span><span class="n">MAX_GENERATED</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span> <span class="k">if</span><span class="p">(</span><span class="n">events</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span> <span class="n">i</span><span class="o">++</span><span class="p">;</span> <span class="p">}</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// Build the array to be returned.
+</span></span></span><span class="line"><span class="cl">  <span class="n">ERL_NIF_TERM</span> <span class="n">retArr</span> <span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">  <span class="k">for</span><span class="p">(</span><span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">j</span><span class="o">&lt;</span><span class="n">i</span> <span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">retArr</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="nf">enif_make_long</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">events</span><span class="p">[</span><span class="n">j</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// we survived.
+</span></span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="nf">enif_make_list_from_array</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">retArr</span><span class="p">,</span>  <span class="n">i</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Don&rsquo;t worry if you didn&rsquo;t catch all that. We&rsquo;ll go thru it.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">// Arguments
+</span></span></span><span class="line"><span class="cl"><span class="kt">long</span> <span class="kt">int</span> <span class="n">nowSeconds</span><span class="p">,</span> <span class="n">startTimeSeconds</span><span class="p">,</span> <span class="n">endTimeSeconds</span><span class="p">,</span> <span class="n">frequencySeconds</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">repeat</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Fetch arguments.
+</span></span></span><span class="line"><span class="cl"><span class="nf">enif_get_long</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="o">&amp;</span><span class="n">nowSeconds</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nf">enif_get_long</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="o">&amp;</span><span class="n">startTimeSeconds</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nf">enif_get_long</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="o">&amp;</span><span class="n">endTimeSeconds</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nf">enif_get_int</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">argv</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="o">&amp;</span><span class="n">repeat</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nf">enif_get_long</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">argv</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="o">&amp;</span><span class="n">frequencySeconds</span><span class="p">);</span>
+</span></span></code></pre></div><p><code>argv[]</code> is an array passed in as the arguments to our function.
+We know the first 3 are <code>long</code>s so we use the <code>enif_get_long</code> function to get them.
+<code>repeat</code> is an integer so we do <code>enif_get_int</code> to get it. Those functions pass
+the address of the variables you wish to populate. (<code>&amp;</code>).</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">// Data used to build the calendar.
+</span></span></span><span class="line"><span class="cl"><span class="kt">long</span> <span class="kt">int</span> <span class="n">gracePeriodSeconds</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">gracePeriodSeconds</span> <span class="o">=</span> <span class="n">nowSeconds</span> <span class="o">-</span> <span class="mi">60</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">long</span> <span class="kt">int</span> <span class="n">step</span> <span class="o">=</span> <span class="n">frequencySeconds</span> <span class="o">*</span> <span class="n">repeat</span><span class="p">;</span>
+</span></span></code></pre></div><p>Just building up some information we will need later.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">// Build our events array and fill it with zeroes.
+</span></span></span><span class="line"><span class="cl"><span class="kt">long</span> <span class="kt">int</span> <span class="n">events</span><span class="p">[</span><span class="n">MAX_GENERATED</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span><span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">MAX_GENERATED</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="n">events</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// put up to MAX_GENERATED events into the array
+</span></span></span><span class="line"><span class="cl"><span class="k">for</span><span class="p">(</span><span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">i</span> <span class="o">=</span> <span class="n">startTimeSeconds</span><span class="p">;</span> <span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">endTimeSeconds</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">j</span> <span class="o">&lt;</span> <span class="n">MAX_GENERATED</span><span class="p">);</span> <span class="n">i</span> <span class="o">+=</span> <span class="n">step</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// if this event (i) is after the grace period, add it to the array.
+</span></span></span><span class="line"><span class="cl">  <span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">&gt;</span> <span class="n">gracePeriodSeconds</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">events</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">events</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">-=</span> <span class="p">(</span><span class="n">events</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">%</span> <span class="mi">60</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">j</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Build an array, and fill it with zeroes, then populate it with up to <code>MAX_GENERATED</code>
+events.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">// Count up our total generated events
+</span></span></span><span class="line"><span class="cl"><span class="k">for</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">j</span><span class="o">&lt;</span><span class="n">MAX_GENERATED</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span> <span class="k">if</span><span class="p">(</span><span class="n">events</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span> <span class="n">i</span><span class="o">++</span><span class="p">;</span> <span class="p">}</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Build the array to be returned.
+</span></span></span><span class="line"><span class="cl"><span class="n">ERL_NIF_TERM</span> <span class="n">retArr</span> <span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span><span class="p">(</span><span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">j</span><span class="o">&lt;</span><span class="n">i</span> <span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="n">retArr</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="nf">enif_make_long</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">events</span><span class="p">[</span><span class="n">j</span><span class="p">]);</span>
+</span></span></code></pre></div><p>build the <code>list</code> of items to return to Erlang/Elixir. and finally
+<code>return enif_make_list_from_array(env, retArr,  i);</code></p>
+<p>Now if we run our examples again, they will be almost instant on our host machine.
+You can deploy to a nerves device now, and it should be still quite fast.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="nv">MIX_TARGET</span><span class="o">=</span>rpi0 mix <span class="k">do</span> deps.get, firmware
+</span></span></code></pre></div><p>You may notice a warning:
+<code>14:52:29.876 [warn]  Failed to load nif: {:load_failed, 'Failed to load NIF library: hello_calendar/_build/rpi0/dev/lib/hello_calendar/priv/build_calendar.so: wrong ELF class: ELFCLASS32\''}</code></p>
+<p>This is happening because the Elixir compiler is trying to load your Nerves
+crosscompiled NIF. You can safely ignore or disable this message.</p>
+<p>All the code for this project is on Github <a href="https://github.com/ConnorRigby/hello_calendar">here</a></p>
+
+        
+          <div class="blog-tags">
+            
+              
+              <a href="https://embedded-elixir.com/tags/nerves/">nerves</a>&nbsp;
+            
+              
+              <a href="https://embedded-elixir.com/tags/nif/">nif</a>&nbsp;
+            
+              
+              <a href="https://embedded-elixir.com/tags/c/">c</a>&nbsp;
+            
+          </div>
+        
+
+        
+
+        
+      </article>
+
+      
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="https://embedded-elixir.com/post/2017-11-02-nerves-update/" data-toggle="tooltip" data-placement="top" title="The Nerves Update">&larr; Previous Post</a>
+            </li>
+          
+          
+            <li class="next">
+              <a href="https://embedded-elixir.com/post/2018-01-02-nerves-update/" data-toggle="tooltip" data-placement="top" title="January 2018 Nerves Update">Next Post &rarr;</a>
+            </li>
+          
+        </ul>
+      
+
+
+      
+      
+      
+      
+      
+          
+          <div class="disqus-comments">
+            
+  
+    <div class="comments">
+      <div id="disqus_thread"></div>
+<script>
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "embedded-elixir" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    </div>
+  
+
+
+          </div>
+          
+        
+        
+      
+
+    </div>
+  </div>
+</div>
+
+      <footer>
+  <div class="container">
+    
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+		
+		  <a href="https://github.com/fhunleth" title="GitHub">
+		
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+		
+		  <a href="https://bsky.app/profile/fhunleth.bsky.social" title="Bluesky">
+		
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-bluesky fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              Curated by Frank Hunleth
+            
+          
+
+          &nbsp;&bull;&nbsp;&copy;
+          
+            2023
+          
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://embedded-elixir.com/">Embedded Elixir</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="https://gohugo.io">Hugo v0.155.3</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer><script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.js" integrity="sha384-cMkvdD8LoxVzGF/RPUKAcvmm49FQ0oxwDF3BGKtDXcEc+T1b2N+teh/OJfpU0jr6" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/contrib/auto-render.min.js" integrity="sha384-hCXGrW6PitJEwbkoStFjeJxv+fSOOQKOPbJxSfM6G5sWZjAyWhXiTIIAmQqnlLlh" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
+<script src="https://code.jquery.com/jquery-3.7.0.slim.min.js" integrity="sha384-w5y/xIeYixWvfM+A1cEbmHPURnvyqmVg5eVENruEdDjcyRLUSNej7512JQGspFUr" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+
+<script src="https://embedded-elixir.com/js/main.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.js" integrity="sha384-QELNnmcmU8IR9ZAykt67vGr9/rZJdHbiWi64V88fCPaOohUlHCqUD/unNN0BXSqy" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe-ui-default.min.js" integrity="sha384-m67o7SkQ1ALzKZIFh4CiTA8tmadaujiTa9Vu+nqPSwDOqHrDmxLezTdFln8077+q" crossorigin="anonymous"></script><script src="https://embedded-elixir.com/js/load-photoswipe.js"></script>
+
+
+
+
+
+
+
+
+
+
+    
+  </body>
+</html>
+

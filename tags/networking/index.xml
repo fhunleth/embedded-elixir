@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Networking on Embedded Elixir</title>
+    <link>https://embedded-elixir.com/tags/networking/</link>
+    <description>Recent content in Networking on Embedded Elixir</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 23 Nov 2019 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://embedded-elixir.com/tags/networking/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>🧙‍♀️Wizards &amp; WiFi ‍🧙‍♂️</title>
+      <link>https://embedded-elixir.com/post/2019-11-23-wizards-and-wifi/</link>
+      <pubDate>Sat, 23 Nov 2019 00:00:00 +0000</pubDate>
+      <guid>https://embedded-elixir.com/post/2019-11-23-wizards-and-wifi/</guid>
+      <description>&lt;p&gt;Introducing &lt;code&gt;VintageNetWizard&lt;/code&gt; - Simple WiFi Configuration using a web browser&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://github.com/nerves-networking/vintage_net_wizard&#34;&gt;https://github.com/nerves-networking/vintage_net_wizard&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Embedded Networking</title>
+      <link>https://embedded-elixir.com/post/2019-11-22-embedded-networking/</link>
+      <pubDate>Fri, 22 Nov 2019 00:00:00 +0000</pubDate>
+      <guid>https://embedded-elixir.com/post/2019-11-22-embedded-networking/</guid>
+      <description>&lt;p&gt;Introducing &lt;code&gt;VintageNet&lt;/code&gt; - a new networking library for embedded Elixir devices,&#xA;specially designed for Nerves 💙💻📶&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://github.com/nerves-networking/vintage_net&#34;&gt;https://github.com/nerves-networking/vintage_net&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

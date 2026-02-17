@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Disk on Embedded Elixir</title>
+    <link>https://embedded-elixir.com/tags/disk/</link>
+    <description>Recent content in Disk on Embedded Elixir</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 08 May 2021 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://embedded-elixir.com/tags/disk/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Nerves 📂 👀</title>
+      <link>https://embedded-elixir.com/post/2021-05-08-nerves-file-peeking/</link>
+      <pubDate>Sat, 08 May 2021 00:00:00 +0000</pubDate>
+      <guid>https://embedded-elixir.com/post/2021-05-08-nerves-file-peeking/</guid>
+      <description>&lt;p&gt;Want to look at and copy files on remote Nerves devices? This post shows you&#xA;how using SSH.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

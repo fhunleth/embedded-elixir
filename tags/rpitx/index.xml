@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Rpitx on Embedded Elixir</title>
+    <link>https://embedded-elixir.com/tags/rpitx/</link>
+    <description>Recent content in Rpitx on Embedded Elixir</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 29 Aug 2019 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://embedded-elixir.com/tags/rpitx/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Nerves @ 434 MHz</title>
+      <link>https://embedded-elixir.com/post/2019-08-29-nerves-at-434-mhz/</link>
+      <pubDate>Thu, 29 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>https://embedded-elixir.com/post/2019-08-29-nerves-at-434-mhz/</guid>
+      <description>&lt;p&gt;Many home and office items use radio frequencies to communicate control. So naturally,&#xA;lets take that over to control them from a single Nerves device with one wire on a&#xA;GPIO pin.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Release on Embedded Elixir</title>
+    <link>https://embedded-elixir.com/tags/release/</link>
+    <description>Recent content in Release on Embedded Elixir</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 30 Mar 2017 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://embedded-elixir.com/tags/release/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Upgrading to Nerves 0.5</title>
+      <link>https://embedded-elixir.com/post/2017-03-30-upgrading-to-nerves-0-5/</link>
+      <pubDate>Thu, 30 Mar 2017 00:00:00 +0000</pubDate>
+      <guid>https://embedded-elixir.com/post/2017-03-30-upgrading-to-nerves-0-5/</guid>
+      <description>&lt;p&gt;In early March, the &lt;a href=&#34;http://www.nerves-project.org&#34;&gt;Nerves Project&lt;/a&gt; published its &lt;a href=&#34;https://github.com/nerves-project/nerves/releases/tag/v0.5.0&#34;&gt;v0.5.0 release&lt;/a&gt;, marking another big step forward in usability and completeness of the platform.&#xA;In this post, I&amp;rsquo;d like to describe the major changes to be aware of as you upgrade existing projects or create new ones using Nerves 0.5.&lt;/p&gt;&#xA;&lt;h1 id=&#34;refreshed-docs-and-examples&#34;&gt;Refreshed Docs and Examples&lt;/h1&gt;&#xA;&lt;p&gt;If you&amp;rsquo;re new to Nerves or you&amp;rsquo;ve been using it for a long time and just never got around to it, you may want to check out the &lt;a href=&#34;https://hexdocs.pm/nerves/getting-started.html&#34;&gt;Getting Started guides and documentation available on Hexdocs&lt;/a&gt; and the &lt;a href=&#34;https://github.com/nerves-project/nerves-examples&#34;&gt;example projects available on GitHub&lt;/a&gt;.&#xA;These have all been reviewed and updated to match what&amp;rsquo;s available in Nerves 0.5, so it&amp;rsquo;s a great way to quickly see how everything works.&#xA;In particular, the &lt;code&gt;nerves-examples&lt;/code&gt; projects can be used as a reference if you get stuck trying to start a new project or feature, or when upgrading an existing project.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

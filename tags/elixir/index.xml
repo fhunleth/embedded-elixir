@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Elixir on Embedded Elixir</title>
+    <link>https://embedded-elixir.com/tags/elixir/</link>
+    <description>Recent content in Elixir on Embedded Elixir</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 11 Jul 2023 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://embedded-elixir.com/tags/elixir/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Nerves System Upgrade Guide</title>
+      <link>https://embedded-elixir.com/post/2023-07-11-nerves-upgrade-guide/</link>
+      <pubDate>Tue, 11 Jul 2023 00:00:00 +0000</pubDate>
+      <guid>https://embedded-elixir.com/post/2023-07-11-nerves-upgrade-guide/</guid>
+      <description>&lt;p&gt;This guide provides steps to be followed when you upgrade your Nerves firmware&#xA;project to a newer version of Nerves System.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Autoloading NIFs on Nerves</title>
+      <link>https://embedded-elixir.com/post/2023-05-29-autoloading-nifs/</link>
+      <pubDate>Mon, 29 May 2023 00:00:00 +0000</pubDate>
+      <guid>https://embedded-elixir.com/post/2023-05-29-autoloading-nifs/</guid>
+      <description>&lt;p&gt;Native Implemented Functions (NIFs) let you significantly speed up code or&#xA;make system calls that would otherwise be unavailable. However, they come with a&#xA;significant cost in that when they go wrong, they can take down the entire&#xA;Erlang VM. This is particularly challenging when using NIFs with Nerves when&#xA;crashes happen at boot time.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Nerves 📂 👀</title>
+      <link>https://embedded-elixir.com/post/2021-05-08-nerves-file-peeking/</link>
+      <pubDate>Sat, 08 May 2021 00:00:00 +0000</pubDate>
+      <guid>https://embedded-elixir.com/post/2021-05-08-nerves-file-peeking/</guid>
+      <description>&lt;p&gt;Want to look at and copy files on remote Nerves devices? This post shows you&#xA;how using SSH.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>🧙‍♀️Wizards &amp; WiFi ‍🧙‍♂️</title>
+      <link>https://embedded-elixir.com/post/2019-11-23-wizards-and-wifi/</link>
+      <pubDate>Sat, 23 Nov 2019 00:00:00 +0000</pubDate>
+      <guid>https://embedded-elixir.com/post/2019-11-23-wizards-and-wifi/</guid>
+      <description>&lt;p&gt;Introducing &lt;code&gt;VintageNetWizard&lt;/code&gt; - Simple WiFi Configuration using a web browser&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://github.com/nerves-networking/vintage_net_wizard&#34;&gt;https://github.com/nerves-networking/vintage_net_wizard&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Embedded Networking</title>
+      <link>https://embedded-elixir.com/post/2019-11-22-embedded-networking/</link>
+      <pubDate>Fri, 22 Nov 2019 00:00:00 +0000</pubDate>
+      <guid>https://embedded-elixir.com/post/2019-11-22-embedded-networking/</guid>
+      <description>&lt;p&gt;Introducing &lt;code&gt;VintageNet&lt;/code&gt; - a new networking library for embedded Elixir devices,&#xA;specially designed for Nerves 💙💻📶&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://github.com/nerves-networking/vintage_net&#34;&gt;https://github.com/nerves-networking/vintage_net&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Nerves @ 434 MHz</title>
+      <link>https://embedded-elixir.com/post/2019-08-29-nerves-at-434-mhz/</link>
+      <pubDate>Thu, 29 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>https://embedded-elixir.com/post/2019-08-29-nerves-at-434-mhz/</guid>
+      <description>&lt;p&gt;Many home and office items use radio frequencies to communicate control. So naturally,&#xA;lets take that over to control them from a single Nerves device with one wire on a&#xA;GPIO pin.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Talking I2C</title>
+      <link>https://embedded-elixir.com/post/2019-05-18-talking-i2c/</link>
+      <pubDate>Sat, 18 May 2019 00:00:00 +0000</pubDate>
+      <guid>https://embedded-elixir.com/post/2019-05-18-talking-i2c/</guid>
+      <description>&lt;p&gt;Reading datasheets for fun and profit, or how I learned to stop worrying and&#xA;convert analog signals into elixir terms.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Nerves At Home: Controlling a Desk</title>
+      <link>https://embedded-elixir.com/post/2019-01-18-nerves-at-home-desk-controller/</link>
+      <pubDate>Fri, 18 Jan 2019 00:00:00 +0000</pubDate>
+      <guid>https://embedded-elixir.com/post/2019-01-18-nerves-at-home-desk-controller/</guid>
+      <description>&lt;p&gt;Use Nerves and a little reverse engineering to control a motorized desk. Then&#xA;intercept current height messages from the controller and publish to a Phoenix&#xA;site for real-time desk height measurements&amp;hellip;because #yolo.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

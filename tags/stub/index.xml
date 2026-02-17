@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Stub on Embedded Elixir</title>
+    <link>https://embedded-elixir.com/tags/stub/</link>
+    <description>Recent content in Stub on Embedded Elixir</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 25 Sep 2018 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://embedded-elixir.com/tags/stub/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Mocks and Explicit Contracts in Nerves</title>
+      <link>https://embedded-elixir.com/post/2018-09-25-mocks-and-explicit-contracts-expansion/</link>
+      <pubDate>Tue, 25 Sep 2018 00:00:00 +0000</pubDate>
+      <guid>https://embedded-elixir.com/post/2018-09-25-mocks-and-explicit-contracts-expansion/</guid>
+      <description>&lt;p&gt;If you are not super new to Elixir, you may have read &lt;a href=&#34;http://blog.plataformatec.com.br/2015/10/mocks-and-explicit-contracts/&#34;&gt;this blog&#xA;post&lt;/a&gt;&#xA;by José Valim. If you haven&amp;rsquo;t read it, you may want to check it out. This post&#xA;references it frequently.&lt;/p&gt;&#xA;&lt;p&gt;Nerves puts a lot of focus into spending as much time developing your&#xA;application on your host machine. This means you can rapidly develop your&#xA;application, write tests, etc. When you feel it is ready you can then burn your&#xA;firmware to a device and it will &lt;em&gt;just work&lt;/em&gt;. This has an issue though.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

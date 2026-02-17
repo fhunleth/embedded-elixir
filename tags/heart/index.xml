@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Heart on Embedded Elixir</title>
+    <link>https://embedded-elixir.com/tags/heart/</link>
+    <description>Recent content in Heart on Embedded Elixir</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 10 Dec 2018 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://embedded-elixir.com/tags/heart/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>You Gotta Have Heart</title>
+      <link>https://embedded-elixir.com/post/2018-12-10-heart/</link>
+      <pubDate>Mon, 10 Dec 2018 00:00:00 +0000</pubDate>
+      <guid>https://embedded-elixir.com/post/2018-12-10-heart/</guid>
+      <description>&lt;p&gt;It’s one of an embedded developer’s worst nightmares: You have devices in the&#xA;field, on remote sites, where you don’t have access to local staff to serve as&#xA;your hands. You’re far from the devices, maybe on a different continent, even,&#xA;and now you have a device that’s no longer responding to network requests, or&#xA;not sending event data as expected.&lt;/p&gt;&#xA;&lt;p&gt;It is a terrible feeling.&lt;/p&gt;&#xA;&lt;p&gt;If you’re using Nerves to build firmware, you have tools at your disposal to&#xA;help keep your devices online.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

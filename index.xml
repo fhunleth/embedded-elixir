@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Embedded Elixir</title>
+    <link>https://embedded-elixir.com/</link>
+    <description>Recent content on Embedded Elixir</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 11 Jul 2023 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://embedded-elixir.com/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Nerves System Upgrade Guide</title>
+      <link>https://embedded-elixir.com/post/2023-07-11-nerves-upgrade-guide/</link>
+      <pubDate>Tue, 11 Jul 2023 00:00:00 +0000</pubDate>
+      <guid>https://embedded-elixir.com/post/2023-07-11-nerves-upgrade-guide/</guid>
+      <description>&lt;p&gt;This guide provides steps to be followed when you upgrade your Nerves firmware&#xA;project to a newer version of Nerves System.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Autoloading NIFs on Nerves</title>
+      <link>https://embedded-elixir.com/post/2023-05-29-autoloading-nifs/</link>
+      <pubDate>Mon, 29 May 2023 00:00:00 +0000</pubDate>
+      <guid>https://embedded-elixir.com/post/2023-05-29-autoloading-nifs/</guid>
+      <description>&lt;p&gt;Native Implemented Functions (NIFs) let you significantly speed up code or&#xA;make system calls that would otherwise be unavailable. However, they come with a&#xA;significant cost in that when they go wrong, they can take down the entire&#xA;Erlang VM. This is particularly challenging when using NIFs with Nerves when&#xA;crashes happen at boot time.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Debugging C Code on Nerves</title>
+      <link>https://embedded-elixir.com/post/2021-07-03-debugging-c/</link>
+      <pubDate>Sat, 03 Jul 2021 00:00:00 +0000</pubDate>
+      <guid>https://embedded-elixir.com/post/2021-07-03-debugging-c/</guid>
+      <description>&lt;p&gt;Having trouble debugging C code on Nerves? This post shows how to create, obtain&#xA;and work with core dumps.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Nerves 📂 👀</title>
+      <link>https://embedded-elixir.com/post/2021-05-08-nerves-file-peeking/</link>
+      <pubDate>Sat, 08 May 2021 00:00:00 +0000</pubDate>
+      <guid>https://embedded-elixir.com/post/2021-05-08-nerves-file-peeking/</guid>
+      <description>&lt;p&gt;Want to look at and copy files on remote Nerves devices? This post shows you&#xA;how using SSH.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>🧙‍♀️Wizards &amp; WiFi ‍🧙‍♂️</title>
+      <link>https://embedded-elixir.com/post/2019-11-23-wizards-and-wifi/</link>
+      <pubDate>Sat, 23 Nov 2019 00:00:00 +0000</pubDate>
+      <guid>https://embedded-elixir.com/post/2019-11-23-wizards-and-wifi/</guid>
+      <description>&lt;p&gt;Introducing &lt;code&gt;VintageNetWizard&lt;/code&gt; - Simple WiFi Configuration using a web browser&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://github.com/nerves-networking/vintage_net_wizard&#34;&gt;https://github.com/nerves-networking/vintage_net_wizard&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Embedded Networking</title>
+      <link>https://embedded-elixir.com/post/2019-11-22-embedded-networking/</link>
+      <pubDate>Fri, 22 Nov 2019 00:00:00 +0000</pubDate>
+      <guid>https://embedded-elixir.com/post/2019-11-22-embedded-networking/</guid>
+      <description>&lt;p&gt;Introducing &lt;code&gt;VintageNet&lt;/code&gt; - a new networking library for embedded Elixir devices,&#xA;specially designed for Nerves 💙💻📶&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://github.com/nerves-networking/vintage_net&#34;&gt;https://github.com/nerves-networking/vintage_net&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Nerves @ 434 MHz</title>
+      <link>https://embedded-elixir.com/post/2019-08-29-nerves-at-434-mhz/</link>
+      <pubDate>Thu, 29 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>https://embedded-elixir.com/post/2019-08-29-nerves-at-434-mhz/</guid>
+      <description>&lt;p&gt;Many home and office items use radio frequencies to communicate control. So naturally,&#xA;lets take that over to control them from a single Nerves device with one wire on a&#xA;GPIO pin.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Talking I2C</title>
+      <link>https://embedded-elixir.com/post/2019-05-18-talking-i2c/</link>
+      <pubDate>Sat, 18 May 2019 00:00:00 +0000</pubDate>
+      <guid>https://embedded-elixir.com/post/2019-05-18-talking-i2c/</guid>
+      <description>&lt;p&gt;Reading datasheets for fun and profit, or how I learned to stop worrying and&#xA;convert analog signals into elixir terms.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Nerves At Home: Controlling a Desk</title>
+      <link>https://embedded-elixir.com/post/2019-01-18-nerves-at-home-desk-controller/</link>
+      <pubDate>Fri, 18 Jan 2019 00:00:00 +0000</pubDate>
+      <guid>https://embedded-elixir.com/post/2019-01-18-nerves-at-home-desk-controller/</guid>
+      <description>&lt;p&gt;Use Nerves and a little reverse engineering to control a motorized desk. Then&#xA;intercept current height messages from the controller and publish to a Phoenix&#xA;site for real-time desk height measurements&amp;hellip;because #yolo.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Using Erlang Distribution to test hardware</title>
+      <link>https://embedded-elixir.com/post/2018-12-10-using-distribution-to-test-hardware/</link>
+      <pubDate>Mon, 10 Dec 2018 00:00:00 +0000</pubDate>
+      <guid>https://embedded-elixir.com/post/2018-12-10-using-distribution-to-test-hardware/</guid>
+      <description>&lt;p&gt;Iterating quickly over code changes when working with new hardware can be&#xA;tricky. Nerves has built-in mechanisms that can be helpful, but what if there&#xA;were an even faster, more efficient way?&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>You Gotta Have Heart</title>
+      <link>https://embedded-elixir.com/post/2018-12-10-heart/</link>
+      <pubDate>Mon, 10 Dec 2018 00:00:00 +0000</pubDate>
+      <guid>https://embedded-elixir.com/post/2018-12-10-heart/</guid>
+      <description>&lt;p&gt;It’s one of an embedded developer’s worst nightmares: You have devices in the&#xA;field, on remote sites, where you don’t have access to local staff to serve as&#xA;your hands. You’re far from the devices, maybe on a different continent, even,&#xA;and now you have a device that’s no longer responding to network requests, or&#xA;not sending event data as expected.&lt;/p&gt;&#xA;&lt;p&gt;It is a terrible feeling.&lt;/p&gt;&#xA;&lt;p&gt;If you’re using Nerves to build firmware, you have tools at your disposal to&#xA;help keep your devices online.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Mocks and Explicit Contracts in Nerves</title>
+      <link>https://embedded-elixir.com/post/2018-09-25-mocks-and-explicit-contracts-expansion/</link>
+      <pubDate>Tue, 25 Sep 2018 00:00:00 +0000</pubDate>
+      <guid>https://embedded-elixir.com/post/2018-09-25-mocks-and-explicit-contracts-expansion/</guid>
+      <description>&lt;p&gt;If you are not super new to Elixir, you may have read &lt;a href=&#34;http://blog.plataformatec.com.br/2015/10/mocks-and-explicit-contracts/&#34;&gt;this blog&#xA;post&lt;/a&gt;&#xA;by José Valim. If you haven&amp;rsquo;t read it, you may want to check it out. This post&#xA;references it frequently.&lt;/p&gt;&#xA;&lt;p&gt;Nerves puts a lot of focus into spending as much time developing your&#xA;application on your host machine. This means you can rapidly develop your&#xA;application, write tests, etc. When you feel it is ready you can then burn your&#xA;firmware to a device and it will &lt;em&gt;just work&lt;/em&gt;. This has an issue though.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Provisioning Nerves Devices</title>
+      <link>https://embedded-elixir.com/post/2018-06-15-serial_number/</link>
+      <pubDate>Fri, 15 Jun 2018 00:00:00 +0000</pubDate>
+      <guid>https://embedded-elixir.com/post/2018-06-15-serial_number/</guid>
+      <description>&lt;p&gt;When you&amp;rsquo;re starting out with Nerves, you may have connected to your first&#xA;projects over the network using &lt;code&gt;nerves.local&lt;/code&gt;. Libraries like&#xA;&lt;a href=&#34;https://github.com/nerves-project/nerves_init_gadget&#34;&gt;nerves_init_gadget&lt;/a&gt; make this easy and when you&amp;rsquo;re&#xA;starting out, it&amp;rsquo;s really convenient. Don&amp;rsquo;t know the IP address that your&#xA;device was assigned? Try &lt;code&gt;nerves.local&lt;/code&gt; and you&amp;rsquo;re good to go.&lt;/p&gt;&#xA;&lt;p&gt;And then you add a second device to your network. &lt;code&gt;nerves.local&lt;/code&gt; isn&amp;rsquo;t looking&#xA;so convenient any more.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Nerves v1.0 Released</title>
+      <link>https://embedded-elixir.com/post/2018-05-03-nerves-v1.0.0/</link>
+      <pubDate>Wed, 02 May 2018 00:00:00 +0000</pubDate>
+      <guid>https://embedded-elixir.com/post/2018-05-03-nerves-v1.0.0/</guid>
+      <description>&lt;p&gt;We are thrilled to announce &lt;a href=&#34;https://nerves-project.org&#34;&gt;Nerves&lt;/a&gt; v1.0 is finally out. This has been&#xA;4219 commits by 102 contributors since the initial commit on &lt;a href=&#34;https://github.com/nerves-project/nerves_system_br/tree/dcd9a16edc39146a505c6e854579a03145c2d439&#34;&gt;October 29th,&#xA;2013&lt;/a&gt;! This would not have been possible without our &lt;a href=&#34;https://nerves-project.org/#sponsors&#34;&gt;corporate&#xA;sponsors&lt;/a&gt; and &lt;a href=&#34;https://opencollective.com/nerves-project&#34;&gt;individual backers&lt;/a&gt;.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Reverting firmware updates</title>
+      <link>https://embedded-elixir.com/post/2018-01-08-firmware-revert/</link>
+      <pubDate>Mon, 08 Jan 2018 00:00:00 +0000</pubDate>
+      <guid>https://embedded-elixir.com/post/2018-01-08-firmware-revert/</guid>
+      <description>&lt;p&gt;Deployed a firmware image that doesn&amp;rsquo;t quite work? Made a mistake in development&#xA;and don&amp;rsquo;t want to remove and reprogram the MicroSD card to go back? No problem.&#xA;If the previous firmware image worked fine, then just revert back to it.&lt;/p&gt;&#xA;&lt;p&gt;This is one of those features that has been possible since the beginning of the&#xA;Nerves project, but we didn&amp;rsquo;t make it easy. That&amp;rsquo;s changing.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>The Road to Windows</title>
+      <link>https://embedded-elixir.com/post/2018-01-08-windows-support/</link>
+      <pubDate>Mon, 08 Jan 2018 00:00:00 +0000</pubDate>
+      <guid>https://embedded-elixir.com/post/2018-01-08-windows-support/</guid>
+      <description>&lt;p&gt;Most Elixir developers prefer Mac or Linux, but Windows is historically the&#xA;platform of choice for embedded development.  Therefore as Nerves continues to&#xA;grow, a Windows solution is needed.&lt;/p&gt;&#xA;&lt;p&gt;There are 2 fundamental approaches to Nerves-on-Windows:&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;Pretend it&amp;rsquo;s Unix&lt;/li&gt;&#xA;&lt;li&gt;Run it as a Windows app&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;Unfortunately, there is no &amp;ldquo;silver bullet&amp;rdquo;&amp;ndash;each approach has its trade-offs.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>January 2018 Nerves Update</title>
+      <link>https://embedded-elixir.com/post/2018-01-02-nerves-update/</link>
+      <pubDate>Tue, 02 Jan 2018 00:00:00 +0000</pubDate>
+      <guid>https://embedded-elixir.com/post/2018-01-02-nerves-update/</guid>
+      <description>&lt;p&gt;Happy New Year from the Nerves team!&lt;/p&gt;&#xA;&lt;p&gt;We&amp;rsquo;re marching ahead with our 1.0 plans and methodically going through our&#xA;constituent projects to get them across the &amp;ldquo;finish&amp;rdquo; line. Work priorities have&#xA;forced some Nerves development on tangents, but some of those may be of interest&#xA;as well. Here&amp;rsquo;s a summary of what&amp;rsquo;s been happening:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Using NIFs With Nerves</title>
+      <link>https://embedded-elixir.com/post/2017-12-23-using-nifs-with-nerves/</link>
+      <pubDate>Sat, 23 Dec 2017 12:48:08 -0800</pubDate>
+      <guid>https://embedded-elixir.com/post/2017-12-23-using-nifs-with-nerves/</guid>
+      <description>&lt;p&gt;While working on a Nerves project, you will likely do most hard work in the&#xA;&lt;code&gt;host&lt;/code&gt; environment. This means you get to develop features quickly, and when&#xA;are ready, you simply deploy your known working firmware to your embedded&#xA;devices. This however can lead to a situation where the code runs really well&#xA;on your i7 powered beast computer, but when deployed on a less&#xA;powerful Raspberry Pi 0, for example. Nothing will be broken, but things are just&#xA;&lt;em&gt;too&lt;/em&gt; slow. There are a number of solutions to this problem and in this post,&#xA;I will walk you through a simplified real world example of one possible solution&#xA;of using an &lt;a href=&#34;http://erlang.org/doc/tutorial/nif.html&#34;&gt;Erlang NIF&lt;/a&gt; to speed&#xA;up one particular functionality.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>The Nerves Update</title>
+      <link>https://embedded-elixir.com/post/2017-11-02-nerves-update/</link>
+      <pubDate>Thu, 02 Nov 2017 00:00:00 +0000</pubDate>
+      <guid>https://embedded-elixir.com/post/2017-11-02-nerves-update/</guid>
+      <description>&lt;p&gt;Wondering what&amp;rsquo;s happening on the Nerves project? You&amp;rsquo;re not alone. We&amp;rsquo;re planning semi-regular updates so that you don&amp;rsquo;t need to lurk on the &lt;a href=&#34;https://elixir-slackin.herokuapp.com/&#34;&gt;elixir-lang Slack&lt;/a&gt;&amp;rsquo;s #nerves and #nerves-dev channels all the time.&lt;/p&gt;&#xA;&lt;p&gt;Before the updates, I&amp;rsquo;d like to thank our &lt;a href=&#34;https://opencollective.com/nerves-project/&#34;&gt;Open Collective backers&lt;/a&gt;, &lt;a href=&#34;https://www.letote.com&#34;&gt;Le Tote&lt;/a&gt; and &lt;a href=&#34;https://farmbot.io/&#34;&gt;FarmBot&lt;/a&gt;, since they&amp;rsquo;re majorly helping all of us make this project sustainable for the long term.&lt;/p&gt;&#xA;&lt;p&gt;Alright, here are the highlights:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Creating Patches Using Git</title>
+      <link>https://embedded-elixir.com/post/2017-10-05-patching-buildroot/</link>
+      <pubDate>Thu, 05 Oct 2017 00:00:00 +0000</pubDate>
+      <guid>https://embedded-elixir.com/post/2017-10-05-patching-buildroot/</guid>
+      <description>&lt;p&gt;This is not an Elixir post, but it comes up when working with custom Nerves&#xA;systems. The problem is how to deal with custom patches to Buildroot, Linux, or&#xA;any of the non-Elixir libraries that your application might use. You may have&#xA;seen patch files like&#xA;&lt;a href=&#34;https://github.com/nerves-project/nerves_system_br/tree/main/patches/buildroot&#34;&gt;these&lt;/a&gt;.&#xA;These patch files are used to create local changes to projects when&#xA;modifications either can&amp;rsquo;t be sent upstream (partial workarounds, hacks for&#xA;specific systems, etc.) or haven&amp;rsquo;t been integrated yet. This post describes a&#xA;way to create them.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Using Ecto and Sqlite3 with Nerves</title>
+      <link>https://embedded-elixir.com/post/2017-09-22-using-ecto-and-sqlite3-with-nerves/</link>
+      <pubDate>Fri, 22 Sep 2017 00:00:00 +0000</pubDate>
+      <guid>https://embedded-elixir.com/post/2017-09-22-using-ecto-and-sqlite3-with-nerves/</guid>
+      <description>&lt;p&gt;One of the most common questions we answer in the Nerves help channels is how to&#xA;store persistant data across reboots.  Since the file system is read-only, the&#xA;normal avenues usually will not work with Nerves.&lt;/p&gt;&#xA;&lt;p&gt;There are several solutions that have yielded varying levels of success accross&#xA;projects. Before we dive too deep into SQLite, lets take a look at the other&#xA;options:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Roundup of Embedded Elixir Talks at ElixirConf 2017</title>
+      <link>https://embedded-elixir.com/post/2017-09-11-embedded-talks-elixirconf/</link>
+      <pubDate>Mon, 11 Sep 2017 00:00:00 +0000</pubDate>
+      <guid>https://embedded-elixir.com/post/2017-09-11-embedded-talks-elixirconf/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://elixirconf.com/&#34;&gt;ElixirConf 2017&lt;/a&gt; was fantastic with a good selection&#xA;of Nerves and embedded Elixir talks. Here&amp;rsquo;s a list:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Using ASDF-vm</title>
+      <link>https://embedded-elixir.com/post/2017-05-23-using-asdf-vm/</link>
+      <pubDate>Tue, 23 May 2017 00:00:00 +0000</pubDate>
+      <guid>https://embedded-elixir.com/post/2017-05-23-using-asdf-vm/</guid>
+      <description>&lt;p&gt;Nerves usually pushes the bleeding edge of Elixir, which means we sometimes&#xA;sometimes hear about problems in our Nerves Slack channel that can be solved by&#xA;updating to the latest version of Elixir and OTP. Now, there are built-in&#xA;options in most operating systems to do this, such as &lt;code&gt;brew&lt;/code&gt;, &lt;code&gt;apt-get&lt;/code&gt;,&#xA;&lt;code&gt;pacman&lt;/code&gt; etc, and they all work with varying levels of success. ASDF-vm is an&#xA;alternate version manager that allows easy installation and switching between&#xA;different versions of various packages.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Poncho Projects</title>
+      <link>https://embedded-elixir.com/post/2017-05-19-poncho-projects/</link>
+      <pubDate>Fri, 19 May 2017 00:00:00 +0000</pubDate>
+      <guid>https://embedded-elixir.com/post/2017-05-19-poncho-projects/</guid>
+      <description>&lt;p&gt;Recently in the Nerves community Slack channel, we have been talking about how &lt;a href=&#34;http://elixir-lang.org/getting-started/mix-otp/dependencies-and-umbrella-apps.html#umbrella-projects&#34;&gt;umbrella projects&lt;/a&gt; can be problematic for a Nerves-based project.&#xA;As a result, we have coined the tongue-in-cheek term &amp;ldquo;poncho projects&amp;rdquo; to refer to plain-old-Elixir projects with applications that use plain-old-dependencies.&#xA;This is different than using an umbrella project, which come with some standard conveniences and interdependencies between applications in the project.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Firmware Updates</title>
+      <link>https://embedded-elixir.com/post/2017-05-04-firmware-update/</link>
+      <pubDate>Thu, 04 May 2017 00:00:00 +0000</pubDate>
+      <guid>https://embedded-elixir.com/post/2017-05-04-firmware-update/</guid>
+      <description>&lt;p&gt;Firmware updates are an important aspect to all parts of the device lifecycle, not just production. In development, they can save you time not burning SD cards by using mechanisms like pushing firmware bundles over the network. Network updates can also pave the way to automate executing canary tests using real hardware. Firmware updates are important to these stages because they are the only way to modify the contents of the read only filesystem.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Official Raspberry Pi Zero Support and new RPi Systems</title>
+      <link>https://embedded-elixir.com/post/2017-04-18-nerves_system_rpi/</link>
+      <pubDate>Tue, 18 Apr 2017 00:00:00 +0000</pubDate>
+      <guid>https://embedded-elixir.com/post/2017-04-18-nerves_system_rpi/</guid>
+      <description>&lt;p&gt;It&amp;rsquo;s official. Tim Mecklem&amp;rsquo;s Raspberry Pi Zero/Zero W system is now&#xA;part of the Nerves Project. Here&amp;rsquo;s why we&amp;rsquo;re so excited about this system:&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;https://embedded-elixir.com/images/2017-04-18/rpi0-equipment.jpg&#34; alt=&#34;Required hardware&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;It only requires a MicroUSB cable, MicroSD card, and an RPi Zero for&#xA;development. The MicroUSB cable provides power and access to the RPi&amp;rsquo;s&#xA;&lt;code&gt;IEx&lt;/code&gt; prompt. If you have a Zero W or a RedBear IoT pHAT, your programs&#xA;have easy access to WiFi too.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Roundup of Embedded and IoT Presentations in March</title>
+      <link>https://embedded-elixir.com/post/2017-04-06-embedded-talks-in-march/</link>
+      <pubDate>Thu, 06 Apr 2017 00:00:00 +0000</pubDate>
+      <guid>https://embedded-elixir.com/post/2017-04-06-embedded-talks-in-march/</guid>
+      <description>&lt;p&gt;March was quite a month for talks starting with&#xA;&lt;a href=&#34;http://elixirdaze.com/&#34;&gt;ElixirDaze&lt;/a&gt; in Florida, going to &lt;a href=&#34;http://www.erlangelixir.com/&#34;&gt;Erlang and Elixir Factory&lt;/a&gt; in&#xA;San Francisco, and ending at the &lt;a href=&#34;https://www.meetup.com/ruby-lviv/&#34;&gt;Lviv Ruby Meetup&lt;/a&gt; in Ukraine.&lt;/p&gt;&#xA;&lt;p&gt;Here&amp;rsquo;s a list of embedded Elixir and Erlang related ones that we found:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Upgrading to Nerves 0.5</title>
+      <link>https://embedded-elixir.com/post/2017-03-30-upgrading-to-nerves-0-5/</link>
+      <pubDate>Thu, 30 Mar 2017 00:00:00 +0000</pubDate>
+      <guid>https://embedded-elixir.com/post/2017-03-30-upgrading-to-nerves-0-5/</guid>
+      <description>&lt;p&gt;In early March, the &lt;a href=&#34;http://www.nerves-project.org&#34;&gt;Nerves Project&lt;/a&gt; published its &lt;a href=&#34;https://github.com/nerves-project/nerves/releases/tag/v0.5.0&#34;&gt;v0.5.0 release&lt;/a&gt;, marking another big step forward in usability and completeness of the platform.&#xA;In this post, I&amp;rsquo;d like to describe the major changes to be aware of as you upgrade existing projects or create new ones using Nerves 0.5.&lt;/p&gt;&#xA;&lt;h1 id=&#34;refreshed-docs-and-examples&#34;&gt;Refreshed Docs and Examples&lt;/h1&gt;&#xA;&lt;p&gt;If you&amp;rsquo;re new to Nerves or you&amp;rsquo;ve been using it for a long time and just never got around to it, you may want to check out the &lt;a href=&#34;https://hexdocs.pm/nerves/getting-started.html&#34;&gt;Getting Started guides and documentation available on Hexdocs&lt;/a&gt; and the &lt;a href=&#34;https://github.com/nerves-project/nerves-examples&#34;&gt;example projects available on GitHub&lt;/a&gt;.&#xA;These have all been reviewed and updated to match what&amp;rsquo;s available in Nerves 0.5, so it&amp;rsquo;s a great way to quickly see how everything works.&#xA;In particular, the &lt;code&gt;nerves-examples&lt;/code&gt; projects can be used as a reference if you get stuck trying to start a new project or feature, or when upgrading an existing project.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Newsletter</title>
+      <link>https://embedded-elixir.com/newsletter/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://embedded-elixir.com/newsletter/</guid>
+      <description>&lt;p&gt;The Official Nerves Newsletter is now at &lt;a href=&#34;https://nerves-project.org/newsletter&#34;&gt;nerves-project.org/newsletter&lt;/a&gt;.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

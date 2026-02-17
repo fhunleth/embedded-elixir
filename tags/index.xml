@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on Embedded Elixir</title>
+    <link>https://embedded-elixir.com/tags/</link>
+    <description>Recent content in Tags on Embedded Elixir</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 11 Jul 2023 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://embedded-elixir.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Elixir</title>
+      <link>https://embedded-elixir.com/tags/elixir/</link>
+      <pubDate>Tue, 11 Jul 2023 00:00:00 +0000</pubDate>
+      <guid>https://embedded-elixir.com/tags/elixir/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Nerves</title>
+      <link>https://embedded-elixir.com/tags/nerves/</link>
+      <pubDate>Tue, 11 Jul 2023 00:00:00 +0000</pubDate>
+      <guid>https://embedded-elixir.com/tags/nerves/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Nif</title>
+      <link>https://embedded-elixir.com/tags/nif/</link>
+      <pubDate>Mon, 29 May 2023 00:00:00 +0000</pubDate>
+      <guid>https://embedded-elixir.com/tags/nif/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Coredump</title>
+      <link>https://embedded-elixir.com/tags/coredump/</link>
+      <pubDate>Sat, 03 Jul 2021 00:00:00 +0000</pubDate>
+      <guid>https://embedded-elixir.com/tags/coredump/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Disk</title>
+      <link>https://embedded-elixir.com/tags/disk/</link>
+      <pubDate>Sat, 08 May 2021 00:00:00 +0000</pubDate>
+      <guid>https://embedded-elixir.com/tags/disk/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Sftp</title>
+      <link>https://embedded-elixir.com/tags/sftp/</link>
+      <pubDate>Sat, 08 May 2021 00:00:00 +0000</pubDate>
+      <guid>https://embedded-elixir.com/tags/sftp/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Ssh</title>
+      <link>https://embedded-elixir.com/tags/ssh/</link>
+      <pubDate>Sat, 08 May 2021 00:00:00 +0000</pubDate>
+      <guid>https://embedded-elixir.com/tags/ssh/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Networking</title>
+      <link>https://embedded-elixir.com/tags/networking/</link>
+      <pubDate>Sat, 23 Nov 2019 00:00:00 +0000</pubDate>
+      <guid>https://embedded-elixir.com/tags/networking/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Radio</title>
+      <link>https://embedded-elixir.com/tags/radio/</link>
+      <pubDate>Thu, 29 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>https://embedded-elixir.com/tags/radio/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Rpitx</title>
+      <link>https://embedded-elixir.com/tags/rpitx/</link>
+      <pubDate>Thu, 29 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>https://embedded-elixir.com/tags/rpitx/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>ASD1115</title>
+      <link>https://embedded-elixir.com/tags/asd1115/</link>
+      <pubDate>Sat, 18 May 2019 00:00:00 +0000</pubDate>
+      <guid>https://embedded-elixir.com/tags/asd1115/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Binary</title>
+      <link>https://embedded-elixir.com/tags/binary/</link>
+      <pubDate>Sat, 18 May 2019 00:00:00 +0000</pubDate>
+      <guid>https://embedded-elixir.com/tags/binary/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Elixir-Circuits</title>
+      <link>https://embedded-elixir.com/tags/elixir-circuits/</link>
+      <pubDate>Sat, 18 May 2019 00:00:00 +0000</pubDate>
+      <guid>https://embedded-elixir.com/tags/elixir-circuits/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>I2c</title>
+      <link>https://embedded-elixir.com/tags/i2c/</link>
+      <pubDate>Sat, 18 May 2019 00:00:00 +0000</pubDate>
+      <guid>https://embedded-elixir.com/tags/i2c/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Gpio</title>
+      <link>https://embedded-elixir.com/tags/gpio/</link>
+      <pubDate>Fri, 18 Jan 2019 00:00:00 +0000</pubDate>
+      <guid>https://embedded-elixir.com/tags/gpio/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Logic Analyzer</title>
+      <link>https://embedded-elixir.com/tags/logic-analyzer/</link>
+      <pubDate>Fri, 18 Jan 2019 00:00:00 +0000</pubDate>
+      <guid>https://embedded-elixir.com/tags/logic-analyzer/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Uart</title>
+      <link>https://embedded-elixir.com/tags/uart/</link>
+      <pubDate>Fri, 18 Jan 2019 00:00:00 +0000</pubDate>
+      <guid>https://embedded-elixir.com/tags/uart/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Distribution</title>
+      <link>https://embedded-elixir.com/tags/distribution/</link>
+      <pubDate>Mon, 10 Dec 2018 00:00:00 +0000</pubDate>
+      <guid>https://embedded-elixir.com/tags/distribution/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Erlang</title>
+      <link>https://embedded-elixir.com/tags/erlang/</link>
+      <pubDate>Mon, 10 Dec 2018 00:00:00 +0000</pubDate>
+      <guid>https://embedded-elixir.com/tags/erlang/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Heart</title>
+      <link>https://embedded-elixir.com/tags/heart/</link>
+      <pubDate>Mon, 10 Dec 2018 00:00:00 +0000</pubDate>
+      <guid>https://embedded-elixir.com/tags/heart/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Watchdog</title>
+      <link>https://embedded-elixir.com/tags/watchdog/</link>
+      <pubDate>Mon, 10 Dec 2018 00:00:00 +0000</pubDate>
+      <guid>https://embedded-elixir.com/tags/watchdog/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Mock</title>
+      <link>https://embedded-elixir.com/tags/mock/</link>
+      <pubDate>Tue, 25 Sep 2018 00:00:00 +0000</pubDate>
+      <guid>https://embedded-elixir.com/tags/mock/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Stub</title>
+      <link>https://embedded-elixir.com/tags/stub/</link>
+      <pubDate>Tue, 25 Sep 2018 00:00:00 +0000</pubDate>
+      <guid>https://embedded-elixir.com/tags/stub/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Provisioning</title>
+      <link>https://embedded-elixir.com/tags/provisioning/</link>
+      <pubDate>Fri, 15 Jun 2018 00:00:00 +0000</pubDate>
+      <guid>https://embedded-elixir.com/tags/provisioning/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>1.0</title>
+      <link>https://embedded-elixir.com/tags/1.0/</link>
+      <pubDate>Wed, 02 May 2018 00:00:00 +0000</pubDate>
+      <guid>https://embedded-elixir.com/tags/1.0/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Releases</title>
+      <link>https://embedded-elixir.com/tags/releases/</link>
+      <pubDate>Wed, 02 May 2018 00:00:00 +0000</pubDate>
+      <guid>https://embedded-elixir.com/tags/releases/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Fwup</title>
+      <link>https://embedded-elixir.com/tags/fwup/</link>
+      <pubDate>Mon, 08 Jan 2018 00:00:00 +0000</pubDate>
+      <guid>https://embedded-elixir.com/tags/fwup/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Revert</title>
+      <link>https://embedded-elixir.com/tags/revert/</link>
+      <pubDate>Mon, 08 Jan 2018 00:00:00 +0000</pubDate>
+      <guid>https://embedded-elixir.com/tags/revert/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Windows</title>
+      <link>https://embedded-elixir.com/tags/windows/</link>
+      <pubDate>Mon, 08 Jan 2018 00:00:00 +0000</pubDate>
+      <guid>https://embedded-elixir.com/tags/windows/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Update</title>
+      <link>https://embedded-elixir.com/tags/update/</link>
+      <pubDate>Tue, 02 Jan 2018 00:00:00 +0000</pubDate>
+      <guid>https://embedded-elixir.com/tags/update/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>C</title>
+      <link>https://embedded-elixir.com/tags/c/</link>
+      <pubDate>Sat, 23 Dec 2017 12:48:08 -0800</pubDate>
+      <guid>https://embedded-elixir.com/tags/c/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Buildroot</title>
+      <link>https://embedded-elixir.com/tags/buildroot/</link>
+      <pubDate>Thu, 05 Oct 2017 00:00:00 +0000</pubDate>
+      <guid>https://embedded-elixir.com/tags/buildroot/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Git</title>
+      <link>https://embedded-elixir.com/tags/git/</link>
+      <pubDate>Thu, 05 Oct 2017 00:00:00 +0000</pubDate>
+      <guid>https://embedded-elixir.com/tags/git/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Ecto</title>
+      <link>https://embedded-elixir.com/tags/ecto/</link>
+      <pubDate>Fri, 22 Sep 2017 00:00:00 +0000</pubDate>
+      <guid>https://embedded-elixir.com/tags/ecto/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Sqlite</title>
+      <link>https://embedded-elixir.com/tags/sqlite/</link>
+      <pubDate>Fri, 22 Sep 2017 00:00:00 +0000</pubDate>
+      <guid>https://embedded-elixir.com/tags/sqlite/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Conferences</title>
+      <link>https://embedded-elixir.com/tags/conferences/</link>
+      <pubDate>Mon, 11 Sep 2017 00:00:00 +0000</pubDate>
+      <guid>https://embedded-elixir.com/tags/conferences/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Talks</title>
+      <link>https://embedded-elixir.com/tags/talks/</link>
+      <pubDate>Mon, 11 Sep 2017 00:00:00 +0000</pubDate>
+      <guid>https://embedded-elixir.com/tags/talks/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Poncho</title>
+      <link>https://embedded-elixir.com/tags/poncho/</link>
+      <pubDate>Fri, 19 May 2017 00:00:00 +0000</pubDate>
+      <guid>https://embedded-elixir.com/tags/poncho/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Umbrella</title>
+      <link>https://embedded-elixir.com/tags/umbrella/</link>
+      <pubDate>Fri, 19 May 2017 00:00:00 +0000</pubDate>
+      <guid>https://embedded-elixir.com/tags/umbrella/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Bootloader</title>
+      <link>https://embedded-elixir.com/tags/bootloader/</link>
+      <pubDate>Thu, 04 May 2017 00:00:00 +0000</pubDate>
+      <guid>https://embedded-elixir.com/tags/bootloader/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Reactor</title>
+      <link>https://embedded-elixir.com/tags/reactor/</link>
+      <pubDate>Thu, 04 May 2017 00:00:00 +0000</pubDate>
+      <guid>https://embedded-elixir.com/tags/reactor/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Raspberrypi</title>
+      <link>https://embedded-elixir.com/tags/raspberrypi/</link>
+      <pubDate>Tue, 18 Apr 2017 00:00:00 +0000</pubDate>
+      <guid>https://embedded-elixir.com/tags/raspberrypi/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Release</title>
+      <link>https://embedded-elixir.com/tags/release/</link>
+      <pubDate>Thu, 30 Mar 2017 00:00:00 +0000</pubDate>
+      <guid>https://embedded-elixir.com/tags/release/</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,621 @@
+
+
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+  <head>
+    
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+ 
+
+
+      <title>Using Ecto and Sqlite3 with Nerves - </title>
+
+  <meta name="description" content="One of the most common questions we answer in the Nerves help channels is how to
+store persistant data across reboots.  Since the file system is read-only, the
+normal avenues usually will not work with Nerves.
+There are several solutions that have yielded varying levels of success accross
+projects. Before we dive too deep into SQLite, lets take a look at the other
+options:">
+  <meta name="author" content="Curated by Frank Hunleth"/><script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "name": "Embedded Elixir",
+    
+    "url": "https:\/\/embedded-elixir.com\/"
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": "",
+  "url": "https:\/\/embedded-elixir.com\/"
+  
+  
+  
+  
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@id": "https:\/\/embedded-elixir.com\/",
+          "name": "home"
+        }
+    },{
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@id": "https:\/\/embedded-elixir.com\/post\/2017-09-22-using-ecto-and-sqlite3-with-nerves\/",
+          "name": "Using ecto and sqlite3 with nerves"
+        }
+    }]
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "author": {
+    "name" : "Connor Rigby"
+  },
+  "headline": "Using Ecto and Sqlite3 with Nerves",
+  "description" : "One of the most common questions we answer in the Nerves help channels is how to store persistant data across reboots. Since the file system is read-only, the normal avenues usually will not work with Nerves.\nThere are several solutions that have yielded varying levels of success accross projects. Before we dive too deep into SQLite, lets take a look at the other options:\n",
+  "inLanguage" : "en",
+  "wordCount":  963 ,
+  "datePublished" : "2017-09-22T00:00:00\u002b00:00",
+  "dateModified" : "2017-09-22T00:00:00\u002b00:00",
+  "image" : "https:\/\/embedded-elixir.com\/images\/logo.png",
+  "keywords" : [ "nerves, sqlite, ecto" ],
+  "mainEntityOfPage" : "https:\/\/embedded-elixir.com\/post\/2017-09-22-using-ecto-and-sqlite3-with-nerves\/",
+  "publisher" : {
+    "@type": "Organization",
+    "name" : "https:\/\/embedded-elixir.com\/",
+    "logo" : {
+        "@type" : "ImageObject",
+        "url" : "https:\/\/embedded-elixir.com\/images\/logo.png",
+        "height" :  60 ,
+        "width" :  60
+    }
+  }
+}
+</script>
+
+
+<meta property="og:title" content="Using Ecto and Sqlite3 with Nerves" />
+<meta property="og:description" content="One of the most common questions we answer in the Nerves help channels is how to
+store persistant data across reboots.  Since the file system is read-only, the
+normal avenues usually will not work with Nerves.
+There are several solutions that have yielded varying levels of success accross
+projects. Before we dive too deep into SQLite, lets take a look at the other
+options:">
+<meta property="og:image" content="https://embedded-elixir.com/images/logo.png" />
+<meta property="og:url" content="https://embedded-elixir.com/post/2017-09-22-using-ecto-and-sqlite3-with-nerves/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Embedded Elixir" />
+
+  <meta name="twitter:title" content="Using Ecto and Sqlite3 with Nerves" />
+  <meta name="twitter:description" content="One of the most common questions we answer in the Nerves help channels is how to
+store persistant data across reboots.  Since the file system is read-only, the
+normal avenues usually will not work …">
+  <meta name="twitter:image" content="https://embedded-elixir.com/images/logo.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link href='https://embedded-elixir.com/images/favicon.ico' rel='icon' type='image/x-icon'/>
+  <meta name="generator" content="Hugo 0.155.3">
+  <link rel="alternate" href="https://embedded-elixir.com/index.xml" type="application/rss+xml" title="Embedded Elixir"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css" integrity="sha384-5TcZemv2l/9On385z///+d7MSYlvIEw9FuZTIdZ14vJLqWphw7e7ZPuOiCHJcFCP" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v7.0.1/css/brands.css" integrity="sha384-+eXGm6TmVoCZR1gX03US+L++L2mJIfOvp2X0+luTuEktXaF5F+e3zn0sO0HBvOyT" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v7.0.1/css/fontawesome.css" integrity="sha384-B5nyPZa7e84uCJEYHtevCdVYtQosWsbDSRtq3cy/jeSVtQW05GL8CKXO7waXsjPK" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v7.0.1/css/regular.css" integrity="sha384-V71z/A/p/DGaZAryHhiSXRQj8HdQmK2nBgL2bX23MGD+h6ZKpyxOO76f5eSXmIaj" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v7.0.1/css/solid.css" integrity="sha384-1IIShlrK5iYgvS7OAgIH3prz4RAFP7hHZ2MaLIb9l3+trFwwnw/NdCWcUHlymZDU" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v7.0.1/css/svg.css" integrity="sha384-iBa7uugTOHXqQ2ngvDYJyKrPPQbd9n2P3EQe+o/0+HZe5TNvV+LO5X0lLLUrXLHP" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v7.0.1/css/svg-with-js.css" integrity="sha384-STWnS5AGz6M2YxsnGAd536EqcE2y+ktGovMMuhtXLsCBtl7lujeQj2eN4eDxa57x" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v7.0.1/css/v4-font-face.css" integrity="sha384-fH83IkgQi7kturzlxpXfNdsR8aUOcqj5HUORRVnSvJgObZkIw6aqKAaQx20IWyB/" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v7.0.1/css/v4-shims.css" integrity="sha384-cCODJHSivNBsaHei/8LC0HUD58kToSbDU+xT7Rs51BO1v/IvgT/uM0W6xMoUqKfn" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v7.0.1/css/v5-font-face.css" integrity="sha384-atSdF89mIn15dv+o2LKkDM6mCh3hwh6A7mwZ6F2it/kenqZbMu+QW/ye1OG4XSWV" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous"><link rel="stylesheet" href="https://embedded-elixir.com/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><link rel="stylesheet" href="https://embedded-elixir.com/css/syntax.css" /><link rel="stylesheet" href="https://embedded-elixir.com/css/codeblock.css" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.css" integrity="sha384-h/L2W9KefUClHWaty3SLE5F/qvc4djlyR4qY3NUV5HGQBBW7stbcfff1+I/vmsHh" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/default-skin/default-skin.min.css" integrity="sha384-iD0dNku6PYSIQLyfTOpB06F2KCZJAKLOThS5HRe8b3ibhdEQ6eKsFf/EeFxdOt5R" crossorigin="anonymous">
+
+  </head>
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://embedded-elixir.com/">Embedded Elixir</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="Blog" href="/">Blog</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Newsletter" href="https://nerves-project.org/newsletter">Newsletter</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Tags" href="/tags">Tags</a>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    
+      <div class="avatar-container">
+        <div class="avatar-img-border">
+          <a title="Embedded Elixir" href="https://embedded-elixir.com/">
+            <img class="avatar-img" src="https://embedded-elixir.com/images/logo.png" alt="Embedded Elixir" />
+           
+          </a>
+        </div>
+      </div>
+    
+
+  </div>
+</nav>
+
+
+
+
+    
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+
+  
+  
+  
+
+
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    
+    <div class="intro-header no-img">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="post-heading">
+              
+                <h1>Using Ecto and Sqlite3 with Nerves</h1>
+              
+              
+              
+              
+                <span class="post-meta">
+  
+  
+  
+  <i class="fas fa-calendar"></i>&nbsp;Posted on September 22, 2017
+  
+  
+  
+  
+    
+      
+        &nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;Connor Rigby
+      
+    
+  
+  
+</span>
+
+
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        <p>One of the most common questions we answer in the Nerves help channels is how to
+store persistant data across reboots.  Since the file system is read-only, the
+normal avenues usually will not work with Nerves.</p>
+<p>There are several solutions that have yielded varying levels of success accross
+projects. Before we dive too deep into SQLite, lets take a look at the other
+options:</p>
+<ul>
+<li>
+<p>Key-Value storage such as the ever popular <a href="https://github.com/cellulose/persistent_storage">Persistant Storage</a></p>
+<ul>
+<li>PROS: Super easy setup. Simple API.</li>
+<li>CONS: May be too simple. No migrations, File size may be an issue.</li>
+</ul>
+</li>
+<li>
+<p>DETS or Mnesia</p>
+<ul>
+<li>PROS: Built into Erlang. Easy setup. Distributed.</li>
+<li>CONS: No migration system. Can be difficult to maintain.</li>
+</ul>
+</li>
+<li>
+<p>Full Databases such as PostgreSQL or MongoDB</p>
+<ul>
+<li>PROS: Ecto adapters make these relatively easy, multi user, etc.</li>
+<li>CONS: Require a large setup on Nerves - Custom system, configs, setup etc.</li>
+</ul>
+</li>
+</ul>
+<p>And depending on your use case, one or more of those might be more useful to
+you.  But I&rsquo;ve found in many cases a simple, local, non-clustered database is
+the perfect data storage mechanism for an embedded system like Nerves.</p>
+<h2 id="application-setup">Application setup</h2>
+<p>Let&rsquo;s walk through a quick example app to get us up and running with Nerves and
+Ecto + SQLite3.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elixir" data-lang="elixir"><span class="line"><span class="cl"><span class="n">mix</span> <span class="n">nerves</span><span class="o">.</span><span class="n">new</span> <span class="n">hello_db</span>
+</span></span></code></pre></div><p>First off, crack open the <code>mix.exs</code> file and add the <code>:sqlite_ecto2</code> dependency
+to your list.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elixir" data-lang="elixir"><span class="line"><span class="cl"><span class="c1"># ...</span>
+</span></span><span class="line"><span class="cl"><span class="kd">def</span> <span class="n">deps</span> <span class="k">do</span>
+</span></span><span class="line"><span class="cl">  <span class="p">[</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span><span class="ss">:sqlite_ecto2</span><span class="p">,</span> <span class="s2">&#34;~&gt; 2.3&#34;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span>
+</span></span></code></pre></div><p>Next, open your <code>lib/hello_db/application.ex</code> file and add this line:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elixir" data-lang="elixir"><span class="line"><span class="cl"><span class="c1"># ...</span>
+</span></span><span class="line"><span class="cl"><span class="n">children</span> <span class="o">=</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">  <span class="nc">HelloDb.Repo</span>
+</span></span><span class="line"><span class="cl"><span class="p">]</span>
+</span></span></code></pre></div><p>Then, open up our <code>config.exs</code> file to configure Ecto and our new adapter.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elixir" data-lang="elixir"><span class="line"><span class="cl"><span class="n">config</span> <span class="ss">:hello_db</span><span class="p">,</span> <span class="nc">HelloDb.Repo</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="ss">adapter</span><span class="p">:</span> <span class="nc">Sqlite.Ecto2</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="ss">database</span><span class="p">:</span> <span class="s2">&#34;</span><span class="si">#{</span><span class="nc">Mix</span><span class="o">.</span><span class="n">env</span><span class="si">}</span><span class="s2">.sqlite3&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">config</span> <span class="ss">:hello_db</span><span class="p">,</span> <span class="ss">ecto_repos</span><span class="p">:</span> <span class="p">[</span><span class="nc">HelloDb.Repo</span><span class="p">]</span>
+</span></span></code></pre></div><p>If you&rsquo;ve used phoenix, before this will be straight-forward.
+<code>adapter: Sqlite.Ecto2</code> tell Ecto to use the SQLite adapter we installed.
+<code>database: &quot;#{Mix.env}.Sqlite3&quot;</code> tells the adapter what the name of the file is
+that will house our database. We sort it by env for standard testing purposes.</p>
+<p>Now if we do a</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elixir" data-lang="elixir"><span class="line"><span class="cl"><span class="n">mix</span> <span class="n">deps</span><span class="o">.</span><span class="n">get</span>
+</span></span><span class="line"><span class="cl"><span class="n">iex</span> <span class="o">-</span><span class="nc">S</span> <span class="n">mix</span>
+</span></span></code></pre></div><p>You&rsquo;ll notice that in the root of your project you will have a <code>dev.sqlite3</code>
+file.  The keen eye will notice that when deployed to our Nerves device, SQLite
+will not be allowed to write to that directory because of the read-only
+filesystem.</p>
+<p>That is relatively easy to solve. Back in our <code>config.exs</code> file uncomment this
+line:</p>
+<pre tabindex="0"><code># import_config &#34;#{Mix.Project.config[:target]}.exs&#34;
+</code></pre><p>Then create a new file <code>config/rpi0.exs</code> (or whatever you plan on deploying to)
+and override the Ecto config:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elixir" data-lang="elixir"><span class="line"><span class="cl"><span class="n">config</span> <span class="ss">:hello_db</span><span class="p">,</span> <span class="nc">HelloDb.Repo</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="ss">adapter</span><span class="p">:</span> <span class="nc">Sqlite.Ecto2</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="ss">database</span><span class="p">:</span> <span class="s2">&#34;/root/</span><span class="si">#{</span><span class="nc">Mix</span><span class="o">.</span><span class="n">env</span><span class="si">}</span><span class="s2">.sqlite3&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">config</span> <span class="ss">:hello_db</span><span class="p">,</span> <span class="ss">ecto_repos</span><span class="p">:</span> <span class="p">[</span><span class="nc">HelloDb.Repo</span><span class="p">]</span>
+</span></span></code></pre></div><p>Notice the only thing we changed was the <code>database</code> field. This means that when
+deployed our database will be written to the read+write application data
+partition of Nerves.</p>
+<h2 id="database-setup">Database Setup</h2>
+<p>Great! Now we have an embedded database! But it will need to be setup before
+runtime won&rsquo;t it?  If you come from Phoenix, you know about all of Ecto&rsquo;s cool
+Mix Tasks. So lets do that.</p>
+<pre tabindex="0"><code>mix ecto.create
+</code></pre><p>You may notice this will only provision our database in our host environment,
+but when deployed to our Nerves device, we unfortunately don&rsquo;t have the luxury
+of Mix Tasks. We are going to have to do something a little custom.</p>
+<p>Note: There are a number of ways to possibly accomplish getting your database
+setup in Nerves, and this is by no means the only way.</p>
+<p>Naturally we should just be able to run the Mix Tasks from our application code.
+Unfortunately this won&rsquo;t work. The Ecto tasks rely on things that just aren&rsquo;t
+available in our Nerves release. So we will have to implement them a little bit
+manually.</p>
+<p>First make sure we have a migration.  <code>mix ecto.gen.migration add_some_stuff</code>
+Edit this file accordingly. (leaving it empty is fine too.)</p>
+<p>In our <code>application.ex</code> file again let&rsquo;s add some functionality.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elixir" data-lang="elixir"><span class="line"><span class="cl"><span class="na">@otp_app</span> <span class="nc">Mix.Project</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="ss">:app</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="kd">def</span> <span class="n">start</span><span class="p">(</span><span class="n">_type</span><span class="p">,</span> <span class="n">_args</span><span class="p">)</span> <span class="k">do</span>
+</span></span><span class="line"><span class="cl">  <span class="kn">import</span> <span class="nc">Supervisor.Spec</span><span class="p">,</span> <span class="ss">warn</span><span class="p">:</span> <span class="no">false</span>
+</span></span><span class="line"><span class="cl">  <span class="ss">:ok</span> <span class="o">=</span> <span class="n">setup_db!</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="n">children</span> <span class="o">=</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">    <span class="nc">HelloDb.Repo</span>
+</span></span><span class="line"><span class="cl">  <span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">opts</span> <span class="o">=</span> <span class="p">[</span><span class="ss">strategy</span><span class="p">:</span> <span class="ss">:one_for_one</span><span class="p">,</span> <span class="ss">name</span><span class="p">:</span> <span class="nc">HelloDb.Supervisor</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">  <span class="nc">Supervisor</span><span class="o">.</span><span class="n">start_link</span><span class="p">(</span><span class="n">children</span><span class="p">,</span> <span class="n">opts</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">defp</span> <span class="n">setup_db!</span> <span class="k">do</span>
+</span></span><span class="line"><span class="cl">  <span class="n">repos</span> <span class="o">=</span> <span class="nc">Application</span><span class="o">.</span><span class="n">get_env</span><span class="p">(</span><span class="na">@otp_app</span><span class="p">,</span> <span class="ss">:ecto_repos</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="k">for</span> <span class="n">repo</span> <span class="o">&lt;-</span> <span class="n">repos</span> <span class="k">do</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="nc">Application</span><span class="o">.</span><span class="n">get_env</span><span class="p">(</span><span class="na">@otp_app</span><span class="p">,</span> <span class="n">repo</span><span class="p">)[</span><span class="ss">:adapter</span><span class="p">]</span> <span class="o">==</span> <span class="nc">Sqlite.Ecto2</span> <span class="k">do</span>
+</span></span><span class="line"><span class="cl">      <span class="n">setup_repo!</span><span class="p">(</span><span class="n">repo</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="n">migrate_repo!</span><span class="p">(</span><span class="n">repo</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">end</span>
+</span></span><span class="line"><span class="cl">  <span class="k">end</span>
+</span></span><span class="line"><span class="cl">  <span class="ss">:ok</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">defp</span> <span class="n">setup_repo!</span><span class="p">(</span><span class="n">repo</span><span class="p">)</span> <span class="k">do</span>
+</span></span><span class="line"><span class="cl">  <span class="n">db_file</span> <span class="o">=</span> <span class="nc">Application</span><span class="o">.</span><span class="n">get_env</span><span class="p">(</span><span class="na">@otp_app</span><span class="p">,</span> <span class="n">repo</span><span class="p">)[</span><span class="ss">:database</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">  <span class="k">unless</span> <span class="nc">File</span><span class="o">.</span><span class="n">exists?</span><span class="p">(</span><span class="n">db_file</span><span class="p">)</span> <span class="k">do</span>
+</span></span><span class="line"><span class="cl">    <span class="ss">:ok</span> <span class="o">=</span> <span class="n">repo</span><span class="o">.</span><span class="n">__adapter__</span><span class="o">.</span><span class="n">storage_up</span><span class="p">(</span><span class="n">repo</span><span class="o">.</span><span class="n">config</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="k">end</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">defp</span> <span class="n">migrate_repo!</span><span class="p">(</span><span class="n">repo</span><span class="p">)</span> <span class="k">do</span>
+</span></span><span class="line"><span class="cl">  <span class="n">opts</span> <span class="o">=</span> <span class="p">[</span><span class="ss">all</span><span class="p">:</span> <span class="no">true</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span><span class="ss">:ok</span><span class="p">,</span> <span class="n">pid</span><span class="p">,</span> <span class="n">apps</span><span class="p">}</span> <span class="o">=</span> <span class="nc">Mix.Ecto</span><span class="o">.</span><span class="n">ensure_started</span><span class="p">(</span><span class="n">repo</span><span class="p">,</span> <span class="n">opts</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">migrator</span> <span class="o">=</span> <span class="o">&amp;</span><span class="nc">Ecto.Migrator</span><span class="o">.</span><span class="n">run</span><span class="o">/</span><span class="mi">4</span>
+</span></span><span class="line"><span class="cl">  <span class="n">pool</span> <span class="o">=</span> <span class="n">repo</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="ss">:pool</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">  <span class="n">migrations_path</span> <span class="o">=</span> <span class="nc">Path</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="ss">:code</span><span class="o">.</span><span class="n">priv_dir</span><span class="p">(</span><span class="na">@otp_app</span><span class="p">)</span> <span class="o">|&gt;</span> <span class="n">to_string</span><span class="p">,</span> <span class="s2">&#34;repo&#34;</span><span class="p">,</span> <span class="s2">&#34;migrations&#34;</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">  <span class="n">migrated</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">function_exported?</span><span class="p">(</span><span class="n">pool</span><span class="p">,</span> <span class="ss">:unboxed_run</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="k">do</span>
+</span></span><span class="line"><span class="cl">      <span class="n">pool</span><span class="o">.</span><span class="n">unboxed_run</span><span class="p">(</span><span class="n">repo</span><span class="p">,</span> <span class="k">fn</span> <span class="o">-&gt;</span> <span class="n">migrator</span><span class="o">.</span><span class="p">(</span><span class="n">repo</span><span class="p">,</span> <span class="n">migrations_path</span><span class="p">,</span> <span class="ss">:up</span><span class="p">,</span> <span class="n">opts</span><span class="p">)</span> <span class="k">end</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span>
+</span></span><span class="line"><span class="cl">      <span class="n">migrator</span><span class="o">.</span><span class="p">(</span><span class="n">repo</span><span class="p">,</span> <span class="n">migrations_path</span><span class="p">,</span> <span class="ss">:up</span><span class="p">,</span> <span class="n">opts</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">end</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">pid</span> <span class="o">&amp;&amp;</span> <span class="n">repo</span><span class="o">.</span><span class="n">stop</span><span class="p">(</span><span class="n">pid</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="nc">Mix.Ecto</span><span class="o">.</span><span class="n">restart_apps_if_migrated</span><span class="p">(</span><span class="n">apps</span><span class="p">,</span> <span class="n">migrated</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span>
+</span></span></code></pre></div><p>We can break that down a bit here:</p>
+<p>The <code>setup_repo!/1</code> was derived from the
+<a href="https://github.com/elixir-ecto/ecto/blob/master/lib/mix/tasks/ecto.create.ex">create</a>
+mix task. It just checks for the database file&rsquo;s existence, and creates it if
+the file does not exist.</p>
+<p>The <code>migrate_repo/1</code> function is a bit more interesting. We actually need to
+start the repo (and its pool), find the path to our migrations, then of course
+run the migrations, and finally restart everything. Luckily <code>Mix.Ecto</code> is
+available for us that does much of the hard work for us.</p>
+<p>And there we have it, Your SQLite repo will be setup and migrated at application
+startup.  Obviously this is a little bit more config than your average Elixir or
+even Phoenix set up, but it&rsquo;s all fairly straight forward. Hopefully this gives
+a good jumping-off point to storing data on a Nerves project.</p>
+<h2 id="bonus-points">Bonus points</h2>
+<p>Obviously, we didn&rsquo;t cover all the details that you&rsquo;d need to think about when
+setting up a database on your embedded device. Here are a few more things to
+consider.</p>
+<ul>
+<li>
+<p>If you plan on having migrations, what will you do about failed migrations?</p>
+</li>
+<li>
+<p>When and how do you drop the database/repo if at all?</p>
+</li>
+<li>
+<p>Should migrations <em>always</em> be run? Maybe you want to hook into OTA updates,
+and only run them on an update. (With the above code, hey would be run on
+every boot.)</p>
+</li>
+</ul>
+
+        
+          <div class="blog-tags">
+            
+              
+              <a href="https://embedded-elixir.com/tags/nerves/">nerves</a>&nbsp;
+            
+              
+              <a href="https://embedded-elixir.com/tags/sqlite/">sqlite</a>&nbsp;
+            
+              
+              <a href="https://embedded-elixir.com/tags/ecto/">ecto</a>&nbsp;
+            
+          </div>
+        
+
+        
+
+        
+      </article>
+
+      
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="https://embedded-elixir.com/post/2017-09-11-embedded-talks-elixirconf/" data-toggle="tooltip" data-placement="top" title="Roundup of Embedded Elixir Talks at ElixirConf 2017">&larr; Previous Post</a>
+            </li>
+          
+          
+            <li class="next">
+              <a href="https://embedded-elixir.com/post/2017-10-05-patching-buildroot/" data-toggle="tooltip" data-placement="top" title="Creating Patches Using Git">Next Post &rarr;</a>
+            </li>
+          
+        </ul>
+      
+
+
+      
+      
+      
+      
+      
+          
+          <div class="disqus-comments">
+            
+  
+    <div class="comments">
+      <div id="disqus_thread"></div>
+<script>
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "embedded-elixir" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    </div>
+  
+
+
+          </div>
+          
+        
+        
+      
+
+    </div>
+  </div>
+</div>
+
+      <footer>
+  <div class="container">
+    
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+		
+		  <a href="https://github.com/fhunleth" title="GitHub">
+		
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+		
+		  <a href="https://bsky.app/profile/fhunleth.bsky.social" title="Bluesky">
+		
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-bluesky fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              Curated by Frank Hunleth
+            
+          
+
+          &nbsp;&bull;&nbsp;&copy;
+          
+            2023
+          
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://embedded-elixir.com/">Embedded Elixir</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="https://gohugo.io">Hugo v0.155.3</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer><script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.js" integrity="sha384-cMkvdD8LoxVzGF/RPUKAcvmm49FQ0oxwDF3BGKtDXcEc+T1b2N+teh/OJfpU0jr6" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/contrib/auto-render.min.js" integrity="sha384-hCXGrW6PitJEwbkoStFjeJxv+fSOOQKOPbJxSfM6G5sWZjAyWhXiTIIAmQqnlLlh" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
+<script src="https://code.jquery.com/jquery-3.7.0.slim.min.js" integrity="sha384-w5y/xIeYixWvfM+A1cEbmHPURnvyqmVg5eVENruEdDjcyRLUSNej7512JQGspFUr" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+
+<script src="https://embedded-elixir.com/js/main.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.js" integrity="sha384-QELNnmcmU8IR9ZAykt67vGr9/rZJdHbiWi64V88fCPaOohUlHCqUD/unNN0BXSqy" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe-ui-default.min.js" integrity="sha384-m67o7SkQ1ALzKZIFh4CiTA8tmadaujiTa9Vu+nqPSwDOqHrDmxLezTdFln8077+q" crossorigin="anonymous"></script><script src="https://embedded-elixir.com/js/load-photoswipe.js"></script>
+
+
+
+
+
+
+
+
+
+
+    
+  </body>
+</html>
+

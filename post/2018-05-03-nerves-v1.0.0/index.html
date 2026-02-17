@@ -1,0 +1,512 @@
+
+
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+  <head>
+    
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+ 
+
+
+      <title>Nerves v1.0 Released - </title>
+
+  <meta name="description" content="We are thrilled to announce Nerves v1.0 is finally out. This has been
+4219 commits by 102 contributors since the initial commit on October 29th,
+2013! This would not have been possible without our corporate
+sponsors and individual backers.">
+  <meta name="author" content="Curated by Frank Hunleth"/><script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "name": "Embedded Elixir",
+    
+    "url": "https:\/\/embedded-elixir.com\/"
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": "",
+  "url": "https:\/\/embedded-elixir.com\/"
+  
+  
+  
+  
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@id": "https:\/\/embedded-elixir.com\/",
+          "name": "home"
+        }
+    },{
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@id": "https:\/\/embedded-elixir.com\/post\/2018-05-03-nerves-v1.0.0\/",
+          "name": "Nerves v1.0 released"
+        }
+    }]
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "author": {
+    "name" : "Justin Schneck and Frank Hunleth"
+  },
+  "headline": "Nerves v1.0 Released",
+  "description" : "We are thrilled to announce Nerves v1.0 is finally out. This has been 4219 commits by 102 contributors since the initial commit on October 29th, 2013! This would not have been possible without our corporate sponsors and individual backers.\n",
+  "inLanguage" : "en",
+  "wordCount":  609 ,
+  "datePublished" : "2018-05-02T00:00:00\u002b00:00",
+  "dateModified" : "2018-05-02T00:00:00\u002b00:00",
+  "image" : "https:\/\/embedded-elixir.com\/images\/logo.png",
+  "keywords" : [ "nerves, 1.0, releases" ],
+  "mainEntityOfPage" : "https:\/\/embedded-elixir.com\/post\/2018-05-03-nerves-v1.0.0\/",
+  "publisher" : {
+    "@type": "Organization",
+    "name" : "https:\/\/embedded-elixir.com\/",
+    "logo" : {
+        "@type" : "ImageObject",
+        "url" : "https:\/\/embedded-elixir.com\/images\/logo.png",
+        "height" :  60 ,
+        "width" :  60
+    }
+  }
+}
+</script>
+
+
+<meta property="og:title" content="Nerves v1.0 Released" />
+<meta property="og:description" content="We are thrilled to announce Nerves v1.0 is finally out. This has been
+4219 commits by 102 contributors since the initial commit on October 29th,
+2013! This would not have been possible without our corporate
+sponsors and individual backers.">
+<meta property="og:image" content="https://embedded-elixir.com/images/logo.png" />
+<meta property="og:url" content="https://embedded-elixir.com/post/2018-05-03-nerves-v1.0.0/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Embedded Elixir" />
+
+  <meta name="twitter:title" content="Nerves v1.0 Released" />
+  <meta name="twitter:description" content="We are thrilled to announce Nerves v1.0 is finally out. This has been
+4219 commits by 102 contributors since the initial commit on October 29th,
+2013! This would not have been possible without our …">
+  <meta name="twitter:image" content="https://embedded-elixir.com/images/logo.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link href='https://embedded-elixir.com/images/favicon.ico' rel='icon' type='image/x-icon'/>
+  <meta name="generator" content="Hugo 0.155.3">
+  <link rel="alternate" href="https://embedded-elixir.com/index.xml" type="application/rss+xml" title="Embedded Elixir"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css" integrity="sha384-5TcZemv2l/9On385z///+d7MSYlvIEw9FuZTIdZ14vJLqWphw7e7ZPuOiCHJcFCP" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v7.0.1/css/brands.css" integrity="sha384-+eXGm6TmVoCZR1gX03US+L++L2mJIfOvp2X0+luTuEktXaF5F+e3zn0sO0HBvOyT" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v7.0.1/css/fontawesome.css" integrity="sha384-B5nyPZa7e84uCJEYHtevCdVYtQosWsbDSRtq3cy/jeSVtQW05GL8CKXO7waXsjPK" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v7.0.1/css/regular.css" integrity="sha384-V71z/A/p/DGaZAryHhiSXRQj8HdQmK2nBgL2bX23MGD+h6ZKpyxOO76f5eSXmIaj" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v7.0.1/css/solid.css" integrity="sha384-1IIShlrK5iYgvS7OAgIH3prz4RAFP7hHZ2MaLIb9l3+trFwwnw/NdCWcUHlymZDU" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v7.0.1/css/svg.css" integrity="sha384-iBa7uugTOHXqQ2ngvDYJyKrPPQbd9n2P3EQe+o/0+HZe5TNvV+LO5X0lLLUrXLHP" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v7.0.1/css/svg-with-js.css" integrity="sha384-STWnS5AGz6M2YxsnGAd536EqcE2y+ktGovMMuhtXLsCBtl7lujeQj2eN4eDxa57x" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v7.0.1/css/v4-font-face.css" integrity="sha384-fH83IkgQi7kturzlxpXfNdsR8aUOcqj5HUORRVnSvJgObZkIw6aqKAaQx20IWyB/" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v7.0.1/css/v4-shims.css" integrity="sha384-cCODJHSivNBsaHei/8LC0HUD58kToSbDU+xT7Rs51BO1v/IvgT/uM0W6xMoUqKfn" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v7.0.1/css/v5-font-face.css" integrity="sha384-atSdF89mIn15dv+o2LKkDM6mCh3hwh6A7mwZ6F2it/kenqZbMu+QW/ye1OG4XSWV" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous"><link rel="stylesheet" href="https://embedded-elixir.com/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><link rel="stylesheet" href="https://embedded-elixir.com/css/syntax.css" /><link rel="stylesheet" href="https://embedded-elixir.com/css/codeblock.css" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.css" integrity="sha384-h/L2W9KefUClHWaty3SLE5F/qvc4djlyR4qY3NUV5HGQBBW7stbcfff1+I/vmsHh" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/default-skin/default-skin.min.css" integrity="sha384-iD0dNku6PYSIQLyfTOpB06F2KCZJAKLOThS5HRe8b3ibhdEQ6eKsFf/EeFxdOt5R" crossorigin="anonymous">
+
+  </head>
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://embedded-elixir.com/">Embedded Elixir</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="Blog" href="/">Blog</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Newsletter" href="https://nerves-project.org/newsletter">Newsletter</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Tags" href="/tags">Tags</a>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    
+      <div class="avatar-container">
+        <div class="avatar-img-border">
+          <a title="Embedded Elixir" href="https://embedded-elixir.com/">
+            <img class="avatar-img" src="https://embedded-elixir.com/images/logo.png" alt="Embedded Elixir" />
+           
+          </a>
+        </div>
+      </div>
+    
+
+  </div>
+</nav>
+
+
+
+
+    
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+
+  
+  
+  
+
+
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    
+    <div class="intro-header no-img">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="post-heading">
+              
+                <h1>Nerves v1.0 Released</h1>
+              
+              
+              
+              
+                <span class="post-meta">
+  
+  
+  
+  <i class="fas fa-calendar"></i>&nbsp;Posted on May 2, 2018
+  
+  
+  
+  
+    
+      
+        &nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;Justin Schneck and Frank Hunleth
+      
+    
+  
+  
+</span>
+
+
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        <p>We are thrilled to announce <a href="https://nerves-project.org">Nerves</a> v1.0 is finally out. This has been
+4219 commits by 102 contributors since the initial commit on <a href="https://github.com/nerves-project/nerves_system_br/tree/dcd9a16edc39146a505c6e854579a03145c2d439">October 29th,
+2013</a>! This would not have been possible without our <a href="https://nerves-project.org/#sponsors">corporate
+sponsors</a> and <a href="https://opencollective.com/nerves-project">individual backers</a>.</p>
+<h2 id="whats-nerves">What’s Nerves?</h2>
+<p>Nerves is tooling and core runtime support for creating bulletproof embedded
+software running on the <a href="http://www.erlang.org">Erlang VM</a>. The Erlang VM is known for its
+support for fault-tolerance, concurrency, and low-latency that has been proven
+out over the past two decades.</p>
+<p>Nerves leverages the <a href="https://elixir-lang.org">Elixir</a> programming language and its tooling to
+bring a dynamic, functional approach to building maintainable embedded
+applications. Elixir&rsquo;s Hex package manager extends this reach to a broad and
+growing selection of Erlang and Elixir libraries that run on embedded systems.</p>
+<p>Nerves additionally uses <a href="https://buildroot.org">Buildroot</a> to access libraries and
+applications from the embedded Linux ecosystem for functionality lacking or
+impractical to move to Elixir or Erlang. Many of these applications can even be
+integrated into the same fault-tolerance abstractions used natively in Elixir.</p>
+<p>Nerves has been ported to a variety of processors and boards. The Nerves v1.0
+release includes official support for easily-obtained platforms like the
+Raspberry Pi, Beaglebone and Lego EV3.</p>
+<h2 id="whats-new">What’s new?</h2>
+<p>This release is the consolidation of all the work done through the years. With
+v1.0, we have reached a stable milestone for the growth of software and projects
+using Nerves.</p>
+<p>Nerves v1.0 consists of the following projects:</p>
+<ul>
+<li><a href="https://hex.pm/packages/nerves">nerves</a> - Nerves integration with Elixir&rsquo;s build tool, <a href="https://hexdocs.pm/mix/Mix.html">Mix</a>.</li>
+<li><a href="https://hex.pm/packages/nerves_bootstrap">nerves_bootstrap</a> - New project generation and bootstrap integration with mix</li>
+<li><a href="https://hex.pm/packages/nerves_runtime">nerves_runtime</a> - Small, general-purpose libraries and utilities for all Nerves devices</li>
+<li><a href="https://github.com/nerves-project/erlinit">erlinit</a> - Replacement for <code>/sbin/init</code> that launches an Erlang/OTP Release</li>
+<li><a href="https://hex.pm/packages/nerves_system_br">nerves_system_br</a> - Buildroot integration for building embedded Linux components</li>
+<li><a href="https://hex.pm/packages/nerves_system_bbb">nerves_system_*</a> - Official ports to boards and devices</li>
+<li><a href="https://github.com/nerves-project/toolchains">toolchains</a> - C/C++ cross-toolchains for ARM, MIPS, i586, and x86_64-based devices</li>
+</ul>
+<p>Nerves tooling and core runtime libraries will follow <a href="https://semver.org">semantic versioning</a>.</p>
+<p>Nerves hardware ports, called Nerves Systems, follow Buildroot releases. Nerves
+also provides toolchains for Elixir projects that contain C and C++. Both Nerves
+Systems and Toolchains aggregate many programs and libraries and therefore don&rsquo;t
+follow semantic versioning. We will attempt to flag significant updates in the
+change notes and link to Buildroot release notes to aid industrial users who
+track constituent software packages closely.</p>
+<p>With v1.0, we are providing a stable platform for the community to leverage and
+extend, and we are extremely excited with the projects and possibilities that
+are ahead of us!</p>
+<h2 id="expectations">Expectations</h2>
+<p>We would like to elaborate on the expectations regarding Nerves v1.0. The Nerves
+Project hosts many projects that are useful in building embedded systems and we
+have put significant thought into how many of those should be part of the 1.0
+release. While pre-1.0 projects have not stopped people from using Nerves and
+shipping Nerves-based devices over the past few years, we understand that
+transitioning projects to 1.0 can provide confidence in the stability of API and
+tooling. The projects chosen for 1.0 are those that have remained stable for a
+long time and those that we are unlikely to break backwards compatibility going
+forward.</p>
+<h2 id="learn-more">Learn more</h2>
+<p>You can get started with Nerves via our <a href="https://hexdocs.pm/nerves/getting-started.html">Getting Started guide</a>.
+While most boards that are capable of running Linux can
+run Nerves, we recommend starting with <a href="https://www.raspberrypi.org">Raspberry Pi</a>
+or <a href="https://beagleboard.org">Beaglebone</a> hardware.</p>
+<p>You can also learn more about Nerves by checking out</p>
+<ul>
+<li><a href="https://nerves-project.org/watch/">Videos and talks</a></li>
+<li>Nerves <a href="https://github.com/nerves-project/nerves_examples">example</a> and <a href="https://github.com/nerves-project/nerves_init_gadget">starter</a> projects</li>
+<li><a href="https://elixirconf.com/#training-schedule">Upcoming training courses</a></li>
+</ul>
+<p>We&rsquo;re really looking forward to hearing from people using Nerves and we want all
+of you to be successful. If you need help or just want to share something you
+made, let us know on the <a href="http://elixirforum.com/">Elixir Forum</a> or the <a href="https://elixir-slackin.herokuapp.com/">elixir-lang Slack</a>.</p>
+
+        
+          <div class="blog-tags">
+            
+              
+              <a href="https://embedded-elixir.com/tags/nerves/">nerves</a>&nbsp;
+            
+              
+              <a href="https://embedded-elixir.com/tags/1.0/">1.0</a>&nbsp;
+            
+              
+              <a href="https://embedded-elixir.com/tags/releases/">releases</a>&nbsp;
+            
+          </div>
+        
+
+        
+
+        
+      </article>
+
+      
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="https://embedded-elixir.com/post/2018-01-08-firmware-revert/" data-toggle="tooltip" data-placement="top" title="Reverting firmware updates">&larr; Previous Post</a>
+            </li>
+          
+          
+            <li class="next">
+              <a href="https://embedded-elixir.com/post/2018-06-15-serial_number/" data-toggle="tooltip" data-placement="top" title="Provisioning Nerves Devices">Next Post &rarr;</a>
+            </li>
+          
+        </ul>
+      
+
+
+      
+      
+      
+      
+      
+          
+          <div class="disqus-comments">
+            
+  
+    <div class="comments">
+      <div id="disqus_thread"></div>
+<script>
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "embedded-elixir" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    </div>
+  
+
+
+          </div>
+          
+        
+        
+      
+
+    </div>
+  </div>
+</div>
+
+      <footer>
+  <div class="container">
+    
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+		
+		  <a href="https://github.com/fhunleth" title="GitHub">
+		
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+		
+		  <a href="https://bsky.app/profile/fhunleth.bsky.social" title="Bluesky">
+		
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-bluesky fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              Curated by Frank Hunleth
+            
+          
+
+          &nbsp;&bull;&nbsp;&copy;
+          
+            2023
+          
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://embedded-elixir.com/">Embedded Elixir</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="https://gohugo.io">Hugo v0.155.3</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer><script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.js" integrity="sha384-cMkvdD8LoxVzGF/RPUKAcvmm49FQ0oxwDF3BGKtDXcEc+T1b2N+teh/OJfpU0jr6" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/contrib/auto-render.min.js" integrity="sha384-hCXGrW6PitJEwbkoStFjeJxv+fSOOQKOPbJxSfM6G5sWZjAyWhXiTIIAmQqnlLlh" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
+<script src="https://code.jquery.com/jquery-3.7.0.slim.min.js" integrity="sha384-w5y/xIeYixWvfM+A1cEbmHPURnvyqmVg5eVENruEdDjcyRLUSNej7512JQGspFUr" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+
+<script src="https://embedded-elixir.com/js/main.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.js" integrity="sha384-QELNnmcmU8IR9ZAykt67vGr9/rZJdHbiWi64V88fCPaOohUlHCqUD/unNN0BXSqy" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe-ui-default.min.js" integrity="sha384-m67o7SkQ1ALzKZIFh4CiTA8tmadaujiTa9Vu+nqPSwDOqHrDmxLezTdFln8077+q" crossorigin="anonymous"></script><script src="https://embedded-elixir.com/js/load-photoswipe.js"></script>
+
+
+
+
+
+
+
+
+
+
+    
+  </body>
+</html>
+
