@@ -14,8 +14,9 @@ googleAnalytics = "UA-16709386-6"
   dateFormat = "January 2, 2006"
   commit = false
   comments = true
+  disqusShortname = "embedded-elixir"
 
-[Author]
+[Params.Author]
   name = "Curated by Frank Hunleth"
   #github = "fhunleth"
   #twitter = "fhunleth" # Why doesn't this work???
