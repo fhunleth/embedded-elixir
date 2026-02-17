@@ -16,10 +16,10 @@ ignoreLogs = ['warning-goldmark-raw-html']
   comments = true
   disqusShortname = "embedded-elixir"
 
-[Params.Author]
+[Params.author]
   name = "Curated by Frank Hunleth"
-  #github = "fhunleth"
-  #twitter = "fhunleth" # Why doesn't this work???
+  github = "fhunleth"
+  bluesky = "fhunleth.bsky.social"
 
 [[menu.main]]
     name = "Blog"
